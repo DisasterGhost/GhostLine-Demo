@@ -1,0 +1,63 @@
+.annotation-overlay {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  pointer-events: none;
+  animation: annotationSlideIn 0.3s ease-out;
+}
+
+@keyframes annotationSlideIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.annotation-card {
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-primary);
+  border-radius: var(--gl-radius-lg);
+  padding: 16px 20px;
+  max-width: 480px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), var(--gl-glow-primary);
+  pointer-events: auto;
+  position: relative;
+}
+
+.annotation-dismiss {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--gl-text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.annotation-dismiss:hover {
+  color: var(--gl-text);
+}
+
+.annotation-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--gl-primary);
+  margin-bottom: 6px;
+}
+
+.annotation-body {
+  font-size: 0.82rem;
+  color: var(--gl-text);
+  line-height: 1.5;
+}
+
+.annotation-token {
+  font-size: 0.7rem;
+  color: var(--gl-text-dim);
+  margin-top: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

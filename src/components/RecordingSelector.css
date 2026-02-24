@@ -1,0 +1,107 @@
+.recording-selector {
+  position: relative;
+}
+
+.recording-selector-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius);
+  color: var(--gl-text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: border-color 0.2s;
+}
+
+.recording-selector-toggle:hover {
+  border-color: var(--gl-border-hover);
+}
+
+.selector-icon {
+  color: var(--gl-primary);
+  font-size: 0.7rem;
+}
+
+.selector-label {
+  flex: 1;
+}
+
+.selector-chevron {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.selector-chevron.open {
+  transform: rotate(180deg);
+}
+
+.recording-selector-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 340px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  padding: 4px;
+}
+
+.recording-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--gl-radius);
+  color: var(--gl-text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.recording-option:hover {
+  background: var(--gl-bg-elevated);
+  border-color: var(--gl-border);
+}
+
+.recording-option.active {
+  border-color: var(--gl-primary);
+  background: rgba(var(--gl-primary-rgb), 0.08);
+}
+
+.recording-option-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.recording-option-desc {
+  font-size: 0.78rem;
+  color: var(--gl-text-muted);
+  line-height: 1.4;
+}
+
+.recording-option-tags {
+  display: flex;
+  gap: 4px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.recording-tag {
+  font-size: 0.65rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgba(var(--gl-primary-rgb), 0.12);
+  color: var(--gl-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}

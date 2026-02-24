@@ -1,0 +1,87 @@
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tutorialFadeIn 0.3s ease-out;
+}
+
+@keyframes tutorialFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tutorial-card {
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-primary);
+  border-radius: var(--gl-radius-lg);
+  padding: 24px 28px;
+  max-width: 420px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6), var(--gl-glow-primary);
+  animation: tutorialSlideUp 0.3s ease-out;
+}
+
+@keyframes tutorialSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tutorial-step-indicator {
+  font-size: 0.7rem;
+  color: var(--gl-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.tutorial-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gl-primary);
+  margin-bottom: 8px;
+}
+
+.tutorial-text {
+  font-size: 0.88rem;
+  color: var(--gl-text);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.tutorial-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tutorial-skip {
+  background: none;
+  border: none;
+  color: var(--gl-text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 6px 12px;
+}
+
+.tutorial-skip:hover {
+  color: var(--gl-text);
+}
+
+.tutorial-next {
+  padding: 8px 20px;
+  background: rgba(var(--gl-primary-rgb), 0.15);
+  border: 1px solid var(--gl-primary);
+  border-radius: var(--gl-radius);
+  color: var(--gl-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.tutorial-next:hover {
+  background: rgba(var(--gl-primary-rgb), 0.25);
+}

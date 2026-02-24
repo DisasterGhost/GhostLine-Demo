@@ -1,39 +1,34 @@
 import { useState, useEffect, useCallback } from 'react';
 import { GhostwireScene } from './components/GhostwireScene';
-import { PromptInput } from './components/PromptInput';
 import { StatusDisplay } from './components/StatusDisplay';
 import { GeneratedText } from './components/GeneratedText';
 import { Toolbar, type PanelId } from './components/Toolbar';
 import { WikiPanel } from './components/WikiPanel';
 import { TokenInspector } from './components/TokenInspector';
-import { BatchPanel } from './components/BatchPanel';
 import { UnifiedResearchPanel } from './components/UnifiedResearchPanel';
 import { SettingsPanel, loadSettings, type AllSettings } from './components/SettingsPanel';
-import { GenerationControls, loadGenerationConfig, saveGenerationConfig, type GenerationConfig } from './components/GenerationControls';
-import { RecordingPanel } from './components/RecordingPanel';
 import { ReplayControls } from './components/ReplayControls';
 import { SignalsPanel } from './components/SignalsPanel';
+import { RecordingSelector } from './components/RecordingSelector';
+import { AnnotationOverlay } from './components/AnnotationOverlay';
+import { Tutorial } from './components/Tutorial';
+import { WelcomeLanding } from './components/WelcomeLanding';
 import { useGhostwire } from './hooks/useGhostwire';
 import { useResearchWorkbench } from './hooks/useResearchWorkbench';
+import type { CuratedRecording } from './recordings/types';
 import './App.css';
 
 function App() {
-  // Load settings from localStorage on mount
   const [settings, setSettings] = useState<AllSettings>(loadSettings);
-  const [generationConfig, setGenerationConfigRaw] = useState<GenerationConfig>(loadGenerationConfig);
-  const setGenerationConfig = useCallback((config: GenerationConfig) => {
-    setGenerationConfigRaw(config);
-    saveGenerationConfig(config);
-  }, []);
-  const [currentPrompt, setCurrentPrompt] = useState('The most important thing about artificial intelligence is');
-
-  // Token selection state - lifted from GhostwireScene for control
-  // null = follow currentToken, number = user override
   const [selectedTokenPosition, setSelectedTokenPosition] = useState<number | null>(null);
-
-  // Unified panel state — only one panel open at a time
   const [activePanel, setActivePanel] = useState<PanelId | null>(null);
   const [activeEntryId, setActiveEntryId] = useState<string | null>(null);
+  const [replayMinimized, setReplayMinimized] = useState(false);
+
+  // Demo viewer state
+  const [currentRecording, setCurrentRecording] = useState<CuratedRecording | null>(null);
+  const [isLoadingRecording, setIsLoadingRecording] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const togglePanel = useCallback((panel: PanelId) => {
     setActivePanel(prev => prev === panel ? null : panel);
@@ -44,11 +39,6 @@ function App() {
     setActivePanel('wiki');
   }, []);
 
-  // Mobile-specific state
-  const [genControlsOpen, setGenControlsOpen] = useState(false);
-  const [replayMinimized, setReplayMinimized] = useState(false);
-
-  // Get playback rate from settings
   const playbackRate = settings.display.playbackRate;
 
   const {
@@ -63,8 +53,6 @@ function App() {
     bufferSize,
     rawTokenCount,
     pauseState,
-    isBatchRunning,
-    batchProgress,
     // Recording state
     isRecording,
     lastSession,
@@ -76,12 +64,8 @@ function App() {
     replayPosition,
     replayTotalTokens,
     // Actions
-    generate,
     flush,
     setPlaybackRate: updatePlaybackRate,
-    runBatch,
-    cancelBatch,
-    saveLastSession,
     loadAndReplay,
     // Replay controls
     replayPlayPause,
@@ -101,7 +85,7 @@ function App() {
     toggleOutOfRangeArcs,
     showPromptTokens,
     togglePromptTokens,
-    // Prophecy (pre-generation prediction)
+    // Prophecy
     prophecy,
     prophecyCorrect,
     // Layer selection
@@ -112,20 +96,43 @@ function App() {
     setTransitionConfig,
   } = useGhostwire(playbackRate);
 
+  // Research workbench (patent-protected, Claim 5)
+  const research = useResearchWorkbench();
+
+  // Load a curated recording by fetching its .ghostline file
+  const handleSelectRecording = useCallback(async (recording: CuratedRecording) => {
+    setIsLoadingRecording(true);
+    setCurrentRecording(recording);
+    setShowWelcome(false);
+    try {
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}recordings/${recording.filename}`);
+      if (!response.ok) throw new Error(`Failed to load ${recording.filename}: ${response.status}`);
+      const json = await response.json();
+
+      // Create a File-like blob so loadAndReplay can parse it
+      const blob = new Blob([JSON.stringify(json)], { type: 'application/json' });
+      const file = new File([blob], recording.filename, { type: 'application/json' });
+      loadAndReplay(file);
+    } catch (err) {
+      console.error('Failed to load recording:', err);
+      setCurrentRecording(null);
+    } finally {
+      setIsLoadingRecording(false);
+    }
+  }, [loadAndReplay]);
+
   // Reset replay minimize when replay ends
   useEffect(() => {
     if (!isReplaying) setReplayMinimized(false);
   }, [isReplaying]);
 
-  // Research workbench
-  const research = useResearchWorkbench();
-
-  // Sync playback rate changes to the hook
+  // Sync playback rate
   useEffect(() => {
     updatePlaybackRate(playbackRate);
   }, [playbackRate, updatePlaybackRate]);
 
-  // Sync layer transition settings to the buffer
+  // Sync layer transition settings
   useEffect(() => {
     setTransitionConfig({
       tokenDuration: settings.visual.layerTokenDuration,
@@ -135,23 +142,14 @@ function App() {
     });
   }, [settings.visual.layerTokenDuration, settings.visual.layerSegmentDuration, settings.visual.layerMinStagger, settings.visual.layerBeatDuration, setTransitionConfig]);
 
-  // Apply UI theme to document root
+  // Apply UI theme
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', settings.visual.uiTheme);
   }, [settings.visual.uiTheme]);
 
-  // Clear selection when new generation starts
+  // Clear selection on replay mode change
   useEffect(() => {
-    if (isGenerating) {
-      setSelectedTokenPosition(null);
-    }
-  }, [isGenerating]);
-
-  // Clear selection when entering replay mode
-  useEffect(() => {
-    if (isReplaying) {
-      setSelectedTokenPosition(null);
-    }
+    if (isReplaying) setSelectedTokenPosition(null);
   }, [isReplaying]);
 
   // Wrap seek actions to clear selection
@@ -180,56 +178,35 @@ function App() {
     replayJumpToEnd();
   }, [replayJumpToEnd]);
 
-  // Handle token selection from scene
   const handleSelectToken = useCallback((position: number | null) => {
     setSelectedTokenPosition(position);
   }, []);
 
-  // Handle generation with full config
-  const handleGenerate = useCallback((prompt: string) => {
-    generate(prompt, {
-      maxTokens: generationConfig.maxTokens,
-      temperature: generationConfig.temperature,
-      topP: generationConfig.topP,
-      minP: generationConfig.minP,
-      frequencyPenalty: generationConfig.frequencyPenalty,
-      presencePenalty: generationConfig.presencePenalty,
-      seed: generationConfig.seed,
-      mirostatMode: generationConfig.mirostatMode,
-      mirostatTau: generationConfig.mirostatTau,
-      mirostatEta: generationConfig.mirostatEta,
-      repetitionPenalty: generationConfig.repetitionPenalty,
-      systemPrompt: generationConfig.systemPrompt,
-      lambdaDetail: generationConfig.lambdaDetail,
-      hallucinationSampling: generationConfig.hallucinationSampling,
-    });
-  }, [generate, generationConfig]);
-
   // Build visualSettings object for GhostwireScene
-  // Spread settings.visual and only provide fallbacks for truly missing fields
   const visualSettings = {
     ...settings.visual,
-    // Legacy fields that may be missing from old localStorage
     ribbonTrails: settings.visual.ribbonTrails ?? false,
-    trajectoryGradient: true,  // Always on (no UI toggle)
-    animatedArcPulses: false,  // Not implemented yet
-    arcThicknessWeight: true,  // Implemented
-    arcGlowTrails: false,      // Not implemented yet
-    pauseDrama: true,          // Always on (no UI toggle yet)
-    // Ensure these have defaults if missing from old localStorage
+    trajectoryGradient: true,
+    animatedArcPulses: false,
+    arcThicknessWeight: true,
+    arcGlowTrails: false,
+    pauseDrama: true,
     trajectoryStyle: settings.visual.trajectoryStyle || 'lines',
     arcColorMode: settings.visual.arcColorMode || 'pattern',
-    // New environment settings - use actual values from settings!
     uncertaintyStatic: settings.visual.uncertaintyStatic ?? false,
     cameraAutoDrift: settings.visual.cameraAutoDrift ?? false,
     dynamicBackground: settings.visual.dynamicBackground ?? false,
   };
 
-  // Text size accessibility — apply CSS variable to root
   const textSizeScale = { small: '0.85', medium: '1', large: '1.2', 'x-large': '1.4' }[settings.visual.textSize ?? 'medium'];
 
   return (
     <div className="app" style={{ fontSize: `calc(1rem * ${textSizeScale})` }}>
+      {/* Welcome landing — shown until first recording is selected */}
+      {showWelcome && !isReplaying && (
+        <WelcomeLanding onSelectRecording={handleSelectRecording} />
+      )}
+
       {/* 3D Visualization - Full Screen */}
       <GhostwireScene
         trajectory={trajectory}
@@ -245,7 +222,6 @@ function App() {
         selectedTokenPosition={selectedTokenPosition}
         onSelectToken={handleSelectToken}
         visualSettings={visualSettings}
-        // Context window (replay mode only)
         contextRange={isReplaying ? contextRange : null}
         showOutOfRangeTokens={showOutOfRangeTokens}
         showOutOfRangeArcs={showOutOfRangeArcs}
@@ -255,7 +231,6 @@ function App() {
 
       {/* UI Overlay */}
       <div className="ui-overlay">
-        {/* Top left: Status + Recording */}
         <div className="top-row">
           <StatusDisplay
             isConnected={isConnected}
@@ -271,20 +246,14 @@ function App() {
             pauseState={pauseState}
             onFlush={flush}
           />
-
-          {/* Recording Panel */}
-          <RecordingPanel
-            isRecording={isRecording}
-            isReplaying={isReplaying}
-            hasSession={hasSession}
-            lastSession={lastSession}
-            onSave={saveLastSession}
-            onLoad={loadAndReplay}
-            disabled={isGenerating || isBatchRunning}
+          <RecordingSelector
+            currentRecordingId={currentRecording?.id ?? null}
+            onSelect={handleSelectRecording}
+            isLoading={isLoadingRecording}
           />
         </div>
 
-        {/* Bottom: Replay Controls + Generation Controls + Input */}
+        {/* Bottom: Replay Controls only (no generation input) */}
         <div className="bottom-controls">
           {isReplaying && (
             <div className={`replay-controls-container ${replayMinimized ? 'minimized' : ''}`}>
@@ -328,35 +297,12 @@ function App() {
               )}
             </div>
           )}
-          <div className={`generation-controls-wrapper ${genControlsOpen ? 'mobile-open' : ''}`}>
-            <GenerationControls
-              config={generationConfig}
-              onChange={setGenerationConfig}
-              disabled={isGenerating || isBatchRunning || research.isRunning || (isReplaying && !isReviewMode)}
-            />
-          </div>
-          <div className="mobile-prompt-row">
-            <button
-              className={`mobile-gen-controls-toggle ${genControlsOpen ? 'active' : ''}`}
-              onClick={() => setGenControlsOpen(o => !o)}
-              title="Generation settings"
-            >
-              {'\u2699'}
-            </button>
-            <PromptInput
-              value={currentPrompt}
-              onChange={setCurrentPrompt}
-              onSubmit={handleGenerate}
-              disabled={!isConnected || isGenerating || isBatchRunning || research.isRunning || (isReplaying && !isReviewMode)}
-              isGenerating={isGenerating || isBatchRunning}
-            />
-          </div>
         </div>
       </div>
 
-      {/* Generated text panel - bottom right */}
+      {/* Generated text panel */}
       <GeneratedText
-        prompt={config?.prompt || ''}
+        prompt={config?.prompt || currentRecording?.title || ''}
         trajectory={trajectory}
         isGenerating={isGenerating || isBuffering}
         selectedPosition={selectedTokenPosition}
@@ -366,21 +312,19 @@ function App() {
       {/* Title */}
       <div className="title">
         <h1>GHOSTLINE</h1>
-        <p>{isReplaying ? (isReviewMode ? 'Review generation.' : 'Replay mode.') : 'Explore LLM internals.'}</p>
+        <p>{isReplaying ? 'Exploring recording.' : 'Choose a recording to begin.'}</p>
       </div>
 
-      {/* Unified Toolbar (top-right) */}
+      {/* Toolbar (top-right) — wiki, settings, research, layer selector */}
       <Toolbar
         activePanel={activePanel}
         onTogglePanel={togglePanel}
-        isBatchRunning={isBatchRunning}
-        batchProgress={batchProgress}
         isResearchRunning={research.isRunning}
         layerInfo={layerInfo}
         onLayerChange={(layer) => setLayers({ render: layer })}
       />
 
-      {/* Wiki Panel (right sidebar) */}
+      {/* Wiki Panel */}
       <WikiPanel
         isOpen={activePanel === 'wiki'}
         onClose={() => setActivePanel(null)}
@@ -388,14 +332,14 @@ function App() {
         onClearActive={() => setActiveEntryId(null)}
       />
 
-      {/* Token Inspector (bottom-right, above GeneratedText) */}
+      {/* Token Inspector */}
       <TokenInspector
         token={selectedTokenPosition !== null ? (trajectory.find(t => t.position === selectedTokenPosition) ?? null) : null}
         tokenIndex={selectedTokenPosition}
         onOpenWiki={handleOpenWiki}
       />
 
-      {/* Validated Signals Panel - The Evidence */}
+      {/* Signals Panel */}
       <SignalsPanel
         trajectory={trajectory}
         currentToken={currentToken?.position ?? (trajectory.length - 1)}
@@ -405,28 +349,16 @@ function App() {
         prophecyCorrect={prophecyCorrect}
       />
 
-      {/* Unified Settings Panel */}
+      {/* Settings Panel */}
       <SettingsPanel
         settings={settings}
         onChange={setSettings}
-        disabled={!isConnected}
+        disabled={false}
         isOpen={activePanel === 'settings'}
         onClose={() => setActivePanel(null)}
       />
 
-      {/* Batch Generator */}
-      <BatchPanel
-        currentPrompt={currentPrompt}
-        isConnected={isConnected}
-        isGenerating={isGenerating}
-        isBatchRunning={isBatchRunning}
-        batchProgress={batchProgress}
-        onRunBatch={runBatch}
-        onCancelBatch={cancelBatch}
-        isOpen={activePanel === 'batch'}
-      />
-
-      {/* Unified Research Panel — all research tools in one sidebar */}
+      {/* Research Panel (patent-protected, Claim 5) */}
       <UnifiedResearchPanel
         isOpen={activePanel === 'research'}
         onClose={() => setActivePanel(null)}
@@ -452,9 +384,19 @@ function App() {
         onLoadHistory={research.loadHistory}
       />
 
+      {/* Annotation Overlay */}
+      <AnnotationOverlay
+        recording={currentRecording}
+        currentTokenIndex={replayPosition}
+        isPlaying={isReplayPlaying}
+      />
+
+      {/* First-Load Tutorial */}
+      <Tutorial />
+
       {/* Footer */}
       <div className="prototype-footer">
-        {config ? `${config.model} · Validated High-D Signals` : 'Connecting...'} · v2.0
+        GhostLine Demo Viewer &middot; Explore LLM Geometric Internals &middot; v2.0
       </div>
     </div>
   );

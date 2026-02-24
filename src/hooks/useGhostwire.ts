@@ -3,7 +3,7 @@ import { GhostwireClient } from '../websocket';
 import type { GhostwireMessage, TokenMessage, ProphecyData } from '../websocket';
 import { usePlaybackBuffer } from './usePlaybackBuffer';
 import { usePauseDetection } from './usePauseDetection';
-import { API_ENDPOINTS } from '../config';
+import { API_ENDPOINTS, IS_DEMO_VIEWER } from '../config';
 import { 
   SessionRecorder, 
   saveSession, 
@@ -472,8 +472,13 @@ export function useGhostwire(playbackRate: number = 4) {
     }
   }, []);
 
-  // Connect on mount
+  // Connect on mount (skip in demo viewer mode)
   useEffect(() => {
+    if (IS_DEMO_VIEWER) {
+      setIsConnected(false);
+      return;
+    }
+
     const client = new GhostwireClient({
       onMessage: handleMessage,
       onConnect: () => {

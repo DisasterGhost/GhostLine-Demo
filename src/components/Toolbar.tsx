@@ -1,18 +1,16 @@
 // ============================================================================
-// Toolbar - Unified top-right button row
+// Toolbar - Unified top-right button row (Demo Viewer)
 // ============================================================================
-// Consolidated: wiki, settings, batch, research (4 buttons)
+// wiki, settings, research, layer selector (no batch)
 
 import './Toolbar.css';
 import type { LayerInfo } from '../hooks/useGhostwire';
 
-export type PanelId = 'wiki' | 'settings' | 'batch' | 'research';
+export type PanelId = 'wiki' | 'settings' | 'research';
 
 interface ToolbarProps {
   activePanel: PanelId | null;
   onTogglePanel: (panel: PanelId) => void;
-  isBatchRunning?: boolean;
-  batchProgress?: { current: number; total: number };
   isResearchRunning?: boolean;
   layerInfo?: LayerInfo;
   onLayerChange?: (layer: number) => void;
@@ -21,8 +19,6 @@ interface ToolbarProps {
 export function Toolbar({
   activePanel,
   onTogglePanel,
-  isBatchRunning = false,
-  batchProgress,
   isResearchRunning = false,
   layerInfo,
   onLayerChange,
@@ -58,19 +54,6 @@ export function Toolbar({
         title="Settings"
       >
         <span className="gl-toolbar-icon">&#9881;</span>
-      </button>
-      <button
-        className={`gl-toolbar-btn ${activePanel === 'batch' ? 'active' : ''} ${isBatchRunning ? 'running' : ''}`}
-        onClick={() => onTogglePanel('batch')}
-        title="Batch Generator"
-      >
-        {isBatchRunning && batchProgress ? (
-          <span className="gl-toolbar-batch-text">
-            {batchProgress.current}/{batchProgress.total}
-          </span>
-        ) : (
-          <span className="gl-toolbar-icon">&#9889;</span>
-        )}
       </button>
       <button
         className={`gl-toolbar-btn ${activePanel === 'research' ? 'active' : ''} ${isResearchRunning ? 'running' : ''}`}

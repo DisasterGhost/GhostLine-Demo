@@ -1,0 +1,64 @@
+{
+  "version": "1.1",
+  "timestamp": "2026-02-23T00:00:00.000Z",
+  "prompt": "Placeholder — replace with real capture from Qwen3-8B.",
+  "model": "placeholder",
+  "config": { "temperature": 0.8, "maxTokens": 100 },
+  "trajectory": [
+    {
+      "position": 0,
+      "coords": [0, 0, 0],
+      "tokenProb": 1.0,
+      "entropy": 0.0,
+      "tokenStr": "This",
+      "timestamp": 0,
+      "tokenId": 0,
+      "residualNorm": 1.0,
+      "isPrompt": true
+    },
+    {
+      "position": 1,
+      "coords": [1, 0.5, 0.2],
+      "tokenProb": 0.85,
+      "entropy": 1.2,
+      "tokenStr": " is",
+      "timestamp": 100,
+      "tokenId": 1,
+      "residualNorm": 1.1,
+      "isPrompt": false,
+      "geometricState": "reasoning",
+      "stateProbs": { "reasoning": 0.7, "creativity": 0.1, "precision": 0.1, "retrieval": 0.05, "uncertainty": 0.05 }
+    },
+    {
+      "position": 2,
+      "coords": [2, 1.0, 0.5],
+      "tokenProb": 0.72,
+      "entropy": 1.8,
+      "tokenStr": " a",
+      "timestamp": 200,
+      "tokenId": 2,
+      "residualNorm": 1.2,
+      "isPrompt": false,
+      "geometricState": "creativity",
+      "stateProbs": { "reasoning": 0.15, "creativity": 0.65, "precision": 0.1, "retrieval": 0.05, "uncertainty": 0.05 }
+    },
+    {
+      "position": 3,
+      "coords": [3, 1.5, 1.0],
+      "tokenProb": 0.90,
+      "entropy": 0.8,
+      "tokenStr": " test",
+      "timestamp": 300,
+      "tokenId": 3,
+      "residualNorm": 1.0,
+      "isPrompt": false,
+      "geometricState": "precision",
+      "stateProbs": { "reasoning": 0.1, "creativity": 0.05, "precision": 0.75, "retrieval": 0.05, "uncertainty": 0.05 }
+    }
+  ],
+  "metadata": {
+    "totalTime": 400,
+    "tokensGenerated": 3,
+    "recordedBy": "GhostLine Demo Placeholder"
+  }
+}
