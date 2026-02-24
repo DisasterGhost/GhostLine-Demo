@@ -11,12 +11,49 @@ import type { CuratedRecording } from './types';
 export const RECORDING_CATALOG: CuratedRecording[] = [
   {
     id: 'cognitive-states',
-    title: 'Cognitive States',
-    description: 'Watch the model shift between reasoning, creativity, and precision — each with its own geometric signature.',
+    title: 'Dragon Poem — Cognitive States',
+    description: 'Qwen3-8B writes a poem about dragons warring in the sky. Watch creativity and reasoning trade off token by token.',
     teachingGoal: 'Understand that different cognitive tasks produce measurably different geometric patterns in the model\'s activation space.',
     filename: 'cognitive-states.ghostline',
-    annotations: [],
-    tags: ['states', 'intro'],
+    annotations: [
+      {
+        tokenIndex: 0,
+        title: 'The Model Begins',
+        description: 'The first token lands in reasoning space — the model is planning its poem structure before the creative words flow.',
+        duration: 10,
+      },
+      {
+        tokenIndex: 5,
+        title: 'Creativity Takes Over',
+        description: '"Skybound Clash" — the title emerges in creativity state. Notice how the trajectory color shifts as the model enters its creative mode.',
+        duration: 8,
+      },
+      {
+        tokenIndex: 11,
+        title: 'Verse Structure',
+        description: '"Upon the wings of storm..." — creativity and reasoning alternate rapidly. The model balances poetic invention with metrical structure.',
+        duration: 8,
+      },
+      {
+        tokenIndex: 39,
+        title: 'Retrieval Flash',
+        description: 'Retrieval state appears briefly — the model is pulling a common phrase pattern ("that") from memory before returning to creative composition.',
+        duration: 8,
+      },
+      {
+        tokenIndex: 61,
+        title: 'Uncertainty Emerges',
+        description: '"with" — a moment of genuine uncertainty. The model is weighing multiple poetic directions. This state is geometrically distinct from both reasoning and creativity.',
+        duration: 8,
+      },
+      {
+        tokenIndex: 83,
+        title: 'Four States in Ten Tokens',
+        description: 'Watch closely: "thunder, swift, unkind" cycles through creativity, retrieval, uncertainty, and reasoning in rapid succession. The geometry captures each micro-decision.',
+        duration: 10,
+      },
+    ],
+    tags: ['states', 'intro', 'creativity', 'qwen3-8b'],
   },
   {
     id: 'collapse-intervention',
