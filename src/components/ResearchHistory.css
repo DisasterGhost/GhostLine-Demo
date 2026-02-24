@@ -1,0 +1,78 @@
+/* ============================================================================
+   ResearchHistory — Saved run dropdown
+   ============================================================================ */
+
+.rh-container {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.rh-toggle {
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rh-toggle:hover { color: rgba(255, 255, 255, 0.8); border-color: rgba(255, 255, 255, 0.2); }
+.rh-toggle:disabled { opacity: 0.4; cursor: default; }
+
+.rh-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin-top: 4px;
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.rh-empty {
+  padding: 12px;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.rh-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 6px 10px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  text-align: left;
+  font-size: 11px;
+}
+
+.rh-entry:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+.rh-entry:last-child { border-bottom: none; }
+
+.rh-summary {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.rh-time {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+}

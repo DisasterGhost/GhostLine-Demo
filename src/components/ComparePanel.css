@@ -1,0 +1,343 @@
+/* ============================================================================
+   ComparePanel — A/B prompt comparison
+   ============================================================================ */
+
+.compare-panel {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  width: 360px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  z-index: 99;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.cp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cp-header h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.cp-content {
+  padding: 12px 16px;
+}
+
+.cp-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Prompts side by side */
+.cp-prompts {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cp-prompt-col {
+  flex: 1;
+}
+
+.cp-textarea {
+  width: 100%;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-family: inherit;
+  padding: 6px 8px;
+  line-height: 1.4;
+}
+
+.cp-textarea:focus {
+  outline: none;
+  border-color: var(--gl-primary, #00ffff);
+}
+
+.cp-param-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.cp-param {
+  flex: 1;
+}
+
+.cp-param label {
+  display: block;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 2px;
+}
+
+.cp-param input,
+.cp-param select {
+  width: 100%;
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+}
+
+.cp-config-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.cp-run-btn {
+  padding: 6px 14px;
+  background: var(--gl-primary, #00ffff);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cp-run-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.cp-error {
+  font-size: 11px;
+  color: var(--gl-danger, #ff3366);
+  margin-bottom: 8px;
+}
+
+/* Prophecy comparison */
+.cp-prophecies {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cp-prophecy {
+  flex: 1;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  font-size: 11px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cp-a { border-left: 2px solid #00cccc; }
+.cp-b { border-left: 2px solid #cc33cc; }
+
+.cp-conf {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+}
+
+.cp-halluc {
+  color: #ff3366;
+  font-size: 10px;
+  margin-left: auto;
+}
+
+/* Summary stats */
+.cp-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.cp-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.cp-summary-label {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+}
+
+/* Signal select */
+.cp-signal-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cp-signal-select select {
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+}
+
+/* Results */
+.cp-results {
+  margin-top: 8px;
+}
+
+.cp-results canvas {
+  display: block;
+  margin: 0 auto 8px;
+}
+
+/* Generated text */
+.cp-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.cp-text label {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 2px;
+}
+
+.cp-text.cp-a label { color: #00cccc; }
+.cp-text.cp-b label { color: #cc33cc; }
+
+.cp-text-content {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  padding: 6px 8px;
+  max-height: 80px;
+  overflow-y: auto;
+  word-break: break-word;
+}
+
+/* Same prompt toggle */
+.cp-same-prompt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.cp-same-prompt input[type="checkbox"] {
+  margin: 0;
+}
+
+.cp-same-indicator {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  padding: 8px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Collapsible params toggle */
+.cp-params-toggle {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 2px 0;
+  margin-top: 2px;
+}
+
+.cp-params-toggle:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Compact 2-column param grid */
+.cp-params-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.cp-param-mini {
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-param-mini label {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 1px;
+}
+
+.cp-param-mini input,
+.cp-param-mini select {
+  width: 100%;
+  padding: 3px 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 10px;
+}
+
+/* Winner/loser diff highlighting */
+.cp-winner {
+  text-shadow: 0 0 6px rgba(0, 255, 102, 0.4);
+}
+
+.cp-loser {
+  opacity: 0.6;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .compare-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
+  }
+  .cp-prompts { flex-direction: column; }
+}

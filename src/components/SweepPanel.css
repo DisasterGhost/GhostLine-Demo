@@ -1,0 +1,174 @@
+/* ============================================================================
+   SweepPanel — Parameter sweep
+   ============================================================================ */
+
+.sweep-panel {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  width: 340px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  z-index: 99;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.sw-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sw-header h3 { font-size: 13px; font-weight: 600; color: #fff; margin: 0; }
+
+.sw-content { padding: 12px 16px; }
+
+.sw-section { margin-bottom: 10px; }
+
+.sw-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.sw-textarea {
+  width: 100%;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-family: inherit;
+  padding: 6px 8px;
+}
+
+.sw-textarea:focus { outline: none; border-color: var(--gl-primary, #00ffff); }
+
+.sw-config-row {
+  display: flex;
+  gap: 8px;
+}
+
+.sw-field { flex: 1; }
+
+.sw-field label {
+  display: block;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 3px;
+}
+
+.sw-field input[type="number"],
+.sw-field input[type="text"] {
+  width: 100%;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+}
+
+.sw-field input:focus { outline: none; border-color: var(--gl-primary, #00ffff); }
+
+.sw-summary {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 8px;
+}
+
+.sw-summary strong { color: rgba(255, 255, 255, 0.9); }
+
+.sw-run-btn {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--gl-primary, #00ffff);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sw-run-btn:disabled { opacity: 0.3; cursor: default; }
+
+.sw-error {
+  font-size: 11px;
+  color: var(--gl-danger, #ff3366);
+  margin-top: 6px;
+}
+
+/* Results */
+.sw-results { margin-top: 12px; }
+
+.sw-results canvas { display: block; margin: 0 auto 8px; }
+
+.sw-metric-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.sw-metric-select select {
+  padding: 3px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+}
+
+.sw-data-table {
+  max-height: 200px;
+  overflow: auto;
+}
+
+.sw-data-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.sw-data-table th {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 6px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sw-data-table td {
+  padding: 3px 6px;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sweep-panel {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
+  }
+}

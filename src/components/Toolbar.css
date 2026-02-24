@@ -1,0 +1,129 @@
+/* ============================================================================
+   Toolbar - Unified top-right button row
+   ============================================================================ */
+
+.gl-toolbar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  z-index: 1000;
+}
+
+.gl-toolbar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--gl-radius);
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  color: var(--gl-text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  padding: 0;
+}
+
+.gl-toolbar-btn:hover {
+  background: var(--gl-bg-elevated);
+  border-color: var(--gl-border-hover);
+  color: var(--gl-text);
+}
+
+.gl-toolbar-btn.active {
+  border-color: var(--gl-primary);
+  color: var(--gl-primary);
+  box-shadow: var(--gl-glow-primary);
+}
+
+.gl-toolbar-btn.running {
+  animation: toolbar-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes toolbar-pulse {
+  0%, 100% {
+    border-color: var(--gl-primary);
+    box-shadow: 0 0 8px rgba(var(--gl-primary-rgb), 0.3);
+  }
+  50% {
+    border-color: var(--gl-accent);
+    box-shadow: 0 0 16px rgba(var(--gl-accent-rgb), 0.4);
+  }
+}
+
+.gl-toolbar-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.gl-toolbar-batch-text {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--gl-primary);
+}
+
+/* Layer selector dropdown */
+.gl-toolbar-layer-select {
+  height: 36px;
+  padding: 0 8px;
+  border-radius: var(--gl-radius);
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  color: var(--gl-primary);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='5' viewBox='0 0 8 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L4 4L7 1' stroke='%2300d4ff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+}
+
+.gl-toolbar-layer-select:hover {
+  background-color: var(--gl-bg-elevated);
+  border-color: var(--gl-border-hover);
+}
+
+.gl-toolbar-layer-select:focus {
+  border-color: var(--gl-primary);
+  box-shadow: var(--gl-glow-primary);
+}
+
+.gl-toolbar-layer-select option {
+  background: var(--gl-bg-panel);
+  color: var(--gl-text);
+}
+
+/* Mobile: larger tap targets */
+@media (max-width: 768px) {
+  .gl-toolbar {
+    top: 8px;
+    right: 8px;
+    gap: 2px;
+    flex-wrap: wrap;
+    max-width: calc(100vw - 16px);
+    justify-content: flex-end;
+  }
+
+  .gl-toolbar-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .gl-toolbar-layer-select {
+    height: 44px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,72 @@
+/* ============================================================================
+   WikiTooltip — Contextual hover tooltip
+   ============================================================================ */
+
+.wiki-tooltip-wrapper {
+  position: relative;
+  cursor: default;
+}
+
+/* Dotted underline hint for terms with wiki entries */
+.wiki-tooltip-wrapper > * {
+  text-decoration-style: dotted;
+}
+
+/* The tooltip itself — positioned fixed so it doesn't clip */
+.wiki-tooltip {
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 260px;
+  min-width: 160px;
+  padding: 8px 10px;
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  animation: wiki-tooltip-fade 0.15s ease;
+}
+
+.wiki-tooltip.above {
+  transform: translate(-50%, -100%);
+}
+
+.wiki-tooltip.below {
+  transform: translate(-50%, 0);
+}
+
+@keyframes wiki-tooltip-fade {
+  from { opacity: 0; transform: translate(-50%, -100%) translateY(4px); }
+  to { opacity: 1; transform: translate(-50%, -100%) translateY(0); }
+}
+
+.wiki-tooltip.below {
+  animation-name: wiki-tooltip-fade-below;
+}
+
+@keyframes wiki-tooltip-fade-below {
+  from { opacity: 0; transform: translate(-50%, 0) translateY(-4px); }
+  to { opacity: 1; transform: translate(-50%, 0) translateY(0); }
+}
+
+.wiki-tooltip-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gl-primary, #00ffff);
+  margin-bottom: 3px;
+}
+
+.wiki-tooltip-short {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+
+.wiki-tooltip-hint {
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 4px;
+  font-style: italic;
+}

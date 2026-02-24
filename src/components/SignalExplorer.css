@@ -1,0 +1,242 @@
+/* ============================================================================
+   SignalExplorer — Per-token signal inspection panel
+   ============================================================================ */
+
+.signal-explorer {
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  width: 340px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  z-index: 99;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.se-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.se-header h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.se-token-count {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* View tabs */
+.se-view-tabs {
+  display: flex;
+  gap: 2px;
+  margin: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.se-tab {
+  flex: 1;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.se-tab:hover { color: rgba(255, 255, 255, 0.7); }
+.se-tab.active { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.9); }
+
+/* Signal selector */
+.se-signal-selector {
+  padding: 0 16px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.se-groups {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.se-group-btn {
+  padding: 3px 8px;
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  border-radius: 3px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.se-group-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.se-signals-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.se-signal-toggle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.se-signal-toggle input[type="checkbox"] {
+  margin: 0;
+  width: 12px;
+  height: 12px;
+}
+
+/* Content */
+.se-content {
+  padding: 8px 16px 16px;
+}
+
+.se-charts canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Table */
+.se-table-container {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.se-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.se-table th {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 4px 6px;
+  text-align: left;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.se-th-sortable {
+  cursor: pointer;
+}
+
+.se-th-sortable:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.se-table td {
+  padding: 3px 6px;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
+}
+
+.se-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+}
+
+.se-row-selected {
+  background: rgba(0, 255, 255, 0.08) !important;
+}
+
+.se-token-cell {
+  font-family: monospace;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Distribution */
+.se-distributions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.se-dist-item canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.se-empty {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  padding: 16px 0;
+  text-align: center;
+}
+
+/* Wiki-linked labels: dotted underline hint, right-click for wiki */
+.se-signal-label-linked {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.2);
+  cursor: default;
+}
+
+.se-th-label-linked {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+/* Embedded mode: no outer padding needed, parent provides it */
+.signal-explorer-embedded .se-signal-selector {
+  padding: 0 0 8px;
+}
+
+.signal-explorer-embedded .se-view-tabs {
+  margin: 0 0 8px;
+}
+
+.se-content-embedded {
+  padding: 8px 0 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .signal-explorer {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
+  }
+}
