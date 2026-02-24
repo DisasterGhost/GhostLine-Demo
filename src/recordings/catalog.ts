@@ -54,6 +54,7 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
       },
     ],
     tags: ['states', 'intro', 'creativity', 'qwen3-8b'],
+    status: 'preview',
   },
   {
     id: 'collapse-intervention',
@@ -63,6 +64,7 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
     filename: 'collapse-intervention.ghostline',
     annotations: [],
     tags: ['collapse', 'intervention', 'causal'],
+    status: 'planned',
   },
   {
     id: 'phase-transition',
@@ -72,6 +74,7 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
     filename: 'phase-transition.ghostline',
     annotations: [],
     tags: ['transition', 'reasoning', 'precision'],
+    status: 'planned',
   },
   {
     id: 'hallucination-detection',
@@ -81,6 +84,7 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
     filename: 'hallucination-detection.ghostline',
     annotations: [],
     tags: ['hallucination', 'detection'],
+    status: 'planned',
   },
   {
     id: 'layer-journey',
@@ -90,6 +94,7 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
     filename: 'layer-journey.ghostline',
     annotations: [],
     tags: ['layers', 'crystallization'],
+    status: 'planned',
   },
   {
     id: 'fabrication-spectrum',
@@ -99,5 +104,6 @@ export const RECORDING_CATALOG: CuratedRecording[] = [
     filename: 'fabrication-spectrum.ghostline',
     annotations: [],
     tags: ['fabrication', 'refusal', 'spectrum', 'attention'],
+    status: 'planned',
   },
 ];

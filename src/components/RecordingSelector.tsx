@@ -32,27 +32,42 @@ export function RecordingSelector({ currentRecordingId, onSelect, isLoading }: R
 
       {expanded && (
         <div className="recording-selector-dropdown">
-          {RECORDING_CATALOG.map(rec => (
-            <button
-              key={rec.id}
-              className={`recording-option ${rec.id === currentRecordingId ? 'active' : ''}`}
-              onClick={() => {
-                onSelect(rec);
-                setExpanded(false);
-              }}
-              disabled={isLoading}
-            >
-              <div className="recording-option-title">{rec.title}</div>
-              <div className="recording-option-desc">{rec.description}</div>
-              {rec.tags && (
-                <div className="recording-option-tags">
-                  {rec.tags.map(tag => (
-                    <span key={tag} className="recording-tag">{tag}</span>
-                  ))}
+          {RECORDING_CATALOG.map(rec => {
+            const isPlanned = rec.status === 'planned';
+            const statusLabel = rec.status === 'preview' ? 'Preview'
+              : rec.status === 'planned' ? 'Coming Soon'
+              : undefined;
+            return (
+              <button
+                key={rec.id}
+                className={`recording-option ${rec.id === currentRecordingId ? 'active' : ''} ${isPlanned ? 'planned' : ''}`}
+                onClick={() => {
+                  if (!isPlanned) {
+                    onSelect(rec);
+                    setExpanded(false);
+                  }
+                }}
+                disabled={isLoading || isPlanned}
+              >
+                <div className="recording-option-header">
+                  <div className="recording-option-title">{rec.title}</div>
+                  {statusLabel && (
+                    <span className={`recording-status recording-status--${rec.status}`}>
+                      {statusLabel}
+                    </span>
+                  )}
                 </div>
-              )}
-            </button>
-          ))}
+                <div className="recording-option-desc">{rec.description}</div>
+                {rec.tags && (
+                  <div className="recording-option-tags">
+                    {rec.tags.map(tag => (
+                      <span key={tag} className="recording-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

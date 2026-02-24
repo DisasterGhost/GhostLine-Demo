@@ -11,6 +11,8 @@ export interface RecordingAnnotation {
   duration?: number;
 }
 
+export type RecordingStatus = 'live' | 'preview' | 'planned';
+
 export interface CuratedRecording {
   id: string;
   title: string;
@@ -24,4 +26,6 @@ export interface CuratedRecording {
   annotations: RecordingAnnotation[];
   /** Optional tags for filtering */
   tags?: string[];
+  /** Recording availability status */
+  status?: RecordingStatus;
 }

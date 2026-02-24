@@ -77,10 +77,48 @@
   background: rgba(var(--gl-primary-rgb), 0.08);
 }
 
+.recording-option.planned {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.recording-option.planned:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+.recording-option-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
 .recording-option-title {
   font-weight: 600;
   font-size: 0.9rem;
-  margin-bottom: 4px;
+}
+
+.recording-status {
+  font-size: 0.6rem;
+  padding: 1px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.recording-status--preview {
+  background: rgba(255, 180, 50, 0.15);
+  color: #ffb432;
+  border: 1px solid rgba(255, 180, 50, 0.3);
+}
+
+.recording-status--planned {
+  background: rgba(120, 120, 140, 0.12);
+  color: #888899;
+  border: 1px solid rgba(120, 120, 140, 0.2);
 }
 
 .recording-option-desc {
