@@ -192,7 +192,23 @@ export async function loadSession(file: File): Promise<GhostwireSession> {
         if (!session.version || !session.trajectory) {
           throw new Error('Invalid .ghostline file format');
         }
-        
+
+        // Normalize field names across recording versions
+        // Older recordings use 'confidence'/'velocity'; current code expects 'tokenProb'/'projectedVelocity'
+        for (const t of session.trajectory) {
+          const raw = t as any;
+          if (raw.confidence !== undefined && raw.tokenProb === undefined) {
+            t.tokenProb = raw.confidence;
+          }
+          if (raw.velocity !== undefined && t.projectedVelocity === undefined) {
+            t.projectedVelocity = raw.velocity;
+          }
+          // Ensure tokenProb always has a numeric value (prevents NaN in color/opacity)
+          if (t.tokenProb === undefined || t.tokenProb === null) {
+            t.tokenProb = 0.5;
+          }
+        }
+
         console.log(`[Recorder] Loaded session: ${session.trajectory.length} points`);
         resolve(session);
       } catch (err) {
