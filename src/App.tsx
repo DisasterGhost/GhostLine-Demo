@@ -309,10 +309,18 @@ function App() {
         onSelectToken={handleSelectToken}
       />
 
-      {/* Title */}
-      <div className="title">
+      {/* Title - status-aware */}
+      <div className={`title ${isReplaying ? (isReplayPlaying ? 'title-active' : 'title-ready') : 'title-idle'}`}>
         <h1>GHOSTLINE</h1>
-        <p>{isReplaying ? 'Exploring recording.' : 'Choose a recording to begin.'}</p>
+        <p>
+          {isReplaying
+            ? (isReplayPlaying
+                ? `Observing: ${currentRecording?.title || 'Recording'}`
+                : `Paused: ${currentRecording?.title || 'Recording'}`)
+            : (isLoadingRecording
+                ? 'Loading recording...'
+                : 'Choose a recording to begin.')}
+        </p>
       </div>
 
       {/* Toolbar (top-right) — wiki, settings, research, layer selector */}

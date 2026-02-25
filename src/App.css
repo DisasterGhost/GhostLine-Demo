@@ -169,6 +169,7 @@ body {
     0 0 30px rgba(var(--gl-primary-rgb), 0.5),
     0 0 60px rgba(var(--gl-primary-rgb), 0.2);
   margin-bottom: 4px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .title p {
@@ -177,6 +178,42 @@ body {
   letter-spacing: 4px;
   color: var(--gl-text-muted);
   text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+/* Title status states */
+.title-idle h1 {
+  color: rgba(255, 255, 255, 0.5);
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 40px rgba(255, 255, 255, 0.05);
+}
+
+.title-idle p {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.title-ready h1 {
+  color: var(--gl-primary);
+  text-shadow:
+    0 0 30px rgba(var(--gl-primary-rgb), 0.6),
+    0 0 60px rgba(var(--gl-primary-rgb), 0.3);
+}
+
+.title-ready p {
+  color: var(--gl-text-muted);
+}
+
+.title-active h1 {
+  color: var(--gl-success);
+  text-shadow:
+    0 0 30px rgba(0, 255, 102, 0.6),
+    0 0 60px rgba(0, 255, 102, 0.3),
+    0 0 90px rgba(0, 255, 102, 0.1);
+}
+
+.title-active p {
+  color: rgba(0, 255, 102, 0.7);
 }
 
 /* ============================================================================
@@ -461,6 +498,18 @@ body {
 .gl-select:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+/* Global select option styling - ensures visibility on all dropdowns */
+select option,
+.gl-select option,
+.hp-select option,
+.cp-param select option,
+.cp-signal-select select option,
+.sw-metric-select select option {
+  background: #0a0a14;
+  color: #ffffff;
+  padding: 8px;
 }
 
 /* --- Tabs --- */

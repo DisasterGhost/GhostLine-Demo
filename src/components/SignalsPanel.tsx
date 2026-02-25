@@ -402,17 +402,17 @@ export function SignalsPanel({
 
       {/* Signal bars */}
       <div className="signals-grid">
-        {/* L0 Entropy */}
+        {/* L0 Entropy - calibrated for 8B models (higher baseline entropy) */}
         <div className="signal-row">
           <div className="signal-label">
             <span>Entropy</span>
           </div>
           <div className="signal-bar-container">
             <div
-              className={`signal-bar ${entropy > 1.95 ? 'over-threshold' : ''}`}
+              className={`signal-bar ${entropy > 3.5 ? 'over-threshold' : ''}`}
               style={{
-                width: `${Math.min(100, (entropy / 4.0) * 100)}%`,
-                backgroundColor: entropy > 1.95 ? '#ff3333' : entropy > 1.5 ? '#ff9900' : '#33ff66',
+                width: `${Math.min(100, (entropy / 5.0) * 100)}%`,
+                backgroundColor: entropy > 3.5 ? '#ff3333' : entropy > 2.8 ? '#ff9900' : '#33ff66',
               }}
             />
           </div>
