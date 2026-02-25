@@ -611,6 +611,22 @@ export function useGhostwire(playbackRate: number = 4) {
         maxTokens: session.config.maxTokens,
       });
       
+      // Extract available layers from layer_coords in trajectory data
+      const firstWithLayers = session.trajectory.find((t: any) => t.layer_coords && Object.keys(t.layer_coords).length > 0);
+      if (firstWithLayers?.layer_coords) {
+        const captureLayers = Object.keys(firstWithLayers.layer_coords).map(Number).sort((a, b) => a - b);
+        // Default render to middle-ish layer, or last capture layer
+        const defaultRender = captureLayers[Math.floor(captureLayers.length * 0.6)] ?? captureLayers[0];
+        setLayerInfo({
+          available: captureLayers,
+          capture: captureLayers,
+          render: defaultRender,
+          attention: captureLayers[Math.floor(captureLayers.length * 0.3)] ?? captureLayers[0],
+          labels: {},
+        });
+        console.log(`[Ghostwire] Replay layer info: ${captureLayers.length} layers, render=L${defaultRender}`);
+      }
+      
       console.log(`[Ghostwire] Loaded session for replay: ${session.trajectory.length} total points`);
       
     } catch (err) {
@@ -811,21 +827,26 @@ export function useGhostwire(playbackRate: number = 4) {
 
   const setLayers = useCallback(async (layers: { capture?: number[]; render?: number; attention?: number }) => {
     try {
-      const response = await fetch(API_ENDPOINTS.setLayers, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(layers),
-      });
+      // In replay mode, skip the API call — just switch coordinates locally
+      if (!isReplaying) {
+        const response = await fetch(API_ENDPOINTS.setLayers, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(layers),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.error) {
-        console.error('[Ghostwire] Layer change failed:', data.error);
-        setError(`Layer change failed: ${data.error}`);
-        return;
+        if (data.error) {
+          console.error('[Ghostwire] Layer change failed:', data.error);
+          setError(`Layer change failed: ${data.error}`);
+          return;
+        }
+
+        console.log('[Ghostwire] Layers updated:', data);
+      } else {
+        console.log('[Ghostwire] Replay layer switch:', layers);
       }
-
-      console.log('[Ghostwire] Layers updated:', data);
 
       // Update local state
       setLayerInfo(prev => ({
@@ -864,7 +885,7 @@ export function useGhostwire(playbackRate: number = 4) {
       console.error('[Ghostwire] Layer change error:', err);
       setError(`Layer change error: ${err}`);
     }
-  }, [switchLayer, switchLayerSequence, layerInfo.render, layerInfo.capture]);
+  }, [switchLayer, switchLayerSequence, layerInfo.render, layerInfo.capture, isReplaying]);
 
   // ============================================================================
   // Intervention Control (Dec 28 - Collapse Prevention)

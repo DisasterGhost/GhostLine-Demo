@@ -571,11 +571,11 @@ function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowI
 
   const size = baseSize * entropyScale * ghostScale * residualNormScale;
 
-  const labelSize = ghosted ? 0.08 :
-                    isCurrent ? 0.22 :
-                    isSelected ? 0.2 :
-                    isPrompt ? 0.1 :
-                    isRecent ? 0.15 : 0.12;
+  const labelSize = ghosted ? 0.14 :
+                    isCurrent ? 0.35 :
+                    isSelected ? 0.32 :
+                    isPrompt ? 0.18 :
+                    isRecent ? 0.24 : 0.20;
   
   // Projection confidence affects visual treatment
   // Low confidence = more transparent, less glow (position is uncertain)
@@ -804,17 +804,22 @@ function TrajectoryLine({ trajectory, showOutlierJumps = false }: TrailProps) {
       const from = trajectory[i];
       const to = trajectory[i + 1];
 
-      if (!from.coords || !to.coords ||
-          !isFinite(from.coords[0]) || !isFinite(from.coords[1]) || !isFinite(from.coords[2]) ||
-          !isFinite(to.coords[0]) || !isFinite(to.coords[1]) || !isFinite(to.coords[2])) {
+      // Use _prevCoords (pre-transition position) if available, so geometry
+      // starts where tokens currently are rather than snapping to destination.
+      const fromPos = from._prevCoords || from.coords;
+      const toPos = to._prevCoords || to.coords;
+
+      if (!fromPos || !toPos ||
+          !isFinite(fromPos[0]) || !isFinite(fromPos[1]) || !isFinite(fromPos[2]) ||
+          !isFinite(toPos[0]) || !isFinite(toPos[1]) || !isFinite(toPos[2])) {
         distances.push(Infinity);
         continue;
       }
 
       const dist = Math.sqrt(
-        (to.coords[0] - from.coords[0]) ** 2 +
-        (to.coords[1] - from.coords[1]) ** 2 +
-        (to.coords[2] - from.coords[2]) ** 2
+        (toPos[0] - fromPos[0]) ** 2 +
+        (toPos[1] - fromPos[1]) ** 2 +
+        (toPos[2] - fromPos[2]) ** 2
       );
       distances.push(dist);
       validDistances.push(dist);
@@ -865,8 +870,11 @@ function TrajectoryLine({ trajectory, showOutlierJumps = false }: TrailProps) {
         b = Math.min(1, baseColor.b * distFactor * 1.3);
       }
 
-      posArr.push(from.coords[0], from.coords[1], from.coords[2]);
-      posArr.push(to.coords[0], to.coords[1], to.coords[2]);
+      // Use pre-transition position so lines start where tokens are, not destination
+      const fromInitPos = from._prevCoords || from.coords;
+      const toInitPos = to._prevCoords || to.coords;
+      posArr.push(fromInitPos[0], fromInitPos[1], fromInitPos[2]);
+      posArr.push(toInitPos[0], toInitPos[1], toInitPos[2]);
       colArr.push(r, g, b);
       colArr.push(r, g, b);
 
@@ -1869,11 +1877,11 @@ function AttentionArc({ fromCoords, toCoords, weight, head, patternType = 'local
           {/* Label showing target token */}
           <Billboard follow={true}>
             <Text
-              fontSize={0.07}
+              fontSize={0.12}
               color="#8899aa"
               anchorX="center"
               anchorY="bottom"
-              position={[0, 0.12, 0]}
+              position={[0, 0.15, 0]}
               fillOpacity={0.7}
               outlineWidth={0.008}
               outlineColor="#000000"
@@ -2144,7 +2152,7 @@ function SelectedTokenInfo({ token, trajectory, enabledHeads, onClear }: Selecte
   return (
     <Billboard position={[token.coords[0], token.coords[1] - 0.35, token.coords[2]]} follow={true}>
       <Text
-        fontSize={0.08}
+        fontSize={0.14}
         color={COLORS.selectedColor}
         anchorX="center"
         anchorY="top"
@@ -2442,7 +2450,7 @@ function PauseIndicator({ pauseState, position }: PauseIndicatorProps) {
   return (
     <Billboard position={[position[0], position[1] + 0.5, position[2]]} follow={true}>
       <Text
-        fontSize={0.12}
+        fontSize={0.18}
         color={COLORS.pauseColor}
         anchorX="center"
         anchorY="middle"
