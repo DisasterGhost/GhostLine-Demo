@@ -833,6 +833,12 @@ select option,
   margin-right: 8px;
 }
 
+.status-display .token-text .token-pos {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 10px;
+  margin-left: 6px;
+}
+
 .status-display .token-text .value {
   color: #7eb8ff;
   font-family: monospace;
@@ -3578,6 +3584,42 @@ canvas {
   /* Title shrink */
   /* Title — hidden on mobile for maximum scene visibility */
   .title {
+    display: none;
+  }
+
+  /* StatusDisplay — compact on mobile */
+  .status-display {
+    padding: 8px 10px;
+    font-size: 11px;
+    max-width: 55vw;
+  }
+
+  .status-display .connection {
+    font-size: 11px;
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+
+  .status-display .model-badge {
+    font-size: 10px;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .status-display .current-token {
+    padding-top: 4px;
+    margin-top: 2px;
+  }
+
+  .status-display .token-text {
+    font-size: 11px;
+  }
+
+  /* Hide non-essential elements on mobile */
+  .status-display .sae-features,
+  .status-display .dim-badge,
+  .status-display .lambda-badge,
+  .status-display .loop-stats-debug {
     display: none;
   }
 

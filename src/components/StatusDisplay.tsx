@@ -432,57 +432,28 @@ export function StatusDisplay({
         </div>
       )}
 
-      {/* Entropy/Uncertainty indicator */}
-      {pauseState && isGenerating && (
-        <div className={`pause-status ${pauseState.isPaused ? 'paused' : ''}`}>
-          {/* HARDENING_TOGGLE */}
-          <span>Entropy: {HARDENING_MODE
-            ? bucketEntropy(pauseState.entropy)
-            : (pauseState.entropy ?? 0).toFixed(2)
-          }</span>
-          {pauseState.isPaused && (
-            <span className="pause-indicator">
-              {/* HARDENING_TOGGLE: Hide exact intensity in hardened mode */}
-              ● UNCERTAIN {HARDENING_MODE ? '' : `(${(pauseState.pauseIntensity * 100).toFixed(0)}%)`}
-            </span>
-          )}
+      {/* Uncertainty pause indicator (no redundant entropy — see SignalsPanel) */}
+      {pauseState && isGenerating && pauseState.isPaused && (
+        <div className={`pause-status paused`}>
+          <span className="pause-indicator">
+            ● UNCERTAIN {HARDENING_MODE ? '' : `(${(pauseState.pauseIntensity * 100).toFixed(0)}%)`}
+          </span>
         </div>
       )}
 
-      {/* Current token info */}
+      {/* Current token — compact, no redundant stats (see SignalsPanel for details) */}
       {currentToken && (
         <div className="current-token">
           <div className="token-text">
             <span className="label">Token:</span>
             <span className="value">{JSON.stringify(currentToken.tokenStr)}</span>
-          </div>
-          <div className="token-stats">
-            {/* HARDENING_TOGGLE: Show bucketed or raw values */}
-            <span>Conf: {HARDENING_MODE
-              ? bucketConfidence(currentToken.tokenProb)
-              : `${((currentToken.tokenProb ?? 0) * 100).toFixed(1)}%`
-            }</span>
-            <span>Entropy: {HARDENING_MODE
-              ? bucketEntropy(currentToken.entropy)
-              : (currentToken.entropy ?? 0).toFixed(2)
-            }</span>
-            <span>Pos: {currentToken.position}</span>
-            {currentToken.projectionConfidence !== undefined && (
-              <span className={`proj-conf ${currentToken.projectionConfidence < 0.5 ? 'low' : ''}`}>
-                {/* HARDENING_TOGGLE */}
-                Proj: {HARDENING_MODE
-                  ? bucketProjectionConfidence(currentToken.projectionConfidence)
-                  : `${(currentToken.projectionConfidence * 100).toFixed(0)}%`
-                }
-              </span>
-            )}
+            <span className="token-pos">#{currentToken.position}</span>
           </div>
           {/* SAE Features */}
           {currentToken.saeFeatures && currentToken.saeFeatures.length > 0 && (
             <div className="sae-features">
               <span className="sae-label">SAE:</span>
               {currentToken.saeFeatures.slice(0, 3).map((f, i) => {
-                // Neuronpedia links only for gpt2-small (pre-trained SAE)
                 const isGpt2Small = config?.model === 'gpt2-small';
                 const npLink = isGpt2Small
                   ? `https://neuronpedia.org/gpt2-small/11-res-jb/${f.id}`
@@ -512,40 +483,6 @@ export function StatusDisplay({
             </div>
           )}
         </div>
-      )}
-
-      {/* Geometric state indicator */}
-      {currentToken?.geometricState && (
-        <div className="geometric-state">
-          <span
-            className="state-dot"
-            style={{ color: STATE_COLORS[currentToken.geometricState] || '#888' }}
-          >●</span>
-          <span className="state-label">{currentToken.geometricState}</span>
-          {currentToken.stateProbs && (() => {
-            const maxProb = Math.max(...Object.values(currentToken.stateProbs!));
-            return <span className="state-conf">{(maxProb * 100).toFixed(0)}%</span>;
-          })()}
-        </div>
-      )}
-
-      {/* Velocity indicator */}
-      {currentToken?.projectedVelocity !== undefined && (
-        <div className="velocity-indicator">
-          <span className="velocity-label">Vel:</span>
-          <div className="velocity-bar-container">
-            <div
-              className="velocity-bar"
-              style={{ width: `${Math.min(100, (currentToken.projectedVelocity / 4.0) * 100)}%` }}
-            />
-          </div>
-          <span className="velocity-value">{(currentToken.projectedVelocity ?? 0).toFixed(2)}</span>
-        </div>
-      )}
-
-      {/* Drift meter - show during/after generation */}
-      {trajectory.length > 1 && (
-        <DriftMeter drift={drift} />
       )}
 
       {/* Progress during generation */}

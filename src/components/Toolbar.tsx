@@ -44,23 +44,26 @@ export function Toolbar({
       <button
         className={`gl-toolbar-btn ${activePanel === 'wiki' ? 'active' : ''}`}
         onClick={() => onTogglePanel('wiki')}
-        title="Wiki"
+        title="Wiki — Learn about GhostLine concepts"
       >
         <span className="gl-toolbar-icon">&#128214;</span>
+        <span className="gl-toolbar-label">Wiki</span>
       </button>
       <button
         className={`gl-toolbar-btn ${activePanel === 'settings' ? 'active' : ''}`}
         onClick={() => onTogglePanel('settings')}
-        title="Settings"
+        title="Settings — Customize visuals and display"
       >
         <span className="gl-toolbar-icon">&#9881;</span>
+        <span className="gl-toolbar-label">Settings</span>
       </button>
       <button
         className={`gl-toolbar-btn ${activePanel === 'research' ? 'active' : ''} ${isResearchRunning ? 'running' : ''}`}
         onClick={() => onTogglePanel('research')}
-        title="Research Lab"
+        title="Research Lab — Hypothesis testing and analysis"
       >
         <span className="gl-toolbar-icon">&#128300;</span>
+        <span className="gl-toolbar-label">Research</span>
       </button>
     </div>
   );
