@@ -1,3 +1,89 @@
+/* ── Tutorial Toggle Button ─────────────────────────────────────────── */
+.tutorial-toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius);
+  color: var(--gl-text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.7;
+}
+
+.tutorial-toggle:hover {
+  opacity: 1;
+  border-color: var(--gl-primary);
+  color: var(--gl-text);
+}
+
+.tutorial-toggle.active {
+  border-color: var(--gl-primary);
+  color: var(--gl-primary);
+  opacity: 0.9;
+}
+
+.tutorial-toggle-icon {
+  font-size: 1rem;
+}
+
+.tutorial-toggle-label {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ── Teaching Goal Banner ──────────────────────────────────────────── */
+.teaching-goal-banner {
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 95;
+  background: linear-gradient(135deg, rgba(var(--gl-primary-rgb), 0.12), rgba(var(--gl-primary-rgb), 0.06));
+  border: 1px solid rgba(var(--gl-primary-rgb), 0.3);
+  border-radius: var(--gl-radius-lg);
+  padding: 12px 20px;
+  max-width: 520px;
+  text-align: center;
+  cursor: pointer;
+  animation: goalSlideIn 0.4s ease-out;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes goalSlideIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-15px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.teaching-goal-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gl-primary);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.teaching-goal-text {
+  font-size: 0.85rem;
+  color: var(--gl-text);
+  line-height: 1.5;
+}
+
+.teaching-goal-hint {
+  font-size: 0.6rem;
+  color: var(--gl-text-dim);
+  margin-top: 6px;
+}
+
+/* ── Annotation Overlay ────────────────────────────────────────────── */
 .annotation-overlay {
   position: fixed;
   top: 80px;
@@ -17,47 +103,127 @@
   background: var(--gl-bg-panel);
   border: 1px solid var(--gl-primary);
   border-radius: var(--gl-radius-lg);
-  padding: 16px 20px;
-  max-width: 480px;
+  padding: 14px 18px;
+  max-width: 500px;
+  min-width: 340px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), var(--gl-glow-primary);
   pointer-events: auto;
   position: relative;
 }
 
+/* ── Dismiss ───────────────────────────────────────────────────────── */
 .annotation-dismiss {
   position: absolute;
   top: 8px;
-  right: 12px;
+  right: 10px;
   background: none;
   border: none;
   color: var(--gl-text-muted);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  transition: color 0.15s;
 }
 
 .annotation-dismiss:hover {
   color: var(--gl-text);
 }
 
+/* ── Progress Dots ─────────────────────────────────────────────────── */
+.annotation-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.annotation-progress-bar {
+  display: flex;
+  gap: 4px;
+}
+
+.annotation-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gl-border);
+  transition: all 0.2s;
+}
+
+.annotation-dot.seen {
+  background: rgba(var(--gl-primary-rgb), 0.4);
+}
+
+.annotation-dot.active {
+  background: var(--gl-primary);
+  box-shadow: 0 0 6px rgba(var(--gl-primary-rgb), 0.5);
+  transform: scale(1.3);
+}
+
+.annotation-step {
+  font-size: 0.65rem;
+  color: var(--gl-text-dim);
+  letter-spacing: 0.05em;
+}
+
+/* ── Content ───────────────────────────────────────────────────────── */
 .annotation-title {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   color: var(--gl-primary);
   margin-bottom: 6px;
+  padding-right: 20px;
 }
 
 .annotation-body {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--gl-text);
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+/* ── Footer with token + nav ───────────────────────────────────────── */
+.annotation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .annotation-token {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--gl-text-dim);
-  margin-top: 8px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.annotation-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.annotation-nav-btn {
+  background: rgba(var(--gl-primary-rgb), 0.1);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius);
+  color: var(--gl-text-muted);
+  width: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all 0.15s;
+}
+
+.annotation-nav-btn:hover:not(:disabled) {
+  background: rgba(var(--gl-primary-rgb), 0.2);
+  border-color: var(--gl-primary);
+  color: var(--gl-primary);
+}
+
+.annotation-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
 }
