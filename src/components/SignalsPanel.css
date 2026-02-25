@@ -17,7 +17,7 @@
   border-radius: 8px;
   padding: 12px;
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
-  font-size: 11px;
+  font-size: 13px;
   color: #e0e0e0;
   backdrop-filter: blur(8px);
   z-index: 100;
@@ -48,7 +48,7 @@
 
 .signals-header h3 {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #ffffff;
 }
@@ -58,7 +58,7 @@
   border: none;
   color: #888;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   padding: 4px;
 }
 
@@ -68,7 +68,7 @@
 
 .signals-expand {
   color: #888;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .signals-state-row {
@@ -87,7 +87,7 @@
 
 .signals-state {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   text-shadow: 0 0 8px currentColor;
 }
 
@@ -106,7 +106,7 @@
 .signals-selected {
   color: #ffcc00;
   margin-left: 8px;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .signals-grid {
@@ -135,7 +135,7 @@
 
 .signal-threshold {
   color: #666;
-  font-size: 9px;
+  font-size: 11px;
 }
 
 .signal-bar-container {
@@ -204,7 +204,7 @@
   grid-template-columns: 80px 1fr 36px;
   gap: 8px;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .risk-row span:first-child {
@@ -236,7 +236,7 @@
 
 .signals-footer small {
   color: #666;
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.4;
 }
 
@@ -259,7 +259,7 @@
 }
 
 .prob-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -278,7 +278,7 @@
 }
 
 .prob-value {
-  font-size: 9px;
+  font-size: 11px;
   text-align: right;
   color: #aaa;
   font-variant-numeric: tabular-nums;
@@ -335,7 +335,7 @@
   border: 1px solid rgba(255, 100, 0, 0.4);
   border-radius: 4px;
   color: #ff9900;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .intervention-icon {
@@ -373,7 +373,7 @@
 
 .halluc-risk-label {
   color: #888;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -408,7 +408,7 @@
   top: 6px;
   right: 24px;
   color: #00CCCC;
-  font-size: 8px;
+  font-size: 11px;
   opacity: 0.6;
 }
 
@@ -445,7 +445,7 @@
 }
 
 .prophecy-label {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   color: rgba(100, 200, 255, 0.8);
@@ -453,7 +453,7 @@
 }
 
 .prophecy-verdict {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -491,13 +491,13 @@
 
 .prophecy-halluc-warning {
   margin-top: 4px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 
 /* Dual prophecy mode indicator */
 .prophecy-mode {
-  font-size: 8px;
+  font-size: 11px;
   opacity: 0.6;
   letter-spacing: 0.5px;
 }
@@ -525,7 +525,7 @@
 }
 
 .prophecy-source-label {
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   color: rgba(100, 200, 255, 0.6);
@@ -537,7 +537,7 @@
 }
 
 .prophecy-split-half .prophecy-confidence {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 @keyframes prophecy-appear {
@@ -590,7 +590,7 @@
     resize: none;
     z-index: 50;
     padding: 8px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .signals-panel.collapsed {

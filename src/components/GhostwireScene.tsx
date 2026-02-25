@@ -219,13 +219,16 @@ const ENTROPY_MAX = 5.0;
 
 interface StableOrbitControlsProps {
   autoDrift?: boolean;
+  trajectory?: TrajectoryPoint[];
 }
 
-function StableOrbitControls({ autoDrift = false }: StableOrbitControlsProps) {
+function StableOrbitControls({ autoDrift = false, trajectory = [] }: StableOrbitControlsProps) {
   const { camera, gl } = useThree();
   const controlsRef = useRef<ThreeOrbitControls | null>(null);
   const userInteracting = useRef(false);
   const lastInteraction = useRef(0);
+  const hasCentered = useRef(false);
+  const lastTrajectoryLength = useRef(0);
   
   useEffect(() => {
     const controls = new ThreeOrbitControls(camera, gl.domElement);
@@ -233,7 +236,7 @@ function StableOrbitControls({ autoDrift = false }: StableOrbitControlsProps) {
     controls.dampingFactor = 0.1;
     controls.minDistance = 0.5;
     controls.maxDistance = 150;
-    controls.target.set(12.5, 12.5, 12.5);
+    controls.target.set(0, 0, 0);
     controlsRef.current = controls;
     
     // Track user interaction to pause auto-drift
@@ -276,6 +279,50 @@ function StableOrbitControls({ autoDrift = false }: StableOrbitControlsProps) {
     }
     
     controlsRef.current.update();
+    
+    // Auto-center camera on trajectory data when it first arrives or resets
+    if (trajectory.length > 0 && controlsRef.current) {
+      const isNewData = trajectory.length !== lastTrajectoryLength.current;
+      const isFirstLoad = !hasCentered.current && trajectory.length >= 3;
+      const isReset = lastTrajectoryLength.current > 0 && trajectory.length < lastTrajectoryLength.current * 0.5;
+      
+      if (isFirstLoad || isReset) {
+        // Compute bounding box center of all trajectory points
+        let minX = Infinity, minY = Infinity, minZ = Infinity;
+        let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+        
+        for (const pt of trajectory) {
+          if (!pt.coords || !isFinite(pt.coords[0])) continue;
+          minX = Math.min(minX, pt.coords[0]);
+          minY = Math.min(minY, pt.coords[1]);
+          minZ = Math.min(minZ, pt.coords[2]);
+          maxX = Math.max(maxX, pt.coords[0]);
+          maxY = Math.max(maxY, pt.coords[1]);
+          maxZ = Math.max(maxZ, pt.coords[2]);
+        }
+        
+        if (isFinite(minX)) {
+          const cx = (minX + maxX) / 2;
+          const cy = (minY + maxY) / 2;
+          const cz = (minZ + maxZ) / 2;
+          const span = Math.max(maxX - minX, maxY - minY, maxZ - minZ, 1);
+          const dist = span * 1.8; // Pull back enough to see the whole thing
+          
+          controlsRef.current.target.set(cx, cy, cz);
+          camera.position.set(cx + dist * 0.6, cy + dist * 0.5, cz + dist * 0.6);
+          controlsRef.current.update();
+          hasCentered.current = true;
+        }
+      }
+      
+      lastTrajectoryLength.current = trajectory.length;
+    }
+    
+    // Reset centering flag when trajectory empties (new recording loading)
+    if (trajectory.length === 0) {
+      hasCentered.current = false;
+      lastTrajectoryLength.current = 0;
+    }
   });
   
   return null;
@@ -2527,7 +2574,7 @@ export function GhostwireScene({
       <TokenColorModeContext.Provider value={visualSettings.tokenColorMode || 'confidence'}>
       <StatePaletteContext.Provider value={getStatePaletteColors((visualSettings.statePalette as StatePaletteId) ?? 'classic')}>
       {/* Custom OrbitControls with optional auto-drift */}
-      <StableOrbitControls autoDrift={visualSettings.cameraAutoDrift} />
+      <StableOrbitControls autoDrift={visualSettings.cameraAutoDrift} trajectory={trajectory} />
 
       <ambientLight intensity={0.3} />
       <pointLight position={[10, 10, 10]} intensity={1.0} />

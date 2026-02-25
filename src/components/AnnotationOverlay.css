@@ -36,6 +36,7 @@
 
 .tutorial-toggle-label {
   font-weight: 600;
+  font-size: 0.85rem;
   letter-spacing: 0.02em;
 }
 
@@ -63,7 +64,7 @@
 }
 
 .teaching-goal-label {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--gl-primary);
@@ -72,13 +73,13 @@
 }
 
 .teaching-goal-text {
-  font-size: 0.85rem;
+  font-size: 1.0rem;
   color: var(--gl-text);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .teaching-goal-hint {
-  font-size: 0.6rem;
+  font-size: 0.75rem;
   color: var(--gl-text-dim);
   margin-top: 6px;
 }
@@ -103,9 +104,9 @@
   background: var(--gl-bg-panel);
   border: 1px solid var(--gl-primary);
   border-radius: var(--gl-radius-lg);
-  padding: 14px 18px;
-  max-width: 500px;
-  min-width: 340px;
+  padding: 16px 22px;
+  max-width: 560px;
+  min-width: 380px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), var(--gl-glow-primary);
   pointer-events: auto;
   position: relative;
@@ -162,7 +163,7 @@
 }
 
 .annotation-step {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   color: var(--gl-text-dim);
   letter-spacing: 0.05em;
 }
@@ -170,16 +171,16 @@
 /* ── Content ───────────────────────────────────────────────────────── */
 .annotation-title {
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1.1rem;
   color: var(--gl-primary);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   padding-right: 20px;
 }
 
 .annotation-body {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--gl-text);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 /* ── Footer with token + nav ───────────────────────────────────────── */
@@ -191,7 +192,7 @@
 }
 
 .annotation-token {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   color: var(--gl-text-dim);
   text-transform: uppercase;
   letter-spacing: 0.05em;
