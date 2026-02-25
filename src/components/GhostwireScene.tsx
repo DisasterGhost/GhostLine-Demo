@@ -2602,8 +2602,25 @@ export function GhostwireScene({
       )}
       <fog attach="fog" args={[COLORS.background, visualSettings.fogNear ?? 40, visualSettings.fogFar ?? 120]} />
 
-      {/* Spatial spread: scale all token/trajectory content from origin */}
-      <group scale={visualSettings.spatialSpread ?? 1}>
+      {/* Spatial spread: scale from trajectory centroid, not origin */}
+      <group
+        position={(() => {
+          const spread = visualSettings.spatialSpread ?? 1;
+          if (spread === 1 || trajectory.length === 0) return [0, 0, 0] as [number, number, number];
+          // Compute centroid
+          let cx = 0, cy = 0, cz = 0, n = 0;
+          for (const pt of trajectory) {
+            if (pt.coords && isFinite(pt.coords[0])) {
+              cx += pt.coords[0]; cy += pt.coords[1]; cz += pt.coords[2]; n++;
+            }
+          }
+          if (n === 0) return [0, 0, 0] as [number, number, number];
+          cx /= n; cy /= n; cz /= n;
+          // Offset to keep centroid stationary after scaling
+          return [cx * (1 - spread), cy * (1 - spread), cz * (1 - spread)] as [number, number, number];
+        })()}
+        scale={visualSettings.spatialSpread ?? 1}
+      >
 
       <Landmarks visible={showLandmarks} opacity={landmarkOpacity} />
 
