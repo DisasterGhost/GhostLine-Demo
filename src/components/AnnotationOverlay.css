@@ -9,6 +9,8 @@
   gap: 6px;
   padding: 6px 12px;
   background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   border: 1px solid var(--gl-border);
   border-radius: var(--gl-radius);
   color: var(--gl-text-muted);
@@ -102,6 +104,8 @@
 
 .annotation-card {
   background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   border: 1px solid var(--gl-primary);
   border-radius: var(--gl-radius-lg);
   padding: 16px 22px;

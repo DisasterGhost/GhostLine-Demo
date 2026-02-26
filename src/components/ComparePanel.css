@@ -9,12 +9,13 @@
   width: 360px;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+  background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius-lg);
   z-index: 99;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .cp-header {

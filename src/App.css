@@ -24,11 +24,12 @@
   --gl-radius-lg: 12px;
   --gl-panel-padding: 16px;
 
-  /* Backgrounds (shared across all themes) */
+  /* Backgrounds (shared across all themes) — frosted glass style */
   --gl-bg-deep: #050508;
-  --gl-bg-panel: rgba(8, 8, 16, 0.95);
-  --gl-bg-elevated: rgba(16, 16, 24, 0.9);
-  --gl-bg-input: rgba(0, 0, 0, 0.4);
+  --gl-bg-panel: rgba(8, 8, 16, 0.72);
+  --gl-bg-elevated: rgba(16, 16, 24, 0.65);
+  --gl-bg-input: rgba(0, 0, 0, 0.35);
+  --gl-backdrop: blur(12px) saturate(1.4);
 
   /* Text (shared across all themes) */
   --gl-text: rgba(255, 255, 255, 0.9);
@@ -268,7 +269,8 @@ body {
 /* --- Unified Panel --- */
 .gl-panel {
   background: var(--gl-bg-panel);
-  backdrop-filter: blur(16px);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   border: 1px solid var(--gl-border);
   border-radius: var(--gl-radius);
   box-shadow: var(--gl-glow-primary), inset 0 1px 0 rgba(255, 255, 255, 0.03);
@@ -328,7 +330,8 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
 }
 
 .gl-icon-btn:hover {
@@ -687,7 +690,8 @@ select option,
 .status-display {
   align-self: flex-start;
   background: var(--gl-bg-panel);
-  backdrop-filter: blur(12px);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   padding: 12px 16px;
   border-radius: var(--gl-radius);
   border: 1px solid var(--gl-border);
@@ -1892,12 +1896,13 @@ canvas {
   top: 60px;
   right: 16px;
   width: 300px;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+  background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius-lg);
   z-index: 99;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .batch-header {
@@ -2175,9 +2180,11 @@ canvas {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.7);
+  background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
+  border: 1px solid var(--gl-border);
+  color: var(--gl-text-muted);
   font-size: 16px;
   cursor: pointer;
   display: flex;
@@ -2199,10 +2206,11 @@ canvas {
   right: 16px;
   width: 280px;
   max-height: calc(100vh - 120px);
-  background: rgba(10, 10, 20, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
+  background: var(--gl-bg-panel);
+  border: 1px solid var(--gl-border);
+  border-radius: var(--gl-radius-lg);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   z-index: 999;
   overflow: hidden;
   display: flex;
@@ -2798,6 +2806,8 @@ canvas {
   width: 320px;
   max-height: calc(100vh - 100px);
   background: var(--gl-bg-panel);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
   border: 1px solid var(--gl-border);
   border-radius: var(--gl-radius-lg);
   z-index: 999;

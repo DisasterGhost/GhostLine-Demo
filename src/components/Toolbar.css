@@ -25,7 +25,8 @@
   justify-content: center;
   gap: 6px;
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--gl-backdrop);
+  -webkit-backdrop-filter: var(--gl-backdrop);
 }
 
 .gl-toolbar-label {
