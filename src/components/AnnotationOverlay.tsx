@@ -132,8 +132,8 @@ export function AnnotationOverlay({ recording, currentTokenIndex, isPlaying }: A
           <div className="annotation-card">
             <button
               className="annotation-dismiss"
-              onClick={() => setDismissed(true)}
-              title="Dismiss this annotation"
+              onClick={toggleTutorial}
+              title="Close tutorial"
             >&times;</button>
 
             {/* Progress indicator */}

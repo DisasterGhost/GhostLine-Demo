@@ -236,6 +236,7 @@ function StableOrbitControls({ autoDrift = false, trajectory = [] }: StableOrbit
     controls.dampingFactor = 0.1;
     controls.minDistance = 0.5;
     controls.maxDistance = 150;
+    controls.zoomSpeed = 3.0;
     controls.target.set(0, 0, 0);
     controlsRef.current = controls;
     
@@ -280,13 +281,15 @@ function StableOrbitControls({ autoDrift = false, trajectory = [] }: StableOrbit
     
     controlsRef.current.update();
     
-    // Auto-center camera on trajectory data when it first arrives or resets
+    // Auto-center camera on trajectory data when enough arrives or recording changes
     if (trajectory.length > 0 && controlsRef.current) {
-      const isNewData = trajectory.length !== lastTrajectoryLength.current;
-      const isFirstLoad = !hasCentered.current && trajectory.length >= 3;
       const isReset = lastTrajectoryLength.current > 0 && trajectory.length < lastTrajectoryLength.current * 0.5;
+      // Center when we first get 10+ tokens, or at 50% of data, or on reset
+      const isFirstLoad = !hasCentered.current && trajectory.length >= 10;
+      const isHalfway = hasCentered.current && !userInteracting.current
+        && lastTrajectoryLength.current < 50 && trajectory.length >= 50;
       
-      if (isFirstLoad || isReset) {
+      if (isFirstLoad || isReset || isHalfway) {
         // Compute bounding box center of all trajectory points
         let minX = Infinity, minY = Infinity, minZ = Infinity;
         let maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
@@ -318,11 +321,12 @@ function StableOrbitControls({ autoDrift = false, trajectory = [] }: StableOrbit
       lastTrajectoryLength.current = trajectory.length;
     }
     
-    // Reset centering flag when trajectory empties (new recording loading)
-    if (trajectory.length === 0) {
+    // Reset centering flag when trajectory empties or shrinks dramatically (new recording loading)
+    if (trajectory.length === 0 || (lastTrajectoryLength.current > 0 && trajectory.length < lastTrajectoryLength.current * 0.5)) {
       hasCentered.current = false;
-      lastTrajectoryLength.current = 0;
     }
+    
+    lastTrajectoryLength.current = trajectory.length;
   });
   
   return null;
