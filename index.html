@@ -2,44 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👻</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>frontend</title>
+    <title>GhostLine — Real-Time LLM Cognitive Monitoring</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Update checker: polls version.json every 60s, shows toast on new deploy -->
-    <style>
-      #gl-update-toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);
-        z-index:9999;background:rgba(8,8,16,0.72);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);border:1px solid #00e5ff;border-radius:10px;padding:12px 20px;
-        display:flex;align-items:center;gap:12px;box-shadow:0 4px 24px rgba(0,229,255,.25);
-        font-family:system-ui,sans-serif;transition:transform .4s ease;pointer-events:auto}
-      #gl-update-toast.show{transform:translateX(-50%) translateY(0)}
-      #gl-update-toast span{color:#e0e0e0;font-size:14px}
-      #gl-update-toast button{background:#00e5ff;color:#0a0a14;border:none;border-radius:6px;
-        padding:6px 14px;font-weight:700;font-size:13px;cursor:pointer}
-      #gl-update-toast button:hover{background:#33ecff}
-      #gl-update-toast .dismiss{background:transparent;color:#888;font-size:18px;padding:2px 6px}
-    </style>
-    <div id="gl-update-toast"><span>🔄 New version available</span>
-      <button onclick="location.reload(true)">Refresh</button>
-      <button class="dismiss" onclick="this.parentElement.classList.remove('show')">&times;</button>
-    </div>
-    <script>
-      (function(){
-        var base='/GhostLine-Demo/';
-        var cur=null;
-        function check(){
-          fetch(base+'version.json?t='+Date.now()).then(function(r){return r.json()}).then(function(d){
-            if(cur===null){cur=d.v;return}
-            if(d.v!==cur)document.getElementById('gl-update-toast').classList.add('show');
-          }).catch(function(){})
-        }
-        check();
-        setInterval(check,60000);
-      })()
-    </script>
+    <!-- Update checker disabled for demo build -->
   </body>
 </html>

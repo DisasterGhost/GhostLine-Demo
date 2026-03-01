@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { API_BASE } from '../config.ts';
+import { API_BASE, IS_DEMO_VIEWER } from '../config.ts';
 
 // ============================================================================
 // Types
@@ -142,8 +142,9 @@ export function useResearchWorkbench() {
   const [runHistory, setRunHistory] = useState<RunListEntry[]>([]);
   const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Load presets on mount
+  // Load presets on mount (skip in demo viewer — no backend)
   useEffect(() => {
+    if (IS_DEMO_VIEWER) return;
     fetch(`${API_BASE}/api/research/presets`)
       .then(r => r.json())
       .then(data => {

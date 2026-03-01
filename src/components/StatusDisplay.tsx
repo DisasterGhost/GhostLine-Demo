@@ -387,8 +387,8 @@ export function StatusDisplay({
     <div className="status-display">
       {/* Connection status */}
       <div className="connection">
-        <span className={`dot ${isConnected ? 'connected' : ''}`} />
-        <span>{isConnected ? 'Connected' : 'Disconnected'}</span>
+        <span className={`dot ${isConnected ? 'connected' : 'demo'}`} />
+        <span>{isConnected ? 'Connected' : 'Demo Mode'}</span>
       </div>
 
       {/* Model/Layer badge */}

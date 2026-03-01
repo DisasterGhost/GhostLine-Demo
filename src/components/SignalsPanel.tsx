@@ -193,6 +193,14 @@ export function SignalsPanel({
         <button className="signals-collapse" onClick={(e) => { e.stopPropagation(); setIsCollapsed(true); }}>&#9664;</button>
       </div>
 
+      {/* Awaiting playback overlay */}
+      {!token && (
+        <div style={{ padding: '24px 16px', textAlign: 'center', color: '#888', fontSize: '14px' }}>
+          <div style={{ fontSize: '28px', marginBottom: '8px' }}>▶</div>
+          Press play to begin monitoring
+        </div>
+      )}
+
       {/* Prophecy banner (pre-generation prediction — dual prophecy system) */}
       {prophecy && (prophecy.predicted_state || prophecy.mode === 'split') && (
         <div className={`signals-prophecy ${getProphecyBannerClass(prophecyCorrect)}`}>

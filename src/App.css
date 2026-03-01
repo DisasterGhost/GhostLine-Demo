@@ -725,6 +725,11 @@ select option,
   animation: cyber-pulse 2s ease-in-out infinite;
 }
 
+.status-display .dot.demo {
+  background: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00;
+}
+
 .status-display .model-badge {
   display: flex;
   align-items: center;
