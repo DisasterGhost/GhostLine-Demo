@@ -307,7 +307,7 @@ export function StatusDisplay({
             {effectiveState === 'locked' ? '🔴' : '🟡'}
           </span>
           <span className="loop-text">
-            {effectiveState === 'locked' ? 'REPETITION LOCK' : 'GENERATION DRIFT'}
+            {effectiveState === 'locked' ? 'COGNITIVE COLLAPSE' : 'GENERATION DRIFT'}
           </span>
           {!HARDENING_MODE && (
             <span className="loop-stats">
