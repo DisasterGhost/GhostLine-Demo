@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // =============================================================================
 // HARDENING_TOGGLE - Security hardening (delete this block for raw output)
@@ -96,225 +96,6 @@ interface PauseState {
 }
 
 // ============================================================================
-// Drift Calculation
-// ============================================================================
-
-function computeDrift(trajectory: TrajectoryPoint[], windowSize: number = 5): number {
-  if (trajectory.length < 2) return 0;
-
-  // Get last N points
-  const recent = trajectory.slice(-windowSize);
-  if (recent.length < 2) return 0;
-
-  // Compute average step distance
-  let totalDist = 0;
-  for (let i = 1; i < recent.length; i++) {
-    const prev = recent[i - 1].coords;
-    const curr = recent[i].coords;
-    const dist = Math.sqrt(
-      (curr[0] - prev[0]) ** 2 +
-      (curr[1] - prev[1]) ** 2 +
-      (curr[2] - prev[2]) ** 2
-    );
-    totalDist += dist;
-  }
-
-  const avgDist = totalDist / (recent.length - 1);
-
-  // Normalize: 0-1 range. Based on observed typical distances.
-  // Typical steps seem to be 0.1-2.0 units
-  const normalized = Math.min(1, avgDist / 1.5);
-
-  return normalized;
-}
-
-// ============================================================================
-// Three-State Loop Detection (ECG for model brain death)
-// ============================================================================
-// 🟢 HEALTHY  — Normal generation
-// 🟡 UNSTABLE — Threshold crossed but <5 consecutive tokens (model fighting)
-// 🔴 LOCKED   — Threshold exceeded 5+ tokens (model surrendered)
-// ============================================================================
-
-type LoopState = 'healthy' | 'unstable' | 'locked';
-
-interface LoopStatus {
-  state: LoopState;
-  avgDirectionChange: number;
-  effectiveDim: number;
-  violationCount: number;
-}
-
-// Persistent violation counter (survives re-renders via closure)
-let persistentViolationCount = 0;
-let lastTrajectoryLength = 0;
-
-function detectLoop(trajectory: TrajectoryPoint[], windowSize: number = 10): LoopStatus {
-  // Default: healthy
-  const healthy: LoopStatus = {
-    state: 'healthy',
-    avgDirectionChange: 0,
-    effectiveDim: 3,
-    violationCount: 0
-  };
-
-  // Reset violation count if trajectory was cleared (new generation)
-  if (trajectory.length < lastTrajectoryLength) {
-    persistentViolationCount = 0;
-  }
-  lastTrajectoryLength = trajectory.length;
-
-  if (trajectory.length < windowSize) return healthy;
-
-  const recent = trajectory.slice(-windowSize);
-
-  // --- Try to use backend-computed stats (preferred) ---
-  const lastToken = recent[recent.length - 1];
-  const backendStats = lastToken?.loopStats;
-
-  let avgDirectionChange: number;
-  let effectiveDim: number;
-
-  if (backendStats && backendStats.avg_direction_change !== null) {
-    // Use backend-computed stats (more accurate, computed over rolling window)
-    avgDirectionChange = backendStats.avg_direction_change;
-    effectiveDim = backendStats.activation_eff_dim;
-  } else {
-    // Fallback: compute locally from coords (for older data or prompt tokens)
-    let totalAngle = 0;
-    let angleCount = 0;
-
-    for (let i = 2; i < recent.length; i++) {
-      const p0 = recent[i - 2].coords;
-      const p1 = recent[i - 1].coords;
-      const p2 = recent[i].coords;
-
-      const v1 = [p1[0] - p0[0], p1[1] - p0[1], p1[2] - p0[2]];
-      const v2 = [p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2]];
-
-      const mag1 = Math.sqrt(v1[0]**2 + v1[1]**2 + v1[2]**2);
-      const mag2 = Math.sqrt(v2[0]**2 + v2[1]**2 + v2[2]**2);
-
-      if (mag1 > 0.001 && mag2 > 0.001) {
-        const dot = v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
-        const cosAngle = Math.max(-1, Math.min(1, dot / (mag1 * mag2)));
-        const angle = Math.acos(cosAngle) * (180 / Math.PI);
-        totalAngle += angle;
-        angleCount++;
-      }
-    }
-
-    avgDirectionChange = angleCount > 0 ? totalAngle / angleCount : 0;
-
-    // Compute effective dimensionality locally
-    const coords = recent.map(p => p.coords);
-    const mean = [0, 0, 0];
-    for (const c of coords) {
-      mean[0] += c[0]; mean[1] += c[1]; mean[2] += c[2];
-    }
-    mean[0] /= coords.length; mean[1] /= coords.length; mean[2] /= coords.length;
-
-    const centered = coords.map(c => [c[0] - mean[0], c[1] - mean[1], c[2] - mean[2]]);
-
-    const cov = [[0,0,0], [0,0,0], [0,0,0]];
-    for (const c of centered) {
-      for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-          cov[i][j] += c[i] * c[j];
-        }
-      }
-    }
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {
-        cov[i][j] /= coords.length;
-      }
-    }
-
-    const variances = [cov[0][0], cov[1][1], cov[2][2]];
-    const totalVar = variances[0] + variances[1] + variances[2];
-
-    effectiveDim = 3;
-    if (totalVar > 0.0001) {
-      const sumSq = variances[0]**2 + variances[1]**2 + variances[2]**2;
-      effectiveDim = (totalVar ** 2) / sumSq;
-    }
-  }
-
-  // --- Three-state logic with hysteresis ---
-  // NOTE: 3D projection preserves variance across all dimensions, so projection_eff_dim (E3) stays ~3.0
-  // even during loops. We primarily rely on direction change for detection.
-  //
-  // Thresholds for 3D projected space:
-  // - Direction > 110° alone triggers (frequent sharp reversals = oscillating)
-  // - Direction > 90° AND dim < 2.5 together trigger (moderate reversals + some collapse)
-  // - Dim < 1.8 alone triggers (unusual linear collapse in 3D)
-  const sharpReversals = avgDirectionChange > 110;        // High direction change alone
-  const moderateReversals = avgDirectionChange > 90;      // Moderate reversals
-  const someCollapse = effectiveDim < 2.5;                // Slight dimensional reduction
-  const strongCollapse = effectiveDim < 1.8;              // Strong collapse (rare in 3D)
-
-  // Trigger: sharp reversals alone, OR moderate reversals + some collapse, OR strong collapse
-  const isViolating = sharpReversals || (moderateReversals && someCollapse) || strongCollapse;
-
-  if (isViolating) {
-    persistentViolationCount++;
-  } else {
-    // Decay slowly (human-friendly - doesn't flicker)
-    persistentViolationCount = Math.max(0, persistentViolationCount - 0.5);
-  }
-
-  // Determine state
-  let state: LoopState = 'healthy';
-  if (persistentViolationCount >= 5) {
-    state = 'locked';    // 🔴 Model has surrendered
-  } else if (persistentViolationCount >= 1) {
-    state = 'unstable';  // 🟡 Model is fighting the attractor
-  }
-
-  return {
-    state,
-    avgDirectionChange,
-    effectiveDim,
-    violationCount: Math.floor(persistentViolationCount)
-  };
-}
-
-function getDriftLabel(drift: number): string {
-  if (drift < 0.2) return 'focused';
-  if (drift < 0.4) return 'coherent';
-  if (drift < 0.6) return 'exploring';
-  if (drift < 0.8) return 'wandering';
-  return 'jumping';
-}
-
-// ============================================================================
-// Drift Meter Component
-// ============================================================================
-
-function DriftMeter({ drift }: { drift: number }) {
-  const dots = 5;
-  const filledDots = Math.round(drift * dots);
-  const label = getDriftLabel(drift);
-  
-  return (
-    <div className="drift-meter">
-      <span className="drift-label">Drift:</span>
-      <span className="drift-dots">
-        {Array.from({ length: dots }, (_, i) => (
-          <span 
-            key={i} 
-            className={`drift-dot ${i < filledDots ? 'filled' : ''}`}
-          >
-            ●
-          </span>
-        ))}
-      </span>
-      <span className="drift-text">({label})</span>
-    </div>
-  );
-}
-
-// ============================================================================
 // Component
 // ============================================================================
 
@@ -351,22 +132,14 @@ export function StatusDisplay({
   const [showRecoveryFlash, setShowRecoveryFlash] = useState(false);
   const prevStateRef = useRef<string | null>(null);
 
-  // Compute drift from trajectory
-  const drift = useMemo(() => computeDrift(trajectory), [trajectory]);
-
-  // Compute loop detection (12-token window = ~3 seconds at human playback speed)
-  const loopStatus = useMemo(() => detectLoop(trajectory, 12), [trajectory]);
-
-  // Get backend loop stats (preferred over local computation)
+  // Get backend loop stats directly from the last token
   const lastToken = trajectory[trajectory.length - 1];
   const backendLoopStats = lastToken?.loopStats;
 
-  // Use backend state if available, otherwise fall back to local detection
-  const effectiveState = backendLoopStats?.state?.toLowerCase() || loopStatus.state;
-  const effectiveHeat = backendLoopStats?.heat ?? loopStatus.violationCount;
-  const manifoldBreadth = backendLoopStats?.manifold_breadth ||
-    (loopStatus.effectiveDim > 2.0 ? 'WIDE' :
-     loopStatus.effectiveDim >= 1.5 ? 'FOCUSED' : 'NARROW');
+  // Use backend state only — no local fallback computation
+  const effectiveState = backendLoopStats?.state?.toLowerCase() ?? 'healthy';
+  const effectiveHeat = backendLoopStats?.heat ?? 0;
+  const manifoldBreadth = backendLoopStats?.manifold_breadth;
 
   // Recovery flash effect
   useEffect(() => {
@@ -382,7 +155,7 @@ export function StatusDisplay({
 
     prevStateRef.current = currentState;
   }, [effectiveState]);
-  
+
   return (
     <div className="status-display">
       {/* Connection status */}
@@ -501,12 +274,14 @@ export function StatusDisplay({
         </div>
       )}
 
-      {/* Manifold Breadth - shows constraint level */}
-      {trajectory.length >= 5 && (isGenerating || isBuffering) && (
+      {/* Manifold Breadth - shows constraint level, backend data only */}
+      {manifoldBreadth && (isGenerating || isBuffering) && (
         <div className={`manifold-breadth manifold-${manifoldBreadth.toLowerCase()}`}>
           <span className="manifold-label">Manifold:</span>
           <span className="manifold-value">{manifoldBreadth}</span>
-          <span className="manifold-dim">({(loopStatus.effectiveDim ?? 0).toFixed(2)})</span>
+          {!HARDENING_MODE && (
+            <span className="manifold-dim">({(backendLoopStats!.activation_eff_dim ?? 0).toFixed(2)})</span>
+          )}
         </div>
       )}
 
@@ -514,52 +289,39 @@ export function StatusDisplay({
       {showRecoveryFlash && (
         <div className="recovery-flash">
           <span className="recovery-icon">✓</span>
-          <span className="recovery-text">SIGNAL RECOVERED</span>
+          <span className="recovery-text">RECOVERED</span>
         </div>
       )}
 
-      {/* Three-State Loop Detection - ECG for model brain death */}
-      {/* Debug: Always show loop stats during generation to calibrate thresholds */}
-      {trajectory.length >= 10 && (isGenerating || isBuffering) && (
+      {/* Debug stats line — backend data only, subtle */}
+      {backendLoopStats && (isGenerating || isBuffering) && (
         <div className={`loop-stats-debug ${effectiveState !== 'healthy' ? 'warning' : ''}`}>
-          <span>Loop: dim={(loopStatus.effectiveDim ?? 0).toFixed(2)} Δ={(loopStatus.avgDirectionChange ?? 0).toFixed(0)}° heat={effectiveHeat}</span>
+          <span>Loop: dim={(backendLoopStats.activation_eff_dim ?? 0).toFixed(2)} Δ={(backendLoopStats.avg_direction_change ?? 0).toFixed(0)}° heat={effectiveHeat}</span>
         </div>
       )}
-      {trajectory.length >= 10 && effectiveState !== 'healthy' && (
+
+      {/* Loop/State Alert — uses backend-provided state directly */}
+      {(isGenerating || isBuffering) && backendLoopStats && effectiveState !== 'healthy' && (
         <div className={`loop-alert loop-${effectiveState}`}>
           <span className="loop-icon">
             {effectiveState === 'locked' ? '🔴' : '🟡'}
           </span>
           <span className="loop-text">
-            {effectiveState === 'locked' ? 'LOOP DETECTED' : 'SEMANTIC STUTTER'}
+            {effectiveState === 'locked' ? 'REPETITION LOCK' : 'GENERATION DRIFT'}
           </span>
-          <span className="loop-stats">
-            dim: {(loopStatus.effectiveDim ?? 0).toFixed(2)} | Δ: {(loopStatus.avgDirectionChange ?? 0).toFixed(0)}° | heat: {effectiveHeat}
-          </span>
+          {!HARDENING_MODE && (
+            <span className="loop-stats">
+              dim: {(backendLoopStats.activation_eff_dim ?? 0).toFixed(2)} | heat: {effectiveHeat}
+            </span>
+          )}
         </div>
       )}
 
-      {/* Generating indicator - healthy state */}
+      {/* Generating indicator — shown when healthy (alert replaces it otherwise) */}
       {(isGenerating || isBuffering) && effectiveState === 'healthy' && (
         <div className="generating">
           <span className="pulse">●</span>
           {isGenerating ? 'Generating...' : 'Playing back...'}
-        </div>
-      )}
-
-      {/* Generating with unstable - yellow warning */}
-      {(isGenerating || isBuffering) && effectiveState === 'unstable' && trajectory.length >= 10 && (
-        <div className="generating loop-unstable-gen">
-          <span className="pulse-warning">●</span>
-          Generating (stuttering...)
-        </div>
-      )}
-
-      {/* Generating with locked loop - red alert */}
-      {(isGenerating || isBuffering) && effectiveState === 'locked' && trajectory.length >= 10 && (
-        <div className="generating loop-locked-gen">
-          <span className="pulse-danger">●</span>
-          Generating (BRAIN DEATH)
         </div>
       )}
     </div>

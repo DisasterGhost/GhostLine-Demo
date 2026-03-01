@@ -1172,30 +1172,6 @@ select option,
   animation: pulse-warning 0.5s ease-in-out infinite;
 }
 
-/* Yellow unstable generating state */
-.status-display .loop-unstable-gen {
-  color: #ffdd00 !important;
-  background: rgba(255, 200, 50, 0.2);
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: 2px solid rgba(255, 200, 50, 0.6);
-  font-weight: 600;
-  font-size: 1rem;
-  box-shadow: 0 0 15px rgba(255, 200, 50, 0.3);
-}
-
-/* Red locked generating state */
-.status-display .loop-locked-gen {
-  color: #ff4444 !important;
-  background: rgba(255, 80, 80, 0.25);
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: 2px solid rgba(255, 80, 80, 0.7);
-  font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 0 0 20px rgba(255, 50, 50, 0.4);
-  animation: locked-gen-pulse 0.3s ease-in-out infinite alternate;
-}
 
 @keyframes loop-pulse-warning {
   from {
