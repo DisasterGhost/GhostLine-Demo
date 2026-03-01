@@ -411,7 +411,7 @@ Key insight: The most important features are all first-token measurements. The m
 
 This detects "geometric hallucination" (distressed geometry, model knows it doesn't know). It does NOT catch "confident confabulation" (model believes wrong answer, geometry looks healthy).`,
     modelData: [
-      { scope: 'Llama 3.2 3B', label: 'Performance', content: 'GB on 828 features: F1=0.988, AUC=0.999 (300 halluc vs 780 healthy)' },
+      { scope: 'Llama 3.2 3B', label: 'Performance', content: 'F1_macro=0.980 (GroupKFold, 9083 features). Stress-test F1=0.9405 (300 samples, server-compat 5046 features)' },
       { scope: 'Llama 3.2 3B', label: 'Top features', content: 'L20 local attn (33.4%), L13 local (12.1%), L13 BOS (11.3%) — all first-token' },
       { scope: 'Qwen3-8B', label: 'Performance', content: 'GB on 9083 features: F1=0.955, AUC=0.998 (300 halluc vs 1134 healthy)' },
       { scope: 'Qwen3-8B', label: 'Key finding', content: 'L28_H17 sentinel head (entropy d=1.89). Halluc is geometrically DIFFUSE, not collapsed.' },
@@ -530,7 +530,7 @@ Confident confabulation ("believes wrong answer"): The model crystallizes cleanl
 
 This is a fundamental detection gap — internal geometry can only catch distress, not confident mistakes.`,
     modelData: [
-      { scope: 'General', label: 'Geometric hallucination', content: 'Ensemble F1=0.988 (3B), F1=0.955 (8B)' },
+      { scope: 'General', label: 'Geometric hallucination', content: 'Ensemble F1_macro=0.980 (GroupKFold). Stress-test F1=0.9405 (held-out, server-compat)' },
       { scope: 'General', label: 'Confident confabulation', content: '~12% recall only (geometry looks healthy)' },
       { scope: 'General', label: 'TruthfulQA validation', content: '88.6% precision but only 12.4% recall' },
     ],

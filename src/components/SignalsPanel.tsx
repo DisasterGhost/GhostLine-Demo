@@ -8,7 +8,7 @@
  *   - Geometric state via LDA classifier (5 healthy + stressed + collapse)
  *   - Primary layer activation_eff_dim (E1) < 5.0 → Collapse (100% accuracy at 3B)
  *   - At 8B, early layers (L0, L4) naturally have low eff_dim — use primary layer
- *   - Hallucination ensemble: GB on 828 features, F1=0.988
+ *   - Hallucination ensemble: F1_macro=0.980 (full features, GroupKFold), F1=0.9405 (server-compat stress)
  */
 
 import { useState, useEffect } from 'react';
@@ -504,7 +504,7 @@ export function SignalsPanel({
       {/* Evidence note */}
       <div className="signals-footer">
         <small>
-          DT: 55-feat, 95.4% adj-acc (primary). LDA: r(T,C)=0.955, 71% cls-acc. Halluc: GB 828-feat, F1=0.988.
+          DT: 55-feat, 95.4% adj-acc (primary). LDA: r(T,C)=0.955, 71% cls-acc. Halluc: F1=0.980 (macro, GroupKFold).
         </small>
       </div>
     </div>
