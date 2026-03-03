@@ -23,7 +23,6 @@ const STATE_WIKI_IDS: Record<string, string> = {
   retrieval: 'state-retrieval',
   precision: 'state-precision',
   uncertainty: 'state-uncertainty',
-  stressed: 'state-stressed',
   collapse: 'state-collapse',
 };
 
@@ -111,15 +110,11 @@ export function generateTokenReading(token: TrajectoryPoint): ReadingSegment[] {
     segments.push({ type: 'text', content: ` at ${entropy.toFixed(2)}. ` });
   }
 
-  // Sentence 5: Alert for stressed/collapse
+  // Sentence 5: Alert for collapse
   if (isCollapse) {
     segments.push({ type: 'text', content: 'WARNING: ' });
     segments.push({ type: 'term', content: 'Collapse', wikiId: 'state-collapse' });
     segments.push({ type: 'text', content: ' detected — activation effective dimensionality (E1) has crashed below 5.0.' });
-  } else if (state === 'stressed') {
-    segments.push({ type: 'text', content: 'Alert: Geometric ' });
-    segments.push({ type: 'term', content: 'stress', wikiId: 'state-stressed' });
-    segments.push({ type: 'text', content: ' detected — the residual stream shows abnormal geometry.' });
   }
 
   return segments;

@@ -68,6 +68,7 @@ interface TrajectoryPoint {
   layer_coords?: Record<string, [number, number, number]>;  // Pre-computed coords per layer
   _prevCoords?: [number, number, number];  // Previous layer position (for transition animation)
   _transitionKeyframes?: Array<[number, number, number]>;  // Multi-layer transition path
+  hallucinationRisk?: number | null;       // Ensemble halluc probability (0-1)
 }
 
 interface PauseState {
@@ -508,6 +509,7 @@ interface ClickableTokenProps {
   signalAmplitude: boolean;  // NEW: Point size from residual norm
   ghosted?: boolean;  // Out-of-context-range token - render at reduced opacity
   tokenIndex?: number;  // Position in trajectory (for staggered layer animation)
+  isFirstGenerated?: boolean;  // T+1: first generated token marker
 }
 
 // Prompt token color (dimmer, more muted)
@@ -515,7 +517,7 @@ const PROMPT_COLOR = '#6688aa';
 // Ghost color for out-of-range tokens
 const GHOST_COLOR = '#334455';
 
-function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowIntensity, entropyDistortion, signalAmplitude, ghosted = false, tokenIndex = 0 }: ClickableTokenProps) {
+function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowIntensity, entropyDistortion, signalAmplitude, ghosted = false, tokenIndex = 0, isFirstGenerated = false }: ClickableTokenProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
@@ -523,12 +525,17 @@ function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowI
   const tokenColorMode = useTokenColorMode();
   const stateColors = useStatePalette();
   const transitionRef = useLayerTransition();
+  const firstTokenScale = useRef(1.3);
 
   // Animate position during layer transitions (staggered by tokenIndex)
-  useFrame(() => {
+  // Also pulse first generated token
+  useFrame(({ clock }) => {
     if (!groupRef.current) return;
     const animCoords = getAnimatedCoords(point, transitionRef, tokenIndex);
     groupRef.current.position.set(...animCoords);
+    if (isFirstGenerated) {
+      firstTokenScale.current = 1.3 + 0.08 * Math.sin(clock.elapsedTime * 3.5);
+    }
   });
 
   const displayText = point.tokenStr.replace(/\n/g, '↵').replace(/ /g, '·');
@@ -573,7 +580,8 @@ function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowI
                    isPrompt ? 0.25 :
                    isRecent ? 0.15 : 0.12;
 
-  const size = baseSize * entropyScale * ghostScale * residualNormScale;
+  const firstGenScale = isFirstGenerated ? firstTokenScale.current : 1.0;
+  const size = baseSize * entropyScale * ghostScale * residualNormScale * firstGenScale;
 
   const labelSize = ghosted ? 0.14 :
                     isCurrent ? 0.35 :
@@ -590,10 +598,13 @@ function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowI
   // High confidence = fully opaque, low confidence = quite translucent
   const confidenceOpacity = 0.3 + (point.tokenProb ?? 0.5) * 0.7; // Range: 0.3-1.0
   const ghostOpacity = 0.4;
+  // Prompt token opacity: modulate by entropy (low entropy = focused = more opaque)
+  // Range: 0.3 (high entropy) - 0.8 (low entropy)
+  const promptOpacity = 0.8 - entropyFactor * 0.5;
   const baseOpacity = ghosted ? ghostOpacity :
                       isCurrent ? 1 :
                       isSelected ? 1 :
-                      isPrompt ? 0.35 :
+                      isPrompt ? promptOpacity :
                       confidenceOpacity;
 
   // Apply projection confidence to opacity (only for non-special tokens)
@@ -663,6 +674,32 @@ function ClickableToken({ point, isSelected, isCurrent, isRecent, onClick, glowI
               />
             </mesh>
           )}
+
+      {/* Hallucination risk halo — red-orange torus when risk > 0.5 */}
+      {!isPrompt && (point.hallucinationRisk ?? 0) > 0.5 && (
+        <mesh>
+          <torusGeometry args={[size * 1.3, size * 0.08, 8, 32]} />
+          <meshBasicMaterial
+            color="#ff4422"
+            transparent
+            opacity={Math.min(0.9, (point.hallucinationRisk ?? 0) * 0.85)}
+            depthWrite={false}
+          />
+        </mesh>
+      )}
+
+      {/* T+1 first generated token ring — state-colored torus */}
+      {isFirstGenerated && !isPrompt && (
+        <mesh>
+          <torusGeometry args={[size * 1.5, size * 0.06, 8, 32]} />
+          <meshBasicMaterial
+            color={baseColor}
+            transparent
+            opacity={0.55}
+            depthWrite={false}
+          />
+        </mesh>
+      )}
 
       {/* Selection glow - brightness-based indicator instead of color */}
       {isSelected && (
@@ -2078,7 +2115,9 @@ function ClickableTokens({
         // Recent = within last recentCount of generated tokens
         const genIndex = generatedTokens.indexOf(point);
         const isRecent = genIndex >= 0 && genIndex >= generatedTokens.length - recentCount;
-        
+        // T+1: first generated token (first in !isPrompt array)
+        const isFirstGen = !point.isPrompt && generatedTokens[0]?.position === point.position;
+
         return (
           <ClickableToken
             key={point.position}
@@ -2092,6 +2131,7 @@ function ClickableTokens({
             signalAmplitude={signalAmplitude}
             ghosted={false}
             tokenIndex={point.position}
+            isFirstGenerated={isFirstGen}
           />
         );
       })}
@@ -2248,12 +2288,9 @@ function UncertaintyStatic({ trajectory, enabled }: UncertaintyStaticProps) {
           tempObject.updateMatrix();
           meshRef.current!.setMatrixAt(activeCount, tempObject.matrix);
           
-          // Color: state-aware for stressed/uncertainty alarm
+          // Color: state-aware for uncertainty alarm
           const intensity = 0.5 + Math.random() * 0.5;
-          if (token.geometricState === 'stressed') {
-            // RED static - alarm
-            tempColor.setRGB(intensity, intensity * 0.2, intensity * 0.2);
-          } else if (token.geometricState === 'uncertainty') {
+          if (token.geometricState === 'uncertainty') {
             // ORANGE static
             tempColor.setRGB(intensity, intensity * 0.6, intensity * 0.1);
           } else {

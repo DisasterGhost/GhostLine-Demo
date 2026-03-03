@@ -46,6 +46,7 @@ export interface TrajectoryPoint {
   crystallized?: boolean;      // top1_prob >= 0.5
   layer_coords?: Record<string, [number, number, number]>;  // Pre-computed coords for each layer
   _transitionKeyframes?: Array<[number, number, number]>;   // Multi-layer transition path
+  logitEntropy?: number | null;            // Output entropy from logit distribution (prefer over attn entropy)
   // Multi-classifier data (Feb 7 2026)
   hallucinationRisk?: number | null;      // Ensemble halluc probability (0-1) — P(fabrication) in v7
   refusalProb?: number | null;           // V7 3-class: P(refusal)

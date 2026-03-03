@@ -358,6 +358,7 @@ export function useGhostwire(playbackRate: number = 4) {
         tokenProb: tokenMsg.data.token_prob,  // C1: top-1 token probability
         projectionFidelity: tokenMsg.data.projection_fidelity,
         entropy: tokenMsg.data.entropy,  // N1: l0_h0_attn_entropy
+        logitEntropy: tokenMsg.data.logit_entropy ?? null,  // Output entropy (preferred for display)
         tokenStr: tokenMsg.data.token_str,
         timestamp: msg.ts,
         tokenId: tokenMsg.data.token_id,

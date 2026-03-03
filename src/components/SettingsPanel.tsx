@@ -98,14 +98,14 @@ const DEFAULT_DISPLAY: DisplaySettings = {
   showPromptTokens: true,
   enabledHeads: [0, 1, 2, 3, 4, 5, 6, 7],
   landmarkOpacity: 0.4,
-  playbackRate: 2,
+  playbackRate: 4,
 };
 
 const DEFAULT_VISUAL: VisualSettings = {
   tokenGlowIntensity: 1.0,
   particleTrails: false,
   entropyShapeDistortion: false,
-  signalAmplitude: false,
+  signalAmplitude: true,
   spatialSpread: 1.0,
   flowParticles: false,
   ribbonTrails: false,

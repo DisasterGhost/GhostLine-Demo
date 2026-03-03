@@ -23,7 +23,6 @@ const CLASSIC: StatePalette = {
     retrieval: '#33ff66',     // Green
     precision: '#ffcc00',     // Gold
     uncertainty: '#ff9900',   // Orange
-    stressed: '#ff3333',      // Red
     collapse: '#ff0000',      // Bright red
     unknown: '#888888',       // Gray
   },
@@ -40,7 +39,6 @@ const REFINED: StatePalette = {
     retrieval: '#33ff88',     // Emerald green
     precision: '#ffcc33',     // Warm gold
     uncertainty: '#ccccdd',   // Cool silver
-    stressed: '#ff3333',      // Red
     collapse: '#ff0000',      // Bright red
     unknown: '#888888',       // Gray
   },

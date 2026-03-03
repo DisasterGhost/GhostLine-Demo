@@ -218,22 +218,6 @@ Typical triggers: Speculation about unknowable topics, contested facts, hedging 
     related: ['geometric-state', 'token-prob', 'entropy'],
   },
   {
-    id: 'state-stressed',
-    title: 'Stressed',
-    category: 'states',
-    short: 'Geometric stress — the model\'s residual stream shows abnormal geometry.',
-    body: `Stressed is a classifier-detected state indicating residual-stream geometric anomaly. The model's activation geometry deviates from all healthy state signatures, suggesting internal conflict or confusion.
-
-This is distinct from two other pathologies:
-- Collapse: A more severe condition where the model enters deterministic repetition loops with extremely low dimensionality.
-- Hallucination: Detected by a separate attention-based ensemble that uses different signals entirely.
-
-Stressed tokens show distressed geometry but haven't collapsed — the model is struggling but still producing varied output.
-
-Color: Red (#ff3333)`,
-    related: ['halluc-ensemble', 'type-separation', 'eff-dim', 'entropy'],
-  },
-  {
     id: 'state-collapse',
     title: 'Collapse',
     category: 'states',
@@ -312,7 +296,7 @@ Important: Single-threshold entropy rules can appear to work very well on one da
     modelData: [
       { scope: 'General', label: 'Cautionary example', content: 'L0 entropy > 1.95: F1=98.7% on original corpus, F1=40.9% on expanded corpus' },
     ],
-    related: ['token-prob', 'state-uncertainty', 'state-stressed'],
+    related: ['token-prob', 'state-uncertainty'],
   },
   {
     id: 'residual-norm',
@@ -342,7 +326,7 @@ Unlike effective dimensionality (which measures the whole activation vector), LI
       { scope: 'Cross-architecture', label: 'Fingerprints', content: 'Pythia LID=17.6, Llama LID=11.8' },
       { scope: 'General', label: 'Content patterns', content: 'Pattern completion: 44-45, Named entities: 6-28' },
     ],
-    related: ['eff-dim', 'activation-manifold', 'state-stressed'],
+    related: ['eff-dim', 'activation-manifold'],
   },
   {
     id: 'attention-patterns',
@@ -416,7 +400,7 @@ This detects "geometric hallucination" (distressed geometry, model knows it does
       { scope: 'Qwen3-8B', label: 'Performance', content: 'GB on 9083 features: F1=0.955, AUC=0.998 (300 halluc vs 1134 healthy)' },
       { scope: 'Qwen3-8B', label: 'Key finding', content: 'L28_H17 sentinel head (entropy d=1.89). Halluc is geometrically DIFFUSE, not collapsed.' },
     ],
-    related: ['state-stressed', 'type-separation', 'first-token-signal', 'sentinel-head'],
+    related: ['type-separation', 'first-token-signal', 'sentinel-head'],
   },
   {
     id: 'umap-projection',
@@ -447,9 +431,9 @@ For collapse: Early-layer anti-momentum perturbation breaks repetition loops. Th
 Trend gating prevents unnecessary intervention when the model is self-recovering (dimensionality trending upward on its own). This avoids interfering with the model's natural recovery process.`,
     modelData: [
       { scope: 'General', label: 'Collapse intervention', content: 'L0 anti-momentum, strength 7.5, 4-token trend gating' },
-      { scope: 'General', label: 'Results', content: '68.8% of stressed → uncertainty, 0% false positives' },
+      { scope: 'General', label: 'Results', content: '68.8% of collapse → uncertainty, 0% false positives' },
     ],
-    related: ['state-collapse', 'state-stressed', 'eff-dim'],
+    related: ['state-collapse', 'eff-dim'],
   },
 
   // ==================== CONCEPTS ====================
@@ -510,7 +494,7 @@ The manifold is not static — it deforms and shifts during generation as the mo
     short: 'Classification of what the model is doing based on activation geometry.',
     body: `A geometric state is a classification of the model's current computational mode based on the geometry of its internal activations, not the content of its output.
 
-7 states: creativity, reasoning, retrieval, precision, uncertainty, stressed, collapse
+6 states: creativity, reasoning, retrieval, precision, uncertainty, collapse
 
 Key insight: The classifier detects OUTPUT geometry, not prompt semantics. The same prompt can produce different geometric signatures. A prompt asking for "creativity" might produce a reasoning geometry if the model reasons about creativity.
 
@@ -524,7 +508,7 @@ Retrieval is a geometric basin (attractor). Uncertainty is the cleanest state. T
     short: 'Two distinct failure modes: geometric distress vs confident confabulation.',
     body: `GhostLine empirically identified two distinct types of hallucination failure:
 
-Geometric hallucination ("can't commit"): The model never crystallizes, geometry is distressed, highly detectable. The model effectively knows it doesn't know.
+Geometric hallucination ("can't commit"): The model never crystallizes, geometry is uncrystallized, highly detectable. The model effectively knows it doesn't know.
 
 Confident confabulation ("believes wrong answer"): The model crystallizes cleanly on wrong information, geometry looks healthy, very difficult to detect. The model doesn't know it's wrong.
 
@@ -534,7 +518,7 @@ This is a fundamental detection gap — internal geometry can only catch distres
       { scope: 'General', label: 'Confident confabulation', content: '~12% recall only (geometry looks healthy)' },
       { scope: 'General', label: 'TruthfulQA validation', content: '88.6% precision but only 12.4% recall' },
     ],
-    related: ['state-stressed', 'halluc-ensemble', 'crystallization'],
+    related: ['halluc-ensemble', 'crystallization'],
   },
 
   // ---- NEW CONCEPT ENTRIES ----
@@ -718,6 +702,316 @@ MLP layers (roughly half the model's parameters) are not visualized. Only a subs
 This is a fundamental limitation of any visualization approach, not a bug.`,
     related: ['mech-interp', 'residual-stream', 'attention-heads'],
   },
+  // ==================== VISUAL GUIDE ENTRIES ====================
+  {
+    id: 'reading-3d-view',
+    title: 'Reading the 3D View',
+    category: 'basics',
+    short: 'A map of every visual element in the 3D canvas.',
+    body: `Each visual element in the 3D canvas has a specific meaning:
+
+Glowing spheres (solid): Generated tokens — one sphere per word the model produced.
+Wireframe tetrahedrons (hollow diamonds): Prompt tokens — your input.
+Connecting line or tube: The trajectory — the path taken through activation space.
+Large bright sphere: The current token indicator — where the model is right now.
+Labeled glowing orbs (background): Landmarks — reference points from training data.
+Curved lines between tokens: Attention arcs — which tokens the selected token "looked at."
+Red-orange torus ring around a sphere: Hallucination risk halo — elevated fabrication probability.
+Pulsing larger sphere with colored ring: First generated token marker (T+1).
+
+Color = geometric state: purple=creative, cyan=reasoning, green=retrieval, gold=precision, silver=uncertain, red=collapse.
+Opacity = token probability: fully opaque = certain; translucent = alternatives were plausible.
+Size (Signal Amplitude on) = residual norm: larger spheres have stronger internal representations.`,
+    related: ['token-shapes', 'token-colors', 'visual-trajectory', 'visual-landmarks', 'current-token-indicator'],
+  },
+  {
+    id: 'token-shapes',
+    title: 'Token Shapes',
+    category: 'basics',
+    short: 'Shape encodes entropy: smooth spheres are confident, spiky icosahedra are uncertain.',
+    body: `Each token in the 3D view has a shape that tells you something about it:
+
+Smooth sphere: A normal generated token. The rounder it is, the more focused the model's attention was.
+
+Spiky icosahedron: A generated token with high attention entropy. The model's attention was scattered across many possibilities. The spikier the shape, the more diffuse the model's internal state.
+
+Wireframe tetrahedron: A prompt token (your input). Always wireframe — hollow, not solid — because they're your words, not the model's. They have a faint inner glow.
+
+The transition from sphere to icosahedron is continuous. You'll see tokens gradually developing edges as entropy rises through a generation.
+
+Shape effects only appear when "Entropy Distortion" is enabled in Settings.`,
+    related: ['reading-3d-view', 'entropy', 'token-opacity', 'prompt-tokens'],
+  },
+  {
+    id: 'token-colors',
+    title: 'Token Colors',
+    category: 'basics',
+    short: 'Color shows what computational mode the model is in when generating each token.',
+    body: `Token color in the default mode shows the model's geometric state — what kind of computation it's performing for that word.
+
+The six state colors:
+Purple: Creativity — open-ended generation, high exploration
+Cyan/Teal: Reasoning — step-by-step logical processing
+Green: Retrieval — factual recall from training
+Gold: Precision — short, definitive structured output
+Silver/Gray: Uncertainty — the model is hedging or speculating
+Bright Red: Collapse — degenerate repetition loop
+
+These colors are set by the "State Palette" in Settings. The Refined palette uses silver for uncertainty (always visually distinct from every other state). The Classic palette uses orange (which can be confused with warning colors).
+
+Two other color modes exist:
+Entropy mode: Blue (focused) to Purple to Pink (diffuse). Shows attention spread regardless of state.
+Confidence mode: Same as state mode — confidence is shown through opacity instead of hue.`,
+    modelData: [
+      { scope: 'General', label: 'Classic palette', content: 'Uncertainty = orange #ff9900.' },
+      { scope: 'General', label: 'Refined palette', content: 'Uncertainty = silver #ccccdd. Achromatic — distinct at any depth or overlap.' },
+    ],
+    related: ['geometric-state', 'token-opacity', 'token-shapes', 'state-uncertainty'],
+  },
+  {
+    id: 'token-opacity',
+    title: 'Token Opacity',
+    category: 'basics',
+    short: 'Opacity shows how confident the model was about this specific word.',
+    body: `The transparency of a token sphere encodes the model's certainty about the specific word it chose.
+
+Fully opaque (bright): The model was very certain. There was really only one reasonable next word.
+Translucent: The model was less sure. Several alternatives were plausible.
+Very transparent: Low probability token — the model surprised itself.
+
+For prompt tokens (wireframe tetrahedrons), opacity varies with attention entropy: low-entropy prompt tokens (focused attention) are more opaque; high-entropy tokens are more transparent (range 0.3 to 0.8).
+
+This is different from state classifier confidence (how sure the geometric state detector is). A token can be:
+- Bright (certain word) + high state confidence: clearly in a state and certain about the word
+- Translucent (uncertain word) + high state confidence: clearly in an uncertain state, producing exploratory tokens
+
+The current token (frontmost bright sphere) is always fully opaque regardless of probability.`,
+    related: ['token-colors', 'token-prob', 'reading-3d-view'],
+  },
+  {
+    id: 'visual-attention-arcs',
+    title: 'Reading Attention Arcs',
+    category: 'basics',
+    short: 'Arcs show which tokens the model "looked at" when generating the selected token.',
+    body: `When you click a token, curved lines appear connecting it to other tokens. These are attention arcs — they show which earlier tokens the model was routing attention toward when generating this one.
+
+Arc colors encode the attention pattern type:
+Gold/Yellow: Local attention — focused on nearby context (within ~3 positions)
+Cyan/Teal: Long-range attention — reaching back to distant context (>10 positions)
+Magenta/Pink: Diffuse attention — spread widely, not focused
+White/Silver: Self-attention — token attending to its own position
+
+Arc thickness shows weight — thicker = stronger attention. Only arcs with >5% weight are shown.
+
+Animated particles travel TOWARD the selected token along each arc, representing information flowing in.
+
+Muted gray arcs point to out-of-range tokens (outside context window) with a directional arrow.
+Nearly-invisible gray arcs point to the BOS token (architectural pattern, shown but de-emphasized).
+
+Important caveat: Attention weight is not explanation. High attention does not mean "this token caused that output" — it means the model's routing put weight there.`,
+    related: ['attention-patterns', 'attention-heads', 'reading-3d-view', 'sentinel-head'],
+  },
+  {
+    id: 'particle-trails',
+    title: 'Particle Trails',
+    category: 'basics',
+    short: 'Glowing dust trails behind the current token encode speed and uncertainty.',
+    body: `The glowing particles that trail behind the current token position encode two signals:
+
+How many particles: Scales with projected velocity — how fast the model is moving through activation space. Fast movement = dense particle cloud. Stable, repetitive generation = sparse trail.
+
+How spread out: Scales with attention entropy. A tight, focused trail means concentrated attention. A wide, diffuse cloud means the model's attention is scattered.
+
+Particle color matches the current geometric state, fading to black as each particle ages.
+
+This creates an intuitive "comet tail" effect: you can see both the direction the model is moving AND something about how certain it is, just from the particle behavior.
+
+Enable with "Particle Trails" in Settings.`,
+    related: ['velocity', 'entropy', 'current-token-indicator'],
+  },
+  {
+    id: 'visual-trajectory',
+    title: 'Trajectory Line',
+    category: 'basics',
+    short: 'The connecting line traces the model\'s computational journey through 3D space.',
+    body: `The line or cable connecting all the token dots is the trajectory — the ordered path the model took through activation space during generation.
+
+Reading the trajectory:
+Muted blue-gray segments: Connecting prompt tokens (your input)
+Colored segments: The generated response, colored by geometric state
+Smooth, gradual curves: Consistent, predictable generation
+Sharp turns: A topic shift, a surprising token, a change in computational mode
+Loops or circles: The model is stuck — repeating itself
+Gaps (no line): Unusually large jump filtered as an outlier
+
+Two visual styles:
+Lines mode: Simple colored line, minimal overhead
+Cables mode: 3D tubes with velocity-encoded thickness. Thick cables = fast movement. Thin cables = smooth, steady generation.
+
+The most important thing to notice: where does the trajectory settle? If tokens from one state cluster together, that state is stable. If the trajectory keeps moving, the model's computational mode is shifting.`,
+    related: ['token-trajectory', 'velocity', 'token-colors', 'visual-loop-detection'],
+  },
+  {
+    id: 'current-token-indicator',
+    title: 'The Current Token Indicator',
+    category: 'basics',
+    short: 'The bright glowing orb shows where the model is right now.',
+    body: `The largest, brightest sphere in the scene is the current token indicator — showing the most recently generated token's position.
+
+Core sphere: Color matches the current geometric state.
+
+Outer glow halo: A transparent sphere around the core that pulses with the same color, giving presence to the current moment.
+
+Amber rotating ring: Only appears when generation is paused or uncertain. The amber color (#f0a030) is intentionally different from all geometric state colors — it signals "the model is weighing its options." The ring fades in as entropy rises and rotates slowly. Brighter ring = more uncertain the current generation is.
+
+The indicator smoothly glides between positions — it doesn't snap — because generation happens faster than visual updates.
+
+When you click a token to inspect it, the indicator dims (30% normal brightness) to reduce visual competition with your selection.`,
+    related: ['reading-3d-view', 'entropy', 'token-colors'],
+  },
+  {
+    id: 'hallucination-halo',
+    title: 'Hallucination Risk Halo',
+    category: 'basics',
+    short: 'A red-orange torus ring indicates elevated hallucination risk for this token.',
+    body: `When the hallucination ensemble assigns a risk score above 0.5 to a generated token, a red-orange torus ring appears around that token sphere in the 3D view.
+
+Appearance:
+Ring color: Red-orange (#ff4422) — distinct from both collapse red and state colors
+Opacity: Scales with risk value — barely visible at 0.5, more intense approaching 1.0
+Size: 1.3x the token sphere radius
+Shape: Thin torus (donut ring) around the sphere
+
+What it means:
+The hallucination ensemble — a Gradient Boosting classifier on hundreds of features across multiple layers — has flagged this token with elevated fabrication probability. The model's geometry shows the signature of uncrystallized generation.
+
+This detects geometric hallucination (the model knows it doesn't know). It does NOT detect confident confabulation (where the model is confidently wrong and its geometry looks healthy).
+
+Note: The halo appears per-token based on when the ensemble ran. The ensemble doesn't run on every single token — it runs on checkpoint tokens during generation.`,
+    modelData: [
+      { scope: 'Qwen3-8B', label: 'Ensemble', content: '3-class GB (fab/refuse/healthy), stress F1=0.9405' },
+      { scope: 'General', label: 'Trigger', content: 'halluc_risk > 0.5 — opacity scales with risk value' },
+      { scope: 'General', label: 'Detection type', content: 'Geometric hallucination only — confident confabulation undetectable' },
+    ],
+    related: ['halluc-ensemble', 'type-separation', 'visual-hallucination'],
+  },
+  {
+    id: 'first-token-visual',
+    title: 'First Token Signal',
+    category: 'basics',
+    short: 'The first generated token pulses at 1.3x scale with a colored ring — it carries disproportionate geometric information.',
+    body: `The very first generated token (T+1) is visually distinguished in the 3D view:
+
+Pulsing scale: The sphere oscillates around 1.3x the normal token size. The pulse is slow and continuous — drawing attention without overwhelming the view.
+
+State-colored ring: A subtle torus ring in the token's geometric state color surrounds the sphere at 1.5x radius. This is different from the hallucination halo (red-orange, risk-driven) — this ring reflects what state the model entered for its first generated word.
+
+Why T+1 is special:
+Research shows the first generated token carries disproportionate geometric information. The model's internal state is largely set during prompt processing, and T+1 is where that pre-set state first becomes visible in the output trajectory.
+
+In hallucination detection, all top 15 discriminative features are first-token measurements. In state classification, the first generated token is often the most geometrically "pure" — the model hasn't drifted yet.
+
+The visual emphasis on T+1 is a reminder: does this first token match the Prophecy prediction? If the Signals Panel showed "REASONING" in the prophecy and the first token lands in a retrieval region, something shifted during generation.`,
+    related: ['first-token-signal', 'prompt-encoding', 'hallucination-halo'],
+  },
+  {
+    id: 'visual-landmarks',
+    title: 'Landmarks',
+    category: 'basics',
+    short: 'Named regions are reference points from training data — not live session data.',
+    body: `The labeled glowing spheres in the 3D space are landmarks — semantic cluster centroids computed from training data.
+
+What they are:
+Reference constellations. They show where different types of tokens tend to cluster in this projection. "Foundation" is where high-frequency structural tokens ended up. "Temporal" is where time-related words cluster.
+
+What they are NOT:
+They do not update during your current inference session. They're not showing you where the current generation is or where your prompt landed. Think of them as a star map — the stars are fixed reference points, and you're watching a comet trace its path through them.
+
+Why they're useful:
+They give spatial context. If your trajectory passes through the "Reasoning" region it confirms the geometry matches semantic expectations. If a token lands in an unexpected cluster, that's interesting.
+
+Size corresponds to how many tokens were in that cluster during training. "Foundation" is the largest. "Method" and "Process" are smallest.
+
+Toggle landmarks off in Settings → Display if they're visually cluttering your view.`,
+    related: ['3d-space', 'umap-projection', 'reading-3d-view'],
+  },
+  {
+    id: 'visual-loop-detection',
+    title: 'Loop Detection',
+    category: 'concepts',
+    short: 'Three-state indicator for detecting when the model gets stuck in a repetition loop.',
+    body: `GhostLine continuously monitors for repetition loops. The status panel shows one of three states:
+
+HEALTHY — Normal generation. The generating indicator shows a normal pulse.
+
+SEMANTIC STUTTER (UNSTABLE) — The model has started showing signs of a loop (sharp direction reversals in 3D space, or dimensional collapse) but hasn't fully committed. The model may self-correct.
+
+BRAIN DEATH (LOCKED) — The model is fully trapped in a repetition loop. The trajectory in 3D space will show either tight circles or a single point. The Activation Spread (E1) in the Signals Panel will be very low.
+
+Recovery: When the model escapes a loop, the status panel shows "SIGNAL RECOVERED."
+
+What causes loops?
+The model can get pulled into "attractor basins" — regions of activation space where the same token always leads back to itself. Common triggers: very short or under-constrained prompts, prompts that elicit repetitive content, or certain model behaviors.
+
+Geometric intervention can break loops: anti-momentum perturbation applied to early-layer activations pushes the model out of the attractor.`,
+    modelData: [
+      { scope: 'General', label: 'Collapse detection', content: 'Activation Spread (E1) < 5.0 — 100% TP, 0% FP on validation set (3B)' },
+      { scope: 'General', label: 'Recovery signal', content: 'E1 trending upward means model is self-recovering (intervention withheld)' },
+    ],
+    related: ['state-collapse', 'eff-dim', 'geometric-intervention'],
+  },
+  {
+    id: 'visual-hallucination',
+    title: 'What Hallucination Looks Like',
+    category: 'concepts',
+    short: 'Geometric hallucination is diffuse and uncrystallized — confident confabulation looks healthy.',
+    body: `GhostLine detects "geometric hallucination" — cases where the model's internal geometry shows distress.
+
+3D view signs:
+- Red-orange halo rings appear on high-risk tokens
+- Trajectory shows unusual movement or sharp turns
+- Tokens appear more translucent (lower probability)
+- Spiky icosahedral shapes from elevated entropy
+
+Signals Panel signs:
+- Halluc Risk meter showing orange or red
+- Prophecy banner showing warning before generation starts
+- State probability bars spread across multiple states (uncertain geometry)
+
+What geometric hallucination is NOT:
+The system detects cases where the model "knows it doesn't know." However, confident confabulation (where the model believes a wrong answer) looks like healthy geometry. Those tokens will appear as normal, bright, confident-looking spheres.
+
+At 8B scale: Hallucination geometry is DIFFUSE (higher effective dimensionality), not collapsed. The model is exploring many possibilities rather than committing to one answer.
+
+Check the Prophecy banner before reading the output — it uses pre-generation features to flag risk before the first word appears.`,
+    modelData: [
+      { scope: 'Qwen3-8B', label: 'Halluc vs healthy eff_dim', content: 'Halluc ~67-70, Healthy ~53-55 — halluc is MORE dimensional, not less' },
+      { scope: 'Qwen3-8B', label: 'Sentinel head', content: 'L28_H17 attention entropy has d=1.89' },
+      { scope: 'General', label: 'Detection gap', content: 'Confident confabulation: geometry looks healthy, ~12% recall only' },
+    ],
+    related: ['halluc-ensemble', 'type-separation', 'hallucination-halo'],
+  },
+  {
+    id: 'prompt-tokens',
+    title: 'Prompt Tokens',
+    category: 'basics',
+    short: 'Wireframe tetrahedrons are your input — they set up the geometry before generation begins.',
+    body: `Before generating any tokens, the model reads your prompt. GhostLine shows prompt tokens as wireframe tetrahedrons — hollow diamond shapes in a muted blue-gray color.
+
+Why tetrahedrons? To be visually distinct from the sphere-shaped generated tokens.
+
+Why wireframe (hollow)? Prompt tokens are processed as input context, not predicted outputs. The hollow shape reflects this passive role.
+
+The blue-gray muted color (#6688aa) keeps prompt tokens present but not dominant. They form a starting cluster in 3D space from which the generated trajectory departs.
+
+Prompt tokens don't show labels by default. Click or hover a prompt tetrahedron to see its text and attention arcs.
+
+Opacity varies with attention entropy: focused (low entropy) prompt tokens are more opaque; diffuse (high entropy) tokens are more transparent.
+
+The Prophecy system uses the geometry of the last prompt token to predict the generation state before the first word is produced.`,
+    related: ['reading-3d-view', 'prompt-encoding', 'visual-attention-arcs'],
+  },
+
 ];
 
 // Index for fast lookup by ID

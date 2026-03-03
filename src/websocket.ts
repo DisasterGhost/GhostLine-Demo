@@ -37,6 +37,7 @@ export type TokenData = {
   token_prob: number;     // C1: top-1 token probability
   projection_fidelity?: number;  // How well-mapped this region is (instrument signal)
   entropy: number;        // N1: l0_h0_attn_entropy
+  logit_entropy?: number | null;  // Output entropy from logit distribution
   residual_norm: number;
   top_k: Array<{ token: string; prob: number }>;
   attention: {

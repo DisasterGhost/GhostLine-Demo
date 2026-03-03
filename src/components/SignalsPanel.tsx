@@ -5,7 +5,7 @@
  * The 3D display is a visual aid; these numbers are the validated evidence.
  *
  * Key systems (from calibration, Feb 2026):
- *   - Geometric state via LDA classifier (5 healthy + stressed + collapse)
+ *   - Geometric state via LDA classifier (5 healthy + collapse)
  *   - Primary layer activation_eff_dim (E1) < 5.0 → Collapse (100% accuracy at 3B)
  *   - At 8B, early layers (L0, L4) naturally have low eff_dim — use primary layer
  *   - Hallucination ensemble: F1_macro=0.980 (full features, GroupKFold), F1=0.9405 (server-compat stress)
@@ -37,7 +37,6 @@ const STATE_LABELS: Record<string, string> = {
   retrieval: 'RETRIEVAL',
   precision: 'PRECISION',
   uncertainty: 'UNCERTAIN',
-  stressed: 'STRESSED',
   collapse: 'COLLAPSE',
   edge_cases: 'EDGE CASE',
 };
@@ -153,7 +152,7 @@ export function SignalsPanel({
   const token = trajectory.find(t => t.position === displayPosition) ?? trajectory[trajectory.length - 1];
 
   // Extract real signals from token data
-  const entropy = token?.entropy ?? 0;
+  const entropy = token?.logitEntropy ?? token?.entropy ?? 0;
   const tokenProb = token?.tokenProb ?? 0;  // C1
   const effDim = token?.loopStats?.activation_eff_dim ?? 0;  // E1
   const geometricState = token?.geometricState || 'unknown';  // LDA/SCL primary
@@ -417,10 +416,10 @@ export function SignalsPanel({
           </div>
           <div className="signal-bar-container">
             <div
-              className={`signal-bar ${entropy > 3.5 ? 'over-threshold' : ''}`}
+              className={`signal-bar ${entropy > 4.0 ? 'over-threshold' : ''}`}
               style={{
                 width: `${Math.min(100, (entropy / 5.0) * 100)}%`,
-                backgroundColor: entropy > 3.5 ? '#ff3333' : entropy > 2.8 ? '#ff9900' : '#33ff66',
+                backgroundColor: entropy > 4.0 ? '#ff3333' : entropy > 3.0 ? '#ff9900' : '#33ff66',
               }}
             />
           </div>
