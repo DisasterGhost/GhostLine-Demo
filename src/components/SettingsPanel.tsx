@@ -94,7 +94,7 @@ export interface AllSettings {
 const DEFAULT_DISPLAY: DisplaySettings = {
   showLandmarks: false,
   showAttentionArcs: true,
-  showAllLabels: false,
+  showAllLabels: true,
   showPromptTokens: true,
   enabledHeads: [0, 1, 2, 3, 4, 5, 6, 7],
   landmarkOpacity: 0.4,
