@@ -35,7 +35,7 @@ const REFINED: StatePalette = {
   description: 'Depth-safe, achromatic uncertainty',
   colors: {
     creativity: '#9933CC',    // Royal purple
-    reasoning: '#00CCCC',     // Robin's egg blue
+    reasoning: '#33AAFF',     // Bright blue
     retrieval: '#33ff88',     // Emerald green
     precision: '#ffcc33',     // Warm gold
     uncertainty: '#ccccdd',   // Cool silver

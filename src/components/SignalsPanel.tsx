@@ -503,7 +503,7 @@ export function SignalsPanel({
       {/* Evidence note */}
       <div className="signals-footer">
         <small>
-          DT: 55-feat, 95.4% adj-acc (primary). LDA: r(T,C)=0.955, 71% cls-acc. Halluc: F1=0.980 (macro, GroupKFold).
+          Geometric state classifier with hallucination ensemble. All signals extracted in real-time during generation.
         </small>
       </div>
     </div>
