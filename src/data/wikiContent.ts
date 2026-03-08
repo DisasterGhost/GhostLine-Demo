@@ -327,12 +327,12 @@ Confidence is well-calibrated: when the classifier is highly confident, it is al
     id: 'halluc-ensemble',
     title: 'Hallucination Ensemble',
     category: 'methods',
-    short: 'Gradient Boosting on many features detects geometric hallucination.',
-    body: `The hallucination ensemble uses Gradient Boosting on hundreds of features across multiple layers to detect geometric hallucination — cases where the model's internal geometry signals distress.
+    short: 'L1-sparse linear classifier on geometric features detects fabrication.',
+    body: `The hallucination ensemble uses an L1-regularized linear classifier on geometric features across multiple layers to detect fabrication — cases where the model's internal geometry reveals performed confidence.
 
-Key insight: The most important features are all first-token measurements. The model's first generated token already carries the geometric signature of whether it will hallucinate. Many individually weak signals combine to near-perfect classification.
+Key insight: The most important features are first-token measurements and output entropy. The model's first generated token already carries the geometric signature of whether it will fabricate. Output entropy minimum is the single strongest feature — fabricating models maintain a floor of uncertainty (no token reaches near-zero entropy), unlike genuine knowledge recall.
 
-This detects "geometric hallucination" (distressed geometry, model knows it doesn't know). It does NOT catch "confident confabulation" (model believes wrong answer, geometry looks healthy).`,
+This detects geometric fabrication (performed confidence with distinctive late-layer anomalies). It does NOT catch "confident confabulation" (model believes wrong answer, geometry looks healthy).`,
     related: ['type-separation', 'first-token-signal', 'sentinel-head'],
   },
   {
@@ -422,14 +422,14 @@ Retrieval is a geometric basin (attractor). Uncertainty is the cleanest state. T
     id: 'type-separation',
     title: 'Hallucination Type Separation',
     category: 'concepts',
-    short: 'Two distinct failure modes: geometric distress vs confident confabulation.',
+    short: 'Two distinct failure modes: performed confidence vs confident confabulation.',
     body: `GhostLine empirically identified two distinct types of hallucination failure:
 
-Geometric hallucination ("can't commit"): The model never crystallizes, geometry is uncrystallized, highly detectable. The model effectively knows it doesn't know.
+Geometric hallucination ("performed confidence"): The model generates with uniformly high output confidence but shows distinctive geometric signatures — late-layer attention disorganization, MLP amplification anomalies, and a telltale floor of minimum entropy (no tokens reach near-zero uncertainty). Highly detectable. The model performs certainty without genuine knowledge-backed commitment on any specific token.
 
 Confident confabulation ("believes wrong answer"): The model crystallizes cleanly on wrong information, geometry looks healthy, very difficult to detect. The model doesn't know it's wrong.
 
-This is a fundamental detection gap — internal geometry can only catch distress, not confident mistakes.`,
+This is a fundamental detection gap — internal geometry can catch performed confidence, but not genuinely confident mistakes.`,
     related: ['halluc-ensemble', 'crystallization'],
   },
 
@@ -765,9 +765,9 @@ Size: 1.3x the token sphere radius
 Shape: Thin torus (donut ring) around the sphere
 
 What it means:
-The hallucination ensemble — a Gradient Boosting classifier on hundreds of features across multiple layers — has flagged this token with elevated fabrication probability. The model's geometry shows the signature of uncrystallized generation.
+The hallucination ensemble — a classifier on geometric features across multiple layers — has flagged this token with elevated fabrication probability. The model's geometry shows the signature of performed confidence: uniformly high output probability with late-layer attention disorganization.
 
-This detects geometric hallucination (the model knows it doesn't know). It does NOT detect confident confabulation (where the model is confidently wrong and its geometry looks healthy).
+This detects geometric hallucination (performed confidence with distinctive geometric anomalies). It does NOT detect confident confabulation (where the model is confidently wrong and its geometry looks healthy).
 
 Note: The halo appears per-token based on when the ensemble ran. The ensemble doesn't run on every single token — it runs on checkpoint tokens during generation.`,
     related: ['halluc-ensemble', 'type-separation', 'visual-hallucination'],
@@ -837,24 +837,23 @@ Geometric intervention can break loops: anti-momentum perturbation applied to ea
     id: 'visual-hallucination',
     title: 'What Hallucination Looks Like',
     category: 'concepts',
-    short: 'Geometric hallucination is diffuse and uncrystallized — confident confabulation looks healthy.',
-    body: `GhostLine detects "geometric hallucination" — cases where the model's internal geometry shows distress.
+    short: 'Geometric hallucination shows performed confidence with distinctive anomalies — confident confabulation looks healthy.',
+    body: `GhostLine detects "geometric hallucination" — cases where the model's internal geometry reveals fabrication despite confident-sounding output.
 
 3D view signs:
 - Red-orange halo rings appear on high-risk tokens
 - Trajectory shows unusual movement or sharp turns
-- Tokens appear more translucent (lower probability)
-- Spiky icosahedral shapes from elevated entropy
+- Late-layer attention disorganization (visible in attention heat maps)
 
 Signals Panel signs:
 - Halluc Risk meter showing orange or red
 - Prophecy banner showing warning before generation starts
-- State probability bars spread across multiple states (uncertain geometry)
+- Output entropy pattern: uniformly high confidence with no tokens reaching near-zero entropy
 
 What geometric hallucination is NOT:
-The system detects cases where the model "knows it doesn't know." However, confident confabulation (where the model believes a wrong answer) looks like healthy geometry. Those tokens will appear as normal, bright, confident-looking spheres.
+The system detects cases where the model performs confidence without genuine knowledge-backed certainty. However, confident confabulation (where the model believes a wrong answer) looks like healthy geometry. Those tokens will appear as normal, bright, confident-looking spheres.
 
-At 8B scale: Hallucination geometry is DIFFUSE (higher effective dimensionality), not collapsed. The model is exploring many possibilities rather than committing to one answer.
+Key insight at 8B scale: Fabricating models are MAXIMALLY CONFIDENT in their output (extremely low entropy), but the geometric signature is distinctive — late-layer attention heads show disorganization, MLP amplification is anomalous, and the minimum entropy across all tokens stays elevated (no token reaches the near-zero entropy seen in genuine knowledge recall).
 
 Check the Prophecy banner before reading the output — it uses pre-generation features to flag risk before the first word appears.`,
     related: ['halluc-ensemble', 'type-separation', 'hallucination-halo'],
