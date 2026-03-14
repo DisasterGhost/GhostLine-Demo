@@ -13,5 +13,5 @@ const versionPlugin = () => ({
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), versionPlugin()],
-  base: '/',
+  base: '/GhostLine-Demo/',
 })
