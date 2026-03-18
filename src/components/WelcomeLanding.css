@@ -35,7 +35,23 @@
   color: var(--gl-text-dim);
   line-height: 1.6;
   max-width: 540px;
+  margin: 0 auto 16px;
+}
+
+.welcome-demo-inquiry {
+  font-size: 0.88rem;
+  color: var(--gl-text-muted);
+  max-width: 540px;
   margin: 0 auto 40px;
+}
+
+.welcome-demo-inquiry a {
+  color: rgba(0, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.welcome-demo-inquiry a:hover {
+  color: rgba(0, 255, 255, 0.9);
 }
 
 .welcome-section-title {

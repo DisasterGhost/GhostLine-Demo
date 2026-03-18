@@ -18,6 +18,10 @@ export function WelcomeLanding({ onSelectRecording }: WelcomeLandingProps) {
           Explore pre-recorded generation sessions. Watch how transformer models
           think, hallucinate, and self-correct — made visible through geometric analysis.
         </p>
+        <p className="welcome-demo-inquiry">
+          Live demo available upon request —{' '}
+          <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+        </p>
 
         <div className="welcome-recordings">
           <h2 className="welcome-section-title">Choose a recording to explore</h2>
