@@ -114,7 +114,8 @@ body {
   background: var(--gl-bg-deep);
   color: var(--gl-text);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 /* ============================================================================
@@ -123,8 +124,7 @@ body {
 
 .app {
   width: 100vw;
-  height: 100vh;
-  height: 100dvh; /* dynamic viewport height — accounts for mobile browser chrome */
+  min-height: 100vh;
   position: relative;
 }
 

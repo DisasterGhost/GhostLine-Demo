@@ -234,15 +234,21 @@ function App() {
     return null;
   })();
 
+  const showDemoChooser = !showFullLanding && showWelcome && !isReplaying;
+  const hideDemoShell = showFullLanding || showDemoChooser;
+
   return (
     <div className="app" style={{ fontSize: `calc(1rem * ${textSizeScale})` }}>
       {/* Main Landing Page (Redesign) */}
       {showFullLanding && !isReplaying && (
-        <LandingPage onLaunchDemo={() => setShowFullLanding(false)} />
+        <LandingPage onLaunchDemo={() => {
+          setShowFullLanding(false);
+          window.scrollTo({ top: 0, behavior: 'auto' });
+        }} />
       )}
 
       {/* High-visibility alerts */}
-      {alertConfig && (
+      {!hideDemoShell && alertConfig && (
         <AlertBanner 
           type={alertConfig.type} 
           message={alertConfig.message} 
@@ -252,11 +258,12 @@ function App() {
       )}
 
       {/* Welcome landing — shown until first recording is selected */}
-      {showWelcome && !isReplaying && (
+      {showDemoChooser && (
         <WelcomeLanding onSelectRecording={handleSelectRecording} />
       )}
 
       {/* 3D Visualization - Full Screen */}
+      {!hideDemoShell && (
       <GhostwireScene
         trajectory={trajectory}
         currentToken={currentToken}
@@ -277,8 +284,10 @@ function App() {
         showPromptTokens={settings.display.showPromptTokens}
         layerTransitionRef={layerTransitionRef}
       />
+      )}
 
       {/* UI Overlay */}
+      {!hideDemoShell && (
       <div className="ui-overlay">
         <div className="top-row">
           <StatusDisplay
@@ -348,8 +357,10 @@ function App() {
           )}
         </div>
       </div>
+      )}
 
       {/* Generated text panel */}
+      {!hideDemoShell && (
       <GeneratedText
         prompt={config?.prompt || currentRecording?.title || ''}
         trajectory={trajectory}
@@ -357,8 +368,10 @@ function App() {
         selectedPosition={selectedTokenPosition}
         onSelectToken={handleSelectToken}
       />
+      )}
 
       {/* Title - status-aware */}
+      {!hideDemoShell && (
       <div className={`title ${isReplaying ? (isReplayPlaying ? 'title-active' : 'title-ready') : 'title-idle'}`}>
         <h1>GHOSTLINE</h1>
         <p>
@@ -371,8 +384,10 @@ function App() {
                 : 'Choose a recording to begin.')}
         </p>
       </div>
+      )}
 
       {/* Toolbar (top-right) — wiki, settings, research, layer selector */}
+      {!hideDemoShell && (
       <Toolbar
         activePanel={activePanel}
         onTogglePanel={togglePanel}
@@ -380,23 +395,29 @@ function App() {
         layerInfo={layerInfo}
         onLayerChange={(layer) => setLayers({ render: layer })}
       />
+      )}
 
       {/* Wiki Panel */}
+      {!hideDemoShell && (
       <WikiPanel
         isOpen={activePanel === 'wiki'}
         onClose={() => setActivePanel(null)}
         activeEntryId={activeEntryId}
         onClearActive={() => setActiveEntryId(null)}
       />
+      )}
 
       {/* Token Inspector */}
+      {!hideDemoShell && (
       <TokenInspector
         token={selectedTokenPosition !== null ? (trajectory.find(t => t.position === selectedTokenPosition) ?? null) : null}
         tokenIndex={selectedTokenPosition}
         onOpenWiki={handleOpenWiki}
       />
+      )}
 
       {/* Signals Panel */}
+      {!hideDemoShell && (
       <SignalsPanel
         trajectory={trajectory}
         currentToken={currentToken?.position ?? (trajectory.length - 1)}
@@ -405,8 +426,10 @@ function App() {
         prophecy={prophecy}
         prophecyCorrect={prophecyCorrect}
       />
+      )}
 
       {/* Settings Panel */}
+      {!hideDemoShell && (
       <SettingsPanel
         settings={settings}
         onChange={setSettings}
@@ -414,8 +437,10 @@ function App() {
         isOpen={activePanel === 'settings'}
         onClose={() => setActivePanel(null)}
       />
+      )}
 
       {/* Research Panel (patent-protected, Claim 5) */}
+      {!hideDemoShell && (
       <UnifiedResearchPanel
         isOpen={activePanel === 'research'}
         onClose={() => setActivePanel(null)}
@@ -440,21 +465,26 @@ function App() {
         onLoadLibrary={research.loadLibrary}
         onLoadHistory={research.loadHistory}
       />
+      )}
 
       {/* Annotation Overlay */}
+      {!hideDemoShell && (
       <AnnotationOverlay
         recording={currentRecording}
         currentTokenIndex={replayPosition}
         isPlaying={isReplayPlaying}
       />
+      )}
 
       {/* First-Load Tutorial */}
-      <Tutorial />
+      {!hideDemoShell && <Tutorial />}
 
       {/* Footer */}
+      {!hideDemoShell && (
       <div className="prototype-footer">
         GhostLine Demo Viewer &middot; Explore LLM Geometric Internals &middot; v2.0
       </div>
+      )}
     </div>
   );
 }

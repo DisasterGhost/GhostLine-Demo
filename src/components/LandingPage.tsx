@@ -5,150 +5,210 @@ interface LandingPageProps {
   onLaunchDemo: () => void;
 }
 
+const pipelineRows = [
+  {
+    index: '01',
+    title: 'Capture',
+    text: 'GhostLine taps model internals during inference and records residual, attention, and MLP-derived signals as generation unfolds.',
+  },
+  {
+    index: '02',
+    title: 'Project',
+    text: 'Those high-dimensional traces are mapped into a stable geometric space that makes state transitions visible instead of latent.',
+  },
+  {
+    index: '03',
+    title: 'Classify',
+    text: 'The resulting geometry is scored for behavioral state, pathology risk, and transition structure in real time.',
+  },
+  {
+    index: '04',
+    title: 'Intervene',
+    text: 'When failure signatures emerge, GhostLine can trigger calibrated geometric interventions rather than merely logging the collapse.',
+  },
+];
+
+const evidenceRows = [
+  { value: '95.3%', label: '7-state classification accuracy' },
+  { value: 'F1=0.977', label: 'Binary hallucination detection' },
+  { value: '927', label: 'Validated signals with d >= 2.0' },
+  { value: '100%', label: 'Collapse detection on the validated 3B set' },
+];
+
 export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
   return (
     <div className="landing-page">
-      {/* Section 1: Hero */}
-      <section className="hero">
-        <div className="hero-content">
-          <div className="hero-branding">
-            <span className="hero-business">GhostLine Research</span>
+      <div className="landing-shell">
+        <header className="landing-masthead">
+          <div className="landing-masthead__brand">
+            <span>GhostLine Research</span>
+            <span>Independent AI instrumentation</span>
           </div>
-          <h1 className="hero-title">GHOSTLINE</h1>
-          <p className="hero-subtitle">
-            Real-time geometric monitoring of LLM cognition.
-          </p>
-          <p className="hero-hook">
-            Watch a language model think — and catch it when it lies.
-          </p>
-          <div className="hero-ctas">
-            <button className="cta-primary" onClick={onLaunchDemo}>Launch Demo</button>
-            <a href="mailto:collin@ghostline-research.org" className="cta-secondary">Contact</a>
+          <div className="landing-masthead__links">
+            <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+            <a href="https://github.com/disasterghost/GhostLine" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Section 2: What It Is */}
-      <section className="info-section">
-        <div className="section-container">
-          <h2>What It Is</h2>
-          <p>
-            GhostLine extracts geometric features from transformer activations in real time — 
-            while the model is generating, not after. It classifies behavioral states, 
-            detects hallucination, and can intervene causally to steer the model away from failure modes.
-          </p>
-          <p className="text-highlight">
-            It's mechanistic interpretability that runs at inference speed, without modifying model weights.
-          </p>
-        </div>
-      </section>
+        <section className="landing-hero">
+          <div className="landing-hero__main">
+            <p className="landing-kicker">Real-time geometric monitoring for transformer inference</p>
+            <h1 className="landing-title">GhostLine</h1>
+            <p className="landing-dek">
+              A working prototype for observing, classifying, and steering model behavior while the
+              model is still generating.
+            </p>
+            <p className="landing-summary">
+              GhostLine is not a post hoc dashboard. It is a runtime instrumentation layer that reads
+              geometric structure from live inference, exposes behavioral state changes, flags
+              fabrication risk, and supports causal intervention against certain failure modes.
+            </p>
 
-      {/* Section 3: Technical Architecture (Schematic Figure 2) */}
-      <section className="info-section alt-bg">
-        <div className="section-container">
-          <h2>System Architecture</h2>
-          <div className="schematic-container">
-            <div className="schematic-box">
-              <span className="box-label">Transformer</span>
-              <span className="box-detail">Hidden States</span>
-            </div>
-            <div className="schematic-arrow">→</div>
-            <div className="schematic-box primary">
-              <span className="box-label">GhostLine</span>
-              <span className="box-detail">SVD Participation Ratio</span>
-            </div>
-            <div className="schematic-arrow">→</div>
-            <div className="schematic-box">
-              <span className="box-label">Classifier</span>
-              <span className="box-detail">7-State LDA/SCL</span>
+            <div className="landing-actions">
+              <button className="landing-button landing-button--primary" onClick={onLaunchDemo}>
+                Open Demo
+              </button>
+              <a className="landing-button" href="mailto:collin@ghostline-research.org">
+                Contact
+              </a>
             </div>
           </div>
-          <p className="schematic-caption">
-            Figure 2: Real-time feature extraction pipeline and state classification.
-          </p>
-        </div>
-      </section>
 
-      {/* Section 4: Why It Matters */}
-      <section className="info-section">
-        <div className="section-container">
-          <h2>Why It Matters</h2>
-          <p>
-            Current interpretability tools are retrospective — they analyze what happened. 
-            GhostLine monitors what's happening, token by token, in under 1ms per token.
-          </p>
-          <ul className="capability-list">
-            <li>✓ Hallucination detection F1=0.98 (9,083 features)</li>
-            <li>✓ 7-state behavioral classification F1=0.94</li>
-            <li>✓ Cross-architecture (6 models validated)</li>
-            <li>✓ Causal intervention — restored from collapse in 9 nudges</li>
-            <li>✓ &lt;1ms feature extraction per token</li>
-          </ul>
-        </div>
-      </section>
+          <aside className="landing-hero__aside">
+            <div className="landing-note">
+              <p className="landing-note__label">Public surface</p>
+              <p>
+                This site is a replay-based demo built on recorded <code>.ghostline</code> sessions
+                captured from real model runs.
+              </p>
+            </div>
+            <div className="landing-note">
+              <p className="landing-note__label">Private stack</p>
+              <p>
+                The live-generation research workbench remains private while validation and launch
+                hardening continue.
+              </p>
+            </div>
+            <div className="landing-note">
+              <p className="landing-note__label">Current claim scope</p>
+              <p>
+                Strongest support currently centers on state separation, hallucination detection, and
+                3B collapse intervention.
+              </p>
+            </div>
+          </aside>
+        </section>
 
-      {/* Section 5: Evidence */}
-      <section className="info-section alt-bg">
-        <div className="section-container">
-          <h2>Technical Evidence</h2>
-          <div className="evidence-grid">
-            <div className="evidence-card">
-              <span className="evidence-value">F1=0.980</span>
-              <span className="evidence-label">Hallucination detection</span>
+        <section className="landing-section landing-section--split">
+          <div className="landing-section__heading">
+            <p className="landing-section__label">System</p>
+            <h2>What GhostLine actually does</h2>
+          </div>
+
+          <div className="landing-columns">
+            <div className="landing-copy">
+              <p>
+                GhostLine turns transformer activations into a live geometric signal stream. Instead
+                of waiting until generation is over, it extracts features as tokens are produced and
+                uses that structure to infer what behavioral regime the model is occupying.
+              </p>
+              <p>
+                The result is a runtime interface for model cognition: one that makes uncertainty,
+                retrieval, reasoning, collapse, and fabrication-related drift observable in motion.
+              </p>
             </div>
-            <div className="evidence-card">
-              <span className="evidence-value">F1=0.941</span>
-              <span className="evidence-label">State classification</span>
-            </div>
-            <div className="evidence-card">
-              <span className="evidence-value">&lt;1ms</span>
-              <span className="evidence-label">Extraction speed</span>
-            </div>
-            <div className="evidence-card">
-              <span className="evidence-value">r=0.977</span>
-              <span className="evidence-label">SCL Geometry alignment</span>
+
+            <div className="landing-facts">
+              <div className="landing-fact">
+                <span className="landing-fact__label">Method</span>
+                <span className="landing-fact__value">Runtime mechanistic interpretability</span>
+              </div>
+              <div className="landing-fact">
+                <span className="landing-fact__label">Mode</span>
+                <span className="landing-fact__value">Inference-time monitoring</span>
+              </div>
+              <div className="landing-fact">
+                <span className="landing-fact__label">Output</span>
+                <span className="landing-fact__value">State, risk, and transition geometry</span>
+              </div>
+              <div className="landing-fact">
+                <span className="landing-fact__label">Intervention</span>
+                <span className="landing-fact__value">Geometry-triggered steering</span>
+              </div>
             </div>
           </div>
-          <p className="evidence-note">Validated with GroupKFold by prompt_id. No leakage.</p>
-        </div>
-      </section>
+        </section>
 
-      {/* Section 6: Patent Portfolio */}
-      <section className="info-section">
-        <div className="section-container">
-          <h2>Intellectual Property</h2>
-          <p>
-            GhostLine's core signal taxonomy and intervention paradigms are protected under 
-            three US provisional patent applications.
-          </p>
-          <div className="patent-list">
-            <code>US Provisional 63/948,867 (Dec 2025)</code>
-            <code>US Provisional 63/975,787 (Feb 2026)</code>
-            <code>US Provisional 63/982,900 (Feb 2026)</code>
+        <section className="landing-section">
+          <div className="landing-section__heading">
+            <p className="landing-section__label">Pipeline</p>
+            <h2>Core research pipeline</h2>
           </div>
-        </div>
-      </section>
 
-      {/* Section 7: Who Built It */}
-      <section className="info-section alt-bg">
-        <div className="section-container biography">
-          <h2>Who Built It</h2>
-          <p><strong>GhostLine Research</strong> is an independent AI research project.</p>
-          <p><strong>Collin Civish</strong> — Independent researcher, US Army veteran, Seattle, WA.</p>
-          <blockquote className="founder-quote">
-            "Built as a solo research project, using AI coding tools alongside my own 
-            mathematical investigation. The ideas — the signal taxonomy, the intervention 
-            paradigms, the causal proof — are mine. The AI was the compiler."
-          </blockquote>
-        </div>
-      </section>
+          <div className="landing-pipeline">
+            {pipelineRows.map((row) => (
+              <article className="landing-pipeline__row" key={row.index}>
+                <div className="landing-pipeline__index">{row.index}</div>
+                <div className="landing-pipeline__body">
+                  <h3>{row.title}</h3>
+                  <p>{row.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <footer className="landing-footer">
-        <p>© 2026 GhostLine Research · <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a></p>
-        <div className="footer-links">
-          <a href="https://github.com/disasterghost/GhostLine" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </div>
-      </footer>
+        <section className="landing-section">
+          <div className="landing-section__heading">
+            <p className="landing-section__label">Evidence</p>
+            <h2>What is already supported</h2>
+          </div>
+
+          <div className="landing-evidence">
+            {evidenceRows.map((row) => (
+              <div className="landing-evidence__row" key={row.label}>
+                <span className="landing-evidence__value">{row.value}</span>
+                <span className="landing-evidence__text">{row.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="landing-footnote">
+            Validation is framed conservatively: prompt-grouped evaluation, bounded launch claims,
+            and a public demo that shows the replay surface honestly rather than pretending the entire
+            private research stack is already public.
+          </p>
+        </section>
+
+        <section className="landing-section landing-section--split">
+          <div className="landing-section__heading">
+            <p className="landing-section__label">Builder</p>
+            <h2>GhostLine is an independent research system by Collin Civish.</h2>
+          </div>
+
+          <div className="landing-columns">
+            <div className="landing-copy">
+              <p>
+                The project combines signal taxonomy work, classifier development, intervention
+                research, visualization, and tooling into a single runtime interpretability system.
+              </p>
+              <p>
+                It was built independently, with AI coding tools used as implementation leverage but
+                not as the originating research insight.
+              </p>
+            </div>
+
+            <div className="landing-quote">
+              <p>
+                GhostLine is what remained after repeatedly killing the wrong explanations and
+                keeping only the geometric structure that continued to predict model behavior.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
