@@ -9,6 +9,8 @@ import { UnifiedResearchPanel } from './components/UnifiedResearchPanel';
 import { SettingsPanel, loadSettings, type AllSettings } from './components/SettingsPanel';
 import { ReplayControls } from './components/ReplayControls';
 import { SignalsPanel } from './components/SignalsPanel';
+import { AlertBanner } from './components/AlertBanner';
+import { LandingPage } from './components/LandingPage';
 import { RecordingSelector } from './components/RecordingSelector';
 import { AnnotationOverlay } from './components/AnnotationOverlay';
 import { Tutorial } from './components/Tutorial';
@@ -29,6 +31,7 @@ function App() {
   const [currentRecording, setCurrentRecording] = useState<CuratedRecording | null>(null);
   const [isLoadingRecording, setIsLoadingRecording] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showFullLanding, setShowFullLanding] = useState(true);
 
   const togglePanel = useCallback((panel: PanelId) => {
     setActivePanel(prev => prev === panel ? null : panel);
@@ -104,6 +107,7 @@ function App() {
     setIsLoadingRecording(true);
     setCurrentRecording(recording);
     setShowWelcome(false);
+    setShowFullLanding(false);
     try {
       const basePath = import.meta.env.BASE_URL || '/';
       const response = await fetch(`${basePath}recordings/${recording.filename}`);
@@ -124,7 +128,9 @@ function App() {
 
   // Reset replay minimize when replay ends
   useEffect(() => {
-    if (!isReplaying) setReplayMinimized(false);
+    if (!isReplaying) {
+      setReplayMinimized(false);
+    }
   }, [isReplaying]);
 
   // Sync playback rate
@@ -200,8 +206,51 @@ function App() {
 
   const textSizeScale = { small: '0.85', medium: '1', large: '1.2', 'x-large': '1.4' }[settings.visual.textSize ?? 'medium'];
 
+  // Determine if we should show an alert banner
+  const displayPosition = selectedTokenPosition ?? currentToken?.position ?? (trajectory.length > 0 ? trajectory[trajectory.length - 1].position : null);
+  const activeToken = trajectory.find(t => t.position === displayPosition);
+  
+  const alertConfig = (() => {
+    if (!activeToken) return null;
+    
+    // 1. Collapse alert (Primary Signal)
+    const effDim = activeToken.loopStats?.activation_eff_dim ?? 0;
+    if (effDim > 0 && effDim < 5.0) {
+      return { type: 'collapse' as const, message: 'GEOMETRIC COLLAPSE DETECTED', metric: `E1: ${effDim.toFixed(2)}`, detail: 'Generation is locked in an attractor basin.' };
+    }
+    
+    // 2. Intervention alert
+    if (activeToken.intervention) {
+      const { type, trigger } = activeToken.intervention as any;
+      return { type: 'intervention' as const, message: `INTERVENTION: ${type}`, detail: `Triggered by ${trigger}` };
+    }
+    
+    // 3. Hallucination alert
+    const hallucRisk = activeToken.hallucinationRisk ?? 0;
+    if (hallucRisk > 0.8) {
+      return { type: 'hallucination' as const, message: 'CRITICAL HALLUCINATION RISK', metric: `${(hallucRisk * 100).toFixed(0)}%`, detail: 'High-D signal divergence detected.' };
+    }
+    
+    return null;
+  })();
+
   return (
     <div className="app" style={{ fontSize: `calc(1rem * ${textSizeScale})` }}>
+      {/* Main Landing Page (Redesign) */}
+      {showFullLanding && !isReplaying && (
+        <LandingPage onLaunchDemo={() => setShowFullLanding(false)} />
+      )}
+
+      {/* High-visibility alerts */}
+      {alertConfig && (
+        <AlertBanner 
+          type={alertConfig.type} 
+          message={alertConfig.message} 
+          metric={alertConfig.metric} 
+          detail={alertConfig.detail} 
+        />
+      )}
+
       {/* Welcome landing — shown until first recording is selected */}
       {showWelcome && !isReplaying && (
         <WelcomeLanding onSelectRecording={handleSelectRecording} />

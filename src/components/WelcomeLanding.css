@@ -15,6 +15,31 @@
   text-align: center;
 }
 
+.welcome-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 32px;
+  font-family: var(--gl-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gl-text-dim);
+}
+
+.welcome-business-name {
+  color: var(--gl-primary);
+  font-weight: 600;
+}
+
+.welcome-tech-note {
+  font-size: 0.75rem;
+  color: var(--gl-primary);
+  opacity: 0.6;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
 .welcome-title {
   font-size: 3rem;
   font-weight: 800;

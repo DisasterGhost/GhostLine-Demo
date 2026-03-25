@@ -10,17 +10,25 @@ export function WelcomeLanding({ onSelectRecording }: WelcomeLandingProps) {
   return (
     <div className="welcome-landing">
       <div className="welcome-content">
+        <div className="welcome-header">
+          <span className="welcome-business-name">GhostLine Research</span>
+          <span className="welcome-founder-name">Collin Civish, Independent Researcher</span>
+        </div>
         <h1 className="welcome-title">GHOSTLINE</h1>
         <p className="welcome-subtitle">
-          Real-time geometric visualization of LLM cognitive states
+          Real-time geometric monitoring and intervention of LLM cognitive states
         </p>
         <p className="welcome-desc">
-          Explore pre-recorded generation sessions. Watch how transformer models
-          think, hallucinate, and self-correct — made visible through geometric analysis.
+          GhostLine is an independent research project focused on runtime mechanistic interpretability. 
+          By extracting geometric features from hidden states during inference, we can classify 
+          behavioral states, detect hallucinations (F1=0.98), and steer generation through 
+          calibrated causal interventions.
+        </p>
+        <p className="welcome-tech-note">
+          Powered by a Two-Stage Detection System and Geometric State Crystallization analysis.
         </p>
         <p className="welcome-demo-inquiry">
-          Live demo available upon request —{' '}
-          <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+          Inquiries & Collaborations: <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
         </p>
 
         <div className="welcome-recordings">
