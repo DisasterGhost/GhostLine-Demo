@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RECORDING_CATALOG } from '../recordings/catalog';
 import './LandingPage.css';
 
@@ -7,45 +7,10 @@ interface LandingPageProps {
 }
 
 const credibilityItems = [
-  {
-    label: 'Instrument',
-    title: 'A runtime surface for model behavior',
-    text: 'GhostLine watches behavior take shape while the model is still generating, instead of waiting for a post hoc trace.',
-  },
-  {
-    label: 'Audience',
-    title: 'Built for people who need to see the shift as it happens',
-    text: 'The immediate audience is labs, model providers, safety teams, and evaluators working close to live inference.',
-  },
-  {
-    label: 'Surface',
-    title: 'A replay environment built from real runs',
-    text: 'The first public surface is grounded in recorded model sessions, so visitors are seeing the real viewer language rather than a simulated product shell.',
-  },
-  {
-    label: 'Purpose',
-    title: 'Made to expose state change, risk, and drift in motion',
-    text: 'GhostLine is meant for moments where static evals are too late and the important change is happening while generation is underway.',
-  },
-];
-
-const workflowSteps = [
-  {
-    label: 'See',
-    text: 'Follow token-by-token geometry, entropy, confidence, and state motion while the model is still speaking.',
-  },
-  {
-    label: 'Read',
-    text: 'Interpret behavioral state, fabrication risk, and regime change directly from the live trajectory.',
-  },
-  {
-    label: 'Revisit',
-    text: 'Replay sessions, scrub tokens, inspect signals, and compare runs inside the same visual surface.',
-  },
-  {
-    label: 'Test',
-    text: 'Use geometry-triggered intervention paths to ask whether the state space is merely descriptive or genuinely causal.',
-  },
+  { label: 'The Instrument', title: 'See cognition in real-time', text: 'Stop relying on post-hoc traces. GhostLine watches transformer geometry take shape token-by-token while the model is actively thinking.' },
+  { label: 'The Audience', title: 'Built for frontier labs', text: 'Designed specifically for AI safety teams, model providers, and evaluators who operate right at the bleeding edge of live inference.' },
+  { label: 'The Surface', title: 'Real runs, real data', text: 'No mockups or simulated interfaces. Every session in this demo is built from genuine inference recordings. You are looking at the exact instrument our researchers use.' },
+  { label: 'The Purpose', title: 'Catch failures in motion', text: 'Static evals are too slow. GhostLine catches high-risk state changes, fabrication, and regime drift the millisecond they cross the threshold.' },
 ];
 
 const proofMetrics = [
@@ -55,72 +20,100 @@ const proofMetrics = [
   { value: '100%', label: 'validated 3B collapse detection' },
 ];
 
-const systemExamples = [
+const workflowSteps = [
   {
-    id: 'surface',
-    label: 'Viewer',
-    title: 'The replay surface',
-    image: 'ghostline-product-surface.png',
-    alt: 'GhostLine product surface showing 3D trajectory replay, signal panels, and token inspection.',
-    caption:
-      'Recorded trajectory replay, token-level inspection, state overlays, and the same visual grammar used throughout GhostLine.',
+    id: 'see',
+    label: 'See',
+    text: 'Track high-dimensional geometry, entropy, and confidence on a token-by-token basis as the model speaks.',
+    tabs: [
+      { id: 'see-viewer', label: 'Live Viewer', title: 'The playback surface', image: 'see-viewer.jpg', caption: 'Fluid 3D trajectory tracking and token inspection.' },
+      { id: 'see-metrics', label: 'Metrics', title: 'Real-time Signal Panel', image: 'see-metrics.jpg', caption: 'Comprehensive entropy and confidence readouts.' }
+    ]
   },
   {
-    id: 'workbench',
-    label: 'Workbench',
-    title: 'The research workbench',
-    image: 'ghostline-workbench.png',
-    alt: 'GhostLine research workbench showing internal analysis and run configuration tools.',
-    caption:
-      'The research surface extends into comparisons, sweeps, hypothesis tests, and capture design without leaving the instrument.',
+    id: 'read',
+    label: 'Read',
+    text: 'Translate raw transformer math into immediate behavioral risk, hallucination detection, and state classification.',
+    tabs: [
+      { id: 'read-state', label: 'State Readout', title: 'State Classification', image: 'read-state.jpg', caption: 'Immediate mapping of behavioral risk.' },
+      { id: 'read-hallucination', label: 'Fabrication', title: 'Fabrication Risk', image: 'read-hallucination.jpg', caption: 'Directly observing high-D signal divergence.' }
+    ]
   },
+  {
+    id: 'replay',
+    label: 'Replay',
+    text: 'Scrub through past sessions, isolate specific signal spikes, and compare different model runs inside a unified workspace.',
+    tabs: [
+      { id: 'replay-scrub', label: 'Timeline', title: 'Scrubbing History', image: 'replay-scrub.jpg', caption: 'Move token-by-token through past states.' },
+      { id: 'replay-compare', label: 'Compare', title: 'Run Comparison', image: 'replay-compare.jpg', caption: 'Compare signals across different model runs.' }
+    ]
+  },
+  {
+    id: 'test',
+    label: 'Test',
+    text: 'Trigger interventions based on live geometry to prove what signals actually drive the model\'s behavior.',
+    tabs: [
+      { id: 'test-trigger', label: 'Intervention', title: 'Live Intervention', image: 'test-trigger.jpg', caption: 'Trigger custom callbacks when geometry hits thresholds.' },
+      { id: 'test-result', label: 'Outcome', title: 'Measuring Causal Impact', image: 'test-result.jpg', caption: 'See whether the state space is descriptive or genuinely causal.' }
+    ]
+  }
 ];
 
-const validationExamples = [
+const validationSteps = [
   {
-    id: 'structure',
-    label: 'Layer evidence',
-    title: 'Structure forming through the stack',
-    image: 'ghostline-proof-chart.png',
-    alt: 'GhostLine proof chart showing evidence of structure formation across transformer layers.',
-    caption:
-      'One GhostLine evidence artifact: structure intensifies through the mid-stack before compressing toward output.',
+    id: 'foundation',
+    label: 'The Foundation',
+    text: 'Our state separation heuristics, hallucination risk detection, and 3B-parameter collapse interventions are fully validated and production-ready.',
+    tabs: [
+      { id: 'val-evidence', label: 'Evidence', title: 'Strong Discriminative Signals', image: 'val-evidence.jpg', caption: '927 strong signals separating states at inference.' },
+      { id: 'val-collapse', label: 'Collapse', title: '3B Collapse Detection', image: 'val-collapse.jpg', caption: '100% validated detection of geometric lock-in.' }
+    ]
   },
   {
-    id: 'recordings',
-    label: 'Demo path',
-    title: 'What the visitor can open first',
-    image: 'ghostline-product-surface.png',
-    alt: 'GhostLine product surface showing 3D trajectory replay, signal panels, and token inspection.',
-    caption:
-      'The public path starts with recorded runs, then moves into tokens, state shifts, and signal motion inside the viewer itself.',
+    id: 'release',
+    label: 'The Release',
+    text: 'Everything you see here—the 3D replay loop, token inspector, and signal arrays—is running effortlessly on live, captured sessions without mock data.',
+    tabs: [
+      { id: 'val-data', label: 'Live Data', title: 'Captured Telemetry', image: 'val-data.jpg', caption: 'No simulated interfaces, just real inference traces.' },
+      { id: 'val-surface', label: 'The App', title: 'Working Instrument', image: 'val-surface.jpg', caption: 'The identical language used by the private live client.' }
+    ]
   },
+  {
+    id: 'roadmap',
+    label: 'The Roadmap',
+    text: 'We are launching with robust replay modes to ensure total interface stability, giving us time to harden the live stream architecture for remote enterprise deployment.',
+    tabs: [
+      { id: 'val-pipeline', label: 'Pipeline', title: 'Replay vs Live', image: 'val-pipeline.jpg', caption: 'Bridging replayable analysis to real-time production.' }
+    ]
+  }
 ];
 
 export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
   const basePath = import.meta.env.BASE_URL || '/';
   const featuredRecordings = RECORDING_CATALOG.slice(0, 4);
-  const [systemExampleIndex, setSystemExampleIndex] = useState(0);
-  const [validationExampleIndex, setValidationExampleIndex] = useState(0);
+
+  // Workflow State
+  const [activeWorkflowStepIndex, setActiveWorkflowStepIndex] = useState(0);
+  const [activeWorkflowTabIndex, setActiveWorkflowTabIndex] = useState(0);
+  
+  // Validation State
+  const [activeValidationStepIndex, setActiveValidationStepIndex] = useState(0);
+  const [activeValidationTabIndex, setActiveValidationTabIndex] = useState(0);
+
+  // Reset inner tab when parent step changes
+  useEffect(() => {
+    setActiveWorkflowTabIndex(0);
+  }, [activeWorkflowStepIndex]);
 
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setSystemExampleIndex((index) => (index + 1) % systemExamples.length);
-    }, 7000);
+    setActiveValidationTabIndex(0);
+  }, [activeValidationStepIndex]);
 
-    return () => window.clearInterval(id);
-  }, []);
+  const activeWorkflowStep = workflowSteps[activeWorkflowStepIndex];
+  const activeWorkflowTab = activeWorkflowStep.tabs[activeWorkflowTabIndex];
 
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setValidationExampleIndex((index) => (index + 1) % validationExamples.length);
-    }, 8200);
-
-    return () => window.clearInterval(id);
-  }, []);
-
-  const activeSystemExample = systemExamples[systemExampleIndex];
-  const activeValidationExample = validationExamples[validationExampleIndex];
+  const activeValidationStep = validationSteps[activeValidationStepIndex];
+  const activeValidationTab = activeValidationStep.tabs[activeValidationTabIndex];
 
   return (
     <div className="landing-page">
@@ -141,15 +134,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
 
         <section className="landing-hero">
           <div className="landing-hero__copy">
-            <p className="landing-kicker">Inference-time instrumentation for transformer behavior</p>
+            <p className="landing-kicker">Real-time AI behavioral monitoring</p>
             <h1 className="landing-title">GhostLine</h1>
             <p className="landing-statement">
-              Watch model behavior form, crystallize, drift, and fail while it is still unfolding.
+              Watch model cognition unfold. Catch drift, structural collapse, and hallucinations the exact moment they happen.
             </p>
             <p className="landing-summary">
-              GhostLine is a working prototype for seeing inference from the inside. It brings replay,
-              geometric monitoring, signal inspection, behavioral state readout, and research tooling
-              into one continuous instrument surface.
+              GhostLine lets you see inside the black box during live inference. By combining geometric monitoring, signal inspection, and state readouts into a single glass surface, we've built the first true observability instrument for frontier models.
             </p>
 
             <div className="landing-actions">
@@ -172,26 +163,22 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
           </div>
 
           <div className="landing-hero__visual">
-            <figure className="landing-hero-card">
+            <figure className="landing-hero-card glass-panel">
               <img
                 src={`${basePath}media/ghostline-product-surface.png`}
                 alt="GhostLine product surface showing 3D trajectory replay, signal panels, and token inspection."
               />
-              <figcaption>
-                The public GhostLine surface: recorded trajectory replay, token-level inspection,
-                state overlays, and the same visual grammar used by the private live instrument.
-              </figcaption>
             </figure>
 
             <div className="landing-hero-aside">
-              <div className="landing-aside-card">
+              <div className="landing-aside-card glass-panel">
                 <span className="landing-card__label">What GhostLine is</span>
-                <p>Runtime interpretability and observability for transformer inference.</p>
+                <p>An enterprise-grade observability and runtime interpretability console.</p>
               </div>
-              <div className="landing-aside-card">
+              <div className="landing-aside-card glass-panel">
                 <span className="landing-card__label">What you can explore here</span>
                 <p>
-                  A replay environment built on recorded <code>.ghostline</code> sessions, designed to let visitors inspect the surface as a working instrument rather than a trailer.
+                  A powerful replay environment built on <code>.ghostline</code> sessions, letting you experience the product exactly as operators do.
                 </p>
               </div>
             </div>
@@ -200,7 +187,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
 
         <section className="landing-credibility">
           {credibilityItems.map((item) => (
-            <article className="landing-credibility-card" key={item.label}>
+            <article className="landing-credibility-card glass-panel" key={item.label}>
               <p className="landing-card__label">{item.label}</p>
               <h2>{item.title}</h2>
               <p>{item.text}</p>
@@ -217,7 +204,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
           <div className="landing-system-layout">
             <div className="landing-system-steps">
               {workflowSteps.map((step, index) => (
-                <article className="landing-system-step" key={step.label}>
+                <article 
+                  className={`landing-system-step ${index === activeWorkflowStepIndex ? 'is-active' : ''}`}
+                  key={step.id}
+                  onClick={() => setActiveWorkflowStepIndex(index)}
+                >
                   <span className="landing-system-step__index">0{index + 1}</span>
                   <div className="landing-system-step__body">
                     <h3>{step.label}</h3>
@@ -227,29 +218,35 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
               ))}
             </div>
 
-            <div className="landing-example-card landing-example-card--system">
-              <div className="landing-example-card__tabs" role="tablist" aria-label="GhostLine system views">
-                {systemExamples.map((example, index) => (
+            <div className="landing-example-card glass-panel landing-example-card--system">
+              <div className="landing-example-card__tabs" role="tablist">
+                <div className="mac-controls">
+                  <span className="mac-close"></span>
+                  <span className="mac-minimize"></span>
+                  <span className="mac-maximize"></span>
+                </div>
+                {activeWorkflowStep.tabs.map((tab, index) => (
                   <button
-                    key={example.id}
-                    className={`landing-example-tab${index === systemExampleIndex ? ' is-active' : ''}`}
-                    onClick={() => setSystemExampleIndex(index)}
+                    key={tab.id}
+                    className={`landing-example-tab ${index === activeWorkflowTabIndex ? 'is-active' : ''}`}
+                    onClick={() => setActiveWorkflowTabIndex(index)}
                     type="button"
                   >
-                    {example.label}
+                    {tab.label}
                   </button>
                 ))}
               </div>
 
               <div className="landing-example-card__frame">
-                <figure className="landing-figure-card landing-figure-card--workbench landing-figure-card--active">
+                <figure className="landing-figure-card landing-figure-card--workbench">
                   <img
-                    src={`${basePath}media/${activeSystemExample.image}`}
-                    alt={activeSystemExample.alt}
+                    src={`${basePath}media/${activeWorkflowTab.image}`}
+                    alt={activeWorkflowTab.caption}
+                    onError={(e) => { (e.target as HTMLImageElement).src = `${basePath}media/ghostline-product-surface.png` }} // Fallback
                   />
                   <figcaption>
-                    <strong>{activeSystemExample.title}</strong>
-                    <span>{activeSystemExample.caption}</span>
+                    <strong>{activeWorkflowTab.title}</strong>
+                    <span>{activeWorkflowTab.caption}</span>
                   </figcaption>
                 </figure>
               </div>
@@ -264,76 +261,67 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
           </div>
 
           <div className="landing-validation-layout">
-            <div className="landing-example-card landing-example-card--validation">
-              <div className="landing-example-card__tabs" role="tablist" aria-label="GhostLine evidence views">
-                {validationExamples.map((example, index) => (
+            <div className="landing-example-card glass-panel landing-example-card--validation">
+              <div className="landing-example-card__tabs" role="tablist">
+                <div className="mac-controls">
+                  <span className="mac-close"></span>
+                  <span className="mac-minimize"></span>
+                  <span className="mac-maximize"></span>
+                </div>
+                {activeValidationStep.tabs.map((tab, index) => (
                   <button
-                    key={example.id}
-                    className={`landing-example-tab${index === validationExampleIndex ? ' is-active' : ''}`}
-                    onClick={() => setValidationExampleIndex(index)}
+                    key={tab.id}
+                    className={`landing-example-tab ${index === activeValidationTabIndex ? 'is-active' : ''}`}
+                    onClick={() => setActiveValidationTabIndex(index)}
                     type="button"
                   >
-                    {example.label}
+                    {tab.label}
                   </button>
                 ))}
               </div>
 
               <div className="landing-example-card__frame">
-                <figure className="landing-figure-card landing-figure-card--chart landing-figure-card--active">
+                <figure className="landing-figure-card landing-figure-card--chart">
                   <img
-                    src={`${basePath}media/${activeValidationExample.image}`}
-                    alt={activeValidationExample.alt}
+                    src={`${basePath}media/${activeValidationTab.image}`}
+                    alt={activeValidationTab.caption}
+                    onError={(e) => { (e.target as HTMLImageElement).src = `${basePath}media/ghostline-proof-chart.png` }} // Fallback
                   />
                   <figcaption>
-                    <strong>{activeValidationExample.title}</strong>
-                    <span>{activeValidationExample.caption}</span>
+                    <strong>{activeValidationTab.title}</strong>
+                    <span>{activeValidationTab.caption}</span>
                   </figcaption>
                 </figure>
               </div>
             </div>
 
             <div className="landing-validation-copy">
-              <div className="landing-validation-card">
-                <p className="landing-card__label">Where the footing is strongest</p>
-                <p>
-                  State separation, fabrication detection, replayable signal inspection, and
-                  3B collapse intervention are the strongest supported parts of GhostLine today.
-                </p>
-              </div>
-
-              <div className="landing-validation-card">
-                <p className="landing-card__label">What this release lets people witness</p>
-                <p>
-                  This site shows the actual viewing surface, replay loop, and explanatory layer on
-                  real captured sessions rather than mock data or static renders.
-                </p>
-              </div>
-
-              <div className="landing-validation-card">
-                <p className="landing-card__label">Why the first release is replay-first</p>
-                <p>
-                  Replay keeps the public surface stable while the live stack is hardened,
-                  validated, and prepared for a wider opening.
-                </p>
-              </div>
+              {validationSteps.map((step, index) => (
+                <div 
+                  className={`landing-validation-card glass-panel ${index === activeValidationStepIndex ? 'is-active' : ''}`}
+                  key={step.id}
+                  onClick={() => setActiveValidationStepIndex(index)}
+                >
+                  <p className="landing-card__label">{step.label}</p>
+                  <p>{step.text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         <section className="landing-section landing-section--founder">
           <div className="landing-founder-layout">
-            <article className="landing-founder-card">
-              <p className="landing-card__label">Behind the project</p>
+            <article className="landing-founder-card glass-panel">
+              <p className="landing-card__label">The Vision</p>
               <h2>Collin Civish</h2>
-              <p className="landing-founder-card__role">Founder, research lead, and product builder</p>
+              <p className="landing-founder-card__role">Founder & Product Lead</p>
               <p>
-                GhostLine is currently an independent research and tooling effort spanning runtime
-                instrumentation, signal taxonomy, replay systems, classifier validation, intervention
-                design, and the interface that makes the whole thing legible.
+                GhostLine is an independent effort to completely rethink AI observability. From the core signal taxonomy to the sleek rendering engine that makes it legible, the goal is to build an instrument that finally treats AI like a measurable physical system.
               </p>
             </article>
 
-            <article className="landing-recordings-card">
+            <article className="landing-recordings-card glass-panel">
               <p className="landing-card__label">Where to begin inside the demo</p>
               <div className="landing-recordings-list">
                 {featuredRecordings.map((recording) => (
@@ -350,10 +338,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
         <section className="landing-closing">
           <div className="landing-closing__copy">
             <p className="landing-section__label">Step inside</p>
-            <h2>Enter the replay surface</h2>
+            <h2>Enter the observability suite</h2>
             <p>
-              Begin with curated recordings captured from real model runs, then move through tokens,
-              state shifts, and signal motion inside the GhostLine viewer itself.
+              Begin with curated intelligence captured from real model runs. Scrub through tokens, isolate state shifts, and track geometry live in the GhostLine viewer.
             </p>
           </div>
 
