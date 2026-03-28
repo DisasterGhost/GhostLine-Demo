@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ghostline-app Live Architecture</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #11161d;
+        color: #eef3f8;
+      }
+      .shell {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 40px 32px 56px;
+      }
+      .kicker {
+        color: #69a7d8;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-size: 40px;
+        font-weight: 600;
+      }
+      .summary {
+        max-width: 900px;
+        color: #c6d0db;
+        line-height: 1.65;
+        font-size: 18px;
+        margin-bottom: 18px;
+      }
+      .parent-link {
+        display: inline-block;
+        margin-bottom: 28px;
+        color: #8dc8ff;
+        text-decoration: none;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+      }
+      .chart-card {
+        display: block;
+        padding: 22px 22px 24px;
+        border: 1px solid #2b3946;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #16202b 0%, #121920 100%);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      }
+      .chart-card:hover {
+        border-color: #4a6982;
+        transform: translateY(-1px);
+      }
+      .chart-card__title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .chart-card__summary {
+        color: #c6d0db;
+        line-height: 1.55;
+      }
+      .footer {
+        margin-top: 28px;
+        color: #90a0ae;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="kicker">GhostLine / live ghostline-app</div>
+      <h1>Live Architecture Pack</h1>
+      <div class="summary">
+        These charts document the current production-facing <code>ghostline-app</code> frontend as it actually exists now: the mounted app shell, live token transport, replay and review cycle, research workbench topology, and the workspace/project/settings systems around it.
+      </div>
+      <a class="parent-link" href="../index.html">&larr; Back to the broader lineage hub</a>
+      <div class="grid">
+        
+            <a class="chart-card" href="ghostline_app_live_overview.html">
+              <div class="chart-card__title">ghostline-app Live Overview</div>
+              <div class="chart-card__summary">The current live frontend shell: toolbar, dockable workspace, floating panels, replay transport, research sidebar, and the useGhostwire runtime seam.</div>
+            </a>
+            
+            <a class="chart-card" href="live_generation_pipeline.html">
+              <div class="chart-card__title">Live Generation Pipeline</div>
+              <div class="chart-card__summary">How the live app resolves endpoints, opens the WebSocket, receives token frames, buffers playback, and fans visible trajectory data into the synchronized panels.</div>
+            </a>
+            
+            <a class="chart-card" href="replay_review_recording_cycle.html">
+              <div class="chart-card__title">Replay / Review / Recording Cycle</div>
+              <div class="chart-card__summary">The live app’s recording and replay loop: session recorder, save/load, auto-review after generation, and transport controls over the reconstructed trajectory.</div>
+            </a>
+            
+            <a class="chart-card" href="research_workbench_topology.html">
+              <div class="chart-card__title">Research Workbench Topology</div>
+              <div class="chart-card__summary">The actual research sidebar architecture in the live app: tab host, researchSlice bus, overlays, artifacts, and run-history linkage to the spectrograph and future analysis flows.</div>
+            </a>
+            
+            <a class="chart-card" href="workspace_project_and_settings.html">
+              <div class="chart-card__title">Workspace, Project, and Settings System</div>
+              <div class="chart-card__summary">How layout presets, project state, floating panels, and URL/deployment configuration shape the live operator experience in ghostline-app.</div>
+            </a>
+            
+      </div>
+      <div class="footer">
+        Generated from <code>build_live_app_architecture_graphs.py</code>.
+      </div>
+    </div>
+  </body>
+</html>

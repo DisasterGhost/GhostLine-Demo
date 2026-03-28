@@ -1,0 +1,203 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1>ghostline-app Live Overview</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 100vh;
+                 background-color: #1a1a1a;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+    <style>
+      .lineage-nav-shell {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 140px;
+        z-index: 9999;
+        background: rgba(17, 22, 29, 0.88);
+        border: 1px solid #31414f;
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+        padding: 12px 14px;
+      }
+      .lineage-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 10px;
+      }
+      .nav-home {
+        color: #eef3f8;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .nav-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav-action {
+        color: #8dc8ff;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      .nav-action--disabled {
+        color: #6f7b87;
+        font-size: 13px;
+      }
+      .lineage-nav-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .nav-link {
+        color: #c6d0db;
+        text-decoration: none;
+        font-size: 12px;
+        padding: 6px 10px;
+        border: 1px solid #31414f;
+        border-radius: 999px;
+      }
+      .nav-link--active {
+        color: #ffffff;
+        border-color: #5f8fb3;
+        background: rgba(74, 105, 130, 0.35);
+      }
+    </style>
+    
+</head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            
+    <div class="lineage-nav-shell">
+      <div class="lineage-nav-header">
+        <a class="nav-home" href="index.html">Live App Chart Index</a>
+        <div class="nav-actions">
+          <a class="nav-action" href="../index.html">Parent Lineage Hub</a>
+          <span class="nav-action nav-action--disabled">&larr; Start</span>
+          <a class="nav-action" href="live_generation_pipeline.html">Live Generation Pipeline &rarr;</a>
+        </div>
+      </div>
+      <div class="lineage-nav-links">
+        <a class="nav-link nav-link--active" href="ghostline_app_live_overview.html">ghostline-app Live Overview</a><a class="nav-link" href="live_generation_pipeline.html">Live Generation Pipeline</a><a class="nav-link" href="replay_review_recording_cycle.html">Replay / Review / Recording Cycle</a><a class="nav-link" href="research_workbench_topology.html">Research Workbench Topology</a><a class="nav-link" href="workspace_project_and_settings.html">Workspace, Project, and Settings System</a>
+      </div>
+    </div>
+    
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": {"background": "#2c3e50", "border": "#4a6982", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Main", "label": "main.tsx", "shape": "box", "title": "Bootstraps the React root and mounts App."}, {"color": {"background": "#2c3e50", "border": "#4a6982", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "App", "label": "App.tsx", "shape": "box", "title": "Root shell for the live ghostline-app frontend."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Toolbar", "label": "Toolbar", "shape": "box", "title": "Connection status, prompt entry, layout presets, project and panel controls."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Layout", "label": "FlexLayout workspace", "shape": "box", "title": "Dockable panel shell from defaultLayout preset JSON."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Scene", "label": "GhostwireScene", "shape": "box", "title": "Primary 3D inference trajectory view."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Spectrograph", "label": "Spectrograph", "shape": "box", "title": "Mechanistic signal waveform panel."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Depth", "label": "Depth Explorer", "shape": "box", "title": "Per-token layer walk through captured layers."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Text", "label": "Generated Text", "shape": "box", "title": "Clickable textual token stream."}, {"color": {"background": "#8e44ad", "border": "#9b59b6", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Replay", "label": "Replay Controls", "shape": "box", "title": "Transport UI for replay and review mode."}, {"color": {"background": "#27ae60", "border": "#2ecc71", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Research", "label": "Research Workbench", "shape": "box", "title": "Signals, compare, sweep, hypothesis, and corpus sidebar."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "ProjectDialog", "label": "Project Dialog", "shape": "box", "title": "Project creation, import, and workspace management."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Settings", "label": "Floating Settings", "shape": "box", "title": "Movable settings control surface."}, {"color": {"background": "#c0392b", "border": "#e74c3c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "TokenHealth", "label": "Floating Token Health", "shape": "box", "title": "Focused token diagnostics overlay."}, {"color": {"background": "#16a085", "border": "#1abc9c", "highlight": {"background": "#34495e", "border": "#4ca1af"}}, "font": {"color": "white"}, "id": "Ghostwire", "label": "useGhostwire", "shape": "box", "title": "Live generation, replay, review, and transport control hook."}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "Main", "label": "mount", "title": "mount", "to": "App"}, {"arrows": "to", "from": "App", "label": "top bar", "title": "top bar", "to": "Toolbar"}, {"arrows": "to", "from": "App", "label": "main shell", "title": "main shell", "to": "Layout"}, {"arrows": "to", "from": "App", "label": "bottom transport", "title": "bottom transport", "to": "Replay"}, {"arrows": "to", "from": "App", "label": "right sidebar", "title": "right sidebar", "to": "Research"}, {"arrows": "to", "from": "App", "label": "modal", "title": "modal", "to": "ProjectDialog"}, {"arrows": "to", "from": "App", "label": "floating panel", "title": "floating panel", "to": "Settings"}, {"arrows": "to", "from": "App", "label": "floating panel", "title": "floating panel", "to": "TokenHealth"}, {"arrows": "to", "from": "App", "label": "runtime hook", "title": "runtime hook", "to": "Ghostwire"}, {"arrows": "to", "from": "Layout", "label": "panel", "title": "panel", "to": "Scene"}, {"arrows": "to", "from": "Layout", "label": "panel", "title": "panel", "to": "Spectrograph"}, {"arrows": "to", "from": "Layout", "label": "panel", "title": "panel", "to": "Depth"}, {"arrows": "to", "from": "Layout", "label": "panel", "title": "panel", "to": "Text"}, {"arrows": "to", "from": "Ghostwire", "label": "connection + generation state", "title": "connection + generation state", "to": "Toolbar"}, {"arrows": "to", "from": "Ghostwire", "label": "trajectory props", "title": "trajectory props", "to": "Layout"}, {"arrows": "to", "from": "Ghostwire", "label": "replay state", "title": "replay state", "to": "Replay"}, {"arrows": "to", "from": "Ghostwire", "label": "inspected token", "title": "inspected token", "to": "TokenHealth"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"layout": {"hierarchical": {"enabled": true, "direction": "LR", "sortMethod": "directed", "nodeSpacing": 230, "levelSeparation": 260, "treeSpacing": 180}}, "physics": {"hierarchicalRepulsion": {"centralGravity": 0.0, "springLength": 100, "springConstant": 0.01, "nodeDistance": 220, "damping": 0.09}, "solver": "hierarchicalRepulsion", "enabled": true}, "configure": {"enabled": false}, "nodes": {"font": {"size": 20, "face": "SegoeUI,Tahoma,sans-serif", "color": "#ffffff", "bold": {"color": "#ffffff"}}, "shape": "box", "margin": {"top": 15, "bottom": 15, "left": 20, "right": 20}, "borderWidth": 2, "widthConstraint": {"maximum": 250}, "shadow": {"enabled": true, "color": "rgba(0,0,0,0.5)", "size": 10, "x": 5, "y": 5}}, "edges": {"smooth": {"type": "cubicBezier", "forceDirection": "horizontal", "roundness": 0.35}, "font": {"size": 16, "align": "middle", "color": "#cccccc", "strokeWidth": 0, "background": "none"}, "arrows": {"to": {"enabled": true, "scaleFactor": 1.2}}, "color": {"color": "#666666", "highlight": "#ffffff"}, "width": 2}, "interaction": {"hover": true, "navigationButtons": true, "keyboard": true}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

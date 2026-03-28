@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ghostline-app Walkthrough</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #11161d;
+        color: #eef3f8;
+      }
+      .shell {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 40px 32px 56px;
+      }
+      .kicker {
+        color: #69a7d8;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-size: 40px;
+        font-weight: 600;
+      }
+      .summary {
+        max-width: 920px;
+        color: #c6d0db;
+        line-height: 1.65;
+        font-size: 18px;
+        margin-bottom: 18px;
+      }
+      .parent-link {
+        display: inline-block;
+        margin-bottom: 28px;
+        color: #8dc8ff;
+        text-decoration: none;
+        margin-right: 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+      }
+      .chart-card {
+        display: block;
+        padding: 22px 22px 24px;
+        border: 1px solid #2b3946;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #16202b 0%, #121920 100%);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      }
+      .chart-card:hover {
+        border-color: #4a6982;
+        transform: translateY(-1px);
+      }
+      .chart-card__title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .chart-card__summary {
+        color: #c6d0db;
+        line-height: 1.55;
+      }
+      .footer {
+        margin-top: 28px;
+        color: #90a0ae;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="kicker">GhostLine / nontechnical walkthrough</div>
+      <h1>Explain-It-Like-I’m-New Pack</h1>
+      <div class="summary">
+        This version is for smart people who do not already speak GhostLine. It keeps the system structure, but trades internal jargon for plain language and concrete framing.
+      </div>
+      <a class="parent-link" href="../live_app_briefing/index.html">&rarr; Open the briefing pack</a>
+      <a class="parent-link" href="../live_app/index.html">&rarr; Open the technical pack</a>
+      <div class="grid">
+        
+            <a class="chart-card" href="what_you_are_looking_at.html">
+              <div class="chart-card__title">What You Are Looking At</div>
+              <div class="chart-card__summary">GhostLine is one workspace with five visible parts: top controls, the main viewer, a playback bar, a research sidebar, and a few extra pop-up tools.</div>
+            </a>
+            
+            <a class="chart-card" href="what_happens_when_you_run_it.html">
+              <div class="chart-card__title">What Happens When You Run It</div>
+              <div class="chart-card__summary">You ask the model something, the backend starts generating, GhostLine receives the stream, slows it down to something watchable, and then draws it on screen.</div>
+            </a>
+            
+            <a class="chart-card" href="what_replay_does.html">
+              <div class="chart-card__title">What Replay Does</div>
+              <div class="chart-card__summary">A live run can be saved as a recording. That recording can be loaded back in later and stepped through again without needing the model to run live.</div>
+            </a>
+            
+            <a class="chart-card" href="what_the_side_tools_are_for.html">
+              <div class="chart-card__title">What The Side Tools Are For</div>
+              <div class="chart-card__summary">The sidebar is where GhostLine turns from a viewer into a research tool: choose signals, compare runs, test ideas, and organize prompt sets.</div>
+            </a>
+            
+            <a class="chart-card" href="what_the_controls_change.html">
+              <div class="chart-card__title">What The Controls Change</div>
+              <div class="chart-card__summary">The top-level controls mainly change three things: how the workspace is arranged, what project you are in, and which backend GhostLine is talking to.</div>
+            </a>
+            
+      </div>
+      <div class="footer">
+        Generated from <code>build_live_app_walkthrough_graphs.py</code>.
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ghostline-app Briefing Pack</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #11161d;
+        color: #eef3f8;
+      }
+      .shell {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 40px 32px 56px;
+      }
+      .kicker {
+        color: #69a7d8;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 12px;
+        margin-bottom: 14px;
+      }
+      h1 {
+        margin: 0 0 16px;
+        font-size: 40px;
+        font-weight: 600;
+      }
+      .summary {
+        max-width: 900px;
+        color: #c6d0db;
+        line-height: 1.65;
+        font-size: 18px;
+        margin-bottom: 18px;
+      }
+      .parent-link {
+        display: inline-block;
+        margin-bottom: 28px;
+        color: #8dc8ff;
+        text-decoration: none;
+        margin-right: 18px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+      }
+      .chart-card {
+        display: block;
+        padding: 22px 22px 24px;
+        border: 1px solid #2b3946;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #16202b 0%, #121920 100%);
+        color: inherit;
+        text-decoration: none;
+        box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      }
+      .chart-card:hover {
+        border-color: #4a6982;
+        transform: translateY(-1px);
+      }
+      .chart-card__title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .chart-card__summary {
+        color: #c6d0db;
+        line-height: 1.55;
+      }
+      .footer {
+        margin-top: 28px;
+        color: #90a0ae;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="kicker">GhostLine / live app briefing</div>
+      <h1>How GhostLine Works</h1>
+      <div class="summary">
+        A visual walkthrough of GhostLine's moving parts — what you see on screen, how data flows, and where the research tools fit in. Start here for the big picture.
+      </div>
+      <a class="parent-link" href="../live_app/index.html">&rarr; Technical deep-dive</a>
+      <a class="parent-link" href="../index.html">&rarr; Full architecture index</a>
+      <div class="grid">
+
+            <a class="chart-card" href="what_the_app_is.html">
+              <div class="chart-card__title">What you're looking at</div>
+              <div class="chart-card__summary">Five panels that work together: a control bar for prompts, a viewer for 3D trajectories, replay controls, a research sidebar, and floating tools for settings and token inspection.</div>
+            </a>
+
+            <a class="chart-card" href="how_live_generation_flows.html">
+              <div class="chart-card__title">How live generation flows</div>
+              <div class="chart-card__summary">You type a prompt. The backend generates tokens one at a time. Each token arrives with its geometry, gets buffered so you can watch at human speed, then appears on screen.</div>
+            </a>
+
+            <a class="chart-card" href="how_replay_works.html">
+              <div class="chart-card__title">How replay works</div>
+              <div class="chart-card__summary">Every generation is automatically recorded. You can save it, load it back later, scrub through it token by token, and inspect any moment — no backend needed.</div>
+            </a>
+
+            <a class="chart-card" href="where_research_fits.html">
+              <div class="chart-card__title">Where the research tools fit</div>
+              <div class="chart-card__summary">The research sidebar sits right next to the viewer. It reads the same signals and sessions you're already watching — compare runs, test hypotheses, sweep parameters.</div>
+            </a>
+
+            <a class="chart-card" href="how_the_operator_controls_it.html">
+              <div class="chart-card__title">How you control it</div>
+              <div class="chart-card__summary">Switch between layout presets, save your workspace, and point at a local or remote GPU backend — all from the same interface.</div>
+            </a>
+            
+      </div>
+      <div class="footer">
+        Interactive diagrams powered by <a href="https://visjs.org/" style="color:#8dc8ff">vis.js</a>. Drag and hover to explore.
+      </div>
+    </div>
+  </body>
+</html>

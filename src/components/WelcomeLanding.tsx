@@ -25,9 +25,8 @@ export function WelcomeLanding({ onSelectRecording }: WelcomeLandingProps) {
             <p className="welcome-kicker">Choose a recorded session to inspect</p>
             <h1 className="welcome-title">Demo recordings</h1>
             <p className="welcome-summary">
-              This public build replays curated GhostLine captures rather than exposing the private
-              live-generation stack. Pick a recording to enter the viewer and inspect the trajectory,
-              state signals, and token-level evolution.
+              Each recording is a real model generation captured from Qwen3-8B. Pick one to
+              step through the trajectory, watch state transitions, and inspect signals token by token.
             </p>
           </div>
 
