@@ -22,7 +22,7 @@ export interface ContextRange {
   end: number;
 }
 
-// Domain switching types (Gemini Procrustes-LERP spec)
+// Domain switching types (Procrustes-LERP spec)
 export interface DomainInfo {
   current: string;
   available: string[];
@@ -102,7 +102,7 @@ export function useGhostwire(playbackRate: number = 4) {
   const [showOutOfRangeArcs, setShowOutOfRangeArcs] = useState(true);      // Faded by default
   const [showPromptTokens, setShowPromptTokens] = useState(true);          // Show prompt in 3D by default
 
-  // Domain switching state (Gemini Procrustes-LERP spec)
+  // Domain switching state (Procrustes-LERP spec)
   const [domainInfo, setDomainInfo] = useState<DomainInfo>({ current: 'global', available: ['global'] });
   const [domainTransform, setDomainTransform] = useState<DomainTransform | null>(null);
   const [isDomainSwitching, setIsDomainSwitching] = useState(false);
@@ -765,7 +765,7 @@ export function useGhostwire(playbackRate: number = 4) {
   }, []);
 
   // ============================================================================
-  // Domain Switching (Gemini Procrustes-LERP spec)
+  // Domain Switching (Procrustes-LERP spec)
   // ============================================================================
 
   const switchDomain = useCallback(async (domain: string) => {
@@ -1001,7 +1001,7 @@ export function useGhostwire(playbackRate: number = 4) {
     showPromptTokens,
     togglePromptTokens,
 
-    // Domain switching (Gemini Procrustes-LERP spec)
+    // Domain switching (Procrustes-LERP spec)
     domainInfo,
     domainTransform,
     isDomainSwitching,

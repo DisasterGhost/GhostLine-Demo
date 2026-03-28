@@ -99,7 +99,7 @@ function App() {
     setTransitionConfig,
   } = useGhostwire(playbackRate);
 
-  // Research workbench (patent-protected, Claim 5)
+  // Research workbench
   const research = useResearchWorkbench();
 
   // Load a curated recording by fetching its .ghostline file
@@ -439,7 +439,7 @@ function App() {
       />
       )}
 
-      {/* Research Panel (patent-protected, Claim 5) */}
+      {/* Research Panel */}
       {!hideDemoShell && (
       <UnifiedResearchPanel
         isOpen={activePanel === 'research'}
