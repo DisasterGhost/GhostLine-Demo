@@ -390,11 +390,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
 
         {/* About */}
         <section id="about" className="landing-section">
-          <div className="landing-section__heading">
+          <div className="landing-section__heading landing-section__heading--about">
             <div>
               <p className="landing-section__label">Behind the project</p>
               <h2>Collin Civish</h2>
             </div>
+            <span className="landing-stage-badge">Research prototype</span>
           </div>
 
           <div className="landing-about-layout">
@@ -407,7 +408,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
               <p>
                 Seeking resources to take it from prototype to production.
               </p>
-              <p className="landing-stage-badge">Current stage: Research prototype — validated, demo-ready</p>
               <div className="landing-actions">
                 <button className="landing-button landing-button--primary" onClick={onLaunchDemo}>
                   Open Demo
