@@ -176,16 +176,15 @@
 .hp-select {
   flex: 1;
   padding: 5px 6px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 4px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.9);
   font-size: 11px;
-  cursor: pointer;
 }
 
 .hp-select option {
-  background: #1a1a24;
+  background: #0a0a14;
   color: #ffffff;
   padding: 8px;
 }

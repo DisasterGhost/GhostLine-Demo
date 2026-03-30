@@ -419,7 +419,7 @@ export function SignalsPanel({
               className={`signal-bar ${entropy > 4.0 ? 'over-threshold' : ''}`}
               style={{
                 width: `${Math.min(100, (entropy / 5.0) * 100)}%`,
-                backgroundColor: entropy > 3.5 ? '#ff3333' : entropy > 3.0 ? '#ff9900' : '#33ff66',
+                backgroundColor: entropy > 4.0 ? '#ff3333' : entropy > 3.0 ? '#ff9900' : '#33ff66',
               }}
             />
           </div>
