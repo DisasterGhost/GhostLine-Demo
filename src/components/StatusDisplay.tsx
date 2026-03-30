@@ -274,11 +274,29 @@ export function StatusDisplay({
         </div>
       )}
 
+      {/* Manifold Breadth - shows constraint level, backend data only */}
+      {manifoldBreadth && (isGenerating || isBuffering) && (
+        <div className={`manifold-breadth manifold-${manifoldBreadth.toLowerCase()}`}>
+          <span className="manifold-label">Manifold:</span>
+          <span className="manifold-value">{manifoldBreadth}</span>
+          {!HARDENING_MODE && (
+            <span className="manifold-dim">({(backendLoopStats!.activation_eff_dim ?? 0).toFixed(2)})</span>
+          )}
+        </div>
+      )}
+
       {/* Recovery Flash - celebrates escape from attractor basin */}
       {showRecoveryFlash && (
         <div className="recovery-flash">
           <span className="recovery-icon">✓</span>
           <span className="recovery-text">RECOVERED</span>
+        </div>
+      )}
+
+      {/* Debug stats line — backend data only, subtle */}
+      {backendLoopStats && (isGenerating || isBuffering) && (
+        <div className={`loop-stats-debug ${effectiveState !== 'healthy' ? 'warning' : ''}`}>
+          <span>Loop: dim={(backendLoopStats.activation_eff_dim ?? 0).toFixed(2)} Δ={(backendLoopStats.avg_direction_change ?? 0).toFixed(0)}° heat={effectiveHeat}</span>
         </div>
       )}
 
@@ -291,6 +309,11 @@ export function StatusDisplay({
           <span className="loop-text">
             {effectiveState === 'locked' ? 'COGNITIVE COLLAPSE' : 'GENERATION DRIFT'}
           </span>
+          {!HARDENING_MODE && (
+            <span className="loop-stats">
+              dim: {(backendLoopStats.activation_eff_dim ?? 0).toFixed(2)} | heat: {effectiveHeat}
+            </span>
+          )}
         </div>
       )}
 
@@ -300,6 +323,7 @@ export function StatusDisplay({
           <span className="pulse">●</span>
           {isGenerating ? 'Generating...' : 'Playing back...'}
         </div>
-      )}    </div>
+      )}
+    </div>
   );
 }
