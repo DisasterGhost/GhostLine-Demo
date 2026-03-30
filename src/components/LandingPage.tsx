@@ -198,11 +198,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
               <span className="landing-bl">O</span>rganizing{' '}
               <span className="landing-bl">S</span>tate{' '}
               <span className="landing-bl">T</span>ransitions:<br />
-              <span className="landing-bl">L</span>inear{' '}
-              <span className="landing-bl">I</span>nsights{' '}
-              <span className="landing-bs">(in)</span>{' '}
+              <span className="landing-bl">L</span>inearity{' '}
+              <span className="landing-bl">I</span>nformed{' '}
               <span className="landing-bl">N</span>eural{' '}
-              <span className="landing-bl">E</span>xecution
+              <span className="landing-bl">E</span>ncoding
             </h1>
             <p className="landing-title-sub">GHOSTLINE</p>
             <p className="landing-statement">
