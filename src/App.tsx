@@ -13,6 +13,7 @@ import { RecordingSelector } from './components/RecordingSelector';
 import { AnnotationOverlay } from './components/AnnotationOverlay';
 import { Tutorial } from './components/Tutorial';
 import { WelcomeLanding } from './components/WelcomeLanding';
+import { LandingPage } from './components/LandingPage';
 import { useGhostwire } from './hooks/useGhostwire';
 import { useResearchWorkbench } from './hooks/useResearchWorkbench';
 import type { CuratedRecording } from './recordings/types';
@@ -29,6 +30,7 @@ function App() {
   const [currentRecording, setCurrentRecording] = useState<CuratedRecording | null>(null);
   const [isLoadingRecording, setIsLoadingRecording] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showLanding, setShowLanding] = useState(true);
 
   const togglePanel = useCallback((panel: PanelId) => {
     setActivePanel(prev => prev === panel ? null : panel);
@@ -104,6 +106,7 @@ function App() {
     setIsLoadingRecording(true);
     setCurrentRecording(recording);
     setShowWelcome(false);
+    setShowLanding(false);
     try {
       const basePath = import.meta.env.BASE_URL || '/';
       const response = await fetch(`${basePath}recordings/${recording.filename}`);
@@ -202,8 +205,15 @@ function App() {
 
   return (
     <div className="app" style={{ fontSize: `calc(1rem * ${textSizeScale})` }}>
+      {/* Landing page overlay — pure CSS overlay, does not affect scene */}
+      {showLanding && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 9999, overflow: 'auto' }}>
+          <LandingPage onLaunchDemo={() => setShowLanding(false)} />
+        </div>
+      )}
+
       {/* Welcome landing — shown until first recording is selected */}
-      {showWelcome && !isReplaying && (
+      {!showLanding && showWelcome && !isReplaying && (
         <WelcomeLanding onSelectRecording={handleSelectRecording} />
       )}
 
