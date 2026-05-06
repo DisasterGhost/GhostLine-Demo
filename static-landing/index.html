@@ -4,314 +4,582 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GhostLine — Real-time behavioral monitoring for transformer inference</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>G</text></svg>">
-  <link rel="stylesheet" href="landing.css">
+  <meta name="description" content="Geometric Hierarchies Organizing State Transitions: Linearity Informed Neural Encoding. Real-time per-token behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 4 architecture families validated.">
+  <meta name="author" content="Collin Civish">
+  <meta name="theme-color" content="#06080c">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.ghostline-research.org/">
+  <meta property="og:title" content="GhostLine — Real-time behavioral monitoring for transformer inference">
+  <meta property="og:description" content="Per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference. 4 architecture families validated, 4 US provisionals filed.">
+  <meta property="og:site_name" content="GhostLine Research">
+  <meta property="og:image" content="https://www.ghostline-research.org/media/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GhostLine — Real-time behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 4 architectures validated.">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@DisasterGh0st">
+  <meta name="twitter:title" content="GhostLine — Real-time behavioral monitoring for transformer inference">
+  <meta name="twitter:description" content="Per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference.">
+  <meta name="twitter:image" content="https://www.ghostline-research.org/media/og-card.png">
+  <meta name="twitter:image:alt" content="GhostLine — Real-time behavioral monitoring for transformer inference. 94.8% accuracy, F1 0.94, 4 architectures validated.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%236b8cff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%236b8cff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="landing.css?v=11">
 </head>
 <body>
-  <div class="landing-page">
-    <!-- Sticky nav -->
-    <nav class="landing-sticky-nav" id="stickyNav">
-      <div class="landing-sticky-nav__inner">
-        <span class="landing-sticky-nav__brand">GHOSTLINE</span>
-        <div class="landing-sticky-nav__links">
-          <a href="#overview" class="landing-sticky-nav__link is-active" data-section="overview">Overview</a>
-          <a href="#instrument" class="landing-sticky-nav__link" data-section="instrument">Instrument</a>
-          <a href="#evidence" class="landing-sticky-nav__link" data-section="evidence">Evidence</a>
-          <a href="#applications" class="landing-sticky-nav__link" data-section="applications">Applications</a>
-          <a href="#architecture" class="landing-sticky-nav__link" data-section="architecture">Architecture</a>
-          <a href="#about" class="landing-sticky-nav__link" data-section="about">About</a>
-        </div>
-        <a class="landing-button landing-button--primary landing-button--sm" href="demo/">Open Demo</a>
+
+  <!-- ═══════════════════ STICKY NAV ═══════════════════ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="#top" class="nav__brand">
+        <span class="nav__brand-dot"></span>
+        GHOSTLINE
+      </a>
+      <div class="nav__spacer"></div>
+      <div class="nav__links">
+        <a href="#paths">Paths</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#engagement">Engagement</a>
+        <a href="#about">About</a>
       </div>
-    </nav>
+      <a href="demo/" class="nav__cta">Open Demo</a>
+    </div>
+  </nav>
 
-    <div class="landing-shell">
-      <!-- Masthead -->
-      <header class="landing-masthead">
-        <div class="landing-masthead__brand">
-          <span>GhostLine Research</span>
-          <span>Independent AI instrumentation</span>
+  <main id="top">
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="hero">
+      <div class="hero__head">
+        <h1 class="hero__backronym">
+          <b>G</b>eometric
+          <b>H</b>ierarchies
+          <b>O</b>rganizing
+          <b>S</b>tate
+          <b>T</b>ransitions:<br>
+          <b>L</b>inearity
+          <b>I</b>nformed
+          <b>N</b>eural
+          <b>E</b>ncoding
+        </h1>
+        <p class="hero__brand">GHOSTLINE</p>
+        <p class="hero__statement">Real-time behavioral monitoring for transformer inference.</p>
+        <div class="hero__actions">
+          <a href="demo/" class="hero__btn hero__btn--primary">Open Demo</a>
+          <a href="mailto:collin@ghostline-research.org" class="hero__btn">Contact</a>
         </div>
-        <div class="landing-masthead__links">
-          <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
-          <a href="https://github.com/DisasterGhost/GhostLine-Demo" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://x.com/DisasterGh0st" target="_blank" rel="noopener noreferrer">X</a>
+      </div>
+
+      <div class="hero__stage">
+        <div class="hero__proof-cell hero__proof-cell--tl">
+          <span class="proof__value">94.8%</span>
+          <span class="proof__label">state classification accuracy</span>
         </div>
-      </header>
+        <div class="hero__proof-cell hero__proof-cell--tr">
+          <span class="proof__value">F1 0.94</span>
+          <span class="proof__label">fabrication detection</span>
+        </div>
 
-      <!-- Hero -->
-      <section id="overview" class="landing-hero">
-        <div class="landing-hero__copy">
-          <h1 class="landing-backronym">
-            <span class="landing-bl">G</span>eometric
-            <span class="landing-bl">H</span>ierarchies
-            <span class="landing-bl">O</span>rganizing
-            <span class="landing-bl">S</span>tate
-            <span class="landing-bl">T</span>ransitions:<br>
-            <span class="landing-bl">L</span>inearity
-            <span class="landing-bl">I</span>nformed
-            <span class="landing-bl">N</span>eural
-            <span class="landing-bl">E</span>ncoding
-          </h1>
-          <p class="landing-title-sub">GHOSTLINE</p>
-          <p class="landing-statement">Real-time behavioral monitoring for transformer inference.</p>
-
-          <div class="landing-hero__row">
-            <div class="landing-actions">
-              <a class="landing-button landing-button--primary" href="demo/">Open Demo</a>
-              <a class="landing-button" href="mailto:collin@ghostline-research.org">Contact</a>
-            </div>
-            <div class="landing-proof-strip">
-              <div class="landing-proof-strip__item">
-                <span class="landing-proof-strip__value">94.8%</span>
-                <span class="landing-proof-strip__label">state classification accuracy</span>
-              </div>
-              <div class="landing-proof-strip__item">
-                <span class="landing-proof-strip__value">F1 0.94</span>
-                <span class="landing-proof-strip__label">fabrication detection</span>
-              </div>
-              <div class="landing-proof-strip__item">
-                <span class="landing-proof-strip__value">4</span>
-                <span class="landing-proof-strip__label">architecture families validated</span>
-              </div>
-              <div class="landing-proof-strip__item">
-                <span class="landing-proof-strip__value">Patent Pending</span>
-                <span class="landing-proof-strip__label">3 US provisionals filed</span>
-              </div>
-            </div>
+        <div class="hero__render" id="heroRender">
+          <div class="hero__render-shell"></div>
+          <svg viewBox="-220 -220 440 440" id="heroSvg"></svg>
+          <div class="hero__render-readout">
+            <div>ILLUSTRATIVE</div>
+            <div>token trajectory in <b>3D projected activation space</b></div>
           </div>
         </div>
-        <figure class="landing-hero-card" onclick="openLightbox('media/ghostline-full-surface.png')">
-          <img src="media/ghostline-full-surface.png" alt="GhostLine full instrument surface">
+
+        <div class="hero__proof-cell hero__proof-cell--bl">
+          <span class="proof__value">4</span>
+          <span class="proof__label">architecture families validated</span>
+        </div>
+        <div class="hero__proof-cell hero__proof-cell--br">
+          <span class="proof__value">Patent Pending</span>
+          <span class="proof__label">4 US provisionals filed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ CHOOSER ═══════════════════ -->
+    <section class="chooser" id="paths">
+      <p class="chooser__label">Choose your path</p>
+      <h2 class="chooser__heading">Two ways to read this work.</h2>
+
+      <div class="chooser__diagram">
+        <button class="path-card path-card--research" data-path="research">
+          <div class="path-card__tag">Research</div>
+          <h3 class="path-card__title">Geometric mechanism, validated.</h3>
+          <p class="path-card__desc">
+            What it measures, how the geometry is computed, what holds up under stress, and what's still maturing. Hypothesis tests, signal taxonomy, and architecture coverage.
+          </p>
+          <ul class="path-card__topics">
+            <li>5 cognitive states · 58 signals</li>
+            <li>4 architecture families validated</li>
+            <li>Causal intervention at 3B</li>
+            <li>Sharp vs maturing — boundaries</li>
+          </ul>
+          <span class="path-card__cta">Enter research path</span>
+        </button>
+
+        <div class="chooser__split" aria-hidden="true">
+          <svg viewBox="0 0 80 280" preserveAspectRatio="none">
+            <path d="M 0 140 Q 40 140 40 80 L 40 0" fill="none" stroke="rgba(107,140,255,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
+            <path d="M 80 140 Q 40 140 40 200 L 40 280" fill="none" stroke="rgba(45,212,191,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="40" cy="140" r="4" fill="#06080c" stroke="rgba(180,200,235,0.4)" stroke-width="1"/>
+            <text x="40" y="156" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5a6478" letter-spacing="0.1em">SPLIT</text>
+          </svg>
+        </div>
+
+        <button class="path-card path-card--industry" data-path="industry">
+          <div class="path-card__tag">Industry</div>
+          <h3 class="path-card__title">Where it deploys, and why now.</h3>
+          <p class="path-card__desc">
+            Compliance, inference economics, defense, and model development. What the geometric layer enables that text-based monitoring cannot — with concrete latency and integration points.
+          </p>
+          <ul class="path-card__topics">
+            <li>EU AI Act Articles 9 &amp; 12</li>
+            <li>Pre-generation hallucination gate</li>
+            <li>Activation-level prompt screening</li>
+            <li>Training checkpoint profiling</li>
+          </ul>
+          <span class="path-card__cta">Enter industry path</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ STICKY PATH TABS ═══════════════════ -->
+    <div class="path-tabs" id="pathTabs">
+      <div class="path-tabs__inner">
+        <button class="path-tab" data-path="research"><span class="path-tab__dot"></span>Research</button>
+        <button class="path-tab" data-path="industry"><span class="path-tab__dot"></span>Industry</button>
+        <div class="path-tabs__spacer"></div>
+        <span class="path-tabs__hint">↑ change perspective</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════ RESEARCH PATH ═══════════════════ -->
+    <div class="path-section" id="path-research" data-path="research">
+
+      <section class="section">
+        <div class="section__label">Mechanism</div>
+        <h2 class="section__title">The instrument reads what the model is doing while it's still doing it.</h2>
+        <p class="section__intro">
+          Each forward pass through a transformer leaves a trajectory through high-dimensional activation space. GhostLine projects that trajectory, classifies the geometric signature of every token, and surfaces 58 derived signals — entropy, velocity, effective dimensionality, attention entropy, hallucination risk — at the moment of generation.
+        </p>
+
+        <div class="mech-grid">
+          <article class="mech-card">
+            <div class="mech-card__num">01 · CAPTURE</div>
+            <h3 class="mech-card__title">Hooks at every layer.</h3>
+            <p class="mech-card__body">Forward-pass hooks capture residual stream, attention, and MLP activations per token. No gradient tape, no extra forward — instrument runs alongside inference.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">02 · CLASSIFY</div>
+            <h3 class="mech-card__title">Geometric state, not text.</h3>
+            <p class="mech-card__body">A trained classifier reads the activation geometry and labels each token with one of five cognitive states. Detection is content-independent.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">03 · DERIVE</div>
+            <h3 class="mech-card__title">58 signals, per token.</h3>
+            <p class="mech-card__body">Entropy, velocity, effective dimensionality, logit-lens distance, attention concentration, and 53 more. Streamed as time-series and queryable post-hoc.</p>
+          </article>
+        </div>
+
+        <figure class="gallery" data-gallery="instrument">
+          <div class="gallery__tabs" role="tablist" aria-label="Instrument surfaces">
+            <button class="gallery__tab is-active" data-idx="0" role="tab" aria-selected="true">Spectrograph</button>
+            <button class="gallery__tab" data-idx="1" role="tab" aria-selected="false">Token Health</button>
+          </div>
+          <div class="gallery__frame" data-frame>
+            <img class="gallery__img" data-img alt="GhostLine spectrograph" src="media/ghostline-spectrograph.png">
+          </div>
+          <figcaption class="gallery__caption">
+            <span data-caption>Entropy, velocity, confidence, and attention signals as time-series across the full generation.</span>
+            <span class="gallery__caption-hint">Click to expand</span>
+          </figcaption>
         </figure>
-      </section>
 
-      <!-- Instrument -->
-      <section id="instrument" class="landing-section">
-        <div class="landing-section__heading"><div>
-          <p class="landing-section__label">The instrument</p>
-          <h2>See what the model is doing while it's still doing it</h2>
-        </div></div>
-        <div class="landing-example-card">
-          <div class="landing-example-card__tabs" id="systemTabs">
-            <button class="landing-example-tab is-active" data-idx="0">Spectrograph</button>
-            <button class="landing-example-tab" data-idx="1">Signals</button>
-            <button class="landing-example-tab" data-idx="2">Token Health</button>
+        <div class="states-legend">
+          <div class="state-cell" style="--c: var(--c-reasoning);">
+            <div class="state-cell__name">Reasoning</div>
+            <div class="state-cell__desc">Planning, structuring, multi-step deliberation.</div>
           </div>
-          <div class="landing-example-card__frame">
-            <figure class="landing-figure-card landing-figure-card--gallery landing-figure-card--clickable" id="systemFigure">
-              <img id="systemImg" src="media/ghostline-spectrograph.png" alt="GhostLine spectrograph">
-              <figcaption id="systemCaption">Entropy, velocity, confidence, and attention signals as time-series across the full generation. <span class="landing-expand-hint">Click to expand</span></figcaption>
-            </figure>
+          <div class="state-cell" style="--c: var(--c-retrieval);">
+            <div class="state-cell__name">Retrieval</div>
+            <div class="state-cell__desc">Pulling stored facts from training data.</div>
+          </div>
+          <div class="state-cell" style="--c: var(--c-creativity);">
+            <div class="state-cell__name">Creativity</div>
+            <div class="state-cell__desc">Synthesis, narrative construction, evocation.</div>
+          </div>
+          <div class="state-cell" style="--c: var(--c-precision);">
+            <div class="state-cell__name">Precision</div>
+            <div class="state-cell__desc">Low-entropy commitment to exact values.</div>
+          </div>
+          <div class="state-cell" style="--c: var(--c-uncertainty);">
+            <div class="state-cell__name">Uncertainty</div>
+            <div class="state-cell__desc">Genuine deliberation, weighing alternatives.</div>
           </div>
         </div>
       </section>
 
-      <!-- Evidence -->
-      <section id="evidence" class="landing-section">
-        <div class="landing-section__heading"><div>
-          <p class="landing-section__label">What holds up</p>
-          <h2>Validated results, honest boundaries</h2>
-        </div></div>
-        <div class="landing-example-card">
-          <div class="landing-example-card__tabs" id="validationTabs">
-            <button class="landing-example-tab is-active" data-idx="0">Hypothesis testing</button>
-            <button class="landing-example-tab" data-idx="1">Run comparison</button>
-            <button class="landing-example-tab" data-idx="2">Parameter sweep</button>
+      <section class="section">
+        <div class="section__label">Evidence</div>
+        <h2 class="section__title">What we can defend, and what we can't.</h2>
+        <p class="section__intro">
+          Validated across 4 architecture families and 6 distinct models spanning 2.8B to 8B parameters. Numbers below are from held-out stress tests, not training data. The right column is honest about boundaries.
+        </p>
+
+        <div class="evidence-grid">
+          <div class="evidence-cell evidence-cell--accent">
+            <p class="evidence-cell__plain">Tell what the model is doing — reasoning, retrieving, fabricating — regardless of what it's saying.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">94.8<i>%</i></span>
+              <span class="evidence-cell__label">state classification accuracy · five-class · held-out</span>
+            </div>
           </div>
-          <div class="landing-example-card__frame">
-            <figure class="landing-figure-card landing-figure-card--gallery landing-figure-card--clickable" id="validationFigure">
-              <img id="validationImg" src="media/ghostline-hypothesis-test.png" alt="GhostLine hypothesis panel">
-              <figcaption id="validationCaption">Define signal rules, test against trajectory data, see accuracy and confusion matrix. <span class="landing-expand-hint">Click to expand</span></figcaption>
-            </figure>
+          <div class="evidence-cell">
+            <p class="evidence-cell__plain">Catch hallucinations from the geometry alone — no fact-checking knowledge base required.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">0.94<i>F1</i></span>
+              <span class="evidence-cell__label">fabrication detection · held-out stress corpus</span>
+            </div>
+          </div>
+          <div class="evidence-cell">
+            <p class="evidence-cell__plain">Works across model families — not tied to any single vendor's architecture.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">4<i>arch families</i></span>
+              <span class="evidence-cell__label">Qwen · Llama · Mistral · Phi</span>
+            </div>
+          </div>
+          <div class="evidence-cell evidence-cell--accent">
+            <p class="evidence-cell__plain">Geometric edits steer behavior — geometry is causal, not just correlated with what the model does next.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">3B<i>causal</i></span>
+              <span class="evidence-cell__label">demonstrated intervention at 3B parameter scale</span>
+            </div>
           </div>
         </div>
-        <div class="landing-evidence-honest">
-          <div class="landing-evidence-col landing-evidence-col--sharp">
-            <h3>Sharp</h3>
-            <ul>
+
+        <figure class="gallery" data-gallery="evidence">
+          <div class="gallery__tabs" role="tablist" aria-label="Evidence surfaces">
+            <button class="gallery__tab is-active" data-idx="0" role="tab" aria-selected="true">Hypothesis testing</button>
+            <button class="gallery__tab" data-idx="1" role="tab" aria-selected="false">Run comparison</button>
+            <button class="gallery__tab" data-idx="2" role="tab" aria-selected="false">Parameter sweep</button>
+          </div>
+          <div class="gallery__frame" data-frame>
+            <img class="gallery__img" data-img alt="GhostLine hypothesis panel" src="media/ghostline-hypothesis-test.png">
+          </div>
+          <figcaption class="gallery__caption">
+            <span data-caption>Define signal rules, test against trajectory data, see accuracy and confusion matrix.</span>
+            <span class="gallery__caption-hint">Click to expand</span>
+          </figcaption>
+        </figure>
+
+        <div class="honest-split">
+          <div class="honest-col honest-col--sharp">
+            <div class="honest-col__head">▰ Sharp</div>
+            <ul class="honest-col__list">
               <li>State separation across 4 architecture families</li>
               <li>Fabrication detection (F1 0.94, held-out stress test)</li>
-              <li>Replayable signal inspection (58 signals, per-token)</li>
-              <li>Causal geometric intervention at 3B</li>
+              <li>Replayable signal inspection — 58 signals, per-token</li>
+              <li>Causal geometric intervention demonstrated at 3B</li>
             </ul>
           </div>
-          <div class="landing-evidence-col landing-evidence-col--maturing">
-            <h3>Maturing</h3>
-            <ul>
-              <li>70B+ scale validation</li>
-              <li>Full parameter space coverage (temp, top-p)</li>
-              <li>Adversarial and multi-turn corpus</li>
+          <div class="honest-col honest-col--maturing">
+            <div class="honest-col__head">▱ Maturing</div>
+            <ul class="honest-col__list">
+              <li>70B+ scale validation — in progress</li>
+              <li>Full parameter sweep coverage (temperature, top-p)</li>
+              <li>Adversarial corpus and multi-turn conversation</li>
+              <li>Cross-model classifier transfer without recalibration</li>
             </ul>
           </div>
         </div>
       </section>
 
-      <!-- Applications -->
-      <section id="applications" class="landing-section">
-        <div class="landing-section__heading"><div>
-          <p class="landing-section__label">Applications</p>
-          <h2>Where this goes</h2>
-        </div></div>
-        <div class="landing-applications-grid">
-          <article class="landing-application-card">
-            <h3>Compliance &amp; Audit</h3>
-            <p>EU AI Act Articles 9 and 12 require behavioral monitoring and logging for high-risk AI systems. GhostLine provides per-token behavioral state classification and audit trails — continuous monitoring that regulators can inspect directly.</p>
-          </article>
-          <article class="landing-application-card">
-            <h3>Inference Optimization</h3>
-            <p>Pre-generation prediction identifies prompts likely to hallucinate before any tokens are generated. Route, re-prompt, or gate chain-of-thought in ~15ms — before wasting compute on bad output.</p>
-          </article>
-          <article class="landing-application-card">
-            <h3>Defense &amp; Security</h3>
-            <p>Geometric behavioral monitoring is independent of output content. An adversary can craft text that passes content filters but cannot easily control the geometry of the model's computation. Prompt injection screening at the activation level.</p>
-          </article>
-          <article class="landing-application-card">
-            <h3>Model Development</h3>
-            <p>Geometric profiling of training checkpoints reveals whether fine-tuning actually improves behavioral separation. Prompt corpus certification establishes geometrically bounded quality rules per model.</p>
-          </article>
-        </div>
-      </section>
+      <section class="section">
+        <div class="section__label">See it</div>
+        <h2 class="section__title">Read a recording.</h2>
+        <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, the state transitions, and the signal stream — all replayable, all explorable per-token.</p>
 
-      <!-- Architecture -->
-      <section id="architecture" class="landing-section">
-        <div class="landing-section__heading"><div>
-          <p class="landing-section__label">Under the hood</p>
-          <h2>How it's wired together</h2>
-        </div></div>
-        <div class="landing-architecture-layout">
-          <div class="landing-architecture-embed">
-            <iframe src="lineage/live_app_briefing/what_the_app_is.html" title="GhostLine architecture overview" class="landing-lineage-frame"></iframe>
-          </div>
-          <div class="landing-architecture-copy">
-            <div class="landing-validation-card">
-              <p class="landing-card__label">Interactive architecture</p>
-              <p>Drag, zoom, and hover to explore how the instrument is structured.</p>
-            </div>
-            <div class="landing-architecture-links">
-              <a class="landing-button" href="lineage/live_app_briefing/index.html" target="_blank">Briefing pack</a>
-              <a class="landing-button" href="lineage/live_app/index.html" target="_blank">Technical atlas</a>
-              <a class="landing-button" href="lineage/index.html" target="_blank">Full lineage hub</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section id="about" class="landing-section">
-        <div class="landing-section__heading landing-section__heading--about">
+        <div class="demo-cta demo-cta--research">
           <div>
-            <p class="landing-section__label">Behind the project</p>
-            <h2>Collin Civish</h2>
+            <div class="demo-cta__label">Recording library</div>
+            <h3 class="demo-cta__title">Every cognitive mode, plus a fabrication caught live.</h3>
+            <p class="demo-cta__body">Math reasoning, knowledge retrieval, moral deliberation, code generation, and a hallucination caught in the act. Each recording carries 7–10 inline annotations.</p>
           </div>
-          <span class="landing-stage-badge">Research prototype</span>
-        </div>
-        <div class="landing-about-layout">
-          <div class="landing-about-statement">
-            <p>Solo inventor. No formal ML background. Built a real-time geometric monitoring system for transformer inference, validated it across 4 architecture families at 2 parameter scales, and filed 3 US provisional patents — in 48 days.</p>
-            <p>Seeking resources to take it from prototype to production.</p>
-            <div class="landing-actions">
-              <a class="landing-button landing-button--primary" href="demo/">Open Demo</a>
-              <a class="landing-button" href="mailto:collin@ghostline-research.org">Contact</a>
-            </div>
-          </div>
-          <div class="landing-ip-card">
-            <p class="landing-card__label">Intellectual property</p>
-            <table class="landing-ip-table">
-              <tbody>
-                <tr><td>P1 — Instrument</td><td>US 63/948,867</td><td>Dec 2025</td></tr>
-                <tr><td>P2 — Intelligence</td><td>US 63/975,787</td><td>Feb 2026</td></tr>
-                <tr><td>P3 — Interface</td><td>US 63/982,900</td><td>Feb 2026</td></tr>
-              </tbody>
-            </table>
-            <p class="landing-ip-detail">P3: 27 claims, 22 figures, 90-page spec.</p>
-            <p class="landing-card__label" style="margin-top: 20px">At a glance</p>
-            <div class="landing-stats-grid">
-              <div><span class="landing-stat-value">6</span><span class="landing-stat-label">models</span></div>
-              <div><span class="landing-stat-value">4</span><span class="landing-stat-label">architectures</span></div>
-              <div><span class="landing-stat-value">2</span><span class="landing-stat-label">scales</span></div>
-              <div><span class="landing-stat-value">48</span><span class="landing-stat-label">days to 3 filings</span></div>
-            </div>
+          <div class="demo-cta__action">
+            <a href="demo/" class="demo-cta__btn">Browse the library</a>
           </div>
         </div>
       </section>
     </div>
 
-    <!-- Lightbox -->
-    <div class="landing-lightbox" id="lightbox" onclick="closeLightbox()" style="display:none">
-      <img id="lightboxImg" src="" alt="Expanded view">
-      <span class="landing-lightbox__close">ESC or click to close</span>
+    <!-- ═══════════════════ INDUSTRY PATH ═══════════════════ -->
+    <div class="path-section" id="path-industry" data-path="industry">
+
+      <section class="section">
+        <div class="section__label">Why now</div>
+        <h2 class="section__title">Text-based monitoring can't see this. The geometric layer can.</h2>
+        <p class="section__intro">
+          Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That distinction is now the difference between catching prompt injection, satisfying EU AI Act behavioral monitoring requirements, and gating expensive chain-of-thought before it runs.
+        </p>
+
+        <div class="app-grid">
+          <article class="app-card">
+            <div class="app-card__head">
+              <h3 class="app-card__title">Compliance &amp; Audit</h3>
+              <span class="app-card__id">A-01</span>
+            </div>
+            <p class="app-card__body">Per-token behavioral state classification with replayable trajectory logs. Continuous monitoring artifacts that regulators can inspect directly — not post-hoc reports synthesized from output text.</p>
+            <div class="app-card__regs">
+              <span>EU AI Act · Art 9</span>
+              <span>EU AI Act · Art 12</span>
+              <span>NIST AI RMF</span>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-card__head">
+              <h3 class="app-card__title">Inference Optimization</h3>
+              <span class="app-card__id">A-02</span>
+            </div>
+            <p class="app-card__body">Pre-generation prediction identifies prompts likely to fabricate before any tokens are produced. Route, re-prompt, or gate chain-of-thought in ~15 ms — before wasting compute on bad output.</p>
+            <div class="app-card__regs">
+              <span>~15 ms gate latency</span>
+              <span>Routing layer drop-in</span>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-card__head">
+              <h3 class="app-card__title">Defense &amp; Security</h3>
+              <span class="app-card__id">A-03</span>
+            </div>
+            <p class="app-card__body">Geometric monitoring is independent of output content. An adversary can craft text that passes content filters but cannot easily control the geometry of the model's computation. Prompt injection screening at the activation level.</p>
+            <div class="app-card__regs">
+              <span>Activation-level</span>
+              <span>Content-independent</span>
+            </div>
+          </article>
+
+          <article class="app-card">
+            <div class="app-card__head">
+              <h3 class="app-card__title">Model Development</h3>
+              <span class="app-card__id">A-04</span>
+            </div>
+            <p class="app-card__body">Geometric profiling of training checkpoints reveals whether fine-tuning actually improves behavioral separation. Prompt corpus certification establishes geometrically bounded quality rules per model.</p>
+            <div class="app-card__regs">
+              <span>Checkpoint diff</span>
+              <span>Corpus certification</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">Integration</div>
+        <h2 class="section__title">Latency budgets, by surface.</h2>
+        <p class="section__intro">
+          The instrument runs alongside inference. These are the operating points we measure today on the prototype stack.
+        </p>
+
+        <div class="latency-strip">
+          <div class="latency-cell">
+            <div class="latency-cell__value">~15 ms</div>
+            <div class="latency-cell__label">Pre-gen gate</div>
+            <div class="latency-cell__desc">Decide to generate, route, or block — before any output token.</div>
+          </div>
+          <div class="latency-cell">
+            <div class="latency-cell__value">&lt;2 ms</div>
+            <div class="latency-cell__label">Per-token classify</div>
+            <div class="latency-cell__desc">State + risk score for every token, streamed during generation.</div>
+          </div>
+          <div class="latency-cell">
+            <div class="latency-cell__value">0</div>
+            <div class="latency-cell__label">Added forward passes</div>
+            <div class="latency-cell__desc">Hooks attach to the existing forward pass — the model is not re-evaluated.</div>
+          </div>
+          <div class="latency-cell">
+            <div class="latency-cell__value">58</div>
+            <div class="latency-cell__label">Logged signals</div>
+            <div class="latency-cell__desc">Replayable per-token signal stream for compliance audit trails.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__label">See it</div>
+        <h2 class="section__title">Catch fabrications in the geometry.</h2>
+        <p class="section__intro">"Battle of Darien, 1645" — a prompt designed to trigger invented history. The text reads fluently; the geometry tells a different story from the third token.</p>
+
+        <figure class="industry-figure">
+          <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible from token three">
+          <figcaption>
+            <span class="industry-figure__title">Per-token risk readout</span>
+            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature lights up by token three — long before a human reader could spot it in the prose.</span>
+          </figcaption>
+        </figure>
+
+        <div class="demo-cta demo-cta--industry">
+          <div>
+            <div class="demo-cta__label">Side-by-side recording</div>
+            <h3 class="demo-cta__title">See the fabrication signature, then compare to healthy retrieval.</h3>
+            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk hits 0.60 by token three — well above the score of a healthy retrieval generation in the comparison recording.</p>
+          </div>
+          <div class="demo-cta__action">
+            <a href="demo/" class="demo-cta__btn">Open the comparison</a>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <!-- ═══════════════════ ARCHITECTURE (cross-path) ═══════════════════ -->
+    <section class="architecture" id="architecture">
+      <div class="architecture__head">
+        <div class="section__label">Deeper</div>
+        <h2 class="section__title">How it's wired.</h2>
+        <p class="section__intro">
+          The instrument is real software. Drag the diagram to explore the capture pipeline, classifier graph, and live runtime bridge — or open the full lineage hub for component-level walkthroughs.
+        </p>
+      </div>
+
+      <div class="architecture__frame">
+        <div class="architecture__frame-placeholder" aria-hidden="true">
+          <span class="architecture__frame-spinner"></span>
+          <span>Loading architecture diagram…</span>
+        </div>
+        <iframe
+          src="lineage/live_app_briefing/what_the_app_is.html"
+          title="GhostLine architecture diagram — interactive"
+          onload="this.previousElementSibling && this.previousElementSibling.remove()"
+        ></iframe>
+      </div>
+
+      <div class="architecture__links">
+        <a class="architecture__link" href="lineage/live_app_briefing/index.html">
+          <span class="architecture__link-num">01</span>
+          <span class="architecture__link-title">Briefing pack</span>
+          <span class="architecture__link-desc">Plain-language tour of the instrument's purpose and surfaces.</span>
+        </a>
+        <a class="architecture__link" href="lineage/live_app/index.html">
+          <span class="architecture__link-num">02</span>
+          <span class="architecture__link-title">Technical atlas</span>
+          <span class="architecture__link-desc">Component-by-component walkthrough of the live runtime.</span>
+        </a>
+        <a class="architecture__link" href="lineage/index.html">
+          <span class="architecture__link-num">03</span>
+          <span class="architecture__link-title">Full lineage hub</span>
+          <span class="architecture__link-desc">All architecture mini-sites, indexed.</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ENGAGEMENT (cross-path) ═══════════════════ -->
+    <section class="section section--engagement" id="engagement">
+      <div class="section__label">Engagement</div>
+      <h2 class="section__title">How a pilot starts.</h2>
+      <p class="section__intro">
+        Two structured ways to put GhostLine on a real model. Both fit alongside an existing inference stack with a single contact engineer on your side.
+      </p>
+
+      <div class="app-grid app-grid--engagement">
+        <article class="app-card">
+          <div class="app-card__head">
+            <h3 class="app-card__title">Pilot integration</h3>
+            <span class="app-card__id">P-01</span>
+          </div>
+          <p class="app-card__body">A 30-day instrumentation of one AI surface. We attach GhostLine to your model's forward pass and stream per-token state plus risk scores into a dashboard your team can inspect. You provide a model endpoint and a contact engineer; we provide the instrumentation, the classifiers, and the live readout.</p>
+          <div class="app-card__regs">
+            <span>~30 days</span>
+            <span>Self-hosted model deployment (Llama, Mistral, Qwen, or similar)</span>
+          </div>
+        </article>
+
+        <article class="app-card">
+          <div class="app-card__head">
+            <h3 class="app-card__title">Custom classifier training</h3>
+            <span class="app-card__id">P-02</span>
+          </div>
+          <p class="app-card__body">A domain-specific state classifier trained on your corpus. You provide ~1,000 labeled generations from your model on your tasks; we deliver a classifier with held-out F1 reported and a replayable validation harness. Label schema defined together in week one.</p>
+          <div class="app-card__regs">
+            <span>~3–4 weeks</span>
+            <span>Corpus + label schema required</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══════════════════ ABOUT ═══════════════════ -->
+    <section class="about" id="about">
+      <div>
+        <span class="stage-badge">▰ Research prototype</span>
+        <p class="about__statement">
+          Independent researcher. Built a real-time geometric monitoring system for transformer inference, validated it across four architecture families and six distinct models spanning 2.8B to 8B parameters, and filed four US provisional patents — working solo end-to-end on the instrument, the corpus, the classifiers, the live frontend, and the IP filings.
+        </p>
+        <p class="about__text">Looking for pilot partners on either side of this page: research collaborators on the geometric mechanism, or operators with an AI surface and a real risk of fabrication.</p>
+
+        <div class="about__stats">
+          <div class="about__stat">
+            <span class="about__stat-value">8</span>
+            <span class="about__stat-label">models tested</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-value">4</span>
+            <span class="about__stat-label">architecture families</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-value">48</span>
+            <span class="about__stat-label">days, idea to working demo</span>
+          </div>
+          <div class="about__stat">
+            <span class="about__stat-value">4</span>
+            <span class="about__stat-label">provisional filings</span>
+          </div>
+        </div>
+
+        <div class="about__contact">
+          <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+          <a href="https://github.com/DisasterGhost/GhostLine-Demo" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://x.com/DisasterGh0st" target="_blank" rel="noopener">X / @DisasterGh0st</a>
+        </div>
+
+        <div class="about__credit">
+          <span class="about__credit-name">Kacie Bingham</span>
+          <span class="about__credit-role">Strategic advisor — commercialization &amp; business readiness</span>
+        </div>
+      </div>
+
+      <aside class="ip-card">
+        <div class="ip-card__head">Intellectual property</div>
+        <div class="ip-row"><span class="ip-row__name">P1 — Instrument</span><span class="ip-row__id">US 63/948,867 · Dec '25</span></div>
+        <div class="ip-row"><span class="ip-row__name">P2 — Intelligence</span><span class="ip-row__id">US 63/975,787 · Feb '26</span></div>
+        <div class="ip-row"><span class="ip-row__name">P3 — Interface</span><span class="ip-row__id">US 63/982,900 · Feb '26</span></div>
+        <div class="ip-row"><span class="ip-row__name">P4 — Introspection</span><span class="ip-row__id">US 64/039,169 · Apr '26</span></div>
+        <p class="ip-card__detail">P3: 27 claims, 22 figures, 90-page specification. P4: geometric self-awareness via attention-integrated metacognitive state monitoring.</p>
+      </aside>
+    </section>
+
+    <footer>
+      <span>GHOSTLINE RESEARCH · 2026</span>
+      <span>Independent AI instrumentation</span>
+    </footer>
+
+  </main>
+
+  <!-- ═══════════════════ LIGHTBOX ═══════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+    <img class="lightbox__img" id="lightboxImg" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <span class="lightbox__close">ESC or click to close</span>
   </div>
 
-  <script>
-    // Gallery data
-    const systemExamples = [
-      { image: 'media/ghostline-spectrograph.png', alt: 'GhostLine spectrograph', caption: 'Entropy, velocity, confidence, and attention signals as time-series across the full generation.' },
-      { image: 'media/ghostline-signal-explorer.png', alt: 'GhostLine signal explorer', caption: '58 signals across attention, residual stream, MLP, logit lens, and temporal dynamics.' },
-      { image: 'media/ghostline-token-health.png', alt: 'GhostLine token health', caption: 'Per-token state classification, hallucination risk, and crystallization status.' },
-    ];
-    const validationExamples = [
-      { image: 'media/ghostline-hypothesis-test.png', alt: 'GhostLine hypothesis panel', caption: 'Define signal rules, test against trajectory data, see accuracy and confusion matrix.' },
-      { image: 'media/ghostline-run-comparison.png', alt: 'GhostLine comparison tool', caption: 'Compare recordings side-by-side with per-metric delta percentages.' },
-      { image: 'media/ghostline-sweep-config.png', alt: 'GhostLine sweep config', caption: 'Sweep generation parameters and track signal behavior at each step.' },
-    ];
-
-    let systemIdx = 0, validationIdx = 0;
-
-    function updateGallery(id, examples, idx) {
-      const img = document.getElementById(id + 'Img');
-      const caption = document.getElementById(id + 'Caption');
-      const figure = document.getElementById(id + 'Figure');
-      const tabs = document.getElementById(id + 'Tabs');
-      img.src = examples[idx].image;
-      img.alt = examples[idx].alt;
-      caption.innerHTML = examples[idx].caption + ' <span class="landing-expand-hint">Click to expand</span>';
-      figure.onclick = function() { openLightbox(examples[idx].image); };
-      tabs.querySelectorAll('.landing-example-tab').forEach((t, i) => {
-        t.classList.toggle('is-active', i === idx);
-      });
-    }
-
-    // Tab clicks
-    document.getElementById('systemTabs').addEventListener('click', function(e) {
-      const btn = e.target.closest('[data-idx]');
-      if (btn) { systemIdx = parseInt(btn.dataset.idx); updateGallery('system', systemExamples, systemIdx); }
-    });
-    document.getElementById('validationTabs').addEventListener('click', function(e) {
-      const btn = e.target.closest('[data-idx]');
-      if (btn) { validationIdx = parseInt(btn.dataset.idx); updateGallery('validation', validationExamples, validationIdx); }
-    });
-
-    // Auto-rotate
-    setInterval(function() { systemIdx = (systemIdx + 1) % systemExamples.length; updateGallery('system', systemExamples, systemIdx); }, 7000);
-    setInterval(function() { validationIdx = (validationIdx + 1) % validationExamples.length; updateGallery('validation', validationExamples, validationIdx); }, 8200);
-
-    // Lightbox
-    function openLightbox(src) { document.getElementById('lightbox').style.display = 'flex'; document.getElementById('lightboxImg').src = src; }
-    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
-
-    // Sticky nav
-    const hero = document.getElementById('overview');
-    const nav = document.getElementById('stickyNav');
-    const observer = new IntersectionObserver(function(entries) {
-      nav.classList.toggle('is-visible', !entries[0].isIntersecting);
-    }, { threshold: 0, rootMargin: '-80px 0px 0px 0px' });
-    observer.observe(hero);
-
-    // Active section tracking
-    const sections = ['overview','instrument','evidence','applications','architecture','about'];
-    const sectionObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          document.querySelectorAll('.landing-sticky-nav__link').forEach(function(link) {
-            link.classList.toggle('is-active', link.dataset.section === entry.target.id);
-          });
-        }
-      });
-    }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
-    sections.forEach(function(id) { var el = document.getElementById(id); if (el) sectionObserver.observe(el); });
-  </script>
+  <script src="hero-render.js?v=4"></script>
+  <script src="paths.js?v=2"></script>
+  <script src="galleries.js?v=3"></script>
 </body>
 </html>

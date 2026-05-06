@@ -28,6 +28,9 @@ jobs:
       # Copy static landing page to dist root
       - run: cp static-landing/index.html dist/index.html
       - run: cp static-landing/landing.css dist/landing.css
+      - run: cp static-landing/paths.js dist/paths.js
+      - run: cp static-landing/galleries.js dist/galleries.js
+      - run: cp static-landing/hero-render.js dist/hero-render.js
       # Copy shared assets (media, lineage, CNAME) to dist root
       - run: cp -r public/media dist/media 2>/dev/null || true
       - run: cp -r public/lineage dist/lineage 2>/dev/null || true
