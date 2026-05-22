@@ -253,7 +253,7 @@
             <p class="evidence-cell__plain">Works across model families — not tied to any single vendor's architecture.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">4<i>arch families</i></span>
-              <span class="evidence-cell__label">Qwen · Llama · Mistral · Phi</span>
+              <span class="evidence-cell__label">Qwen · Llama · Gemma · Pythia</span>
             </div>
           </div>
           <div class="evidence-cell evidence-cell--accent">
@@ -403,7 +403,7 @@
           <div class="latency-cell">
             <div class="latency-cell__value">0</div>
             <div class="latency-cell__label">Added forward passes</div>
-            <div class="latency-cell__desc">Hooks attach to the existing forward pass — the model is not re-evaluated.</div>
+            <div class="latency-cell__desc">Per-token monitoring rides the existing forward pass — no re-evaluation. The pre-gen gate above is one optional extra pass.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">58</div>
@@ -416,13 +416,13 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Catch fabrications in the geometry.</h2>
-        <p class="section__intro">"Battle of Darien, 1645" — a prompt designed to trigger invented history. The text reads fluently; the geometry tells a different story from the third token.</p>
+        <p class="section__intro">"Battle of Darien, 1645" — a prompt designed to trigger invented history. The text reads fluently; the geometry tells a different story within the first few generated tokens.</p>
 
         <figure class="industry-figure">
-          <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible from token three">
+          <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible within the first few generated tokens">
           <figcaption>
             <span class="industry-figure__title">Per-token risk readout</span>
-            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature lights up by token three — long before a human reader could spot it in the prose.</span>
+            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature climbs past 0.60 by the fourth generated token and peaks at 0.88 — long before a human reader could spot it in the prose.</span>
           </figcaption>
         </figure>
 
@@ -430,7 +430,7 @@
           <div>
             <div class="demo-cta__label">Side-by-side recording</div>
             <h3 class="demo-cta__title">See the fabrication signature, then compare to healthy retrieval.</h3>
-            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk hits 0.60 by token three — well above the score of a healthy retrieval generation in the comparison recording.</p>
+            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk crosses 0.60 by the fourth generated token and peaks at 0.88 — well above the score of a healthy retrieval generation in the comparison recording.</p>
           </div>
           <div class="demo-cta__action">
             <a href="demo/" class="demo-cta__btn">Open the comparison</a>
@@ -561,7 +561,7 @@
         <div class="ip-row"><span class="ip-row__name">P2 — Intelligence</span><span class="ip-row__id">US 63/975,787 · Feb '26</span></div>
         <div class="ip-row"><span class="ip-row__name">P3 — Interface</span><span class="ip-row__id">US 63/982,900 · Feb '26</span></div>
         <div class="ip-row"><span class="ip-row__name">P4 — Introspection</span><span class="ip-row__id">US 64/039,169 · Apr '26</span></div>
-        <p class="ip-card__detail">P3: 27 claims, 22 figures, 90-page specification. P4: geometric self-awareness via attention-integrated metacognitive state monitoring.</p>
+        <p class="ip-card__detail">P3: 27 claims, 22 figures, 90-page specification. P4: introspective inference — attention-integrated geometric self-monitoring of internal state during generation.</p>
       </aside>
     </section>
 
