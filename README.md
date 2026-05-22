@@ -30,7 +30,7 @@ This demo viewer lets you explore pre-recorded Qwen3-8B sessions with full geome
 
 | Capability | Result |
 |------------|--------|
-| State classification | 94.8% accuracy (8B, 7 states) |
+| State classification | 94.8% accuracy (8B, 5 states) |
 | Fabrication detection | F1 0.94 (3-class, held-out stress test) |
 | Cross-architecture | 4 families validated (Llama, Qwen, Gemma, Pythia) |
 | Causal intervention | 9 geometric nudges broke a deterministic collapse loop |
@@ -71,7 +71,7 @@ React 19, TypeScript 5.9, Three.js (React Three Fiber), Vite 7
 
 ## Intellectual property
 
-3 US provisional patents filed covering the full stack — signal extraction, classification intelligence, and the spectrographic interface paradigm. 27 claims in the latest filing (US 63/982,900, Feb 13, 2026).
+4 US provisional patents filed covering the full stack — signal extraction, classification intelligence, the spectrographic interface paradigm, and introspective inference training. 27 claims in the P3 filing (US 63/982,900, Feb 13, 2026); P4 filed Apr 2026 (US 64/039,169).
 
 ## Contact
 
