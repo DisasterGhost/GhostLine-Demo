@@ -30,7 +30,7 @@ function App() {
   const [currentRecording, setCurrentRecording] = useState<CuratedRecording | null>(null);
   const [isLoadingRecording, setIsLoadingRecording] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
-  const [showLanding, setShowLanding] = useState(true);
+  const [showLanding, setShowLanding] = useState(false);
 
   const togglePanel = useCallback((panel: PanelId) => {
     setActivePanel(prev => prev === panel ? null : panel);
