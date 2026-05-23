@@ -63,6 +63,40 @@
     });
   });
 
+  const usecaseCards = document.querySelectorAll('[data-usecase]');
+  const usecaseBriefs = document.querySelectorAll('[data-usecase-brief]');
+  const usecasePanel = document.querySelector('[data-usecase-panel]');
+
+  function openUsecase(key, scrollPanel = false) {
+    if (!key) return;
+
+    usecaseCards.forEach(card => {
+      const selected = card.dataset.usecase === key;
+      card.classList.toggle('is-selected', selected);
+      const button = card.querySelector('.app-card__open');
+      if (button) {
+        button.setAttribute('aria-expanded', selected ? 'true' : 'false');
+        button.textContent = selected ? 'Context brief open' : 'Open context brief';
+      }
+    });
+
+    usecaseBriefs.forEach(brief => {
+      brief.classList.toggle('is-active', brief.dataset.usecaseBrief === key);
+    });
+
+    if (scrollPanel && usecasePanel && window.innerWidth < 900) {
+      const y = usecasePanel.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }
+
+  usecaseCards.forEach(card => {
+    const button = card.querySelector('.app-card__open');
+    if (button) button.setAttribute('aria-expanded', card.classList.contains('is-selected') ? 'true' : 'false');
+    card.addEventListener('click', () => openUsecase(card.dataset.usecase, true));
+  });
+  openUsecase('compliance', false);
+
   // Restore from hash on load
   const m = window.location.hash.match(/path=(research|industry)/);
   if (m) activate(m[1], false);

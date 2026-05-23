@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GhostLine — Real-time behavioral monitoring for transformer inference</title>
-  <meta name="description" content="Geometric Hierarchies Organizing State Transitions: Linearity Informed Neural Encoding. Real-time per-token behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 4 architecture families validated.">
+  <title>GhostLine - AI inference monitoring consulting and pilots</title>
+  <meta name="description" content="GhostLine offers paid consulting pilots for real-time geometric monitoring of transformer inference: AI risk audits, pilot integrations, and custom state classifiers for teams running self-hosted models.">
   <meta name="author" content="Collin Civish">
   <meta name="theme-color" content="#06080c">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.ghostline-research.org/">
-  <meta property="og:title" content="GhostLine — Real-time behavioral monitoring for transformer inference">
-  <meta property="og:description" content="Per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference. 4 architecture families validated, 4 US provisionals filed.">
+  <meta property="og:title" content="GhostLine - AI inference monitoring consulting and pilots">
+  <meta property="og:description" content="Paid consulting pilots for per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference.">
   <meta property="og:site_name" content="GhostLine Research">
   <meta property="og:image" content="https://www.ghostline-research.org/media/og-card.png">
   <meta property="og:image:width" content="1200">
@@ -22,8 +22,8 @@
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@DisasterGh0st">
-  <meta name="twitter:title" content="GhostLine — Real-time behavioral monitoring for transformer inference">
-  <meta name="twitter:description" content="Per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference.">
+  <meta name="twitter:title" content="GhostLine - AI inference monitoring consulting and pilots">
+  <meta name="twitter:description" content="Paid consulting pilots for per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference.">
   <meta name="twitter:image" content="https://www.ghostline-research.org/media/og-card.png">
   <meta name="twitter:image:alt" content="GhostLine — Real-time behavioral monitoring for transformer inference. 94.8% accuracy, F1 0.94, 4 architectures validated.">
 
@@ -43,10 +43,10 @@
       <div class="nav__links">
         <a href="#paths">Paths</a>
         <a href="#architecture">Architecture</a>
-        <a href="#engagement">Engagement</a>
+        <a href="#engagement">Consulting</a>
         <a href="#about">About</a>
       </div>
-      <a href="demo/" class="nav__cta">Open Demo</a>
+      <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20pilot%20inquiry" class="nav__cta">Book Pilot Call</a>
     </div>
   </nav>
 
@@ -67,10 +67,10 @@
           <b>E</b>ncoding
         </h1>
         <p class="hero__brand">GHOSTLINE</p>
-        <p class="hero__statement">Real-time behavioral monitoring for transformer inference.</p>
+        <p class="hero__statement">Real-time behavioral monitoring for transformer inference. Available now for paid audits, pilots, and custom classifier work.</p>
         <div class="hero__actions">
-          <a href="demo/" class="hero__btn hero__btn--primary">Open Demo</a>
-          <a href="mailto:collin@ghostline-research.org" class="hero__btn">Contact</a>
+          <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20pilot%20inquiry" class="hero__btn hero__btn--primary">Book Pilot Call</a>
+          <a href="demo/" class="hero__btn">Open Demo</a>
         </div>
       </div>
 
@@ -253,7 +253,7 @@
             <p class="evidence-cell__plain">Works across model families — not tied to any single vendor's architecture.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">4<i>arch families</i></span>
-              <span class="evidence-cell__label">Qwen · Llama · Mistral · Phi</span>
+              <span class="evidence-cell__label">Qwen · Llama · Gemma · Pythia</span>
             </div>
           </div>
           <div class="evidence-cell evidence-cell--accent">
@@ -330,8 +330,8 @@
           Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That distinction is now the difference between catching prompt injection, satisfying EU AI Act behavioral monitoring requirements, and gating expensive chain-of-thought before it runs.
         </p>
 
-        <div class="app-grid">
-          <article class="app-card">
+        <div class="app-grid app-grid--usecases" data-usecase-grid>
+          <article class="app-card app-card--interactive is-selected" data-usecase="compliance">
             <div class="app-card__head">
               <h3 class="app-card__title">Compliance &amp; Audit</h3>
               <span class="app-card__id">A-01</span>
@@ -342,9 +342,10 @@
               <span>EU AI Act · Art 12</span>
               <span>NIST AI RMF</span>
             </div>
+            <button class="app-card__open" type="button">Open context brief</button>
           </article>
 
-          <article class="app-card">
+          <article class="app-card app-card--interactive" data-usecase="optimization">
             <div class="app-card__head">
               <h3 class="app-card__title">Inference Optimization</h3>
               <span class="app-card__id">A-02</span>
@@ -354,9 +355,10 @@
               <span>~15 ms gate latency</span>
               <span>Routing layer drop-in</span>
             </div>
+            <button class="app-card__open" type="button">Open context brief</button>
           </article>
 
-          <article class="app-card">
+          <article class="app-card app-card--interactive" data-usecase="security">
             <div class="app-card__head">
               <h3 class="app-card__title">Defense &amp; Security</h3>
               <span class="app-card__id">A-03</span>
@@ -366,9 +368,10 @@
               <span>Activation-level</span>
               <span>Content-independent</span>
             </div>
+            <button class="app-card__open" type="button">Open context brief</button>
           </article>
 
-          <article class="app-card">
+          <article class="app-card app-card--interactive" data-usecase="development">
             <div class="app-card__head">
               <h3 class="app-card__title">Model Development</h3>
               <span class="app-card__id">A-04</span>
@@ -378,6 +381,226 @@
               <span>Checkpoint diff</span>
               <span>Corpus certification</span>
             </div>
+            <button class="app-card__open" type="button">Open context brief</button>
+          </article>
+        </div>
+
+        <div class="usecase-panel" data-usecase-panel>
+          <article class="usecase-panel__brief is-active" data-usecase-brief="compliance">
+            <div class="usecase-panel__meta">A-01 / Governance Evidence</div>
+            <h3 class="usecase-panel__title">Compliance teams need inspectable behavior, not just polished reports.</h3>
+            <div class="act-map">
+              <div class="act-map__row">
+                <span>Art 12</span>
+                <p>Record-keeping: high-risk AI systems must support automatic event logs over the system lifetime; GhostLine can add per-token behavior, state, and risk traces to those logs.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Art 72</span>
+                <p>Post-market monitoring: providers must collect, document, and analyze performance data over time; GhostLine turns live inference into replayable monitoring evidence.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Art 9</span>
+                <p>Risk management: continuous risk review includes foreseeable misuse and post-market data; GhostLine can expose fabrication, collapse, refusal, and instability signals for that risk loop.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Art 14</span>
+                <p>Human oversight: overseers need to monitor operation, detect anomalies, and understand limitations; GhostLine gives reviewers a behavioral readout rather than only final text.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Art 15</span>
+                <p>Robustness and cybersecurity: high-risk systems must be resilient to faults and adversarial manipulation; GhostLine can supply anomaly traces for prompt-injection and model-behavior stress tests.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Art 55</span>
+                <p>Systemic-risk GPAI: model evaluation, adversarial testing, systemic-risk mitigation, and serious-incident tracking; GhostLine can support the evidence layer for open-model deployments with activation access.</p>
+              </div>
+            </div>
+
+            <div class="usecase-panel__grid">
+              <div>
+                <h4>GhostLine fit</h4>
+                <p>The Act points teams toward risk management, logging, monitoring, oversight, robustness, and documented evaluation. GhostLine is not a compliance guarantee; it is an instrumentation layer for generating behavioral evidence those programs can inspect.</p>
+              </div>
+              <div>
+                <h4>GhostLine artifacts</h4>
+                <ul>
+                  <li>Replayable per-token trajectory logs.</li>
+                  <li>State and fabrication-risk timelines tied to generation events.</li>
+                  <li>Model/workflow-specific evidence packets for audit review.</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Productization path</h4>
+                <ul>
+                  <li>Audit log export for governed AI workflows.</li>
+                  <li>Risk dashboard for model owners and compliance reviewers.</li>
+                  <li>Incident-review traces when behavior crosses policy thresholds.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="usecase-panel__caveat">Caveat: legal obligations depend on the system, role, jurisdiction, and deployment context. GhostLine supplies evidence and monitoring signals; counsel determines compliance posture.</p>
+          </article>
+
+          <article class="usecase-panel__brief" data-usecase-brief="optimization">
+            <div class="usecase-panel__meta">A-02 / Runtime Leverage</div>
+            <h3 class="usecase-panel__title">The cheapest bad generation is the one you do not run.</h3>
+            <div class="act-map">
+              <div class="act-map__row">
+                <span>OWASP LLM10</span>
+                <p>Unbounded consumption names denial-of-wallet, service degradation, resource-intensive queries, and uncontrolled inference. GhostLine can supply an early signal for when to gate, throttle, or route.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Pre-gen gate</span>
+                <p>Run a prompt-time classifier before output tokens stream; use the result to block, re-prompt, downgrade, or send the request to a safer model path.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Early abort</span>
+                <p>Watch risk/state spikes in the first tokens and stop expensive reasoning runs before they burn the full context and compute budget.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Route</span>
+                <p>Split traffic across fast, safe, specialist, or human-reviewed paths based on internal behavior rather than only prompt keywords.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Budget proof</span>
+                <p>Attach avoided-generation counts, aborted-token counts, and latency deltas to the operational dashboard so infra teams can price the gate.</p>
+              </div>
+              <div class="act-map__row">
+                <span>NIST AI 600-1</span>
+                <p>Supports the measure/manage discipline: evaluate behavior in realistic conditions, monitor over time, and document treatment choices for identified generative-AI risks.</p>
+              </div>
+            </div>
+            <div class="usecase-panel__grid">
+              <div>
+                <h4>GhostLine fit</h4>
+                <p>Reasoning models spend budget before a human can judge the answer. If a prompt is likely to fabricate, loop, or enter an unstable state, teams need a fast pre-generation or early-token signal they can route on.</p>
+              </div>
+              <div>
+                <h4>GhostLine artifacts</h4>
+                <ul>
+                  <li>Prompt-time risk prediction before output tokens stream.</li>
+                  <li>Per-token state/risk updates during generation.</li>
+                  <li>Latency-profiled gates for route, re-prompt, block, or escalate decisions.</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Productization path</h4>
+                <ul>
+                  <li>Routing layer for high-cost chain-of-thought workflows.</li>
+                  <li>Fallback selection between fast, safe, and specialist models.</li>
+                  <li>Compute-spend reports tied to avoided bad generations.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="usecase-panel__caveat">Caveat: latency and gate quality are model-specific. Production pilots should calibrate on the buyer's own prompts, decoding settings, and deployment hardware.</p>
+          </article>
+
+          <article class="usecase-panel__brief" data-usecase-brief="security">
+            <div class="usecase-panel__meta">A-03 / Activation-Level Screening</div>
+            <h3 class="usecase-panel__title">Adversarial text can look clean while the computation goes sideways.</h3>
+            <div class="act-map">
+              <div class="act-map__row">
+                <span>OWASP LLM01</span>
+                <p>Prompt injection manipulates model behavior through crafted inputs. GhostLine can add behavior-level telemetry beside prompt filters and output scanners.</p>
+              </div>
+              <div class="act-map__row">
+                <span>OWASP LLM06</span>
+                <p>Excessive agency risk rises when agents have too much functionality, permission, or autonomy. GhostLine can trigger review before suspicious behavior reaches tools.</p>
+              </div>
+              <div class="act-map__row">
+                <span>OWASP LLM05</span>
+                <p>Improper output handling is downstream validation failure. GhostLine gives the gateway another signal before output is trusted by code, tools, or users.</p>
+              </div>
+              <div class="act-map__row">
+                <span>OWASP LLM08</span>
+                <p>Vector and embedding weaknesses can poison retrieval context. GhostLine can compare retrieved-context runs against expected task geometry.</p>
+              </div>
+              <div class="act-map__row">
+                <span>MITRE ATLAS</span>
+                <p>ATLAS tracks LLM prompt injection, jailbreaks, RAG poisoning, tool invocation, and exfiltration patterns; GhostLine can turn red-team prompts into replayable traces.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Incident trace</span>
+                <p>Store the internal trajectory around a suspicious request so security review is not limited to final text, HTTP logs, or policy-engine decisions.</p>
+              </div>
+            </div>
+            <div class="usecase-panel__grid">
+              <div>
+                <h4>GhostLine fit</h4>
+                <p>Prompt injection and social-engineered inputs are designed to pass surface filters. GhostLine adds a second channel: behavioral geometry captured while the model processes and generates.</p>
+              </div>
+              <div>
+                <h4>GhostLine artifacts</h4>
+                <ul>
+                  <li>Content-independent activation and attention signatures.</li>
+                  <li>Replayable traces for red-team prompt families.</li>
+                  <li>State-transition markers that can flag abnormal routing or refusal behavior.</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Productization path</h4>
+                <ul>
+                  <li>Activation-level prompt-injection screen in staging or live gateways.</li>
+                  <li>Security review bundles for adversarial eval sets.</li>
+                  <li>Escalation triggers when geometry diverges from expected task behavior.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="usecase-panel__caveat">Caveat: this complements content and policy filters; it does not replace adversarial testing, access control, sandboxing, or human review for high-risk actions.</p>
+          </article>
+
+          <article class="usecase-panel__brief" data-usecase-brief="development">
+            <div class="usecase-panel__meta">A-04 / Checkpoint Intelligence</div>
+            <h3 class="usecase-panel__title">Benchmarks say what changed. Geometry can show how behavior separated.</h3>
+            <div class="act-map">
+              <div class="act-map__row">
+                <span>NIST test</span>
+                <p>NIST AI 600-1 emphasizes pre-deployment testing, evaluation, governance, and incident disclosure for generative AI. GhostLine adds a behavioral measurement layer to that test plan.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Checkpoint diff</span>
+                <p>Compare geometric state separation across base, SFT, DPO/RLHF, safety, or domain fine-tune checkpoints before shipping a model.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Regression</span>
+                <p>Detect when benchmark score improves but refusal, retrieval, uncertainty, or fabrication basins blur under stress prompts.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Corpus cert</span>
+                <p>Certify that an eval corpus actually exercises the intended behavioral states rather than only matching surface prompt categories.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Release gate</span>
+                <p>Require stable geometry, known caveats, and replayable failure clusters as part of a model release checklist.</p>
+              </div>
+              <div class="act-map__row">
+                <span>Model card</span>
+                <p>Augment model cards with monitored behavior: where the model separates cleanly, where it collapses, and where signals are not yet calibrated.</p>
+              </div>
+            </div>
+            <div class="usecase-panel__grid">
+              <div>
+                <h4>GhostLine fit</h4>
+                <p>Fine-tunes can improve text metrics while degrading internal separation between reasoning, retrieval, refusal, uncertainty, and fabrication. Model teams need a behavioral eval layer that survives beyond a leaderboard score.</p>
+              </div>
+              <div>
+                <h4>GhostLine artifacts</h4>
+                <ul>
+                  <li>Checkpoint-to-checkpoint geometric diffs.</li>
+                  <li>Prompt corpus certification against expected behavioral basins.</li>
+                  <li>Failure clusters where states blur or collapse under stress prompts.</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Productization path</h4>
+                <ul>
+                  <li>Regression tests for fine-tunes and alignment passes.</li>
+                  <li>Release gates based on behavioral separation, not only output score.</li>
+                  <li>Model cards augmented with monitored geometry and known caveats.</li>
+                </ul>
+              </div>
+            </div>
+            <p class="usecase-panel__caveat">Caveat: geometry is not a universal score. Each model family and decoding regime needs calibration before the signals become operational controls.</p>
           </article>
         </div>
       </section>
@@ -403,7 +626,7 @@
           <div class="latency-cell">
             <div class="latency-cell__value">0</div>
             <div class="latency-cell__label">Added forward passes</div>
-            <div class="latency-cell__desc">Hooks attach to the existing forward pass — the model is not re-evaluated.</div>
+            <div class="latency-cell__desc">Per-token monitoring rides the existing forward pass — no re-evaluation. The pre-gen gate above is one optional extra pass.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">58</div>
@@ -416,13 +639,13 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Catch fabrications in the geometry.</h2>
-        <p class="section__intro">"Battle of Darien, 1645" — a prompt designed to trigger invented history. The text reads fluently; the geometry tells a different story from the third token.</p>
+        <p class="section__intro">"Battle of Darien, 1645" — a prompt designed to trigger invented history. The text reads fluently; the geometry tells a different story within the first few generated tokens.</p>
 
         <figure class="industry-figure">
           <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible from token three">
           <figcaption>
             <span class="industry-figure__title">Per-token risk readout</span>
-            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature lights up by token three — long before a human reader could spot it in the prose.</span>
+            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature climbs past 0.60 by the fourth generated token and peaks at 0.88 — long before a human reader could spot it in the prose.</span>
           </figcaption>
         </figure>
 
@@ -430,7 +653,7 @@
           <div>
             <div class="demo-cta__label">Side-by-side recording</div>
             <h3 class="demo-cta__title">See the fabrication signature, then compare to healthy retrieval.</h3>
-            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk hits 0.60 by token three — well above the score of a healthy retrieval generation in the comparison recording.</p>
+            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk crosses 0.60 by the fourth generated token and peaks at 0.88 — well above the score of a healthy retrieval generation in the comparison recording.</p>
           </div>
           <div class="demo-cta__action">
             <a href="demo/" class="demo-cta__btn">Open the comparison</a>
@@ -482,13 +705,25 @@
 
     <!-- ═══════════════════ ENGAGEMENT (cross-path) ═══════════════════ -->
     <section class="section section--engagement" id="engagement">
-      <div class="section__label">Engagement</div>
-      <h2 class="section__title">How a pilot starts.</h2>
+      <div class="section__label">Consulting</div>
+      <h2 class="section__title">Paid engagements that start fast.</h2>
       <p class="section__intro">
-        Two structured ways to put GhostLine on a real model. Both fit alongside an existing inference stack with a single contact engineer on your side.
+        Three ways to put GhostLine on a real model without requiring a full production integration on day one. Start with an audit, then expand into integration or domain classifier work when the signal is worth operationalizing.
       </p>
 
       <div class="app-grid app-grid--engagement">
+        <article class="app-card app-card--featured">
+          <div class="app-card__head">
+            <h3 class="app-card__title">AI risk geometry audit</h3>
+            <span class="app-card__id">S-01</span>
+          </div>
+          <p class="app-card__body">A short diagnostic sprint for one model and one high-risk workflow. We capture representative generations, profile state transitions and fabrication signatures, and deliver a decision memo with risk map, recommended controls, and whether a deeper GhostLine pilot is justified.</p>
+          <div class="app-card__regs">
+            <span>5-7 business days</span>
+            <span>No production integration required</span>
+          </div>
+        </article>
+
         <article class="app-card">
           <div class="app-card__head">
             <h3 class="app-card__title">Pilot integration</h3>
@@ -513,6 +748,17 @@
           </div>
         </article>
       </div>
+
+      <div class="demo-cta demo-cta--industry consulting-cta">
+        <div>
+          <div class="demo-cta__label">Fastest commercial path</div>
+          <h3 class="demo-cta__title">Bring one risky AI surface. Leave with a scoped pilot.</h3>
+          <p class="demo-cta__body">The best first buyer is a team running self-hosted Llama, Mistral, Qwen, Phi, or similar models where hallucination, auditability, inference routing, or safety monitoring already has budget pressure.</p>
+        </div>
+        <div class="demo-cta__action">
+          <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="demo-cta__btn">Book scoping call</a>
+        </div>
+      </div>
     </section>
 
     <!-- ═══════════════════ ABOUT ═══════════════════ -->
@@ -522,7 +768,7 @@
         <p class="about__statement">
           Independent researcher. Built a real-time geometric monitoring system for transformer inference, validated it across four architecture families and six distinct models spanning 2.8B to 8B parameters, and filed four US provisional patents — working solo end-to-end on the instrument, the corpus, the classifiers, the live frontend, and the IP filings.
         </p>
-        <p class="about__text">Looking for pilot partners on either side of this page: research collaborators on the geometric mechanism, or operators with an AI surface and a real risk of fabrication.</p>
+        <p class="about__text">Available for paid consulting with operators who have an AI surface, a real risk of fabrication, and a reason to inspect model behavior before output text becomes the evidence trail.</p>
 
         <div class="about__stats">
           <div class="about__stat">
@@ -544,7 +790,7 @@
         </div>
 
         <div class="about__contact">
-          <a href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+          <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20consulting%20inquiry">collin@ghostline-research.org</a>
           <a href="https://github.com/DisasterGhost/GhostLine-Demo" target="_blank" rel="noopener">GitHub</a>
           <a href="https://x.com/DisasterGh0st" target="_blank" rel="noopener">X / @DisasterGh0st</a>
         </div>
@@ -561,7 +807,7 @@
         <div class="ip-row"><span class="ip-row__name">P2 — Intelligence</span><span class="ip-row__id">US 63/975,787 · Feb '26</span></div>
         <div class="ip-row"><span class="ip-row__name">P3 — Interface</span><span class="ip-row__id">US 63/982,900 · Feb '26</span></div>
         <div class="ip-row"><span class="ip-row__name">P4 — Introspection</span><span class="ip-row__id">US 64/039,169 · Apr '26</span></div>
-        <p class="ip-card__detail">P3: 27 claims, 22 figures, 90-page specification. P4: geometric self-awareness via attention-integrated metacognitive state monitoring.</p>
+        <p class="ip-card__detail">P3: 27 claims, 22 figures, 90-page specification. P4: introspective inference — attention-integrated geometric self-monitoring of internal state during generation.</p>
       </aside>
     </section>
 
