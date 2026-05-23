@@ -71,7 +71,7 @@ React 19, TypeScript 5.9, Three.js (React Three Fiber), Vite 7
 
 ## Intellectual property
 
-4 US provisional patents filed covering the full stack — signal extraction, classification intelligence, the spectrographic interface paradigm, and introspective inference. 27 claims in the interface filing (US 63/982,900, Feb 13, 2026).
+4 US provisional patents filed covering the full stack — signal extraction, classification intelligence, the spectrographic interface paradigm, and introspective inference training. 27 claims in the P3 filing (US 63/982,900, Feb 13, 2026); P4 filed Apr 2026 (US 64/039,169).
 
 ## Contact
 
