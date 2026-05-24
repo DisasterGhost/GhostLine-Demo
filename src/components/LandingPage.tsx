@@ -8,8 +8,8 @@ interface LandingPageProps {
 const proofMetrics = [
   { value: '94.8%', label: 'state classification accuracy' },
   { value: 'F1 0.94', label: 'fabrication detection' },
-  { value: '4', label: 'architecture families validated' },
-  { value: 'Patent Pending', label: '3 US provisionals filed' },
+  { value: '5', label: 'architecture families validated' },
+  { value: 'Patent Pending', label: '4 US provisionals filed' },
 ];
 
 const systemExamples = [
@@ -314,7 +314,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
             <div className="landing-evidence-col landing-evidence-col--sharp">
               <h3>Sharp</h3>
               <ul>
-                <li>State separation across 4 architecture families</li>
+                <li>State separation across 5 architecture families</li>
                 <li>Fabrication detection (F1 0.94, held-out stress test)</li>
                 <li>Replayable signal inspection (58 signals, per-token)</li>
                 <li>Causal geometric intervention at 3B</li>
@@ -394,18 +394,30 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
               <p className="landing-section__label">Behind the project</p>
               <h2>Collin Civish</h2>
             </div>
-            <span className="landing-stage-badge">Research prototype</span>
+            <span className="landing-stage-badge">Working instrument · pilot-ready</span>
           </div>
 
           <div className="landing-about-layout">
             <div className="landing-about-statement">
               <p>
-                Solo inventor. No formal ML background. Built a real-time geometric monitoring
-                system for transformer inference, validated it across 4 architecture families
-                at 2 parameter scales, and filed 3 US provisional patents — in 48 days.
+                I'm an independent researcher and builder working outside the traditional
+                academic and venture-backed paths. My background is blue-collar rather than
+                institutional, and the work has been self-directed — reading deeply, testing
+                aggressively, and using modern AI as a force multiplier to turn
+                pattern-recognition into working systems far faster than I could alone.
               </p>
               <p>
-                Seeking resources to take it from prototype to production.
+                GhostLine came out of that: I noticed a high-leverage problem — what a language
+                model's reasoning actually looks like from the inside — and followed it
+                obsessively until it became real infrastructure. I built every layer myself: the
+                capture pipeline, the behavioral corpus, the classifiers, the live interface, and
+                the four filed provisional patents behind them. It's been validated across five
+                model architectures and nine models, from 1B to 8B parameters.
+              </p>
+              <p>
+                I build for systems that have to survive contact with messy reality. Modern AI
+                gives a relentless individual the reach of a whole team — but someone still has to
+                be relentless.
               </p>
               <div className="landing-actions">
                 <button className="landing-button landing-button--primary" onClick={onLaunchDemo}>
@@ -424,14 +436,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDemo }) => {
                   <tr><td>P1 — Instrument</td><td>US 63/948,867</td><td>Dec 2025</td></tr>
                   <tr><td>P2 — Intelligence</td><td>US 63/975,787</td><td>Feb 2026</td></tr>
                   <tr><td>P3 — Interface</td><td>US 63/982,900</td><td>Feb 2026</td></tr>
+                  <tr><td>P4 — Introspection</td><td>US 64/039,169</td><td>Apr 2026</td></tr>
                 </tbody>
               </table>
               <p className="landing-ip-detail">P3: 27 claims, 22 figures, 90-page spec.</p>
 
               <p className="landing-card__label" style={{marginTop: '20px'}}>At a glance</p>
               <div className="landing-stats-grid">
-                <div><span className="landing-stat-value">6</span><span className="landing-stat-label">models</span></div>
-                <div><span className="landing-stat-value">4</span><span className="landing-stat-label">architectures</span></div>
+                <div><span className="landing-stat-value">9</span><span className="landing-stat-label">models</span></div>
+                <div><span className="landing-stat-value">5</span><span className="landing-stat-label">architectures</span></div>
                 <div><span className="landing-stat-value">2</span><span className="landing-stat-label">scales</span></div>
                 <div><span className="landing-stat-value">48</span><span className="landing-stat-label">days to 3 filings</span></div>
               </div>
