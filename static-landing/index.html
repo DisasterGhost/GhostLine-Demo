@@ -434,6 +434,32 @@
       </section>
 
       <section class="section">
+        <div class="section__label">Method</div>
+        <h2 class="section__title">How we keep ourselves honest.</h2>
+        <p class="section__intro">
+          The point of an instrument is that you can check it. Every number on this page comes from held-out data under a locked protocol — and where we've fooled ourselves, we've said so and fixed it.
+        </p>
+
+        <div class="mech-grid">
+          <article class="mech-card">
+            <div class="mech-card__num">01 · PROTOCOL</div>
+            <h3 class="mech-card__title">Locked, not tuned per result.</h3>
+            <p class="mech-card__body">HuggingFace Transformers, temperature 0.8, top-p 1.0, multinomial sampling. Every threshold is calibrated at these settings, not re-tuned to flatter a number.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">02 · VALIDATION</div>
+            <h3 class="mech-card__title">Grouped, held-out, no leakage.</h3>
+            <p class="mech-card__body">Cross-validation groups by prompt — analogous to patient-level splits in medical ML — so a classifier can't memorize a prompt's identity. Reported numbers are held-out, not training accuracy.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">03 · SELF-CORRECTION</div>
+            <h3 class="mech-card__title">We catch our own inflation.</h3>
+            <p class="mech-card__body">A 99.6% prophecy number turned out to be prompt-identity leakage; grouped CV corrected it to 85% — and we kept the lower one. We also flag where rules don't transfer (a 3B collapse threshold is invalid at 8B).</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Read a recording.</h2>
         <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, the state transitions, and the signal stream — all replayable, all explorable per-token.</p>
