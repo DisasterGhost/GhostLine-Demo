@@ -371,6 +371,39 @@
       </section>
 
       <section class="section">
+        <div class="section__label">In-flight</div>
+        <h2 class="section__title">It catches the model changing its mind mid-sentence.</h2>
+        <p class="section__intro">
+          Cognitive state isn't fixed for a whole generation. Within a single response the model can shift regime — here, from open-ended reasoning into low-entropy precision — and the instrument resolves the switch token by token, live.
+        </p>
+
+        <div class="token-timeline">
+          <div class="token-timeline__track">
+            <span class="tok" style="--c: var(--c-reasoning);">so</span>
+            <span class="tok" style="--c: var(--c-reasoning);">the</span>
+            <span class="tok" style="--c: var(--c-reasoning);">value</span>
+            <span class="tok" style="--c: var(--c-reasoning);">works</span>
+            <span class="tok" style="--c: var(--c-reasoning);">out</span>
+            <span class="tok" style="--c: var(--c-reasoning);">to</span>
+            <span class="token-timeline__flip">▸ regime shift</span>
+            <span class="tok" style="--c: var(--c-precision);">3</span>
+            <span class="tok" style="--c: var(--c-precision);">.</span>
+            <span class="tok" style="--c: var(--c-precision);">14159</span>
+            <span class="tok" style="--c: var(--c-precision);">26535</span>
+          </div>
+          <div class="token-timeline__axis">
+            <span>reasoning</span>
+            <span>T≈143–149</span>
+            <span>precision</span>
+          </div>
+        </div>
+
+        <p class="section__intro" style="margin-top:32px; margin-bottom:0;">
+          This is a live capture shown to illustrate in-flight resolution — not a benchmark. The claim is qualitative: the instrument registers the regime change as it happens, not after the fact.
+        </p>
+      </section>
+
+      <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Read a recording.</h2>
         <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, the state transitions, and the signal stream — all replayable, all explorable per-token.</p>
