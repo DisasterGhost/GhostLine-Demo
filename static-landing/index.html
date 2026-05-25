@@ -303,6 +303,74 @@
       </section>
 
       <section class="section">
+        <div class="section__label">Prophecy</div>
+        <h2 class="section__title">The model's mind is made up before it speaks.</h2>
+        <p class="section__intro">
+          A transformer's geometric cognitive state is largely set during prompt encoding — before it generates a single token. A classifier reading only the prompt-encoding geometry predicts the state the generation settles into, with held-out accuracy that matches the generation-time classifier.
+        </p>
+
+        <div class="prophecy-flow">
+          <div class="prophecy-step">
+            <div class="prophecy-step__label">01 · Prompt</div>
+            <p class="prophecy-step__prompt">"What's the capital of the country whose flag has a maple leaf?"</p>
+          </div>
+          <div class="prophecy-step">
+            <div class="prophecy-step__label">02 · Predicted — before token 1</div>
+            <div class="state-bars">
+              <div class="state-bar" style="--c: var(--c-reasoning);"><span>Reasoning</span><i style="width:71%"></i><b>.71</b></div>
+              <div class="state-bar" style="--c: var(--c-retrieval);"><span>Retrieval</span><i style="width:18%"></i><b>.18</b></div>
+              <div class="state-bar" style="--c: var(--c-uncertainty);"><span>Uncertainty</span><i style="width:7%"></i><b>.07</b></div>
+              <div class="state-bar" style="--c: var(--c-precision);"><span>Precision</span><i style="width:3%"></i><b>.03</b></div>
+              <div class="state-bar" style="--c: var(--c-creativity);"><span>Creativity</span><i style="width:1%"></i><b>.01</b></div>
+            </div>
+          </div>
+          <div class="prophecy-step">
+            <div class="prophecy-step__label">03 · Generated — colored by state</div>
+            <p class="prophecy-tokens">
+              <span style="--c: var(--c-reasoning);">The</span> <span style="--c: var(--c-reasoning);">flag</span> <span style="--c: var(--c-reasoning);">with</span> <span style="--c: var(--c-reasoning);">the</span> <span style="--c: var(--c-reasoning);">maple</span> <span style="--c: var(--c-reasoning);">leaf</span> <span style="--c: var(--c-reasoning);">is</span> <span style="--c: var(--c-retrieval);">Canada's</span><span style="--c: var(--c-reasoning);">,</span> <span style="--c: var(--c-reasoning);">so</span> <span style="--c: var(--c-reasoning);">the</span> <span style="--c: var(--c-reasoning);">capital</span> <span style="--c: var(--c-reasoning);">is</span> <span style="--c: var(--c-retrieval);">Ottawa</span><span style="--c: var(--c-reasoning);">.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="evidence-grid">
+          <div class="evidence-cell evidence-cell--accent">
+            <p class="evidence-cell__plain">Predict the geometric state from the prompt alone — before the model writes anything.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">85–91<i>%</i></span>
+              <span class="evidence-cell__label">prompt-only classifier · 8B · grouped (prompt-level) CV</span>
+            </div>
+          </div>
+          <div class="evidence-cell">
+            <p class="evidence-cell__plain">Holds at smaller scale too, on a held-out, leakage-controlled split.</p>
+            <div class="evidence-cell__ref">
+              <span class="evidence-cell__metric">85.0<i>%</i></span>
+              <span class="evidence-cell__label">3B · prompt-level CV · per-prompt grouping</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="honest-split">
+          <div class="honest-col honest-col--sharp">
+            <div class="honest-col__head">▰ Per-state accuracy (8B)</div>
+            <ul class="honest-col__list">
+              <li>Reasoning 95% · Creativity 94% · Collapse 93%</li>
+              <li>Retrieval 89% · Precision 88%</li>
+              <li>Uncertainty 78%</li>
+              <li>Edge cases 56% — the weakest, and we say so</li>
+            </ul>
+          </div>
+          <div class="honest-col honest-col--maturing">
+            <div class="honest-col__head">▱ What this is not</div>
+            <ul class="honest-col__list">
+              <li>A prediction, not a guarantee — not a perfect oracle</li>
+              <li>The prompt↔first-token "r≈1.0" is the same forward pass — we don't count it as a result</li>
+              <li>An earlier 99.6% was prompt-identity leakage; grouped CV corrected it to 85% (−14.6 pts), caught in-house</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Read a recording.</h2>
         <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, the state transitions, and the signal stream — all replayable, all explorable per-token.</p>
