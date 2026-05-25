@@ -71,16 +71,15 @@ Logit-Lens / Top-K) — confirms the prompt-time signals are real and captured.
 **Claim:** Within a single generation, the model can switch cognitive regime (e.g.
 reasoning→precision), and the instrument resolves the shift live.
 
-**Artifact (built CSS/SVG):** a token-timeline strip — generated tokens along the x-axis, each
-colored by per-token state, with the regime label flipping at the transition point (the
-reasoning→precision moment, ~T143–149). A thin signal line (e.g. entropy or velocity) underneath
-echoes the shift.
+**Artifact (built CSS/SVG, REAL DATA):** a token-timeline strip built from **real tokens of
+`public/recordings/math-reasoning.ghostline`** (prompt "Solve 22x − 8 = 3x"), each colored by the
+recording's per-token `geometricState`. Early tokens reason the strategy ("Subtract … from both
+sides"); near the answer the model shifts into precision ("Divide both sides by … x = 8/19"). The
+flip occurs ≈ token 105 (NOT T143–149 — that was the 8B chicken demo, a different recording).
 
 **Framing guardrail:** this is a **qualitative live-capture demonstration, not a benchmark.**
-No accuracy/F1 number attaches to it. Frame as "the instrument resolves change in-flight."
-
-**Style ref:** screenshot #9's colored Generated-Text panel (per-token state coloring is the
-real mechanism behind this artifact).
+No accuracy/F1 number attaches to it. Per-token labels are raw classifier output (they flicker);
+the final fraction is condensed for readability — both stated in the caption.
 
 ---
 
