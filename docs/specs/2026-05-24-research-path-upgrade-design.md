@@ -53,11 +53,15 @@ predictable from prompt-only features, before the first token is generated.
 - Per-state accuracy (8B), shown as a small honest spread: reasoning 95% · creativity 94% ·
   collapse 93% · retrieval 89% · precision 88% · uncertainty 78% · **edge cases 56% (weakest).**
 
-**Honesty guardrails (must appear, not be hidden):**
-- Do **NOT** cite "r≈1.000 prompt↔first-token" as a result — it is trivially true (same forward
-  pass). Omit it or explicitly label it as not-a-finding.
-- State that CV is **grouped / prompt-level**, and that an earlier **14.6% prompt-identity
-  leakage** inflation (99.6%→85.0%) was caught and corrected in-house.
+**Honesty guardrails (must appear somewhere on the page, not be hidden):**
+- Do **NOT** cite "r≈1.000 prompt↔first-token" as a result — trivially true (same forward pass).
+  Omit it entirely; don't even disclaim it on the page (outsiders never saw the claim, so a
+  disclaimer just confuses — this was a review note).
+- The grouped/prompt-level CV + the **99.6%→85% leakage self-correction** lives in the **Methods**
+  section (card 03), where there's room to explain it — NOT duplicated in Prophecy. Prophecy's
+  "what it's not" column holds plain-language limitations instead: mode ≠ answer; a tendency, not a
+  guarantee (cross-links to Phase transition); accuracy varies by mode (cross-links to edge cases).
+  Reason: the insider shorthand (r≈1.0, "prompt-identity leakage") was illegible to reviewers.
 
 **Style ref:** screenshot #12 (real Prompt-time signal family: Prompt Residual / Attention /
 Logit-Lens / Top-K) — confirms the prompt-time signals are real and captured.
