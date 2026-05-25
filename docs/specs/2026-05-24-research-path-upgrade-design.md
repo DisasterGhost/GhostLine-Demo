@@ -86,20 +86,32 @@ real mechanism behind this artifact).
 
 ## Section 3 — 8B cross-scale (breadth)
 
-**Section label:** `At scale` · **Title:** *Geometry doesn't wash out as models grow — it sharpens.*
+**Section label:** `At scale` · **Title:** *Does it hold as models grow? At 8B — yes, and richer.*
 
-**Claim:** At 8B, state-separation widens and a new discriminator family (MLP) emerges that is
-barely present at 3B.
+**Claim:** At 8B the geometry is rich and well-separated, and a new discriminator family (MLP)
+emerges that is barely present at 3B. The only *clean* scale-growth evidence (same family, same
+pipeline) is within-family Qwen2.5 1.5B→3B, where separation rose **~1.1–1.3×** — modest, still
+N=2, and the honest figure to cite for "grows with scale" (NOT the confounded 3.3×).
 
 **Artifact:** the **real #9 screenshot** (Qwen3-8B run + per-layer E1 readout) embedded
-alongside a small CSS effect-size comparison (3B vs 8B): eff_dim gaps ~**3.3× wider**; **MLP
-discriminators emerge at 8B (d≈4.2)**, near-absent at 3B.
+alongside a small CSS panel highlighting **MLP discriminators emerging at 8B (d≈4.2)**,
+near-absent at 3B, plus the per-layer E1 profile visible in the shot.
 
-**Honesty guardrails:**
+**Honesty guardrails (critical — this section is easy to overclaim):**
 - Framed as **"validated at 8B,"** NEVER as a "scaling law" or "power law" — that result is
   preliminary (N=2 sizes) and explicitly not citable.
+- The **"~3.3× wider eff_dim gap" must NOT be presented as a clean scale effect.** It is a
+  Llama-3B → Qwen-8B comparison that confounds **scale with architecture** (different model
+  families). Either omit the 3.3× figure, or state the confound plainly. Do not imply "gaps grow
+  3.3× with size."
 - Use defensible effect sizes (large-by-convention, d≈4.2). Avoid the contested aggregate signal
   counts (1,018 / 2,016 had no FDR correction).
+- **Name the open question (forward-compatible):** whether state-separation grows as a clean
+  function of parameter count is the explicit open question, and a pre-registered experiment
+  (`experiments/geometric_scaling/SCALING_V3_UNIFIED_DESIGN.md`, "scaling-law 2.0": 3 families,
+  bf16, within-family curves) is designed to answer it — currently unrun (funding-gated as of
+  May 2026). When that lands with citable results, THIS section upgrades in place from "holds at
+  8B" to the stronger scaling claim, no restructuring needed.
 
 **Asset dependency:** the #9 PNG must be exported into `public/media/` (e.g.
 `ghostline-8b-chicken.png`) so the workflow copies it to `dist/media/`. Collin to provide the
