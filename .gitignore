@@ -2,3 +2,6 @@ node_modules/
 dist/
 .vite/
 *.local
+
+# Local-only preview copy of media (deploy uses public/media)
+static-landing/media/
