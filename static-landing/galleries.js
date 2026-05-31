@@ -9,7 +9,7 @@
       interval: 12000,
       slides: [
         { src: 'media/ghostline-spectrograph.png', alt: 'GhostLine spectrograph', caption: 'Entropy, velocity, confidence, and attention signals as time-series across the full generation.' },
-        { src: 'media/ghostline-token-health.png', alt: 'GhostLine token health', caption: 'Per-token state classification, hallucination risk, and crystallization status.' },
+        { src: 'media/ghostline-token-health.png', alt: 'GhostLine token health', caption: 'Per-token state classification, fabrication risk, and crystallization status.' },
       ],
     },
     evidence: {

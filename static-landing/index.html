@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GhostLine - AI inference monitoring consulting and pilots</title>
-  <meta name="description" content="GhostLine offers paid consulting pilots for real-time geometric monitoring of transformer inference: AI risk audits, pilot integrations, and custom state classifiers for teams running self-hosted models.">
+  <meta name="description" content="GhostLine offers consulting pilots for geometric monitoring of transformer inference: AI risk audits, pilot integrations, and custom state classifiers for teams running self-hosted models.">
   <meta name="author" content="Collin Civish">
   <meta name="theme-color" content="#06080c">
 
@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://www.ghostline-research.org/media/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="GhostLine — Real-time behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 5 architectures validated.">
+  <meta property="og:image:alt" content="GhostLine — behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 5 architectures validated.">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +25,7 @@
   <meta name="twitter:title" content="GhostLine - AI inference monitoring consulting and pilots">
   <meta name="twitter:description" content="Paid consulting pilots for per-token geometric state classification, fabrication detection, and replayable signal streams for transformer inference.">
   <meta name="twitter:image" content="https://www.ghostline-research.org/media/og-card.png">
-  <meta name="twitter:image:alt" content="GhostLine — Real-time behavioral monitoring for transformer inference. 94.8% accuracy, F1 0.94, 5 architectures validated.">
+  <meta name="twitter:image:alt" content="GhostLine — behavioral monitoring for transformer inference. 94.8% accuracy, F1 0.94, 5 architectures validated.">
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%236b8cff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%236b8cff'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="landing.css?v=12">
@@ -58,16 +58,15 @@
         <h1 class="hero__backronym">
           <b>G</b>eometric
           <b>H</b>ierarchies
-          <b>O</b>rganizing
+          <b>O</b>rganize
           <b>S</b>tate
           <b>T</b>ransitions:<br>
-          <b>L</b>inearity
-          <b>I</b>nformed
+          <b>L</b>inearity-<b>I</b>nformed
           <b>N</b>eural
           <b>E</b>ncoding
         </h1>
         <p class="hero__brand">GHOSTLINE</p>
-        <p class="hero__statement">Real-time behavioral monitoring for transformer inference — audits, pilots, and custom classifier work for teams running self-hosted models.</p>
+        <p class="hero__statement">Behavioral monitoring for transformer inference: audits, pilots, and custom classifier work for teams running self-hosted models.</p>
         <div class="hero__actions">
           <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="hero__btn hero__btn--primary">Book a scoping call</a>
           <a href="demo/" class="hero__btn">Open Demo</a>
@@ -114,7 +113,7 @@
           <div class="path-card__tag">Research</div>
           <h3 class="path-card__title">Geometric mechanism, validated.</h3>
           <p class="path-card__desc">
-            What it measures, how the geometry is computed, what holds up under stress, and what's still maturing. Hypothesis tests, signal taxonomy, and architecture coverage.
+            What GhostLine measures, how the geometry is computed, what held up under stress, and what is still immature. Includes hypothesis tests, signal taxonomy, and architecture coverage.
           </p>
           <ul class="path-card__topics">
             <li>5 cognitive states · 58 signals</li>
@@ -138,7 +137,7 @@
           <div class="path-card__tag">Industry</div>
           <h3 class="path-card__title">Where it deploys, and why now.</h3>
           <p class="path-card__desc">
-            Compliance, inference economics, defense, and model development. What the geometric layer enables that text-based monitoring cannot — with concrete latency and integration points.
+            Compliance, inference economics, defense, and model development. What geometry can catch that text-based monitoring misses, with concrete latency and integration points.
           </p>
           <ul class="path-card__topics">
             <li>EU AI Act Articles 9 &amp; 12</li>
@@ -168,24 +167,24 @@
         <div class="section__label">Mechanism</div>
         <h2 class="section__title">The instrument reads what the model is doing while it's still doing it.</h2>
         <p class="section__intro">
-          Each forward pass through a transformer leaves a trajectory through high-dimensional activation space. GhostLine projects that trajectory, classifies the geometric signature of every token, and surfaces 58 derived signals — entropy, velocity, effective dimensionality, attention entropy, hallucination risk — at the moment of generation.
+          Each forward pass through a transformer leaves a trajectory through high-dimensional activation space. GhostLine projects that trajectory, classifies the geometric signature of every token, and streams 58 derived signals while the model is generating: entropy, velocity, effective dimensionality, attention entropy, fabrication risk, and more.
         </p>
 
         <div class="mech-grid">
           <article class="mech-card">
             <div class="mech-card__num">01 · CAPTURE</div>
             <h3 class="mech-card__title">Hooks at every layer.</h3>
-            <p class="mech-card__body">Forward-pass hooks capture residual stream, attention, and MLP activations per token. No gradient tape, no extra forward — instrument runs alongside inference.</p>
+            <p class="mech-card__body">Forward-pass hooks capture residual stream, attention, and MLP activations per token. No gradient tape, no extra generation pass; the instrument runs alongside inference.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">02 · CLASSIFY</div>
             <h3 class="mech-card__title">Geometric state, not text.</h3>
-            <p class="mech-card__body">A trained classifier reads the activation geometry and labels each token with one of five cognitive states. Detection is content-independent.</p>
+            <p class="mech-card__body">A trained classifier reads the activation geometry and labels each token with one of five cognitive states. It does not need to read the output text.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">03 · DERIVE</div>
             <h3 class="mech-card__title">58 signals, per token.</h3>
-            <p class="mech-card__body">Entropy, velocity, effective dimensionality, logit-lens distance, attention concentration, and 53 more. Streamed as time-series and queryable post-hoc.</p>
+            <p class="mech-card__body">Entropy, velocity, effective dimensionality, logit-lens distance, attention concentration, and 53 more. Streamed as time series and available for replay after the run.</p>
           </article>
         </div>
 
@@ -222,7 +221,7 @@
           </div>
           <div class="state-cell" style="--c: var(--c-uncertainty);">
             <div class="state-cell__name">Uncertainty</div>
-            <div class="state-cell__desc">Genuine deliberation, weighing alternatives.</div>
+            <div class="state-cell__desc">Hesitation, hedging, or unresolved alternatives.</div>
           </div>
         </div>
       </section>
@@ -236,28 +235,28 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Tell what the model is doing — reasoning, retrieving, fabricating — regardless of what it's saying.</p>
+            <p class="evidence-cell__plain">Classify what the model is doing: reasoning, retrieving, fabricating, and more.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">94.8<i>%</i></span>
               <span class="evidence-cell__label">state classification accuracy · five-class · held-out</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">Catch hallucinations from the geometry alone — no fact-checking knowledge base required.</p>
+            <p class="evidence-cell__plain">Catch fabrication from the geometry alone, without a fact-checking knowledge base.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">0.94<i>F1</i></span>
               <span class="evidence-cell__label">fabrication detection · held-out stress corpus</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">Works across model families — not tied to any single vendor's architecture.</p>
+            <p class="evidence-cell__plain">Works across model families, not just one vendor's architecture.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">5<i>arch families</i></span>
               <span class="evidence-cell__label">Qwen · Llama · Gemma · Pythia · OLMo</span>
             </div>
           </div>
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Geometric edits steer behavior — geometry is causal, not just correlated with what the model does next.</p>
+            <p class="evidence-cell__plain">Geometric edits can steer behavior, which means the geometry is not just a passive readout.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">3B<i>causal</i></span>
               <span class="evidence-cell__label">demonstrated intervention at 3B parameter scale</span>
@@ -306,7 +305,7 @@
         <div class="section__label">Prophecy</div>
         <h2 class="section__title">The model's mind is made up before it speaks.</h2>
         <p class="section__intro">
-          A transformer's geometric cognitive state is largely set during prompt encoding — before it generates a single token. A classifier reading only the prompt-encoding geometry predicts the state the generation settles into, with held-out accuracy that matches the generation-time classifier.
+          A transformer's geometric state is often set during prompt encoding, before it generates a single token. A classifier reading only that prompt geometry can predict the state the generation settles into, with held-out accuracy close to the generation-time classifier.
         </p>
 
         <div class="prophecy-flow">
@@ -334,14 +333,14 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Predict the geometric state from the prompt alone — before the model writes anything.</p>
+            <p class="evidence-cell__plain">Predict the geometric state from the prompt alone, before the model writes anything.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">85–91<i>%</i></span>
               <span class="evidence-cell__label">prompt-only classifier · 8B · grouped (prompt-level) CV</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">Holds at smaller scale too, on a held-out, leakage-controlled split.</p>
+            <p class="evidence-cell__plain">The smaller 3B model shows the same pattern on a held-out, leakage-controlled split.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">85.0<i>%</i></span>
               <span class="evidence-cell__label">3B · prompt-level CV · per-prompt grouping</span>
@@ -356,14 +355,14 @@
               <li>Reasoning 95% · Creativity 94% · Collapse 93%</li>
               <li>Retrieval 89% · Precision 88%</li>
               <li>Uncertainty 78%</li>
-              <li>Edge cases 56% — the weakest, and we say so</li>
+              <li>Edge cases 56% — weakest category</li>
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
             <div class="honest-col__head">▱ What this is not</div>
             <ul class="honest-col__list">
-              <li>A strong tendency, not a guarantee — the model can still change course mid-generation (next section).</li>
-              <li>It predicts the cognitive mode — reasoning, retrieval, and so on — not the literal answer, or whether that answer is right.</li>
+              <li>This is a strong tendency, not a guarantee; the model can still change course mid-generation.</li>
+              <li>It predicts the cognitive mode: reasoning, retrieval, and so on. It does not predict the literal answer or whether that answer is true.</li>
               <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard (the edge cases at left).</li>
             </ul>
           </div>
@@ -374,7 +373,7 @@
         <div class="section__label">In-flight</div>
         <h2 class="section__title">It catches the model changing its mind mid-sentence.</h2>
         <p class="section__intro">
-          Cognitive state isn't fixed for a whole generation. Within a single response the model can shift regime — here, from open-ended reasoning into low-entropy precision — and the instrument resolves the switch token by token, live.
+          Cognitive state is not fixed for a whole generation. Within one response, the model can shift from open-ended reasoning into low-entropy precision. GhostLine resolves that switch token by token.
         </p>
 
         <div class="token-timeline">
@@ -402,15 +401,15 @@
         </div>
 
         <p class="section__intro" style="margin-top:32px; margin-bottom:0;">
-          Real tokens from the math-reasoning recording — prompt "Solve 22x − 8 = 3x" — colored by the instrument's per-token state. Early on it reasons through the approach ("Subtract … from both sides"); as it commits to the exact value it shifts into precision ("Divide both sides by … x = 8/19"). A live qualitative capture, not a benchmark — per-token labels are raw, and the final fraction is condensed for readability.
+          Real tokens from the math-reasoning recording, prompt: "Solve 22x − 8 = 3x." The early tokens work through the strategy ("Subtract … from both sides"). Later, as the model commits to the exact value, the state shifts into precision ("Divide both sides by … x = 8/19"). This is a qualitative live capture, not a benchmark; per-token labels are raw, and the final fraction is condensed for readability.
         </p>
       </section>
 
       <section class="section">
         <div class="section__label">At scale</div>
-        <h2 class="section__title">Does it hold as models grow? At 8B — yes, and richer.</h2>
+        <h2 class="section__title">Does it hold as models grow? At 8B, yes.</h2>
         <p class="section__intro">
-          The geometry doesn't wash out at 8B parameters; it stays sharply separated, and a new discriminator family — MLP-based signals — emerges that is barely present at 3B. Whether separation grows as a clean function of scale is an open question, and an experiment is designed to answer it.
+          The geometry does not wash out at 8B parameters. It stays sharply separated, and a new discriminator family, MLP-based signals, appears that is barely present at 3B. Whether separation grows cleanly with scale is still open; the next experiment is designed to test that.
         </p>
 
         <figure class="scale-figure">
@@ -420,7 +419,7 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">A new signal family appears at 8B that barely registers at 3B — large by Cohen's convention.</p>
+            <p class="evidence-cell__plain">A new signal family appears at 8B and barely registers at 3B. The effect is large by Cohen's convention.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">d ≈ 4.2<i>MLP emergence</i></span>
               <span class="evidence-cell__label">MLP discriminators · Qwen3-8B · near-absent at 3B</span>
@@ -440,7 +439,7 @@
         <div class="section__label">Method</div>
         <h2 class="section__title">How we keep ourselves honest.</h2>
         <p class="section__intro">
-          The point of an instrument is that you can check it. Every number on this page comes from held-out data under a locked protocol — and where we've fooled ourselves, we've said so and fixed it.
+          An instrument should be checkable. Every number on this page comes from held-out data under a locked protocol. Where we fooled ourselves, we say so and use the corrected number.
         </p>
 
         <div class="mech-grid">
@@ -452,12 +451,12 @@
           <article class="mech-card">
             <div class="mech-card__num">02 · VALIDATION</div>
             <h3 class="mech-card__title">Grouped, held-out, no leakage.</h3>
-            <p class="mech-card__body">Cross-validation groups by prompt — analogous to patient-level splits in medical ML — so a classifier can't memorize a prompt's identity. Reported numbers are held-out, not training accuracy.</p>
+            <p class="mech-card__body">Cross-validation groups by prompt, analogous to patient-level splits in medical ML, so a classifier cannot memorize a prompt's identity. Reported numbers are held-out, not training accuracy.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">03 · SELF-CORRECTION</div>
             <h3 class="mech-card__title">We catch our own inflation.</h3>
-            <p class="mech-card__body">A 99.6% prophecy number turned out to be prompt-identity leakage; grouped CV corrected it to 85% — and we kept the lower one. We also flag where rules don't transfer (a 3B collapse threshold is invalid at 8B).</p>
+            <p class="mech-card__body">A 99.6% prophecy number turned out to be prompt-identity leakage. Grouped CV corrected it to 85%, and we kept the lower number. We also flag where rules do not transfer, such as a 3B collapse threshold that fails at 8B.</p>
           </article>
         </div>
       </section>
@@ -465,7 +464,7 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Read a recording.</h2>
-        <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, the state transitions, and the signal stream — all replayable, all explorable per-token.</p>
+        <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, state transitions, and signal stream; then inspect any token yourself.</p>
 
         <div class="demo-cta demo-cta--research">
           <div>
@@ -487,7 +486,7 @@
         <div class="section__label">Why now</div>
         <h2 class="section__title">Text-based monitoring can't see this. The geometric layer can.</h2>
         <p class="section__intro">
-          Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That distinction is now the difference between catching prompt injection, satisfying EU AI Act behavioral monitoring requirements, and gating expensive chain-of-thought before it runs.
+          Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That difference matters for prompt injection, EU AI Act monitoring evidence, and gating expensive chain-of-thought before it runs.
         </p>
 
         <div class="app-grid app-grid--usecases" data-usecase-grid>
@@ -496,7 +495,7 @@
               <h3 class="app-card__title">Compliance &amp; Audit</h3>
               <span class="app-card__id">A-01</span>
             </div>
-            <p class="app-card__body">Per-token behavioral state classification with replayable trajectory logs. Continuous monitoring artifacts that regulators can inspect directly — not post-hoc reports synthesized from output text.</p>
+            <p class="app-card__body">Per-token behavioral state classification with replayable trajectory logs. The result is inspectable monitoring evidence, not a post-hoc report synthesized from output text.</p>
             <div class="app-card__regs">
               <span>EU AI Act · Art 9</span>
               <span>EU AI Act · Art 12</span>
@@ -510,7 +509,7 @@
               <h3 class="app-card__title">Inference Optimization</h3>
               <span class="app-card__id">A-02</span>
             </div>
-            <p class="app-card__body">Pre-generation prediction identifies prompts likely to fabricate before any tokens are produced. Route, re-prompt, or gate chain-of-thought in ~15 ms — before wasting compute on bad output.</p>
+            <p class="app-card__body">Pre-generation prediction identifies prompts likely to fabricate before any tokens are produced. Route, re-prompt, or gate chain-of-thought in about 15 ms, before spending compute on a bad run.</p>
             <div class="app-card__regs">
               <span>~15 ms gate latency</span>
               <span>Routing layer drop-in</span>
@@ -523,7 +522,7 @@
               <h3 class="app-card__title">Defense &amp; Security</h3>
               <span class="app-card__id">A-03</span>
             </div>
-            <p class="app-card__body">Geometric monitoring is independent of output content. An adversary can craft text that passes content filters but cannot easily control the geometry of the model's computation. Prompt injection screening at the activation level.</p>
+            <p class="app-card__body">Geometric monitoring is independent of output content. An adversary can craft text that passes content filters, but controlling the geometry of the model's computation is harder. This gives prompt-injection screening another channel.</p>
             <div class="app-card__regs">
               <span>Activation-level</span>
               <span>Content-independent</span>
@@ -536,7 +535,7 @@
               <h3 class="app-card__title">Model Development</h3>
               <span class="app-card__id">A-04</span>
             </div>
-            <p class="app-card__body">Geometric profiling of training checkpoints reveals whether fine-tuning actually improves behavioral separation. Prompt corpus certification establishes geometrically bounded quality rules per model.</p>
+            <p class="app-card__body">Geometric profiling of training checkpoints shows whether fine-tuning improves behavioral separation. Prompt corpus certification checks whether an eval set actually exercises the intended states.</p>
             <div class="app-card__regs">
               <span>Checkpoint diff</span>
               <span>Corpus certification</span>
@@ -579,7 +578,7 @@
             <div class="usecase-panel__grid">
               <div>
                 <h4>GhostLine fit</h4>
-                <p>The Act points teams toward risk management, logging, monitoring, oversight, robustness, and documented evaluation. GhostLine is not a compliance guarantee; it is an instrumentation layer for generating behavioral evidence those programs can inspect.</p>
+                <p>The Act pushes teams toward risk management, logging, monitoring, oversight, robustness, and documented evaluation. GhostLine is not a compliance guarantee. It is an instrumentation layer that produces behavioral evidence those programs can inspect.</p>
               </div>
               <div>
                 <h4>GhostLine artifacts</h4>
@@ -652,7 +651,7 @@
                 </ul>
               </div>
             </div>
-            <p class="usecase-panel__caveat">Latency and gate quality are tuned per model — your pilot calibrates on your own prompts, decoding settings, and hardware.</p>
+            <p class="usecase-panel__caveat">Latency and gate quality are model-specific. A pilot calibrates on your prompts, decoding settings, and hardware.</p>
           </article>
 
           <article class="usecase-panel__brief" data-usecase-brief="security">
@@ -776,7 +775,7 @@
           <div class="latency-cell">
             <div class="latency-cell__value">~15 ms</div>
             <div class="latency-cell__label">Pre-gen gate</div>
-            <div class="latency-cell__desc">Decide to generate, route, or block — before any output token.</div>
+            <div class="latency-cell__desc">Decide whether to generate, route, or block before any output token.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">&lt;2 ms</div>
@@ -786,7 +785,7 @@
           <div class="latency-cell">
             <div class="latency-cell__value">0</div>
             <div class="latency-cell__label">Added forward passes</div>
-            <div class="latency-cell__desc">Per-token monitoring rides the existing forward pass — no re-evaluation. The pre-gen gate above is one optional extra pass.</div>
+            <div class="latency-cell__desc">Per-token monitoring rides the existing forward pass. It does not re-run the model. The pre-gen gate above is one optional extra pass.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">58</div>
@@ -799,13 +798,13 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Catch fabrications in the geometry.</h2>
-        <p class="section__intro">"Battle of Darien, 1645" — a false-premise question, the kind that makes models confidently invent history. The text reads fluently; the geometry tells a different story within the first few generated tokens.</p>
+        <p class="section__intro">"Battle of Darien, 1645" is a false-premise question, the kind that can make a model confidently invent history. The text reads fluently; the geometry tells a different story within the first few generated tokens.</p>
 
         <figure class="industry-figure">
           <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible within the first few generated tokens">
           <figcaption>
             <span class="industry-figure__title">Per-token risk readout</span>
-            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature climbs past 0.60 by the fourth generated token and peaks at 0.88 — long before a human reader could spot it in the prose.</span>
+            <span class="industry-figure__body">A risk score on every generated token. The fabrication signature climbs past 0.60 by the fourth generated token and peaks at 0.88, long before a human reader could spot the problem in the prose.</span>
           </figcaption>
         </figure>
 
@@ -813,7 +812,7 @@
           <div>
             <div class="demo-cta__label">Side-by-side recording</div>
             <h3 class="demo-cta__title">See the fabrication signature, then compare to healthy retrieval.</h3>
-            <p class="demo-cta__body">Same surface behavior, radically different internal geometry. Hallucination risk crosses 0.60 by the fourth generated token and peaks at 0.88 — well above the score of a healthy retrieval generation in the comparison recording.</p>
+            <p class="demo-cta__body">Similar surface behavior, very different internal geometry. Fabrication risk crosses 0.60 by the fourth generated token and peaks at 0.88, well above the score of a healthy retrieval generation in the comparison recording.</p>
           </div>
           <div class="demo-cta__action">
             <a href="demo/" class="demo-cta__btn">Open the comparison</a>
@@ -828,7 +827,7 @@
         <div class="section__label">Deeper</div>
         <h2 class="section__title">How it's wired.</h2>
         <p class="section__intro">
-          The instrument is real software. Drag the diagram to explore the capture pipeline, classifier graph, and live runtime bridge — or open the full lineage hub for component-level walkthroughs.
+          This is real software, not a deck. Drag the diagram to explore the capture pipeline, classifier graph, and live runtime bridge, or open the full lineage hub for component-level walkthroughs.
         </p>
       </div>
 
@@ -868,7 +867,7 @@
       <div class="section__label">Consulting</div>
       <h2 class="section__title">From a one-week audit to a full pilot.</h2>
       <p class="section__intro">
-        Three ways to put GhostLine on a real model without requiring a full production integration on day one. Start with an audit, then expand into integration or domain classifier work when the signal is worth operationalizing.
+        Three ways to try GhostLine on a real model without a full production integration on day one. Start with an audit, then expand into integration or domain classifier work if the signal is strong enough.
       </p>
 
       <div class="app-grid app-grid--engagement">
@@ -877,7 +876,7 @@
             <h3 class="app-card__title">AI risk geometry audit</h3>
             <span class="app-card__id">S-01</span>
           </div>
-          <p class="app-card__body">A short diagnostic sprint for one model and one high-risk workflow. We capture representative generations, profile state transitions and fabrication signatures, and deliver a decision memo with risk map, recommended controls, and a clear recommendation on whether and how to operationalize it.</p>
+          <p class="app-card__body">A short diagnostic sprint for one model and one high-risk workflow. We capture representative generations, profile state transitions and fabrication signatures, and deliver a decision memo: risk map, recommended controls, and a clear call on whether GhostLine is worth taking further.</p>
           <div class="app-card__regs">
             <span>5-7 business days</span>
             <span>No production integration required</span>
@@ -889,7 +888,7 @@
             <h3 class="app-card__title">Pilot integration</h3>
             <span class="app-card__id">P-01</span>
           </div>
-          <p class="app-card__body">A 30-day instrumentation of one AI surface. We attach GhostLine to your model's forward pass and stream per-token state plus risk scores into a dashboard your team can inspect. You provide a model endpoint and a contact engineer; we provide the instrumentation, the classifiers, and the live readout.</p>
+          <p class="app-card__body">A 30-day pilot on one AI surface. We attach GhostLine to your model's forward pass and stream per-token state plus risk scores into a dashboard your team can inspect. You provide a model endpoint and a contact engineer; we provide the instrumentation, classifiers, and live readout.</p>
           <div class="app-card__regs">
             <span>~30 days</span>
             <span>Self-hosted model deployment (Qwen, Llama, Gemma, Pythia, or similar)</span>
@@ -901,7 +900,7 @@
             <h3 class="app-card__title">Custom classifier training</h3>
             <span class="app-card__id">P-02</span>
           </div>
-          <p class="app-card__body">A domain-specific state classifier trained on your corpus. You provide ~1,000 labeled generations from your model on your tasks; we deliver a classifier with held-out F1 reported and a replayable validation harness. Label schema defined together in week one.</p>
+          <p class="app-card__body">A domain-specific state classifier trained on your corpus. You provide about 1,000 labeled generations from your model on your tasks; we deliver a classifier with held-out F1 and a replayable validation harness. We define the label schema together in week one.</p>
           <div class="app-card__regs">
             <span>~3–4 weeks</span>
             <span>Corpus + label schema required</span>
@@ -913,7 +912,7 @@
         <div>
           <div class="demo-cta__label">Pilot-ready surface</div>
           <h3 class="demo-cta__title">Bring one risky AI surface. Leave with a scoped pilot.</h3>
-          <p class="demo-cta__body">The strongest first fit is a team running self-hosted Qwen, Llama, Gemma, Pythia, or adjacent open-weight models where hallucination, auditability, inference routing, or safety monitoring already has budget pressure.</p>
+          <p class="demo-cta__body">Best first fit: a team running self-hosted Qwen, Llama, Gemma, Pythia, or similar open-weight models where hallucination, auditability, inference routing, or safety monitoring already has budget pressure.</p>
         </div>
         <div class="demo-cta__action">
           <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="demo-cta__btn">Book a scoping call</a>
@@ -926,15 +925,15 @@
       <div>
         <span class="stage-badge">▰ Working instrument · pilot-ready</span>
         <p class="about__statement">
-          I'm an independent researcher and builder working outside the traditional academic and venture-backed paths. My background is blue-collar rather than institutional, and the work has been self-directed — reading deeply, testing aggressively, and using modern AI as a force multiplier to turn pattern-recognition into working systems far faster than I could alone.
+          I'm an independent researcher and builder working outside the usual academic and venture-backed paths. My background is blue-collar rather than institutional. The work has been self-directed: reading deeply, testing aggressively, and using modern AI to turn pattern recognition into working systems faster than I could alone.
         </p>
         <p class="about__text">
-          GhostLine came out of that: I noticed a high-leverage problem — what a language model's reasoning actually looks like from the inside — and followed it obsessively until it became real infrastructure. I built every layer myself: the capture pipeline, the behavioral corpus, the classifiers, the live interface, and the four filed provisional patents behind them. It's been validated across five model architectures and nine models, from 1B to 8B parameters.
+          GhostLine came out of that. I kept coming back to one problem: what does a language model's reasoning look like from the inside? I followed that question until it became real infrastructure. I built every layer myself: the capture pipeline, the behavioral corpus, the classifiers, the live interface, and the four filed provisional patents behind them. It has been validated across five model architectures and nine models, from 1B to 8B parameters.
         </p>
         <p class="about__text">
-          I build for systems that have to survive contact with messy reality. Modern AI gives a relentless individual the reach of a whole team — but someone still has to be relentless.
+          I build for systems that have to survive contact with messy reality. Modern AI can give one determined person the reach of a whole team, but someone still has to stay with the problem.
         </p>
-        <p class="about__text">Works with operators who have an AI surface, a real risk of fabrication, and a reason to inspect model behavior before the output becomes the evidence trail.</p>
+        <p class="about__text">I work with operators who have an AI surface, a real risk of fabrication, and a reason to inspect model behavior before the output becomes the evidence trail.</p>
 
         <div class="about__stats">
           <div class="about__stat">
