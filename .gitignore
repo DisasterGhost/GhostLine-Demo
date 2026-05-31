@@ -5,3 +5,6 @@ dist/
 
 # Local-only preview copy of media (deploy uses public/media)
 static-landing/media/
+
+# Local-only Playwright screenshots (agent eyeball)
+.shots/
