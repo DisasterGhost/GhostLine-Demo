@@ -113,7 +113,7 @@
           <div class="path-card__tag">Research</div>
           <h3 class="path-card__title">Geometric mechanism, validated.</h3>
           <p class="path-card__desc">
-            What GhostLine measures, how the geometry is computed, what held up under stress, and what is still immature. Includes hypothesis tests, signal taxonomy, and architecture coverage.
+            The mechanism, the numbers, and what's still open — written for someone who wants to stress-test the approach before trusting it.
           </p>
           <ul class="path-card__topics">
             <li>5 cognitive states · 58 signals</li>
@@ -137,7 +137,7 @@
           <div class="path-card__tag">Industry</div>
           <h3 class="path-card__title">Where it deploys, and why now.</h3>
           <p class="path-card__desc">
-            Compliance, inference economics, defense, and model development. What geometry can catch that text-based monitoring misses, with concrete latency and integration points.
+            Where it deploys, what it costs operationally, and what it catches that text-based monitoring misses.
           </p>
           <ul class="path-card__topics">
             <li>EU AI Act Articles 9 &amp; 12</li>
@@ -167,7 +167,7 @@
         <div class="section__label">Mechanism</div>
         <h2 class="section__title">The instrument reads what the model is doing while it's still doing it.</h2>
         <p class="section__intro">
-          Each forward pass through a transformer leaves a trajectory through high-dimensional activation space. GhostLine projects that trajectory, classifies the geometric signature of every token, and streams 58 derived signals while the model is generating: entropy, velocity, effective dimensionality, attention entropy, fabrication risk, and more.
+          Each token leaves a trace in the transformer's activation space — a path shaped by what the model is doing. GhostLine captures that path, classifies every token's geometric signature against five cognitive states, and streams 58 derived signals in real time: entropy, velocity, effective dimensionality, attention patterns, fabrication risk, and more.
         </p>
 
         <div class="mech-grid">
@@ -209,15 +209,15 @@
           </div>
           <div class="state-cell" style="--c: var(--c-retrieval);">
             <div class="state-cell__name">Retrieval</div>
-            <div class="state-cell__desc">Pulling stored facts from training data.</div>
+            <div class="state-cell__desc">Drawing on stored knowledge — recall, not active reasoning.</div>
           </div>
           <div class="state-cell" style="--c: var(--c-creativity);">
             <div class="state-cell__name">Creativity</div>
-            <div class="state-cell__desc">Synthesis, narrative construction, evocation.</div>
+            <div class="state-cell__desc">Open-ended synthesis — generating, connecting, building rather than recalling.</div>
           </div>
           <div class="state-cell" style="--c: var(--c-precision);">
             <div class="state-cell__name">Precision</div>
-            <div class="state-cell__desc">Low-entropy commitment to exact values.</div>
+            <div class="state-cell__desc">Narrow, committed output: a specific value, name, or answer with little hesitation.</div>
           </div>
           <div class="state-cell" style="--c: var(--c-uncertainty);">
             <div class="state-cell__name">Uncertainty</div>
@@ -256,7 +256,7 @@
             </div>
           </div>
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Geometric edits can steer behavior, which means the geometry is not just a passive readout.</p>
+            <p class="evidence-cell__plain">Editing the geometry mid-generation shifts what the model produces — making GhostLine a control surface, not just a readout.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">3B<i>causal</i></span>
               <span class="evidence-cell__label">demonstrated intervention at 3B parameter scale</span>
@@ -305,7 +305,7 @@
         <div class="section__label">Prophecy</div>
         <h2 class="section__title">The model's mind is made up before it speaks.</h2>
         <p class="section__intro">
-          A transformer's geometric state is often set during prompt encoding, before it generates a single token. A classifier reading only that prompt geometry can predict the state the generation settles into, with held-out accuracy close to the generation-time classifier.
+          Before a transformer writes a single token, its internal geometry is already leaning toward a particular mode — committed during prompt encoding, before generation begins. A classifier trained only on that prompt geometry can predict whether the response will reason through a problem, retrieve a fact, or fabricate, at accuracy that matches the generation-time classifier.
         </p>
 
         <div class="prophecy-flow">
@@ -340,7 +340,7 @@
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">The smaller 3B model shows the same pattern on a held-out, leakage-controlled split.</p>
+            <p class="evidence-cell__plain">At 3B, the same pattern holds — same methodology, prompt-level grouping, same result.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">85.0<i>%</i></span>
               <span class="evidence-cell__label">3B · prompt-level CV · per-prompt grouping</span>
@@ -373,7 +373,7 @@
         <div class="section__label">In-flight</div>
         <h2 class="section__title">It catches the model changing its mind mid-sentence.</h2>
         <p class="section__intro">
-          Cognitive state is not fixed for a whole generation. Within one response, the model can shift from open-ended reasoning into low-entropy precision. GhostLine resolves that switch token by token.
+          Cognitive state doesn't lock in for a whole generation. Within a single response, a model can move from working through a problem to committing to an answer — and GhostLine catches that transition token by token.
         </p>
 
         <div class="token-timeline">
@@ -409,7 +409,7 @@
         <div class="section__label">At scale</div>
         <h2 class="section__title">Does it hold as models grow? At 8B, yes.</h2>
         <p class="section__intro">
-          The geometry does not wash out at 8B parameters. It stays sharply separated, and a new discriminator family, MLP-based signals, appears that is barely present at 3B. Whether separation grows cleanly with scale is still open; the next experiment is designed to test that.
+          The geometry doesn't wash out at 8B parameters. State separation stays sharp, and MLP activations — barely informative at 3B — become a distinct signal class at 8B. Whether that trend continues across a wider scale range is still open; the next experiment tests it directly.
         </p>
 
         <figure class="scale-figure">
@@ -463,8 +463,8 @@
 
       <section class="section">
         <div class="section__label">See it</div>
-        <h2 class="section__title">Read a recording.</h2>
-        <p class="section__intro">Six curated generations, fully annotated. Watch the trajectory, state transitions, and signal stream; then inspect any token yourself.</p>
+        <h2 class="section__title">See it working.</h2>
+        <p class="section__intro">Six live captures, each fully annotated. Browse reasoning, retrieval, creativity, and a fabrication caught in the act — then step through any generation token by token.</p>
 
         <div class="demo-cta demo-cta--research">
           <div>
@@ -486,7 +486,7 @@
         <div class="section__label">Why now</div>
         <h2 class="section__title">Text-based monitoring can't see this. The geometric layer can.</h2>
         <p class="section__intro">
-          Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That difference matters for prompt injection, EU AI Act monitoring evidence, and gating expensive chain-of-thought before it runs.
+          Output filtering reads what the model said. GhostLine reads what the model was doing while saying it. That gap is where EU AI Act monitoring, prompt injection screening, and pre-generation cost gating all operate.
         </p>
 
         <div class="app-grid app-grid--usecases" data-usecase-grid>
@@ -798,7 +798,7 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">Catch fabrications in the geometry.</h2>
-        <p class="section__intro">"Battle of Darien, 1645" is a false-premise question, the kind that can make a model confidently invent history. The text reads fluently; the geometry tells a different story within the first few generated tokens.</p>
+        <p class="section__intro">"Battle of Darien, 1645" is a false-premise question — the kind that makes a model confidently invent history. The text reads fluently. The geometry tells a different story within the first few generated tokens.</p>
 
         <figure class="industry-figure">
           <img src="media/ghostline-token-health.png" alt="Per-token risk readout — fabrication signature visible within the first few generated tokens">
@@ -812,7 +812,7 @@
           <div>
             <div class="demo-cta__label">Side-by-side recording</div>
             <h3 class="demo-cta__title">See the fabrication signature, then compare to healthy retrieval.</h3>
-            <p class="demo-cta__body">Similar surface behavior, very different internal geometry. Fabrication risk crosses 0.60 by the fourth generated token and peaks at 0.88, well above the score of a healthy retrieval generation in the comparison recording.</p>
+            <p class="demo-cta__body">Similar surface behavior, very different internal geometry. Fabrication risk crosses 0.60 by the fourth generated token and peaks at 0.88 — where the healthy retrieval recording in the same demo sits near zero.</p>
           </div>
           <div class="demo-cta__action">
             <a href="demo/" class="demo-cta__btn">Open the comparison</a>
@@ -827,7 +827,7 @@
         <div class="section__label">Deeper</div>
         <h2 class="section__title">How it's wired.</h2>
         <p class="section__intro">
-          This is real software, not a deck. Drag the diagram to explore the capture pipeline, classifier graph, and live runtime bridge, or open the full lineage hub for component-level walkthroughs.
+          This is real software, not a deck. Drag the diagram to explore how the capture pipeline, classifier graph, and live runtime connect — or follow any node to the full lineage hub.
         </p>
       </div>
 
@@ -867,7 +867,7 @@
       <div class="section__label">Consulting</div>
       <h2 class="section__title">From a one-week audit to a full pilot.</h2>
       <p class="section__intro">
-        Three ways to try GhostLine on a real model without a full production integration on day one. Start with an audit, then expand into integration or domain classifier work if the signal is strong enough.
+        Three ways to start without committing to a full production integration on day one. Most teams begin with an audit, then decide whether integration or a custom classifier is worth taking further.
       </p>
 
       <div class="app-grid app-grid--engagement">
@@ -912,7 +912,7 @@
         <div>
           <div class="demo-cta__label">Pilot-ready surface</div>
           <h3 class="demo-cta__title">Bring one risky AI surface. Leave with a scoped pilot.</h3>
-          <p class="demo-cta__body">Best first fit: a team running self-hosted Qwen, Llama, Gemma, Pythia, or similar open-weight models where hallucination, auditability, inference routing, or safety monitoring already has budget pressure.</p>
+          <p class="demo-cta__body">Best first fit: teams running self-hosted open-weight models where hallucination, auditability, inference routing, or safety monitoring already has budget pressure.</p>
         </div>
         <div class="demo-cta__action">
           <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="demo-cta__btn">Book a scoping call</a>
