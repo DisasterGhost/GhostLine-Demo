@@ -19,8 +19,9 @@
       --c-reasoning: #6b8cff;
       --c-retrieval: #2dd4bf;
       --c-creativity: #a855f7;
-      --c-precision: #f59e0b;
+      --c-precision: #d4c25a;
       --c-halluc: #ef4444;
+      --c-uncertainty: #d98a4f;
     }
     body { background: var(--bg); color: var(--text); font-family: var(--mono); min-height: 100vh; }
 
@@ -86,6 +87,9 @@
       font-size: 9px; letter-spacing: 0.1em; padding: 2px 6px;
       border-radius: 2px; background: var(--accent-dim); color: var(--accent);
     }
+    .rec-card__badge--live {
+      background: rgba(45,212,191,0.1); color: var(--c-retrieval);
+    }
 
     .rec-card__title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
     .rec-card__prompt {
@@ -95,6 +99,11 @@
       font-style: italic; line-height: 1.5;
     }
     .rec-card__desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; flex: 1; }
+    .rec-card__goal {
+      font-size: 11px; color: rgba(107,140,255,0.55); line-height: 1.5;
+      margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
     .rec-card__states {
       display: flex; gap: 6px; flex-wrap: wrap;
       margin-top: 14px; padding-top: 14px;
@@ -133,7 +142,7 @@
   </nav>
 
   <div class="lib-hero">
-    <div class="lib-hero__eyebrow">▰ 8 captures · fully annotated</div>
+    <div class="lib-hero__eyebrow">▰ 7 captures · fully annotated</div>
     <h1 class="lib-hero__title">Every cognitive mode — including one fabrication caught live.</h1>
     <p class="lib-hero__sub">Each recording is a complete generation with per-token state labels, 58 signal streams, and inline annotations. Pick any to explore in the live instrument.</p>
   </div>
@@ -143,15 +152,19 @@
     <a class="rec-card rec-card--featured" href="demo/?demo=1&recording=/recordings/hallucination-detection.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-halluc);"></span>
-        <span class="rec-card__id">R-05</span>
+        <span class="rec-card__id">hallucination-detection</span>
         <span class="rec-card__badge">FEATURED</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
       <div class="rec-card__title">Hallucination Detection</div>
       <p class="rec-card__prompt">"Tell me about the Battle of Darien, 1645."</p>
-      <p class="rec-card__desc">A false-premise question. The model invents history fluently. The geometry flags fabrication risk past 0.60 by the fourth generated token — long before a human reader could spot the problem.</p>
+      <p class="rec-card__desc">"Battle of Darien, 1645" — a prompt designed to trigger fabrication. The model invents history, briefly hedges, then commits again. GhostLine's ensemble flags it from the very first token.</p>
+      <p class="rec-card__goal">See the geometric difference between healthy retrieval and hallucinated fabrication: same surface behavior, radically different internal geometry.</p>
       <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-halluc);">Fabrication</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
         <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
-        <span class="rec-card__state" style="--s-color: var(--c-halluc);">Fabrication ↑</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
     </a>
@@ -159,12 +172,14 @@
     <a class="rec-card rec-card--featured" href="demo/?demo=1&recording=/recordings/math-reasoning.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
-        <span class="rec-card__id">R-07</span>
+        <span class="rec-card__id">math-reasoning</span>
         <span class="rec-card__badge">FEATURED</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
-      <div class="rec-card__title">Math Reasoning</div>
+      <div class="rec-card__title">Mathematical Reasoning</div>
       <p class="rec-card__prompt">"Solve 22x − 8 = 3x."</p>
-      <p class="rec-card__desc">A live regime shift: the model reasons through the strategy, then commits to the exact answer. State transitions from reasoning to precision are visible token by token around token 105.</p>
+      <p class="rec-card__desc">Solving 22x − 8 = 3x. Watch reasoning and precision alternate with every equation symbol — a clean two-state oscillation visible token by token.</p>
+      <p class="rec-card__goal">See how different cognitive modes alternate within a single task: reasoning for structure, precision for exact values.</p>
       <div class="rec-card__states">
         <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
         <span class="rec-card__state" style="--s-color: var(--c-precision);">→ Precision</span>
@@ -172,33 +187,21 @@
       <div class="rec-card__open">Open recording →</div>
     </a>
 
-    <a class="rec-card" href="demo/?demo=1&recording=/recordings/cognitive-states.ghostline">
-      <div class="rec-card__tag">
-        <span class="rec-card__dot" style="--dot-color: var(--c-creativity);"></span>
-        <span class="rec-card__id">R-04</span>
-      </div>
-      <div class="rec-card__title">Cognitive States</div>
-      <p class="rec-card__prompt">A prompt designed to exercise all five states.</p>
-      <p class="rec-card__desc">The broadest coverage recording — shows reasoning, retrieval, creativity, precision, and uncertainty in a single generation. Good first tour of what GhostLine tracks.</p>
-      <div class="rec-card__states">
-        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
-        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
-        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
-        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
-      </div>
-      <div class="rec-card__open">Open recording →</div>
-    </a>
-
     <a class="rec-card" href="demo/?demo=1&recording=/recordings/knowledge-retrieval.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-retrieval);"></span>
-        <span class="rec-card__id">R-06</span>
+        <span class="rec-card__id">knowledge-retrieval</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
       <div class="rec-card__title">Knowledge Retrieval</div>
-      <p class="rec-card__prompt">Factual recall from training data.</p>
-      <p class="rec-card__desc">A clean retrieval generation to compare against the fabrication recording. Similar surface fluency; very different internal geometry. Compare them to see the signal gap.</p>
+      <p class="rec-card__prompt">"Tell me about the wonderful and diverse chicken."</p>
+      <p class="rec-card__desc">Qwen3-8B explains the chicken. All 5 cognitive states, 63 transitions, and the widest entropy range in the collection — watch the model weave between recall and invention.</p>
+      <p class="rec-card__goal">Understand healthy knowledge retrieval: rapid state switching between factual recall, creative elaboration, and structural reasoning.</p>
       <div class="rec-card__states">
         <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
         <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
@@ -206,15 +209,18 @@
 
     <a class="rec-card" href="demo/?demo=1&recording=/recordings/moral-reasoning.ghostline">
       <div class="rec-card__tag">
-        <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
-        <span class="rec-card__id">R-08</span>
+        <span class="rec-card__dot" style="--dot-color: var(--c-uncertainty);"></span>
+        <span class="rec-card__id">moral-reasoning</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
-      <div class="rec-card__title">Moral Reasoning</div>
-      <p class="rec-card__prompt">An ethical deliberation prompt.</p>
-      <p class="rec-card__desc">Extended reasoning and uncertainty across a morally ambiguous question. Watch the model hedge, reframe, and commit — with uncertainty and reasoning states visible as they alternate.</p>
+      <div class="rec-card__title">Moral Reasoning Under Uncertainty</div>
+      <p class="rec-card__prompt">"Starve honorably or steal?"</p>
+      <p class="rec-card__desc">The model grapples with a genuine dilemma. Uncertainty dominates as it explores both sides without pretending to have an answer — no precision, no retrieval, pure deliberation.</p>
+      <p class="rec-card__goal">See what genuine uncertainty looks like geometrically: the model explores rather than retrieves, and the geometry shows deliberation.</p>
       <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
         <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
-        <span class="rec-card__state" style="--s-color: var(--c-reasoning);" style="opacity:0.6">Uncertainty</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
     </a>
@@ -222,14 +228,19 @@
     <a class="rec-card" href="demo/?demo=1&recording=/recordings/code-generation.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-precision);"></span>
-        <span class="rec-card__id">R-03</span>
+        <span class="rec-card__id">code-generation</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
       <div class="rec-card__title">Code Generation</div>
-      <p class="rec-card__prompt">A programming task.</p>
-      <p class="rec-card__desc">Low-variance, precision-heavy output. The model commits early and stays committed — a contrast to the open-ended moral reasoning recording. Useful for comparing state geometry across task types.</p>
+      <p class="rec-card__prompt">"Write a React script with live data fetching."</p>
+      <p class="rec-card__desc">Writing a React script. All five states appear — reasoning and precision dominate, retrieval activates for library names, with three uncertainty tokens and a single creativity token at the margins.</p>
+      <p class="rec-card__goal">See how the same states look different in code vs math, and how retrieval activates specifically for API and library knowledge.</p>
       <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
         <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
         <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
     </a>
@@ -237,30 +248,38 @@
     <a class="rec-card" href="demo/?demo=1&recording=/recordings/ai-overview.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-creativity);"></span>
-        <span class="rec-card__id">R-01</span>
+        <span class="rec-card__id">ai-overview</span>
+        <span class="rec-card__badge rec-card__badge--live">LIVE</span>
       </div>
-      <div class="rec-card__title">AI Overview</div>
-      <p class="rec-card__prompt">An open-ended question about artificial intelligence.</p>
-      <p class="rec-card__desc">Broad, generative, and exploratory. The model synthesizes across topics — creativity and reasoning alternate as it organizes a long-form answer. Good for watching the cloud reshape across states.</p>
+      <div class="rec-card__title">How AI Thinks About AI</div>
+      <p class="rec-card__prompt">"What is artificial intelligence?"</p>
+      <p class="rec-card__desc">Qwen3-8B explains artificial intelligence. All five cognitive states appear in a single generation — annotated step by step to introduce every GhostLine concept.</p>
+      <p class="rec-card__goal">Learn to read the 3D visualization: each sphere is a token, color is cognitive state, and the trajectory reveals how the model thinks.</p>
       <div class="rec-card__states">
         <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
         <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
     </a>
 
-    <a class="rec-card" href="demo/?demo=1&recording=/recordings/chicken.ghostline">
+<a class="rec-card" href="demo/?demo=1&recording=/recordings/chicken.ghostline">
       <div class="rec-card__tag">
         <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
-        <span class="rec-card__id">R-02</span>
+        <span class="rec-card__id">chicken</span>
       </div>
       <div class="rec-card__title">The Chicken</div>
       <p class="rec-card__prompt">"Tell me about the wonderful and diverse chicken."</p>
-      <p class="rec-card__desc">The default demo recording — 150 tokens, all five states represented. A reliable first look at what GhostLine tracks and a good baseline for understanding how the token cloud moves.</p>
+      <p class="rec-card__desc">150 tokens, all five cognitive states present including a single precision token. A reliable first look at what GhostLine tracks and a good baseline for understanding how the token cloud moves.</p>
+      <p class="rec-card__goal">Get comfortable with the interface: try clicking a token, switching layers, and stepping frame by frame through the generation.</p>
       <div class="rec-card__states">
         <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
         <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
         <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-uncertainty);">Uncertainty</span>
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
       </div>
       <div class="rec-card__open">Open recording →</div>
     </a>
