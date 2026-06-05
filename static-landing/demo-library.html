@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostLine — Recording Library</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%236b8cff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%236b8cff'/%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #06080c;
+      --surface: #0d1117;
+      --border: rgba(180,200,235,0.08);
+      --accent: #6b8cff;
+      --accent-dim: rgba(107,140,255,0.15);
+      --text: #c8d4e8;
+      --text-dim: #5a6478;
+      --mono: 'JetBrains Mono', 'Fira Mono', monospace;
+      --c-reasoning: #6b8cff;
+      --c-retrieval: #2dd4bf;
+      --c-creativity: #a855f7;
+      --c-precision: #f59e0b;
+      --c-halluc: #ef4444;
+    }
+    body { background: var(--bg); color: var(--text); font-family: var(--mono); min-height: 100vh; }
+
+    .lib-nav {
+      position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid var(--border);
+      background: rgba(6,8,12,0.92);
+      backdrop-filter: blur(8px);
+      padding: 0 32px;
+      height: 48px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .lib-nav__back {
+      color: var(--text-dim); text-decoration: none; font-size: 12px;
+      letter-spacing: 0.08em; transition: color 0.15s;
+    }
+    .lib-nav__back:hover { color: var(--text); }
+    .lib-nav__brand { color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; }
+    .lib-nav__label { color: var(--text-dim); font-size: 11px; letter-spacing: 0.1em; }
+
+    .lib-hero {
+      padding: 56px 32px 40px;
+      max-width: 960px; margin: 0 auto;
+    }
+    .lib-hero__eyebrow { font-size: 11px; color: var(--text-dim); letter-spacing: 0.12em; margin-bottom: 12px; }
+    .lib-hero__title { font-size: 22px; color: var(--text); font-weight: 700; margin-bottom: 10px; }
+    .lib-hero__sub { font-size: 13px; color: var(--text-dim); line-height: 1.6; max-width: 560px; }
+
+    .lib-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding: 0 32px 80px;
+      max-width: 960px; margin: 0 auto;
+    }
+
+    .rec-card {
+      display: flex; flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px 22px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, background 0.15s;
+      cursor: pointer;
+    }
+    .rec-card:hover { border-color: rgba(107,140,255,0.3); background: rgba(13,17,23,0.8); }
+    .rec-card--featured { border-color: rgba(107,140,255,0.2); }
+    .rec-card--featured:hover { border-color: rgba(107,140,255,0.5); }
+
+    .rec-card__tag {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .rec-card__dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--dot-color, var(--text-dim));
+      flex-shrink: 0;
+    }
+    .rec-card__id { font-size: 10px; color: var(--text-dim); letter-spacing: 0.12em; }
+    .rec-card__badge {
+      font-size: 9px; letter-spacing: 0.1em; padding: 2px 6px;
+      border-radius: 2px; background: var(--accent-dim); color: var(--accent);
+    }
+
+    .rec-card__title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+    .rec-card__prompt {
+      font-size: 11px; color: var(--text-dim);
+      border-left: 2px solid var(--border);
+      padding-left: 10px; margin-bottom: 12px;
+      font-style: italic; line-height: 1.5;
+    }
+    .rec-card__desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; flex: 1; }
+    .rec-card__states {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .rec-card__state {
+      font-size: 10px; letter-spacing: 0.06em;
+      padding: 2px 7px; border-radius: 2px;
+      background: rgba(255,255,255,0.04);
+      color: var(--s-color, var(--text-dim));
+    }
+    .rec-card__open {
+      margin-top: 16px;
+      font-size: 11px; color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    footer {
+      text-align: center; padding: 32px;
+      font-size: 11px; color: var(--text-dim); letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .lib-hero { padding: 32px 20px 24px; }
+      .lib-grid { padding: 0 20px 60px; grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="lib-nav">
+    <a href="." class="lib-nav__back">← ghostline-research.org</a>
+    <span class="lib-nav__brand">GHOSTLINE</span>
+    <span class="lib-nav__label">/ Recording Library</span>
+  </nav>
+
+  <div class="lib-hero">
+    <div class="lib-hero__eyebrow">▰ 8 captures · fully annotated</div>
+    <h1 class="lib-hero__title">Every cognitive mode — including one fabrication caught live.</h1>
+    <p class="lib-hero__sub">Each recording is a complete generation with per-token state labels, 58 signal streams, and inline annotations. Pick any to explore in the live instrument.</p>
+  </div>
+
+  <div class="lib-grid">
+
+    <a class="rec-card rec-card--featured" href="demo/?demo=1&recording=/recordings/hallucination-detection.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-halluc);"></span>
+        <span class="rec-card__id">R-05</span>
+        <span class="rec-card__badge">FEATURED</span>
+      </div>
+      <div class="rec-card__title">Hallucination Detection</div>
+      <p class="rec-card__prompt">"Tell me about the Battle of Darien, 1645."</p>
+      <p class="rec-card__desc">A false-premise question. The model invents history fluently. The geometry flags fabrication risk past 0.60 by the fourth generated token — long before a human reader could spot the problem.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-halluc);">Fabrication ↑</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card rec-card--featured" href="demo/?demo=1&recording=/recordings/math-reasoning.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
+        <span class="rec-card__id">R-07</span>
+        <span class="rec-card__badge">FEATURED</span>
+      </div>
+      <div class="rec-card__title">Math Reasoning</div>
+      <p class="rec-card__prompt">"Solve 22x − 8 = 3x."</p>
+      <p class="rec-card__desc">A live regime shift: the model reasons through the strategy, then commits to the exact answer. State transitions from reasoning to precision are visible token by token around token 105.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">→ Precision</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/cognitive-states.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-creativity);"></span>
+        <span class="rec-card__id">R-04</span>
+      </div>
+      <div class="rec-card__title">Cognitive States</div>
+      <p class="rec-card__prompt">A prompt designed to exercise all five states.</p>
+      <p class="rec-card__desc">The broadest coverage recording — shows reasoning, retrieval, creativity, precision, and uncertainty in a single generation. Good first tour of what GhostLine tracks.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/knowledge-retrieval.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-retrieval);"></span>
+        <span class="rec-card__id">R-06</span>
+      </div>
+      <div class="rec-card__title">Knowledge Retrieval</div>
+      <p class="rec-card__prompt">Factual recall from training data.</p>
+      <p class="rec-card__desc">A clean retrieval generation to compare against the fabrication recording. Similar surface fluency; very different internal geometry. Compare them to see the signal gap.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/moral-reasoning.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
+        <span class="rec-card__id">R-08</span>
+      </div>
+      <div class="rec-card__title">Moral Reasoning</div>
+      <p class="rec-card__prompt">An ethical deliberation prompt.</p>
+      <p class="rec-card__desc">Extended reasoning and uncertainty across a morally ambiguous question. Watch the model hedge, reframe, and commit — with uncertainty and reasoning states visible as they alternate.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);" style="opacity:0.6">Uncertainty</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/code-generation.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-precision);"></span>
+        <span class="rec-card__id">R-03</span>
+      </div>
+      <div class="rec-card__title">Code Generation</div>
+      <p class="rec-card__prompt">A programming task.</p>
+      <p class="rec-card__desc">Low-variance, precision-heavy output. The model commits early and stays committed — a contrast to the open-ended moral reasoning recording. Useful for comparing state geometry across task types.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-precision);">Precision</span>
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/ai-overview.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-creativity);"></span>
+        <span class="rec-card__id">R-01</span>
+      </div>
+      <div class="rec-card__title">AI Overview</div>
+      <p class="rec-card__prompt">An open-ended question about artificial intelligence.</p>
+      <p class="rec-card__desc">Broad, generative, and exploratory. The model synthesizes across topics — creativity and reasoning alternate as it organizes a long-form answer. Good for watching the cloud reshape across states.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+    <a class="rec-card" href="demo/?demo=1&recording=/recordings/chicken.ghostline">
+      <div class="rec-card__tag">
+        <span class="rec-card__dot" style="--dot-color: var(--c-reasoning);"></span>
+        <span class="rec-card__id">R-02</span>
+      </div>
+      <div class="rec-card__title">The Chicken</div>
+      <p class="rec-card__prompt">"Tell me about the wonderful and diverse chicken."</p>
+      <p class="rec-card__desc">The default demo recording — 150 tokens, all five states represented. A reliable first look at what GhostLine tracks and a good baseline for understanding how the token cloud moves.</p>
+      <div class="rec-card__states">
+        <span class="rec-card__state" style="--s-color: var(--c-reasoning);">Reasoning</span>
+        <span class="rec-card__state" style="--s-color: var(--c-retrieval);">Retrieval</span>
+        <span class="rec-card__state" style="--s-color: var(--c-creativity);">Creativity</span>
+      </div>
+      <div class="rec-card__open">Open recording →</div>
+    </a>
+
+  </div>
+
+  <footer>GHOSTLINE RESEARCH · 2026 · Independent AI instrumentation</footer>
+
+</body>
+</html>
