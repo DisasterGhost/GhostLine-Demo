@@ -13,18 +13,20 @@
   const svg = document.getElementById('heroSvg');
   if (!svg) return;
 
-  // Canonical redesign palette — matches data/statePalettes.ts in the live
-  // research frontend. Keeps the hero consistent with the demo viewer's
-  // state coloring. (Earlier draft used a saturated alt palette where
-  // precision was green and creativity magenta — corrected Apr 27.)
+  // Muted "redesign" palette — matches data/statePalettes.ts in the live
+  // research frontend (the current default). Normalized May '26 from the
+  // older saturated set (bright cyan/green/yellow) so the hero reads like
+  // the new instrument and the library card mini-renders.
   const STATE_COLORS = {
-    reasoning:   '#4dd9ff',  // cyan
-    retrieval:   '#5cf2a8',  // green
-    creativity:  '#b466ff',  // purple
-    precision:   '#ffd24d',  // yellow
-    uncertainty: '#ff9c52',  // orange
-    selected:    '#a855f7',  // purple selected glow (kept — distinct from creativity for a reason)
+    reasoning:   '#56b0dd',  // muted blue
+    retrieval:   '#4eba85',  // muted emerald
+    creativity:  '#9b6fc9',  // muted violet
+    precision:   '#d4c25a',  // muted gold
+    uncertainty: '#d98a4f',  // muted orange
+    selected:    '#9b6fc9',  // soft violet selected glow
   };
+  // Cool accent for periphery glyphs + the inline token label.
+  const ACCENT = '#56b0dd';
 
   // ─── Cluster centers — distinct positions, moderate overlap
   const CLUSTERS = [
@@ -76,9 +78,10 @@
     }
   }
 
-  // ─── Dense attention web — colored by endpoint state
+  // ─── Attention web — colored by endpoint state (sparser than the old
+  //     dense cyan mesh; the new frontend's arcs are few and multi-colored)
   const arcs = [];
-  for (let k = 0; k < 130; k++) {
+  for (let k = 0; k < 78; k++) {
     const a = Math.floor(rand() * trajectory.length);
     let b = Math.floor(rand() * trajectory.length);
     if (Math.abs(a - b) < 2) b = (b + 5 + Math.floor(rand() * 20)) % trajectory.length;
@@ -127,9 +130,9 @@
   const centerGlow = document.createElementNS(SVGNS, 'radialGradient');
   centerGlow.setAttribute('id', 'center-glow');
   centerGlow.innerHTML = `
-    <stop offset="0%" stop-color="#a855f7" stop-opacity="0.45"/>
-    <stop offset="50%" stop-color="#5b3aa8" stop-opacity="0.12"/>
-    <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+    <stop offset="0%" stop-color="#9b6fc9" stop-opacity="0.38"/>
+    <stop offset="50%" stop-color="#5b3aa8" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="#9b6fc9" stop-opacity="0"/>
   `;
   defs.appendChild(centerGlow);
   svg.appendChild(defs);
@@ -155,7 +158,7 @@
     const s = 4;
     tri.setAttribute('points', `${t.x},${t.y - s} ${t.x - s * 0.87},${t.y + s * 0.5} ${t.x + s * 0.87},${t.y + s * 0.5}`);
     tri.setAttribute('fill', 'none');
-    tri.setAttribute('stroke', '#4dd9ff');
+    tri.setAttribute('stroke', ACCENT);
     tri.setAttribute('stroke-width', '0.6');
     triGroup.appendChild(tri);
   });
@@ -180,19 +183,33 @@
   });
   svg.appendChild(arcGroup);
 
-  // 5. Sequential trajectory — each segment colored by its endpoint state
+  // 5. Sequential trajectory — dual-layer (soft glow behind + crisp core in
+  //    front), each segment colored by its endpoint state. Matches the new
+  //    frontend's two-pass trajectory line.
+  const trajGlowGroup = document.createElementNS(SVGNS, 'g');
   const trajGroup = document.createElementNS(SVGNS, 'g');
+  const trajGlowEls = [];
   const trajEls = [];
   for (let i = 0; i < trajectory.length - 1; i++) {
+    const color = STATE_COLORS[trajectory[i + 1].state];
+    const glow = document.createElementNS(SVGNS, 'line');
+    glow.setAttribute('stroke', color);
+    glow.setAttribute('stroke-linecap', 'round');
+    glow.dataset.from = trajectory[i].i;
+    glow.dataset.to = trajectory[i + 1].i;
+    trajGlowGroup.appendChild(glow);
+    trajGlowEls.push(glow);
+
     const seg = document.createElementNS(SVGNS, 'line');
-    seg.setAttribute('stroke', STATE_COLORS[trajectory[i + 1].state]);
-    seg.setAttribute('stroke-width', '0.75');
+    seg.setAttribute('stroke', color);
+    seg.setAttribute('stroke-width', '0.85');
     seg.setAttribute('stroke-linecap', 'round');
     seg.dataset.from = trajectory[i].i;
     seg.dataset.to = trajectory[i + 1].i;
     trajGroup.appendChild(seg);
     trajEls.push(seg);
   }
+  svg.appendChild(trajGlowGroup);
   svg.appendChild(trajGroup);
 
   // 6. Halos (large soft glow per token)
@@ -223,13 +240,13 @@
   const labelBg = document.createElementNS(SVGNS, 'rect');
   labelBg.setAttribute('rx', '1');
   labelBg.setAttribute('fill', 'rgba(6, 8, 12, 0.75)');
-  labelBg.setAttribute('stroke', '#4dd9ff');
+  labelBg.setAttribute('stroke', 'rgba(86,176,221,0.5)');
   labelBg.setAttribute('stroke-width', '0.4');
   labelGroup.appendChild(labelBg);
   const labelText = document.createElementNS(SVGNS, 'text');
   labelText.setAttribute('font-family', 'JetBrains Mono, monospace');
   labelText.setAttribute('font-size', '6.5');
-  labelText.setAttribute('fill', '#4dd9ff');
+  labelText.setAttribute('fill', '#cdd9ec');
   labelText.setAttribute('text-anchor', 'start');
   labelText.setAttribute('dominant-baseline', 'middle');
   labelText.textContent = '" chicken"';
@@ -276,10 +293,22 @@
       line.setAttribute('x2', t.x.toFixed(2));
       line.setAttribute('y2', t.y.toFixed(2));
       const s = (f.scale + t.scale) / 2;
-      line.setAttribute('opacity', (0.22 + 0.4 * s).toFixed(2));
+      line.setAttribute('opacity', (0.10 + 0.26 * s).toFixed(2));
     });
 
-    // Trajectory
+    // Trajectory — soft glow pass (behind)
+    trajGlowEls.forEach(seg => {
+      const f = proj[+seg.dataset.from], t = proj[+seg.dataset.to];
+      seg.setAttribute('x1', f.x.toFixed(2));
+      seg.setAttribute('y1', f.y.toFixed(2));
+      seg.setAttribute('x2', t.x.toFixed(2));
+      seg.setAttribute('y2', t.y.toFixed(2));
+      const s = (f.scale + t.scale) / 2;
+      seg.setAttribute('stroke-width', (2.4 * s).toFixed(2));
+      seg.setAttribute('opacity', (0.10 + 0.16 * s).toFixed(2));
+    });
+
+    // Trajectory — crisp core pass (front)
     trajEls.forEach(seg => {
       const f = proj[+seg.dataset.from], t = proj[+seg.dataset.to];
       seg.setAttribute('x1', f.x.toFixed(2));
@@ -296,11 +325,11 @@
       const p = proj[i];
       const sz = points[i].size;
       const halo = haloEls[i];
-      const haloR = (5 + 5 * p.scale) * sz;
+      const haloR = (4 + 4.2 * p.scale) * sz;
       halo.setAttribute('cx', p.x.toFixed(2));
       halo.setAttribute('cy', p.y.toFixed(2));
       halo.setAttribute('r', haloR.toFixed(2));
-      halo.setAttribute('opacity', (0.55 + 0.4 * p.scale).toFixed(2));
+      halo.setAttribute('opacity', (0.34 + 0.32 * p.scale).toFixed(2));
       haloGroup.appendChild(halo);
 
       const core = coreEls[i];

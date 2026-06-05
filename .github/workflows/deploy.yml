@@ -35,6 +35,8 @@ jobs:
       - run: cp static-landing/galleries.js dist/galleries.js
       - run: cp static-landing/hero-render.js dist/hero-render.js
       - run: cp static-landing/demo-library.html dist/demo-library.html
+      - run: cp static-landing/card-data.js dist/card-data.js
+      - run: cp static-landing/card-render.js dist/card-render.js
       # Copy shared assets (media, lineage, CNAME) to dist root
       - run: cp -r public/media dist/media 2>/dev/null || true
       - run: cp -r public/lineage dist/lineage 2>/dev/null || true
