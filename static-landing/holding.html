@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostLine</title>
+  <meta name="description" content="GhostLine — reconstruction in progress.">
+  <meta name="theme-color" content="#06080c">
+  <meta property="og:title" content="GhostLine">
+  <meta property="og:description" content="Reconstruction in progress.">
+  <meta property="og:site_name" content="GhostLine Research">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%236b8cff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%236b8cff'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      color: rgba(238, 244, 248, 0.9);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(126, 184, 255, 0.07), transparent 26%),
+        linear-gradient(180deg, #020407 0%, #05070a 44%, #020304 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 40px 24px; position: relative; overflow-x: hidden;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 23px,
+        rgba(255, 255, 255, 0.015) 23px, rgba(255, 255, 255, 0.015) 24px);
+      opacity: 0.45;
+    }
+    .wrap { position: relative; z-index: 1; width: min(620px, 100%);
+      display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .hero { position: relative; width: min(420px, 80vw); aspect-ratio: 1; margin: 4px 0; }
+    .hero svg { width: 100%; height: 100%; display: block; }
+    .wordmark { font-family: 'Instrument Serif', serif; font-style: normal;
+      font-size: clamp(0.95rem, 2.4vw, 1.12rem); letter-spacing: 0.05em; color: #7eb8ff;
+      transform: translateY(-3px); }
+    .backronym { font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: clamp(1.25rem, 4.3vw, 1.9rem); line-height: 1.34;
+      color: rgba(238, 244, 248, 0.92); max-width: 560px; }
+    .backronym b { font-style: normal; font-weight: 600; color: #7eb8ff; }
+    .status { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(212, 223, 230, 0.55); }
+    .contact { font-size: 0.82rem; color: rgba(212, 223, 230, 0.55); text-decoration: none;
+      border-bottom: 1px solid rgba(126, 184, 255, 0.32); padding-bottom: 2px; transition: color 0.2s; }
+    .contact:hover { color: rgba(229, 238, 244, 0.88); }
+    footer { position: fixed; bottom: 18px; left: 0; right: 0; text-align: center;
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(212, 223, 230, 0.32); z-index: 1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="wordmark">GhostLine</div>
+
+    <h1 class="backronym">
+      <b>G</b>eometric <b>H</b>ierarchies <b>O</b>rganize <b>S</b>tate <b>T</b>ransitions:
+      <b>L</b>inearity-<b>I</b>nformed <b>N</b>eural <b>E</b>ncoding
+    </h1>
+
+    <div class="hero" id="heroRender">
+      <svg viewBox="-220 -220 440 440" id="heroSvg"></svg>
+    </div>
+
+    <div class="status">Reconstruction in progress</div>
+    <a class="contact" href="mailto:collin@ghostline-research.org">collin@ghostline-research.org</a>
+  </div>
+
+  <footer>GhostLine Research &middot; 2026</footer>
+
+  <script src="hero-render.js?v=5"></script>
+</body>
+</html>

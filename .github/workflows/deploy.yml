@@ -1,5 +1,9 @@
 name: Deploy to GitHub Pages
 
+# HOLDING MODE (2026-06): serves ONLY the reconstruction page (static-landing/holding.html)
+# + the rotating hero + CNAME. The full site (React app, /demo, landing, lineage, media)
+# remains in the repo, just not deployed. To restore: `git revert` this commit.
+
 on:
   push:
     branches: [master]
@@ -19,28 +23,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      # Use the vendored ghostline-app-next demo build for /demo (replaces the
-      # legacy src/ demo). Built with VITE_DEMO_MODE=true VITE_BASE=/demo/.
-      - run: rm -rf dist/demo && cp -r demo-app dist/demo
-      # Copy static landing page to dist root
-      - run: cp static-landing/index.html dist/index.html
-      - run: cp static-landing/landing.css dist/landing.css
-      - run: cp static-landing/paths.js dist/paths.js
-      - run: cp static-landing/galleries.js dist/galleries.js
-      - run: cp static-landing/hero-render.js dist/hero-render.js
-      - run: cp static-landing/demo-library.html dist/demo-library.html
-      - run: cp static-landing/card-data.js dist/card-data.js
-      - run: cp static-landing/card-render.js dist/card-render.js
-      # Copy shared assets (media, lineage, CNAME) to dist root
-      - run: cp -r public/media dist/media 2>/dev/null || true
-      - run: cp -r public/lineage dist/lineage 2>/dev/null || true
-      - run: cp public/CNAME dist/CNAME 2>/dev/null || true
+      - name: Assemble holding page
+        run: |
+          mkdir -p dist
+          cp static-landing/holding.html dist/index.html
+          cp static-landing/hero-render.js dist/hero-render.js
+          cp public/CNAME dist/CNAME
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
