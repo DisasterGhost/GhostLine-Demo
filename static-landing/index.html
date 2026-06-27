@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://www.ghostline-research.org/media/og-card.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="GhostLine — behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 fabrication detection, 5 architectures validated.">
+  <meta property="og:image:alt" content="GhostLine — behavioral monitoring for transformer inference. 94.8% state classification accuracy, F1 0.94 binary fabrication detection, 5 architectures validated.">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
@@ -80,7 +80,7 @@
         </div>
         <div class="hero__proof-cell hero__proof-cell--tr">
           <span class="proof__value">F1 0.94</span>
-          <span class="proof__label">fabrication detection</span>
+          <span class="proof__label">binary fabrication detection</span>
         </div>
 
         <div class="hero__render" id="heroRender">
@@ -109,30 +109,6 @@
       <h2 class="chooser__heading">Two ways to read this work.</h2>
 
       <div class="chooser__diagram">
-        <button class="path-card path-card--research" data-path="research">
-          <div class="path-card__tag">Research</div>
-          <h3 class="path-card__title">Geometric mechanism, validated.</h3>
-          <p class="path-card__desc">
-            The mechanism, the numbers, and what's still open — written for someone who wants to stress-test the approach before trusting it.
-          </p>
-          <ul class="path-card__topics">
-            <li>5 cognitive states · 58 signals</li>
-            <li>5 architecture families validated</li>
-            <li>Causal intervention at 3B</li>
-            <li>Sharp vs maturing — boundaries</li>
-          </ul>
-          <span class="path-card__cta">Enter research path</span>
-        </button>
-
-        <div class="chooser__split" aria-hidden="true">
-          <svg viewBox="0 0 80 280" preserveAspectRatio="none">
-            <path d="M 0 140 Q 40 140 40 80 L 40 0" fill="none" stroke="rgba(107,140,255,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
-            <path d="M 80 140 Q 40 140 40 200 L 40 280" fill="none" stroke="rgba(45,212,191,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
-            <circle cx="40" cy="140" r="4" fill="#06080c" stroke="rgba(180,200,235,0.4)" stroke-width="1"/>
-            <text x="40" y="156" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5a6478" letter-spacing="0.1em">SPLIT</text>
-          </svg>
-        </div>
-
         <button class="path-card path-card--industry" data-path="industry">
           <div class="path-card__tag">Industry</div>
           <h3 class="path-card__title">Where it deploys, and why now.</h3>
@@ -147,14 +123,38 @@
           </ul>
           <span class="path-card__cta">Enter industry path</span>
         </button>
+
+        <div class="chooser__split" aria-hidden="true">
+          <svg viewBox="0 0 80 280" preserveAspectRatio="none">
+            <path d="M 0 140 Q 40 140 40 80 L 40 0" fill="none" stroke="rgba(107,140,255,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
+            <path d="M 80 140 Q 40 140 40 200 L 40 280" fill="none" stroke="rgba(45,212,191,0.35)" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="40" cy="140" r="4" fill="#06080c" stroke="rgba(180,200,235,0.4)" stroke-width="1"/>
+            <text x="40" y="156" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5a6478" letter-spacing="0.1em">SPLIT</text>
+          </svg>
+        </div>
+
+        <button class="path-card path-card--research" data-path="research">
+          <div class="path-card__tag">Validations</div>
+          <h3 class="path-card__title">Geometric mechanism, validated.</h3>
+          <p class="path-card__desc">
+            The mechanism, the numbers, and what's still open — written for someone who wants to stress-test the approach before trusting it.
+          </p>
+          <ul class="path-card__topics">
+            <li>5 cognitive states · 58 signals</li>
+            <li>5 architecture families validated</li>
+            <li>Causal intervention at 3B</li>
+            <li>Sharp vs maturing — boundaries</li>
+          </ul>
+          <span class="path-card__cta">Enter validations path</span>
+        </button>
       </div>
     </section>
 
     <!-- ═══════════════════ STICKY PATH TABS ═══════════════════ -->
     <div class="path-tabs" id="pathTabs">
       <div class="path-tabs__inner">
-        <button class="path-tab" data-path="research"><span class="path-tab__dot"></span>Research</button>
         <button class="path-tab" data-path="industry"><span class="path-tab__dot"></span>Industry</button>
+        <button class="path-tab" data-path="research"><span class="path-tab__dot"></span>Validations</button>
         <div class="path-tabs__spacer"></div>
         <span class="path-tabs__hint">↑ change perspective</span>
       </div>
@@ -284,7 +284,7 @@
             <div class="honest-col__head">▰ Sharp</div>
             <ul class="honest-col__list">
               <li>State separation across 5 architecture families</li>
-              <li>Fabrication detection (F1 0.94, held-out stress test)</li>
+              <li>Binary fabrication detection (F1 0.94, held-out stress test)</li>
               <li>Replayable signal inspection — 58 signals, per-token</li>
               <li>Causal geometric intervention demonstrated at 3B</li>
             </ul>
