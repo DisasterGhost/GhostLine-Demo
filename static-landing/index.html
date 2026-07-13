@@ -408,7 +408,7 @@
         <div class="section__label">At scale</div>
         <h2 class="section__title">Does it hold as models grow? At 8B, yes.</h2>
         <p class="section__intro">
-          The geometry doesn't wash out at 8B parameters. State separation stays sharp, and MLP activations — barely informative at 3B — become a distinct signal class at 8B. Whether that trend continues across a wider scale range is still open; the next experiment tests it directly.
+          The geometry doesn't wash out at 8B parameters. State separation stays sharp, and MLP activations — barely informative at 3B — become a distinct signal class at 8B.
         </p>
 
         <figure class="scale-figure">
@@ -422,13 +422,6 @@
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">d ≈ 4.2<i>MLP emergence</i></span>
               <span class="evidence-cell__label">MLP discriminators · Qwen3-8B · near-absent at 3B</span>
-            </div>
-          </div>
-          <div class="evidence-cell">
-            <p class="evidence-cell__plain">The only clean, same-family scale comparison is a promising two-size signal, not a scaling-law claim.</p>
-            <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">~1.1–1.3×<i>1.5B→3B</i></span>
-              <span class="evidence-cell__label">within-family Qwen2.5 · same pipeline · N=2 sizes · hypothesis only</span>
             </div>
           </div>
         </div>
