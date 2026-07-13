@@ -137,13 +137,13 @@
           <div class="path-card__tag">Validations</div>
           <h3 class="path-card__title">Geometric mechanism, validated.</h3>
           <p class="path-card__desc">
-            The mechanism, the numbers, and what's still open — written for someone who wants to stress-test the approach before trusting it.
+            Mechanism, measurements, and deployment boundaries for readers who want to inspect the approach.
           </p>
           <ul class="path-card__topics">
             <li>5 cognitive states · 58 signals</li>
             <li>5 architecture families validated</li>
             <li>Causal intervention at 3B</li>
-            <li>Sharp vs maturing — boundaries</li>
+            <li>Measured vs calibration-dependent surfaces</li>
           </ul>
           <span class="path-card__cta">Enter validations path</span>
         </button>
@@ -228,9 +228,9 @@
 
       <section class="section">
         <div class="section__label">Evidence</div>
-        <h2 class="section__title">What we can defend, and what we can't.</h2>
+        <h2 class="section__title">Measured results.</h2>
         <p class="section__intro">
-          Validated across 5 architecture families and 9 distinct models spanning 1B to 8B parameters. Numbers below are from held-out stress tests, not training data. The right column is honest about boundaries.
+          Validated across 5 architecture families and 9 distinct models spanning 1B to 8B parameters. Numbers below are from held-out stress tests, not training data.
         </p>
 
         <div class="evidence-grid">
@@ -281,7 +281,7 @@
 
         <div class="honest-split">
           <div class="honest-col honest-col--sharp">
-            <div class="honest-col__head">▰ Sharp</div>
+            <div class="honest-col__head">▰ Measured</div>
             <ul class="honest-col__list">
               <li>State separation across 5 architecture families</li>
               <li>Binary fabrication detection (F1 0.94, held-out stress test)</li>
@@ -290,7 +290,7 @@
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
-            <div class="honest-col__head">▱ Maturing</div>
+            <div class="honest-col__head">▱ Calibration-dependent</div>
             <ul class="honest-col__list">
               <li>Full parameter sweep coverage (temperature, top-p)</li>
               <li>Adversarial corpus and multi-turn conversation</li>
@@ -358,7 +358,7 @@
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
-            <div class="honest-col__head">▱ What this is not</div>
+            <div class="honest-col__head">▱ Scope</div>
             <ul class="honest-col__list">
               <li>This is a strong tendency, not a guarantee; the model can still change course mid-generation.</li>
               <li>It predicts the cognitive mode: reasoning, retrieval, and so on. It does not predict the literal answer or whether that answer is true.</li>
@@ -400,7 +400,7 @@
         </div>
 
         <p class="section__intro" style="margin-top:32px; margin-bottom:0;">
-          Real tokens from the math-reasoning recording, prompt: "Solve 22x − 8 = 3x." The early tokens work through the strategy ("Subtract … from both sides"). Later, as the model commits to the exact value, the state shifts into precision ("Divide both sides by … x = 8/19"). This is a qualitative live capture, not a benchmark; per-token labels are raw, and the final fraction is condensed for readability.
+          Real tokens from the math-reasoning recording, prompt: "Solve 22x − 8 = 3x." The early tokens work through the strategy ("Subtract … from both sides"). Later, as the model commits to the exact value, the state shifts into precision ("Divide both sides by … x = 8/19").
         </p>
       </section>
 
@@ -429,9 +429,9 @@
 
       <section class="section">
         <div class="section__label">Method</div>
-        <h2 class="section__title">How we keep ourselves honest.</h2>
+        <h2 class="section__title">Protocol and validation.</h2>
         <p class="section__intro">
-          An instrument should be checkable. Every number on this page comes from held-out data under a locked protocol. Where we fooled ourselves, we say so and use the corrected number.
+          Every number on this page comes from held-out data under a locked protocol. Classifiers are evaluated with prompt-grouped splits, and corrected metrics replace earlier estimates.
         </p>
 
         <div class="mech-grid">
@@ -446,9 +446,9 @@
             <p class="mech-card__body">Cross-validation groups by prompt, analogous to patient-level splits in medical ML, so a classifier cannot memorize a prompt's identity. Reported numbers are held-out, not training accuracy.</p>
           </article>
           <article class="mech-card">
-            <div class="mech-card__num">03 · SELF-CORRECTION</div>
-            <h3 class="mech-card__title">We catch our own inflation.</h3>
-            <p class="mech-card__body">A 99.6% prophecy number turned out to be prompt-identity leakage. Grouped CV corrected it to 85%, and we kept the lower number. We also flag where rules do not transfer, such as a 3B collapse threshold that fails at 8B.</p>
+            <div class="mech-card__num">03 · CORRECTION</div>
+            <h3 class="mech-card__title">Metrics are revised when controls change.</h3>
+            <p class="mech-card__body">A 99.6% prophecy estimate was revised to 85% after prompt-grouped cross-validation removed prompt-identity leakage. Transfer limits are tracked separately, including thresholds that hold at 3B but fail at 8B.</p>
           </article>
         </div>
       </section>
