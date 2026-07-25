@@ -74,12 +74,12 @@
 
       <div class="hero__stage">
         <div class="hero__proof-cell hero__proof-cell--tl">
-          <span class="proof__value">94.8%</span>
-          <span class="proof__label">state classification accuracy</span>
+          <span class="proof__value">0.933</span>
+          <span class="proof__label">macro F1 &middot; 5 prompt-intent classes &middot; sealed vault &middot; Qwen3-8B</span>
         </div>
         <div class="hero__proof-cell hero__proof-cell--tr">
-          <span class="proof__value">F1 0.94</span>
-          <span class="proof__label">binary fabrication detection</span>
+          <span class="proof__value">85&ndash;91%</span>
+          <span class="proof__label">task category predicted from the prompt alone &middot; grouped CV</span>
         </div>
 
         <div class="hero__render" id="heroRender">
@@ -93,7 +93,7 @@
 
         <div class="hero__proof-cell hero__proof-cell--bl">
           <span class="proof__value">5</span>
-          <span class="proof__label">architecture families validated</span>
+          <span class="proof__label">architecture families the instrument has been exercised across</span>
         </div>
         <div class="hero__proof-cell hero__proof-cell--br">
           <span class="proof__value">Patent Pending</span>
@@ -139,9 +139,9 @@
             Mechanism, measurements, and deployment boundaries for readers who want to inspect the approach.
           </p>
           <ul class="path-card__topics">
-            <li>5 cognitive states · 58 signals</li>
-            <li>5 architecture families validated</li>
-            <li>Causal intervention at 3B</li>
+            <li>5 prompt-intent categories · 58 signals</li>
+            <li>5 architecture families exercised</li>
+            <li>Collapse escape at 3B</li>
             <li>Measured vs calibration-dependent surfaces</li>
           </ul>
           <span class="path-card__cta">Enter validations path</span>
@@ -166,7 +166,7 @@
         <div class="section__label">Mechanism</div>
         <h2 class="section__title">The instrument reads what the model is doing while it's still doing it.</h2>
         <p class="section__intro">
-          Each token leaves a trace in the transformer's activation space — a path shaped by what the model is doing. GhostLine captures that path, classifies every token's geometric signature against five cognitive states, and streams 58 derived signals in real time: entropy, velocity, effective dimensionality, attention patterns, fabrication risk, and more.
+          Each token leaves a trace in the transformer's activation space — a path shaped by what the model is doing. GhostLine captures that path, classifies every token's geometric signature against five prompt-intent categories, and streams 58 derived signals in real time: entropy, velocity, effective dimensionality, attention patterns, fabrication risk, and more.
         </p>
 
         <div class="mech-grid">
@@ -177,8 +177,8 @@
           </article>
           <article class="mech-card">
             <div class="mech-card__num">02 · CLASSIFY</div>
-            <h3 class="mech-card__title">Geometric state, not text.</h3>
-            <p class="mech-card__body">A trained classifier reads the activation geometry and labels each token with one of five cognitive states. It does not need to read the output text.</p>
+            <h3 class="mech-card__title">Geometry, not text.</h3>
+            <p class="mech-card__body">A trained classifier reads the activation geometry and labels each token with one of five prompt-intent categories. It does not need to read the output text.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">03 · DERIVE</div>
@@ -229,36 +229,36 @@
         <div class="section__label">Evidence</div>
         <h2 class="section__title">Measured results.</h2>
         <p class="section__intro">
-          Validated across 5 architecture families and 9 distinct models spanning 1B to 8B parameters. Numbers below are from held-out stress tests, not training data.
+          The instrument has been exercised across 5 architecture families and 9 models spanning 1B to 8B parameters; those runs differ in corpus and protocol and are a breadth inventory, not one uniform validation. Classifier figures below are from held-out evaluation, not training data.
         </p>
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Classify what the model is doing: reasoning, retrieving, fabricating, and more.</p>
+            <p class="evidence-cell__plain">Classify what kind of task the model is handling — reasoning, retrieval, precision work — from the activation geometry alone.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">94.8<i>%</i></span>
-              <span class="evidence-cell__label">state classification accuracy · five-class · held-out</span>
+              <span class="evidence-cell__metric">0.933<i>macro F1</i></span>
+              <span class="evidence-cell__label">5 prompt-intent classes · sealed vault · Qwen3-8B</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">Catch fabrication from the geometry alone, without a fact-checking knowledge base.</p>
+            <p class="evidence-cell__plain">Inspect every signal behind a call, token by token, and replay the whole run afterwards.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">0.94<i>F1</i></span>
-              <span class="evidence-cell__label">fabrication detection · held-out stress corpus</span>
+              <span class="evidence-cell__metric">58<i>signals</i></span>
+              <span class="evidence-cell__label">captured per token · exportable and replayable</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">Works across model families, not just one vendor's architecture.</p>
+            <p class="evidence-cell__plain">Geometry has been extracted across five model families. Classifiers are calibrated per model rather than transferred.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">5<i>arch families</i></span>
               <span class="evidence-cell__label">Qwen · Llama · Gemma · Pythia · OLMo</span>
             </div>
           </div>
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Editing the geometry mid-generation shifts what the model produces — making GhostLine a control surface, not just a readout.</p>
+            <p class="evidence-cell__plain">Editing the geometry mid-generation changes what the model produces. At 3B this broke deterministic repetition loops and restored coherent output.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">3B<i>causal</i></span>
-              <span class="evidence-cell__label">demonstrated intervention at 3B parameter scale</span>
+              <span class="evidence-cell__metric">3B<i>collapse</i></span>
+              <span class="evidence-cell__label">repetition loops broken · generalisation to other failure modes is open</span>
             </div>
           </div>
         </div>
@@ -282,10 +282,10 @@
           <div class="honest-col honest-col--sharp">
             <div class="honest-col__head">▰ Measured</div>
             <ul class="honest-col__list">
-              <li>State separation across 5 architecture families</li>
-              <li>Binary fabrication detection (F1 0.94, held-out stress test)</li>
+              <li>Prompt-intent separation measured in 5 architecture families</li>
+              <li>Fabrication separates from declining to answer in attention routing and MLP amplification (Llama-3.1-8B)</li>
               <li>Replayable signal inspection — 58 signals, per-token</li>
-              <li>Causal geometric intervention demonstrated at 3B</li>
+              <li>Collapse escape via activation intervention, demonstrated at 3B</li>
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
@@ -360,7 +360,7 @@
             <div class="honest-col__head">▱ Scope</div>
             <ul class="honest-col__list">
               <li>This is a strong tendency, not a guarantee; the model can still change course mid-generation.</li>
-              <li>It predicts the cognitive mode: reasoning, retrieval, and so on. It does not predict the literal answer or whether that answer is true.</li>
+              <li>It predicts the category of task the prompt sets up: reasoning, retrieval, and so on. It does not predict the literal answer, whether that answer is true, or what the model is &ldquo;thinking&rdquo;.</li>
               <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard (the edge cases at left).</li>
             </ul>
           </div>
@@ -371,7 +371,7 @@
         <div class="section__label">In-flight</div>
         <h2 class="section__title">It catches the model changing its mind mid-sentence.</h2>
         <p class="section__intro">
-          Cognitive state doesn't lock in for a whole generation. Within a single response, a model can move from working through a problem to committing to an answer — and GhostLine catches that transition token by token.
+          The category doesn't lock in for a whole generation. Within a single response, a model can move from working through a problem to committing to an answer — and GhostLine catches that transition token by token.
         </p>
 
         <div class="token-timeline">
@@ -455,12 +455,12 @@
       <section class="section">
         <div class="section__label">See it</div>
         <h2 class="section__title">See it working.</h2>
-        <p class="section__intro">Six live captures, each fully annotated. Browse reasoning, retrieval, creativity, and a fabrication caught in the act — then step through any generation token by token.</p>
+        <p class="section__intro">Seven recorded captures, each fully annotated. Browse reasoning, retrieval, creativity, and a fabrication caught in the act — then step through any generation token by token.</p>
 
         <div class="demo-cta demo-cta--research">
           <div>
             <div class="demo-cta__label">Recording library</div>
-            <h3 class="demo-cta__title">Every cognitive mode, plus a fabrication caught live.</h3>
+            <h3 class="demo-cta__title">Every task category, plus a fabrication caught live.</h3>
             <p class="demo-cta__body">Math reasoning, knowledge retrieval, moral deliberation, code generation, and a hallucination caught in the act. Each recording carries 7–10 inline annotations.</p>
           </div>
           <div class="demo-cta__action">
@@ -500,9 +500,9 @@
               <h3 class="app-card__title">Inference Optimization</h3>
               <span class="app-card__id">A-02</span>
             </div>
-            <p class="app-card__body">Pre-generation prediction identifies prompts likely to fabricate before any tokens are produced. Route, re-prompt, or gate chain-of-thought in about 15 ms, before spending compute on a bad run.</p>
+            <p class="app-card__body">Pre-generation prediction identifies prompts likely to fabricate before any tokens are produced. Route, re-prompt, or gate chain-of-thought before spending compute on a bad run. The gate costs one extra forward pass.</p>
             <div class="app-card__regs">
-              <span>~15 ms gate latency</span>
+              <span>one extra forward pass</span>
               <span>Routing layer drop-in</span>
             </div>
             <button class="app-card__open" type="button">Open context brief</button>
@@ -550,7 +550,7 @@
               </div>
               <div class="act-map__row">
                 <span>Art 9</span>
-                <p>Risk management: continuous risk review includes foreseeable misuse and post-market data; GhostLine can expose fabrication, collapse, refusal, and instability signals for that risk loop.</p>
+                <p>Risk management: continuous risk review includes foreseeable misuse and post-market data; GhostLine can expose fabrication, collapse, declining-to-answer, and instability signals for that risk loop.</p>
               </div>
               <div class="act-map__row">
                 <span>Art 14</span>
@@ -684,7 +684,7 @@
                 <ul>
                   <li>Content-independent activation and attention signatures.</li>
                   <li>Replayable traces for red-team prompt families.</li>
-                  <li>State-transition markers that can flag abnormal routing or refusal behavior.</li>
+                  <li>Transition markers that can flag abnormal routing, or the model declining to answer.</li>
                 </ul>
               </div>
               <div>
@@ -713,7 +713,7 @@
               </div>
               <div class="act-map__row">
                 <span>Regression</span>
-                <p>Detect when benchmark score improves but refusal, retrieval, uncertainty, or fabrication basins blur under stress prompts.</p>
+                <p>Detect when benchmark score improves but the geometry for declining, retrieval, uncertainty, or fabrication blurs under stress prompts.</p>
               </div>
               <div class="act-map__row">
                 <span>Corpus cert</span>
@@ -731,7 +731,7 @@
             <div class="usecase-panel__grid">
               <div>
                 <h4>GhostLine fit</h4>
-                <p>Fine-tunes can improve text metrics while degrading internal separation between reasoning, retrieval, refusal, uncertainty, and fabrication. Model teams need a behavioral eval layer that survives beyond a leaderboard score.</p>
+                <p>Fine-tunes can improve text metrics while degrading internal separation between reasoning, retrieval, declining to answer, uncertainty, and fabrication. Model teams need a behavioral eval layer that survives beyond a leaderboard score.</p>
               </div>
               <div>
                 <h4>GhostLine artifacts</h4>
@@ -766,12 +766,12 @@
           <div class="latency-cell">
             <div class="latency-cell__value">~15 ms</div>
             <div class="latency-cell__label">Pre-gen gate</div>
-            <div class="latency-cell__desc">Decide whether to generate, route, or block before any output token.</div>
+            <div class="latency-cell__desc">Decide whether to generate, route, or block before any output token. Single-stream reference stack; not measured under production batching.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">&lt;2 ms</div>
             <div class="latency-cell__label">Per-token classify</div>
-            <div class="latency-cell__desc">State + risk score for every token, streamed during generation.</div>
+            <div class="latency-cell__desc">Task category and signal values for every token, streamed during generation. Single-stream reference stack; not measured under production batching.</div>
           </div>
           <div class="latency-cell">
             <div class="latency-cell__value">0</div>
