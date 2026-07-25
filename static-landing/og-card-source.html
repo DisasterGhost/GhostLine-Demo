@@ -1,0 +1,76 @@
+<meta charset="utf-8">
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #0a0e18;
+    background-image:
+      linear-gradient(rgba(107,140,255,.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107,140,255,.055) 1px, transparent 1px),
+      radial-gradient(ellipse 900px 500px at 78% 8%, rgba(60,90,190,.30), transparent 70%);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: #eef2fb;
+    position: relative;
+  }
+  .pad { padding: 78px 96px 0; }
+  .brand {
+    display: flex; align-items: center; gap: 13px;
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 13.5px; letter-spacing: .19em; color: #dbe3f5;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #58b8f0; box-shadow: 0 0 14px #58b8f0aa; }
+  .brand .sep { color: #6f7d99; }
+  .rule { height: 1px; background: linear-gradient(90deg, rgba(150,175,235,.30), rgba(150,175,235,.04)); margin-top: 26px; }
+
+  h1 { font-size: 66px; line-height: 1.13; font-weight: 400; letter-spacing: -.012em; margin-top: 72px; }
+  .sub { margin-top: 34px; font-size: 21px; line-height: 1.4; color: #94a3c0; font-style: normal; }
+
+  .stats { position: absolute; left: 96px; right: 96px; bottom: 92px; }
+  .stats .rule { margin: 0 0 30px; }
+  .row { display: flex; }
+  .stat { flex: 0 0 33.33%; }
+  .val {
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 42px; letter-spacing: -.01em; color: #ffffff; line-height: 1;
+  }
+  .val i { font-style: normal; font-size: 27px; color: #c9d6ef; }
+  .lbl {
+    margin-top: 12px;
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 11px; letter-spacing: .105em; color: #7e8caa; line-height: 1.55;
+  }
+  .foot {
+    position: absolute; right: 96px; bottom: 42px;
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 11px; letter-spacing: .105em; color: #66738f;
+  }
+</style>
+
+<div class="pad">
+  <div class="brand"><span class="dot"></span>GHOSTLINE<span class="sep">&middot;</span>RESEARCH</div>
+  <div class="rule"></div>
+  <h1>Real-time instrument for<br>transformer inference.</h1>
+  <div class="sub">Geometric Hierarchies Organizing State Transitions: Linearity Informed Neural Encoding</div>
+</div>
+
+<div class="stats">
+  <div class="rule"></div>
+  <div class="row">
+    <div class="stat">
+      <div class="val">0.933</div>
+      <div class="lbl">MACRO F1 &middot; 5 PROMPT-INTENT<br>CLASSES &middot; SEALED VAULT &middot; QWEN3-8B</div>
+    </div>
+    <div class="stat">
+      <div class="val">91.3<i>%</i></div>
+      <div class="lbl">7 CATEGORIES &middot; GROUPED CV<br>BY PROMPT ID &middot; QWEN3-8B</div>
+    </div>
+    <div class="stat">
+      <div class="val">5 <i>families</i></div>
+      <div class="lbl">9 MODELS &middot; 1B&ndash;8B<br>BREADTH INVENTORY</div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">PATENT PENDING &middot; 4 US PROVISIONALS FILED</div>
