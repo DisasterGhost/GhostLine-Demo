@@ -32,4 +32,14 @@
   bundled in the build (`demo-app/recordings/`).
 - **Verify locally** before merge: serve a dir where `/demo` = `demo-app`, then
   `node C:/GhostLine/tools/shot/verify-demo.mjs http://localhost:PORT/demo/ <out>`.
-- Going live = merge `codex/consulting-offer-site` → `master`.
+- **Going live = push to `master`.** The deploy workflow runs on every push to
+  `master`, so vendoring the build and pushing is the whole release. (This line
+  previously said to merge `codex/consulting-offer-site`; that branch is no
+  longer part of the flow.)
+- **The wiki source is in app-next, not here.** `src/data/wikiContent.ts` in
+  *this* repo is dead code for `/demo` — it is an older copy that nothing
+  builds from. Edit `ghostline-app-next/src/data/wikiContent.ts` and rebuild.
+  There are several stale copies of that file on disk; the canonical one is the
+  app-next version.
+- Verified working 2026-07-25: the build produces `/demo/assets/...` paths and
+  `verify-demo.mjs` reports layer switching with no console errors.
