@@ -12,3 +12,5 @@ static-landing/media/
 # Pitch and sales collateral — keep out of the site repo
 pitch/
 *.pptx
+docs/CONSULTING_GIG.md
+.superpowers/
