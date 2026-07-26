@@ -430,7 +430,7 @@
         <div class="section__label">Method</div>
         <h2 class="section__title">Protocol and validation.</h2>
         <p class="section__intro">
-          Every number on this page comes from held-out data under a locked protocol. Classifiers are evaluated with prompt-grouped splits, and corrected metrics replace earlier estimates.
+          Classifier figures on this page come from held-out data under a locked protocol, evaluated with prompt-grouped splits, with corrected metrics replacing earlier estimates. Counts, latency and patent figures are not classifier metrics and are labelled where they appear.
         </p>
 
         <div class="mech-grid">
@@ -448,6 +448,21 @@
             <div class="mech-card__num">03 · CORRECTION</div>
             <h3 class="mech-card__title">Metrics are revised when controls change.</h3>
             <p class="mech-card__body">A 99.6% prophecy estimate was revised to 85% after prompt-grouped cross-validation removed prompt-identity leakage. Transfer limits are tracked separately, including thresholds that hold at 3B but fail at 8B.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">04 &middot; BASELINE</div>
+            <h3 class="mech-card__title">What prompt text alone achieves.</h3>
+            <p class="mech-card__body">On the same corpus and the same grouped splits, a classifier reading only the prompt text &mdash; no activations at all &mdash; predicts the category 74.6% of the time. Prompt length and word count alone reach 58.9%. Any geometric result has to beat that before it means anything, so the baseline is published alongside it.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">05 &middot; VIEWPORT</div>
+            <h3 class="mech-card__title">The viewport is part of the claim.</h3>
+            <p class="mech-card__body">Interpretability figures routinely present 2D projections as faithful pictures of high-dimensional structure, when the trustworthiness and continuity metrics for those projections do not support that reading. GhostLine measures projection fidelity and reports it next to what it renders &mdash; closer to an oscilloscope than a diagram. A display with known error, not an illustration.</p>
+          </article>
+          <article class="mech-card">
+            <div class="mech-card__num">06 &middot; POSITIONING</div>
+            <h3 class="mech-card__title">Not a probe. An instrument.</h3>
+            <p class="mech-card__body">Linear probing and representation-engineering work already established that activations carry decodable structure; that is not the claim here. The contribution is instrumentation &mdash; per-token measurement during live generation, rendered as a trajectory and recorded so a run can be replayed and inspected afterwards. The classifiers are one readout on that stream, not the product.</p>
           </article>
         </div>
       </section>
