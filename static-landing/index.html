@@ -74,12 +74,12 @@
 
       <div class="hero__stage">
         <div class="hero__proof-cell hero__proof-cell--tl">
-          <span class="proof__value">0.933</span>
-          <span class="proof__label">macro F1 &middot; 5 prompt-intent classes &middot; sealed vault &middot; Qwen3-8B</span>
+          <span class="proof__value">88.4%</span>
+          <span class="proof__label">task category read from the prompt alone &middot; Qwen3-8B &middot; prompt-grouped CV &middot; independently reproduced</span>
         </div>
         <div class="hero__proof-cell hero__proof-cell--tr">
-          <span class="proof__value">85&ndash;91%</span>
-          <span class="proof__label">task category predicted from the prompt alone &middot; grouped CV</span>
+          <span class="proof__value">85.0%</span>
+          <span class="proof__label">same task, Llama 3.2 3B &middot; independent corpus &middot; prompt-grouped CV</span>
         </div>
 
         <div class="hero__render" id="heroRender">
@@ -234,10 +234,10 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Classify what kind of task the model is handling — reasoning, retrieval, precision work — from the activation geometry alone.</p>
+            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">0.933<i>macro F1</i></span>
-              <span class="evidence-cell__label">5 prompt-intent classes · sealed vault · Qwen3-8B</span>
+              <span class="evidence-cell__metric">88.4<i>%</i></span>
+              <span class="evidence-cell__label">7 task categories · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
             </div>
           </div>
           <div class="evidence-cell">
@@ -331,24 +331,24 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Predict the geometric state from the prompt alone, before the model writes anything.</p>
+            <p class="evidence-cell__plain">Predict which task category the model is about to handle, from the prompt encoding alone, before it writes anything.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">85–91<i>%</i></span>
-              <span class="evidence-cell__label">prompt-only classifier · 8B · grouped (prompt-level) CV</span>
+              <span class="evidence-cell__metric">88.4<i>%</i></span>
+              <span class="evidence-cell__label">Qwen3-8B · 1,134 samples over 378 prompts · 335 aggregated prompt features · prompt-grouped CV</span>
             </div>
           </div>
           <div class="evidence-cell">
-            <p class="evidence-cell__plain">At 3B, the same pattern holds — same methodology, prompt-level grouping, same result.</p>
+            <p class="evidence-cell__plain">A different architecture at a different scale reproduces it, on a separate corpus.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">85.0<i>%</i></span>
-              <span class="evidence-cell__label">3B · prompt-level CV · per-prompt grouping</span>
+              <span class="evidence-cell__label">Llama 3.2 3B · 1,380 samples over 530 prompts · prompt-level CV</span>
             </div>
           </div>
         </div>
 
         <div class="honest-split">
           <div class="honest-col honest-col--sharp">
-            <div class="honest-col__head">▰ Per-state accuracy (8B)</div>
+            <div class="honest-col__head">▰ Per-state accuracy · 335-feature prompt classifier (8B)</div>
             <ul class="honest-col__list">
               <li>Reasoning 95% · Creativity 94% · Collapse 93%</li>
               <li>Retrieval 89% · Precision 88%</li>
