@@ -16,12 +16,18 @@
    - **`MSYS_NO_PATHCONV=1` is REQUIRED on git-bash/Windows** — without it, MSYS
      mangles `/demo/` into `/Program Files/Git/demo/` and the build is broken.
 
-2. **Vendor the build** into this repo (`GhostLine-Demo`):
+2. **Vendor the build** into this repo (`GhostLine-Demo`), on **`master`**:
    ```bash
-   cd C:/GhostLine/worktrees/ghostline-consulting-site
+   cd C:/GhostLine/GhostLine-Demo
    rm -rf demo-app && cp -r C:/GhostLine/ghostline-app-next/dist demo-app
    git add demo-app && git commit -m "demo: rebuild vendored /demo"
    ```
+   > This previously said `cd C:/GhostLine/worktrees/ghostline-consulting-site`,
+   > which is a second checkout of this repo pinned to `codex/consulting-offer-site`
+   > — the branch the Notes below correctly describe as no longer part of the
+   > flow. Following the old step vendored the build onto a dead branch and
+   > deployed nothing, with no error to notice. Verify with
+   > `git -C <path> branch --show-current` before copying; it must say `master`.
 
 3. **Deploy** publishes it automatically: `.github/workflows/deploy.yml` does
    `rm -rf dist/demo && cp -r demo-app dist/demo` (master → Pages).
