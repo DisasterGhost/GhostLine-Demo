@@ -4934,6 +4934,8 @@ Halo brightness: how contested the assignment was — the closer the top two pro
 
 Most tokens have no visible halo, because the classifier is at ceiling almost everywhere. That quiet is honest — halos ignite exactly at state boundaries and transitions, the tokens most worth clicking. Boundary regions visibly bleed toward the state they are torn with.
 
+A note on reading that bleed: the halo's hue and the token's position are the same probability vector expressed through two different channels — the blend that places a contested token toward its runner-up's region is the same measurement that colors its halo. When haloed tokens gather on the matching flank of a cluster, that is one signal being applied two ways, not two independent measurements corroborating each other.
+
 Halos also fade with camera distance so a zoomed-out cloud reads as separate tokens, not fused glow. Tokens without classifier probabilities (prompt tokens, unmeasured tokens) get no halo.`,related:["geometric-state","token-colors","reading-3d-view"]},{id:"hallucination-halo",title:"Hallucination Ring",category:"basics",short:"A crimson ring with white edging marks tokens the trained ensemble flagged.",epistemic:"classifier",body:`When the hallucination ensemble assigns a risk score above 0.5 to a generated token, a crimson ring appears around that token.
 
 Appearance: crimson body with hairline near-white edging inside and out. The edging guarantees the ring stays readable against warm-colored spheres and under color-vision deficiency. Ring opacity scales with the risk value.
