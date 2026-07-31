@@ -45,7 +45,7 @@
       <div class="section__label">Register</div>
       <h2 class="section__title">Claims &amp; corrections.</h2>
       <p class="section__intro">
-        Every quantitative claim GhostLine publishes traces to a typed record in an internal research ledger. This page lists the live figures with their scope and provenance — and, deliberately, the corrections and retractions that preceded them. Corrections stay listed after they are fixed. The admission policy: only claims that have cleared confound review are published; anything still under audit is labelled where it appears.
+        Every quantitative claim GhostLine publishes traces to a typed record in an internal research ledger. This page lists the live figures with their scope and provenance, and the corrections and retractions that preceded them. Corrections stay listed after they are fixed. The admission policy: only claims that have cleared confound review are published; anything still under audit is labelled where it appears.
       </p>
 
       <div class="claims-scroll">
@@ -75,7 +75,7 @@
             <tr>
               <td class="figure">85.0%</td>
               <td>The same prompt-time task, replicated on a different architecture at a different scale.</td>
-              <td class="scope">Llama 3.2 3B · independent corpus · 1,380 samples over 530 prompts · prompt-grouped CV. This is a corrected figure: originally 99.6% under sample-level CV; prompt-identity leakage was removed by grouped splits in the February 2026 overfitting audit. Unlike the 8B figure, it has no 2026-07 re-run on record — its support is that audit. Stated rather than hidden.</td>
+              <td class="scope">Llama 3.2 3B · independent corpus · 1,380 samples over 530 prompts · prompt-grouped CV. This is a corrected figure: originally 99.6% under sample-level CV; prompt-identity leakage was removed by grouped splits in the February 2026 overfitting audit. Unlike the 8B figure, it has no 2026-07 re-run on record — its support is that audit.</td>
               <td class="rec">CLM-2026-0729-002</td>
             </tr>
             <tr>
@@ -93,7 +93,7 @@
             <tr>
               <td class="figure">d ≈ 4.2</td>
               <td>MLP activations become a distinct discriminating signal family at 8B, barely present at 3B.</td>
-              <td class="scope">Qwen3-8B, February 2026 protocol; effect size is standardized within-model. Measured before the current confound-screening standards existed. The queued re-audit tests three named risks: generation-length confounds, scale-versus-family attribution (the 3B and 8B comparators differ in model family, not only size), and robustness to per-dimension normalization. This label will be updated with the outcome.</td>
+              <td class="scope">Qwen3-8B, February 2026 protocol; effect size is standardized within-model. Measured before the current confound-screening standards existed. The queued re-audit tests three named risks: generation-length confounds, scale-versus-family attribution (the 3B and 8B comparators differ in model family, not only size), and robustness to per-dimension normalization.</td>
               <td class="rec">re-audit queued</td>
             </tr>
             <tr>
@@ -116,9 +116,9 @@
 
     <section class="section">
       <div class="section__label">Corrections</div>
-      <h2 class="section__title">What was corrected, retracted, or reworded — and stays listed.</h2>
+      <h2 class="section__title">Corrections and retractions.</h2>
       <p class="section__intro">
-        These are the claims that did not survive review. Some were pulled after publication, some before. They are listed because a register that only shows survivors is a highlight reel, not a register.
+        Claims that did not survive review — what changed, when, and why, one entry each.
       </p>
 
       <div class="cor-item">
@@ -171,7 +171,7 @@
       <div class="section__label">Method</div>
       <h2 class="section__title">How a number earns a place here.</h2>
       <p class="section__intro">
-        A figure is publishable when it has a ledger record with stated scope; held-out evaluation under prompt-grouped splits at the locked generation protocol; a length-only baseline reported before any structural claim; and no open correction against its corpus or method. The site build runs a claims lint that fails on any published number missing from this register, on retracted figures, and on known-misleading phrasings. External review is invited — the fastest way to get a figure corrected is to write to the address above.
+        A figure is publishable when it has a ledger record with stated scope; held-out evaluation under prompt-grouped splits at the locked generation protocol; a length-only baseline reported before any structural claim; and no open correction against its corpus or method. The site build runs a claims lint that fails on any published number missing from this register, on retracted figures, and on known-misleading phrasings. External review is invited; corrections reach the address above.
       </p>
     </section>
 
