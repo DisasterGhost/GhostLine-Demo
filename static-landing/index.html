@@ -45,6 +45,7 @@
         <a href="#paths">Paths</a>
         <a href="#architecture">Architecture</a>
         <a href="#engagement">Consulting</a>
+        <a href="claims.html">Claims</a>
         <a href="#about">About</a>
       </div>
       <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="nav__cta">Book a scoping call</a>
@@ -75,7 +76,7 @@
       <div class="hero__stage">
         <div class="hero__proof-cell hero__proof-cell--tl">
           <span class="proof__value">88.4%</span>
-          <span class="proof__label">task category read from the prompt alone &middot; Qwen3-8B &middot; prompt-grouped CV &middot; independently reproduced</span>
+          <span class="proof__label">task category read from the prompt alone &middot; Qwen3-8B &middot; prompt-grouped CV</span>
         </div>
         <div class="hero__proof-cell hero__proof-cell--tr">
           <span class="proof__value">85.0%</span>
@@ -229,15 +230,15 @@
         <div class="section__label">Evidence</div>
         <h2 class="section__title">Measured results.</h2>
         <p class="section__intro">
-          The instrument has been exercised across 5 architecture families and 9 models spanning 1B to 8B parameters; those runs differ in corpus and protocol and are a breadth inventory, not one uniform validation. Classifier figures below are from held-out evaluation, not training data.
+          The instrument has been exercised across 5 architecture families and 9 models spanning 1B to 8B parameters; those runs differ in corpus and protocol and are a breadth inventory, not one uniform validation. Classifier figures below are from held-out evaluation, not training data. Every figure on this page traces to the <a href="claims.html">public claims register</a> — corrections included.
         </p>
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything.</p>
+            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything. This prompt-time classifier covers seven prompt labels: the five prompt-intent states the live display renders, collapse, and a residual bucket — "edge cases" — for prompts constructed to fit none of the others. The bucket is an evaluation-honesty device, not a claimed state or task type.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">88.4<i>%</i></span>
-              <span class="evidence-cell__label">7 task categories · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
+              <span class="evidence-cell__label">7 prompt labels · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
             </div>
           </div>
           <div class="evidence-cell">
@@ -341,19 +342,19 @@
             <p class="evidence-cell__plain">A different architecture at a different scale reproduces it, on a separate corpus.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">85.0<i>%</i></span>
-              <span class="evidence-cell__label">Llama 3.2 3B · 1,380 samples over 530 prompts · prompt-level CV</span>
+              <span class="evidence-cell__label">Llama 3.2 3B · 1,380 samples over 530 prompts · prompt-grouped CV</span>
             </div>
           </div>
         </div>
 
         <div class="honest-split">
           <div class="honest-col honest-col--sharp">
-            <div class="honest-col__head">▰ Per-state accuracy · 335-feature prompt classifier (8B)</div>
+            <div class="honest-col__head">▰ Per-label accuracy · 335-feature prompt classifier (8B) · n = 1,134</div>
             <ul class="honest-col__list">
-              <li>Reasoning 95% · Creativity 94% · Collapse 93%</li>
-              <li>Retrieval 89% · Precision 88%</li>
-              <li>Uncertainty 78%</li>
-              <li>Edge cases 56% — weakest category</li>
+              <li>Reasoning 95% (180) · Creativity 94% (150) · Collapse 93% (180)</li>
+              <li>Retrieval 89% (300) · Precision 88% (150)</li>
+              <li>Uncertainty 78% (120)</li>
+              <li>Edge cases 56% (54) — a residual bucket, not a category; 4.8% of the corpus</li>
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
@@ -361,7 +362,7 @@
             <ul class="honest-col__list">
               <li>This is a strong tendency, not a guarantee; the model can still change course mid-generation.</li>
               <li>It predicts the category of task the prompt sets up: reasoning, retrieval, and so on. It does not predict the literal answer, whether that answer is true, or what the model is &ldquo;thinking&rdquo;.</li>
-              <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard (the edge cases at left).</li>
+              <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard (the residual bucket at left).</li>
             </ul>
           </div>
         </div>
@@ -447,12 +448,12 @@
           <article class="mech-card">
             <div class="mech-card__num">03 · CORRECTION</div>
             <h3 class="mech-card__title">Metrics are revised when controls change.</h3>
-            <p class="mech-card__body">A 99.6% prophecy estimate was revised to 85% after prompt-grouped cross-validation removed prompt-identity leakage. Transfer limits are tracked separately, including thresholds that hold at 3B but fail at 8B.</p>
+            <p class="mech-card__body">Metrics are revised when controls change, and the revisions stay public: a 99.6% prophecy estimate on Llama 3.2 3B fell to 85.0% when prompt-grouped cross-validation removed prompt-identity leakage. The scope, provenance, and full correction history of every published figure lives in the <a href="claims.html">claims register</a>.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">04 &middot; BASELINE</div>
             <h3 class="mech-card__title">What prompt text alone achieves.</h3>
-            <p class="mech-card__body">On the same corpus and the same grouped splits, a classifier reading only the prompt text &mdash; no activations at all &mdash; predicts the category 74.6% of the time. Prompt length and word count alone reach 58.9%. Any geometric result has to beat that before it means anything, so the baseline is published alongside it.</p>
+            <p class="mech-card__body">Measured on the 3B corpus &mdash; five states, 780 samples, grouped splits &mdash; a classifier reading only the prompt text, no activations at all, predicts the category 74.6% of the time; geometry reads 85&ndash;91% on those same splits. Prompt length and word count alone reach 58.9%. A matched text baseline for the 8B seven-category figure has not been run yet. Any geometric result has to beat its text baseline before it means anything, so the baseline is published alongside it.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">05 &middot; VIEWPORT</div>

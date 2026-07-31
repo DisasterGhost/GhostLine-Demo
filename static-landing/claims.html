@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GhostLine — Claims &amp; Corrections</title>
+  <meta name="description" content="The public claims register: every figure GhostLine publishes, with scope, provenance, and the corrections that preceded it.">
+  <link rel="stylesheet" href="landing.css?v=13">
+  <style>
+    .claims-scroll { overflow-x: auto; margin-top: 28px; }
+    .claims-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; min-width: 720px; }
+    .claims-table th, .claims-table td { text-align: left; padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .claims-table th { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 400; }
+    .claims-table .figure { font-family: var(--f-mono); white-space: nowrap; color: var(--ink); font-size: 1.05rem; }
+    .claims-table .scope { color: var(--ink-dim); max-width: 46ch; }
+    .claims-table .rec { font-family: var(--f-mono); font-size: 0.7rem; color: var(--ink-faint); white-space: nowrap; }
+    .cor-item { border-left: 2px solid var(--line-strong); padding: 2px 0 2px 18px; margin: 18px 0; }
+    .cor-item__date { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--ink-faint); display: block; margin-bottom: 4px; }
+    .cor-item__body { color: var(--ink-dim); margin: 0; }
+    .claims-note { color: var(--ink-faint); font-size: 0.85rem; margin-top: 24px; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__brand">
+        <span class="nav__brand-dot"></span>
+        GHOSTLINE
+      </a>
+      <div class="nav__spacer"></div>
+      <div class="nav__links">
+        <a href="index.html#paths">Paths</a>
+        <a href="index.html#architecture">Architecture</a>
+        <a href="index.html#engagement">Consulting</a>
+        <a href="index.html#about">About</a>
+      </div>
+      <a href="mailto:collin@ghostline-research.org?subject=GhostLine%20scoping%20call&amp;body=Model%20family%3A%0ADeployment%20surface%3A%0ARisk%20to%20instrument%3A%0ATimeline%3A" class="nav__cta">Book a scoping call</a>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <section class="section">
+      <div class="section__label">Register</div>
+      <h2 class="section__title">Claims &amp; corrections.</h2>
+      <p class="section__intro">
+        Every quantitative claim GhostLine publishes traces to a typed record in an internal research ledger. This page lists the live figures with their scope and provenance — and, deliberately, the corrections and retractions that preceded them. Corrections stay listed after they are fixed. The admission policy: only claims that have cleared confound review are published; anything still under audit is labelled where it appears.
+      </p>
+
+      <div class="claims-scroll">
+        <table class="claims-table">
+          <thead>
+            <tr><th>Figure</th><th>What it says</th><th>Scope, provenance &amp; status</th><th>Record</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="figure">88.4%</td>
+              <td>Task category read from the prompt encoding alone, before generation.</td>
+              <td class="scope">Qwen3-8B · 7 prompt labels — the five prompt-intent states, collapse, and a residual "edge cases" bucket · 335 aggregated (non-per-head) prompt features · 1,134 samples over 378 prompts · prompt-grouped CV. Independently re-run 2026-07-26 and reproduced at 88.36% — a 0.04pp delta. Accuracy is quoted rather than macro-F1 because accuracy is the metric that was re-run.</td>
+              <td class="rec">CLM-2026-0729-001</td>
+            </tr>
+            <tr>
+              <td class="figure">95 / 94 / 93 / 89 / 88 / 78 / 56</td>
+              <td>Per-label accuracy of the same classifier: reasoning, creativity, collapse, retrieval, precision, uncertainty, and the residual edge-cases bucket.</td>
+              <td class="scope">Label supports 180 / 150 / 180 / 300 / 150 / 120 / 54, n = 1,134. Weighted by support, the breakdown reconciles to 88.36% — matching the re-run headline to two decimals. "Edge cases" is not a claimed state or task type: it is the residual bucket for prompts constructed to fit no category, which is why it scores lowest — there is no coherent signature for the classifier to learn. It is 4.8% of the corpus and is never surfaced in the live display.</td>
+              <td class="rec">COR-2026-0726-006</td>
+            </tr>
+            <tr>
+              <td class="figure">85.0%</td>
+              <td>The same prompt-time task, replicated on a different architecture at a different scale.</td>
+              <td class="scope">Llama 3.2 3B · independent corpus · 1,380 samples over 530 prompts · prompt-grouped CV. This is a corrected figure: originally 99.6% under sample-level CV; prompt-identity leakage was removed by grouped splits in the February 2026 overfitting audit. Unlike the 8B figure, it has no 2026-07 re-run on record — its support is that audit. Stated rather than hidden.</td>
+              <td class="rec">CLM-2026-0729-002</td>
+            </tr>
+            <tr>
+              <td class="figure">91.3%</td>
+              <td>The 3,791-feature variant of the prompt-time classifier (secondary figure).</td>
+              <td class="scope">Reproduced at 90.74%, within its own fold variance (SD 2.17pp). Exact hyperparameters and seed were never recorded, so it reproduces within noise but not exactly. Cited only as secondary for that reason.</td>
+              <td class="rec">COR-2026-0726-006</td>
+            </tr>
+            <tr>
+              <td class="figure">74.6% / 58.9%</td>
+              <td>What prompt text alone, and prompt length alone, achieve — the baselines any geometric result must beat.</td>
+              <td class="scope">3B corpus · five states · 780 samples · 260 prompt groups · grouped splits. Geometry reads 85–91% on those same splits. A matched text baseline for the 8B seven-category figure has not been run yet; it is queued. An earlier "+13pp" delta was removed because it paired numbers from different corpora — see corrections below.</td>
+              <td class="rec">prompt_text_baseline</td>
+            </tr>
+            <tr>
+              <td class="figure">d ≈ 4.2</td>
+              <td>MLP activations become a distinct discriminating signal family at 8B, barely present at 3B.</td>
+              <td class="scope">Qwen3-8B, February 2026 protocol; effect size is standardized within-model. Measured before the current confound-screening standards existed; a re-audit under current controls (length baselines, nuisance screens) is queued, and this label will be updated with its outcome.</td>
+              <td class="rec">re-audit queued</td>
+            </tr>
+            <tr>
+              <td class="figure">~15 ms / &lt;2 ms / 0</td>
+              <td>Pre-generation gate latency, per-token classification latency, added forward passes.</td>
+              <td class="scope">Capability measurements on a single-stream reference stack, explicitly not measured under production batching. Not classifier metrics.</td>
+              <td class="rec">labelled on page</td>
+            </tr>
+            <tr>
+              <td class="figure">58 · 5 · 9</td>
+              <td>Signals captured per token; architecture families; models instrumented (1B–8B).</td>
+              <td class="scope">Capability and breadth counts, not one uniform validation — the runs differ in corpus and protocol. Framed as a breadth inventory wherever they appear.</td>
+              <td class="rec">inventory</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="claims-note">Record IDs refer to GhostLine's internal research ledger — a typed store of claim, correction, and method records with supersession tracking. A build-time lint checks the published pages against this register; a figure that drifts from its record fails the build.</p>
+    </section>
+
+    <section class="section">
+      <div class="section__label">Corrections</div>
+      <h2 class="section__title">What was corrected, retracted, or reworded — and stays listed.</h2>
+      <p class="section__intro">
+        These are the claims that did not survive review. Some were pulled after publication, some before. They are listed because a register that only shows survivors is a highlight reel, not a register.
+      </p>
+
+      <div class="cor-item">
+        <span class="cor-item__date">2026-02</span>
+        <p class="cor-item__body">A 99.6% prompt-time accuracy on Llama 3.2 3B was corrected to 85.0%. Sample-level cross-validation on a multi-run corpus had leaked prompt identity; prompt-grouped splits are now mandatory for every published figure.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">A sealed-vault hallucination macro-F1 figure was pulled. The measurement was real; the corpus family it was measured on was later disqualified as off-distribution for the deployed setting.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">A 94-point state-accuracy figure was pulled after a length-only baseline explained most of its separation. Length baselines now run before any structural claim is published.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">An "85–91%" accuracy range was pulled for mixing metrics across models and mis-captioning an 8B figure. Single numbers with stated scope replaced it.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">Binary hallucination-detection F1 headlines were retired from public use in favour of three-class evaluation, which better reflects the deployed decision. The binary figures remain in the internal ledger; they are no longer quoted.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">An unsupervised-clustering ARI figure was retracted before it ever shipped — caught by internal audit, listed here as part of the record.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07</span>
+        <p class="cor-item__body">A "+13pp over baseline" delta was removed: the baseline and the headline came from different corpora and class sets. The baseline row above states the honest scope; a matched comparison is queued.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07-30</span>
+        <p class="cor-item__body">The banner phrase "independently reproduced" was removed from the hero. The reproduction is an independent internal re-run of the pipeline, not third-party replication, and that provenance now lives in this register rather than in a banner label. In the same pass, the text-baseline card was rescoped to its actual corpus after an external review caught the mismatch.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__label">Method</div>
+      <h2 class="section__title">How a number earns a place here.</h2>
+      <p class="section__intro">
+        A figure is publishable when it has a ledger record with stated scope; held-out evaluation under prompt-grouped splits at the locked generation protocol; a length-only baseline reported before any structural claim; and no open correction against its corpus or method. The site build runs a claims lint that fails on any published number missing from this register, on retracted figures, and on known-misleading phrasings. External review is invited — the fastest way to get a figure corrected is to write to the address above.
+      </p>
+    </section>
+
+    <footer>
+      <span>GHOSTLINE RESEARCH · 2026</span>
+      <span>Independent AI instrumentation</span>
+    </footer>
+
+  </main>
+
+</body>
+</html>
