@@ -235,7 +235,7 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything. This prompt-time classifier covers seven prompt labels: the five prompt-intent states the live display renders, collapse, and a residual bucket — "edge cases" — for prompts constructed to fit none of the others. The bucket is an evaluation-honesty device, not a claimed state or task type.</p>
+            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything. This prompt-time classifier covers seven prompt labels: the five prompt-intent categories the live display renders, collapse, and a residual bucket — "edge cases" — for prompts constructed to fit none of the others. The bucket is an evaluation-honesty device, not a claimed category or task type.</p>
             <div class="evidence-cell__ref">
               <span class="evidence-cell__metric">88.4<i>%</i></span>
               <span class="evidence-cell__label">7 prompt labels · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
@@ -323,7 +323,7 @@
             </div>
           </div>
           <div class="prophecy-step">
-            <div class="prophecy-step__label">03 · Generated — colored by state</div>
+            <div class="prophecy-step__label">03 · Generated — colored by category</div>
             <p class="prophecy-tokens">
               <span style="--c: var(--c-reasoning);">The</span> <span style="--c: var(--c-reasoning);">flag</span> <span style="--c: var(--c-reasoning);">with</span> <span style="--c: var(--c-reasoning);">the</span> <span style="--c: var(--c-reasoning);">maple</span> <span style="--c: var(--c-reasoning);">leaf</span> <span style="--c: var(--c-reasoning);">is</span> <span style="--c: var(--c-retrieval);">Canada's</span><span style="--c: var(--c-reasoning);">,</span> <span style="--c: var(--c-reasoning);">so</span> <span style="--c: var(--c-reasoning);">the</span> <span style="--c: var(--c-reasoning);">capital</span> <span style="--c: var(--c-reasoning);">is</span> <span style="--c: var(--c-retrieval);">Ottawa</span><span style="--c: var(--c-reasoning);">.</span>
             </p>
@@ -401,7 +401,7 @@
         </div>
 
         <p class="section__intro" style="margin-top:32px; margin-bottom:0;">
-          Real tokens from the math-reasoning recording, prompt: "Solve 22x − 8 = 3x." The early tokens work through the strategy ("Subtract … from both sides"). Later, as the model commits to the exact value, the state shifts into precision ("Divide both sides by … x = 8/19").
+          Real tokens from the math-reasoning recording, prompt: "Solve 22x − 8 = 3x." The early tokens work through the strategy ("Subtract … from both sides"). Later, as the model commits to the exact value, the category shifts to precision ("Divide both sides by … x = 8/19").
         </p>
       </section>
 
@@ -413,8 +413,8 @@
         </p>
 
         <figure class="scale-figure">
-          <img alt="GhostLine running on Qwen3-8B — state-colored token cloud with per-layer effective-dimension readout" src="media/ghostline-8b-chicken.png">
-          <figcaption class="scale-figure__cap">A live Qwen3-8B generation: the state-colored trajectory plus the per-layer effective-dimension profile (L0→L31).</figcaption>
+          <img alt="GhostLine running on Qwen3-8B — category-colored token cloud with per-layer effective-dimension readout" src="media/ghostline-8b-chicken.png">
+          <figcaption class="scale-figure__cap">A live Qwen3-8B generation: the category-colored trajectory plus the per-layer effective-dimension profile (L0→L31).</figcaption>
         </figure>
 
         <div class="evidence-grid">
@@ -454,7 +454,7 @@
           <article class="mech-card">
             <div class="mech-card__num">04 &middot; BASELINE</div>
             <h3 class="mech-card__title">What prompt text alone achieves.</h3>
-            <p class="mech-card__body">Measured on the five-state healthy subset of the same Qwen3-8B corpus &mdash; 780 samples over 260 prompt groups, grouped splits &mdash; a classifier reading only the prompt text, no activations at all, predicts the category 74.6% of the time. The 85&ndash;91% geometry figures come from different label sets and split instantiations, so a same-split geometry-versus-text run is queued. Any geometric result has to beat its text baseline before it means anything, so the baseline is published alongside it.</p>
+            <p class="mech-card__body">Measured on the five-category healthy subset of the same Qwen3-8B corpus &mdash; 780 samples over 260 prompt groups, grouped splits &mdash; a classifier reading only the prompt text, no activations at all, predicts the category 74.6% of the time. The 85&ndash;91% geometry figures come from different label sets and split instantiations, so a same-split geometry-versus-text run is queued. Any geometric result has to beat its text baseline before it means anything, so the baseline is published alongside it.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">05 &middot; VIEWPORT</div>
@@ -503,7 +503,7 @@
               <h3 class="app-card__title">Compliance &amp; Audit</h3>
               <span class="app-card__id">A-01</span>
             </div>
-            <p class="app-card__body">Per-token behavioral state classification with replayable trajectory logs. The result is inspectable monitoring evidence, not a post-hoc report synthesized from output text.</p>
+            <p class="app-card__body">Per-token behavioral classification with replayable trajectory logs. The result is inspectable monitoring evidence, not a post-hoc report synthesized from output text.</p>
             <div class="app-card__regs">
               <span>EU AI Act · Art 9</span>
               <span>EU AI Act · Art 12</span>
@@ -543,7 +543,7 @@
               <h3 class="app-card__title">Model Development</h3>
               <span class="app-card__id">A-04</span>
             </div>
-            <p class="app-card__body">Geometric profiling of training checkpoints shows whether fine-tuning improves behavioral separation. Prompt corpus certification checks whether an eval set actually exercises the intended states.</p>
+            <p class="app-card__body">Geometric profiling of training checkpoints shows whether fine-tuning improves behavioral separation. Prompt corpus certification checks whether an eval set actually exercises the intended categories.</p>
             <div class="app-card__regs">
               <span>Checkpoint diff</span>
               <span>Corpus certification</span>
@@ -559,7 +559,7 @@
             <div class="act-map">
               <div class="act-map__row">
                 <span>Art 12</span>
-                <p>Record-keeping: high-risk AI systems must support automatic event logs over the system lifetime; GhostLine can add per-token behavior, state, and risk traces to those logs.</p>
+                <p>Record-keeping: high-risk AI systems must support automatic event logs over the system lifetime; GhostLine can add per-token behavior, category, and risk traces to those logs.</p>
               </div>
               <div class="act-map__row">
                 <span>Art 72</span>
@@ -622,7 +622,7 @@
               </div>
               <div class="act-map__row">
                 <span>Early abort</span>
-                <p>Watch risk/state spikes in the first tokens and stop expensive reasoning runs before they burn the full context and compute budget.</p>
+                <p>Watch risk and category signals spike in the first tokens and stop expensive reasoning runs before they burn the full context and compute budget.</p>
               </div>
               <div class="act-map__row">
                 <span>Route</span>
@@ -640,13 +640,13 @@
             <div class="usecase-panel__grid">
               <div>
                 <h4>GhostLine fit</h4>
-                <p>Reasoning models spend budget before a human can judge the answer. If a prompt is likely to fabricate, loop, or enter an unstable state, teams need a fast pre-generation or early-token signal they can route on.</p>
+                <p>Reasoning models spend budget before a human can judge the answer. If a prompt is likely to fabricate, loop, or destabilize, teams need a fast pre-generation or early-token signal they can route on.</p>
               </div>
               <div>
                 <h4>GhostLine artifacts</h4>
                 <ul>
                   <li>Prompt-time risk prediction before output tokens stream.</li>
-                  <li>Per-token state/risk updates during generation.</li>
+                  <li>Per-token category/risk updates during generation.</li>
                   <li>Latency-profiled gates for route, re-prompt, block, or escalate decisions.</li>
                 </ul>
               </div>
@@ -726,7 +726,7 @@
               </div>
               <div class="act-map__row">
                 <span>Checkpoint diff</span>
-                <p>Compare geometric state separation across base, SFT, DPO/RLHF, safety, or domain fine-tune checkpoints before shipping a model.</p>
+                <p>Compare geometric category separation across base, SFT, DPO/RLHF, safety, or domain fine-tune checkpoints before shipping a model.</p>
               </div>
               <div class="act-map__row">
                 <span>Regression</span>
@@ -734,7 +734,7 @@
               </div>
               <div class="act-map__row">
                 <span>Corpus cert</span>
-                <p>Certify that an eval corpus actually exercises the intended behavioral states rather than only matching surface prompt categories.</p>
+                <p>Certify that an eval corpus actually exercises the intended behaviors rather than only matching surface prompt phrasing.</p>
               </div>
               <div class="act-map__row">
                 <span>Release gate</span>
@@ -755,7 +755,7 @@
                 <ul>
                   <li>Checkpoint-to-checkpoint geometric diffs.</li>
                   <li>Prompt corpus certification against expected behavioral basins.</li>
-                  <li>Failure clusters where states blur or collapse under stress prompts.</li>
+                  <li>Failure clusters where categories blur or collapse under stress prompts.</li>
                 </ul>
               </div>
               <div>
@@ -884,7 +884,7 @@
             <h3 class="app-card__title">AI risk geometry audit</h3>
             <span class="app-card__id">S-01</span>
           </div>
-          <p class="app-card__body">A short diagnostic sprint for one model and one high-risk workflow. We capture representative generations, profile state transitions and fabrication signatures, and deliver a decision memo: risk map, recommended controls, and a clear call on whether GhostLine is worth taking further.</p>
+          <p class="app-card__body">A short diagnostic sprint for one model and one high-risk workflow. We capture representative generations, profile category transitions and fabrication signatures, and deliver a decision memo: risk map, recommended controls, and a clear call on whether GhostLine is worth taking further.</p>
           <div class="app-card__regs">
             <span>5-7 business days</span>
             <span>No production integration required</span>
@@ -896,7 +896,7 @@
             <h3 class="app-card__title">Pilot integration</h3>
             <span class="app-card__id">P-01</span>
           </div>
-          <p class="app-card__body">A 30-day pilot on one AI surface. We attach GhostLine to your model's forward pass and stream per-token state plus risk scores into a dashboard your team can inspect. You provide a model endpoint and a contact engineer; we provide the instrumentation, classifiers, and live readout.</p>
+          <p class="app-card__body">A 30-day pilot on one AI surface. We attach GhostLine to your model's forward pass and stream per-token category plus risk scores into a dashboard your team can inspect. You provide a model endpoint and a contact engineer; we provide the instrumentation, classifiers, and live readout.</p>
           <div class="app-card__regs">
             <span>~30 days</span>
             <span>Self-hosted model deployment (Qwen, Llama, Gemma, Pythia, or similar)</span>
@@ -908,7 +908,7 @@
             <h3 class="app-card__title">Custom classifier training</h3>
             <span class="app-card__id">P-02</span>
           </div>
-          <p class="app-card__body">A domain-specific state classifier trained on your corpus. You provide about 1,000 labeled generations from your model on your tasks; we deliver a classifier with held-out F1 and a replayable validation harness. We define the label schema together in week one.</p>
+          <p class="app-card__body">A domain-specific behavior classifier trained on your corpus. You provide about 1,000 labeled generations from your model on your tasks; we deliver a classifier with held-out F1 and a replayable validation harness. We define the label schema together in week one.</p>
           <div class="app-card__regs">
             <span>~3–4 weeks</span>
             <span>Corpus + label schema required</span>
