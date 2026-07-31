@@ -55,16 +55,22 @@
           </thead>
           <tbody>
             <tr>
-              <td class="figure">88.4%</td>
-              <td>Task category read from the prompt encoding alone, before generation.</td>
-              <td class="scope">Qwen3-8B · 7 prompt labels — the five prompt-intent categories, collapse, and a residual "edge cases" bucket · 335 aggregated (non-per-head) prompt features · 1,134 samples over 378 prompts · prompt-grouped CV. Re-derived at 88.36% in a July 2026 internal audit; the audit's seed and fold assignment are not on record, so this is pipeline agreement rather than independent replication. Sampling uncertainty at 378 prompt groups is roughly ±3 points; a cluster-bootstrap interval is queued. Accuracy is quoted rather than macro-F1 (0.834) because accuracy is the re-derived metric.</td>
-              <td class="rec">CLM-2026-0729-001</td>
+              <td class="figure">91.3%</td>
+              <td>Task category read from the prompt encoding alone — scoped to the five prompt-intent categories the live display renders.</td>
+              <td class="scope">Qwen3-8B · 5 prompt-intent categories · 335 aggregated (non-per-head) prompt features · 900 samples over 300 prompts · prompt-grouped CV. Mean over five fold seeds: 91.3% ± 0.8 (single-seed range 90.3–92.7); macro-F1 0.911. Text baseline on identical folds: 66.4%. Sampling uncertainty at 300 prompt groups is roughly ±3 points; a cluster-bootstrap interval is queued. Distinct from the 3,791-feature figure below — the shared numeral is coincidence.</td>
+              <td class="rec">record queued</td>
             </tr>
             <tr>
-              <td class="figure">95.0 / 94.0 / 93.3 / 89.0 / 88.0 / 77.5 / 55.6</td>
-              <td>Per-label accuracy of the same classifier: reasoning, creativity, collapse, retrieval, precision, uncertainty, and the residual edge-cases bucket.</td>
-              <td class="scope">Label supports 180 / 150 / 180 / 300 / 150 / 120 / 54, n = 1,134. Weighted by support these values reconcile to 88.36%, the re-derived headline. Excluding the residual bucket would report 90.0%; it is included. Unweighted mean 84.6%; majority-class floor 26.5%. "Edge cases" is the residual bucket for prompts constructed to fit no category — not a claimed category or task type — and is never surfaced in the live display.</td>
-              <td class="rec">COR-2026-0726-006</td>
+              <td class="figure">98.4 / 95.4 / 94.0 / 84.5 / 78.0</td>
+              <td>Per-category recall of the headline classifier: creativity, retrieval, reasoning, uncertainty, precision (seed-mean).</td>
+              <td class="scope">Supports 150 / 300 / 180 / 120 / 150, n = 900. Support-weighted these values reconcile to 91.3%, the headline. Precision is the weakest category.</td>
+              <td class="rec">record queued</td>
+            </tr>
+            <tr>
+              <td class="figure">88.4%</td>
+              <td>The seven-label variant: the five categories plus collapse and the residual "edge cases" bucket.</td>
+              <td class="scope">Qwen3-8B · 1,134 samples over 378 prompts · 335 aggregated prompt features · prompt-grouped CV. Re-derived at 88.36% in a July 2026 internal audit (pipeline agreement — the audit's seed and fold assignment are not on record) and again at 88.36% from a fresh implementation on shared folds. Macro-F1 0.834. Per-label recalls 95.0 / 94.0 / 93.3 / 89.0 / 88.0 / 77.5 / 55.6, supports 180 / 150 / 180 / 300 / 150 / 120 / 54 — support-weighted they reconcile to 88.36%; excluding the residual bucket would read 90.0%. The bucket is not a claimed category and is never surfaced in the live display.</td>
+              <td class="rec">CLM-2026-0729-001</td>
             </tr>
             <tr>
               <td class="figure">85.0%</td>
@@ -74,15 +80,15 @@
             </tr>
             <tr>
               <td class="figure">91.3%</td>
-              <td>The 3,791-feature variant of the prompt-time classifier (secondary figure).</td>
+              <td>The 3,791-feature seven-label variant (secondary figure; shares the headline's numeral by coincidence).</td>
               <td class="scope">Reproduced at 90.74%, within its own fold variance (SD 2.17pp). Exact hyperparameters and seed were never recorded, so it reproduces within noise but not exactly. Cited only as secondary for that reason.</td>
               <td class="rec">COR-2026-0726-006</td>
             </tr>
             <tr>
-              <td class="figure">74.6%</td>
-              <td>What prompt text alone achieves — the baseline any geometric result must beat.</td>
-              <td class="scope">Qwen3-8B · the five-category healthy subset of the headline corpus · 780 matched samples over 260 prompt groups · grouped splits · TF-IDF + logistic regression (Feb 2026). The 85–91% geometry range comes from different label sets and split instantiations — no geometry run exists on these exact folds; a same-split comparison is queued. An earlier "+13pp" delta was removed because it paired mismatched numbers — see corrections below.</td>
-              <td class="rec">prompt_text_baseline</td>
+              <td class="figure">66.4%</td>
+              <td>What prompt text alone achieves on the headline's own folds — the baseline any geometric result must beat.</td>
+              <td class="scope">Qwen3-8B · five categories · 900 samples over 300 prompt groups · identical folds to the headline · TF-IDF + logistic regression, fitted in-fold · mean over five fold seeds. The earlier 74.6% (Feb 2026) fitted its vectorizer on the full corpus before cross-validation and ran on a 780-sample matched subset; retained as the historical configuration. An earlier "+13pp" delta was removed because it paired mismatched numbers — see corrections below.</td>
+              <td class="rec">record queued</td>
             </tr>
             <tr>
               <td class="figure">d ≈ 4.2</td>
@@ -149,7 +155,15 @@
       </div>
       <div class="cor-item">
         <span class="cor-item__date">2026-07-31</span>
-        <p class="cor-item__body">The text-baseline row's substrate was corrected to the five-category healthy subset of the same Qwen3-8B corpus; an intermediate revision had misattributed it to a 3B corpus. The geometry figures quoted beside it were not run on the baseline's folds; a same-split comparison is queued.</p>
+        <p class="cor-item__body">The text-baseline row's substrate was corrected to the five-category healthy subset of the same Qwen3-8B corpus; an intermediate revision had misattributed it to a 3B corpus.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07-31</span>
+        <p class="cor-item__body">The headline was rescoped from the seven-label evaluation (88.4%) to the five prompt-intent categories the live display renders (91.3%, mean over five fold seeds). The seven-label figure remains published above. Rationale: at 8B the collapse label marks prompt intent rather than confirmed behaviour, and the residual bucket is not a category.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07-31</span>
+        <p class="cor-item__body">The 74.6% text baseline was superseded by a same-fold, in-fold-fitted measurement of 66.4%; the original fitted its vectorizer before cross-validation.</p>
       </div>
     </section>
 

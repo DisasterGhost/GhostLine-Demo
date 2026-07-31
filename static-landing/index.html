@@ -75,8 +75,8 @@
 
       <div class="hero__stage">
         <div class="hero__proof-cell hero__proof-cell--tl">
-          <span class="proof__value">88.4%</span>
-          <span class="proof__label">task category read from the prompt alone &middot; Qwen3-8B &middot; prompt-grouped CV</span>
+          <span class="proof__value">91.3%</span>
+          <span class="proof__label">task category read from the prompt alone &middot; five categories &middot; Qwen3-8B &middot; prompt-grouped CV</span>
         </div>
         <div class="hero__proof-cell hero__proof-cell--tr">
           <span class="proof__value">85.0%</span>
@@ -235,10 +235,10 @@
 
         <div class="evidence-grid">
           <div class="evidence-cell evidence-cell--accent">
-            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything. This prompt-time classifier covers seven prompt labels: the five prompt-intent categories the live display renders, collapse, and a residual bucket — "edge cases" — for prompts constructed to fit none of the others. The bucket is an evaluation-honesty device, not a claimed category or task type.</p>
+            <p class="evidence-cell__plain">Identify what kind of task the model is handling — reasoning, retrieval, precision work — from the prompt encoding, before it writes anything. The headline covers the five prompt-intent categories the live display renders; a harder seven-label variant adding collapse and the residual "edge cases" bucket reads 88.4%.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">88.4<i>%</i></span>
-              <span class="evidence-cell__label">7 prompt labels · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
+              <span class="evidence-cell__metric">91.3<i>%</i></span>
+              <span class="evidence-cell__label">5 prompt-intent categories · Qwen3-8B · 335 aggregated prompt features · prompt-grouped CV</span>
             </div>
           </div>
           <div class="evidence-cell">
@@ -334,8 +334,8 @@
           <div class="evidence-cell evidence-cell--accent">
             <p class="evidence-cell__plain">Predict which task category the model is about to handle, from the prompt encoding alone, before it writes anything.</p>
             <div class="evidence-cell__ref">
-              <span class="evidence-cell__metric">88.4<i>%</i></span>
-              <span class="evidence-cell__label">Qwen3-8B · 1,134 samples over 378 prompts · 335 aggregated prompt features · prompt-grouped CV</span>
+              <span class="evidence-cell__metric">91.3<i>%</i></span>
+              <span class="evidence-cell__label">Qwen3-8B · 900 samples over 300 prompts · 335 aggregated prompt features · prompt-grouped CV</span>
             </div>
           </div>
           <div class="evidence-cell">
@@ -349,12 +349,12 @@
 
         <div class="honest-split">
           <div class="honest-col honest-col--sharp">
-            <div class="honest-col__head">▰ Per-label accuracy · 335-feature prompt classifier (8B) · n = 1,134</div>
+            <div class="honest-col__head">▰ Per-category recall · 335-feature prompt classifier (8B) · n = 900</div>
             <ul class="honest-col__list">
-              <li>Reasoning 95.0% (180) · Creativity 94.0% (150) · Collapse 93.3% (180)</li>
-              <li>Retrieval 89.0% (300) · Precision 88.0% (150)</li>
-              <li>Uncertainty 77.5% (120)</li>
-              <li>Edge cases 55.6% (54) — a residual bucket, not a category; 4.8% of the corpus</li>
+              <li>Creativity 98.4% (150) · Retrieval 95.4% (300)</li>
+              <li>Reasoning 94.0% (180)</li>
+              <li>Uncertainty 84.5% (120) · Precision 78.0% (150)</li>
+              <li>Support-weighted, these reconcile to the 91.3% headline.</li>
             </ul>
           </div>
           <div class="honest-col honest-col--maturing">
@@ -362,8 +362,7 @@
             <ul class="honest-col__list">
               <li>This is a strong tendency, not a guarantee; the model can still change course mid-generation.</li>
               <li>It predicts the category of task the prompt sets up: reasoning, retrieval, and so on. It does not predict the literal answer, whether that answer is true, or what the model is &ldquo;thinking&rdquo;.</li>
-              <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard (the residual bucket at left).</li>
-              <li>The headline includes the residual bucket; excluding it would read 90.0%.</li>
+              <li>Accuracy varies by mode: clear prompts are easy, genuinely ambiguous ones are hard.</li>
             </ul>
           </div>
         </div>
@@ -454,7 +453,7 @@
           <article class="mech-card">
             <div class="mech-card__num">04 &middot; BASELINE</div>
             <h3 class="mech-card__title">What prompt text alone achieves.</h3>
-            <p class="mech-card__body">Measured on the five-category healthy subset of the same Qwen3-8B corpus &mdash; 780 samples over 260 prompt groups, grouped splits &mdash; a classifier reading only the prompt text, no activations at all, predicts the category 74.6% of the time. The 85&ndash;91% geometry figures come from different label sets and split instantiations, so a same-split geometry-versus-text run is queued. Any geometric result has to beat its text baseline before it means anything, so the baseline is published alongside it.</p>
+            <p class="mech-card__body">On identical prompt-grouped folds of the headline corpus, a classifier reading only the prompt text &mdash; no activations at all &mdash; reads 66.4%, against 91.3% for geometry. An earlier 74.6% text figure fitted its vectorizer corpus-wide before cross-validation; the register retains it with its configuration. Any geometric result has to beat its text baseline before it means anything, so the baseline is published alongside it.</p>
           </article>
           <article class="mech-card">
             <div class="mech-card__num">05 &middot; VIEWPORT</div>
