@@ -57,13 +57,13 @@
             <tr>
               <td class="figure">88.4%</td>
               <td>Task category read from the prompt encoding alone, before generation.</td>
-              <td class="scope">Qwen3-8B · 7 prompt labels — the five prompt-intent states, collapse, and a residual "edge cases" bucket · 335 aggregated (non-per-head) prompt features · 1,134 samples over 378 prompts · prompt-grouped CV. Independently re-run 2026-07-26 and reproduced at 88.36% — a 0.04pp delta. Accuracy is quoted rather than macro-F1 because accuracy is the metric that was re-run.</td>
+              <td class="scope">Qwen3-8B · 7 prompt labels — the five prompt-intent states, collapse, and a residual "edge cases" bucket · 335 aggregated (non-per-head) prompt features · 1,134 samples over 378 prompts · prompt-grouped CV. Re-derived at 88.36% in a July 2026 internal audit; the audit's seed and fold assignment are not on record, so this is pipeline agreement rather than independent replication. Sampling uncertainty at 378 prompt groups is roughly ±3 points; a cluster-bootstrap interval is queued. Accuracy is quoted rather than macro-F1 (0.834) because accuracy is the re-derived metric.</td>
               <td class="rec">CLM-2026-0729-001</td>
             </tr>
             <tr>
-              <td class="figure">95 / 94 / 93 / 89 / 88 / 78 / 56</td>
+              <td class="figure">95.0 / 94.0 / 93.3 / 89.0 / 88.0 / 77.5 / 55.6</td>
               <td>Per-label accuracy of the same classifier: reasoning, creativity, collapse, retrieval, precision, uncertainty, and the residual edge-cases bucket.</td>
-              <td class="scope">Label supports 180 / 150 / 180 / 300 / 150 / 120 / 54, n = 1,134. Weighted by support, the breakdown reconciles to 88.36% — matching the re-run headline to two decimals. "Edge cases" is not a claimed state or task type: it is the residual bucket for prompts constructed to fit no category, which is why it scores lowest — there is no coherent signature for the classifier to learn. It is 4.8% of the corpus and is never surfaced in the live display.</td>
+              <td class="scope">Label supports 180 / 150 / 180 / 300 / 150 / 120 / 54, n = 1,134. Weighted by support these values reconcile to 88.36%, the re-derived headline. Excluding the residual bucket would report 90.0%; it is included. Unweighted mean 84.6%; majority-class floor 26.5%. "Edge cases" is the residual bucket for prompts constructed to fit no category — not a claimed state or task type — and is never surfaced in the live display.</td>
               <td class="rec">COR-2026-0726-006</td>
             </tr>
             <tr>
@@ -87,7 +87,7 @@
             <tr>
               <td class="figure">d ≈ 4.2</td>
               <td>MLP activations become a distinct discriminating signal family at 8B, barely present at 3B.</td>
-              <td class="scope">Qwen3-8B, February 2026 protocol; effect size is standardized within-model. Measured before the current confound-screening standards existed; a re-audit under current controls (length baselines, nuisance screens) is queued, and this label will be updated with its outcome.</td>
+              <td class="scope">Qwen3-8B, February 2026 protocol; effect size is standardized within-model. Measured before the current confound-screening standards existed. The queued re-audit tests three named risks: generation-length confounds, scale-versus-family attribution (the 3B and 8B comparators differ in model family, not only size), and robustness to per-dimension normalization. This label will be updated with the outcome.</td>
               <td class="rec">re-audit queued</td>
             </tr>
             <tr>
@@ -137,19 +137,19 @@
       </div>
       <div class="cor-item">
         <span class="cor-item__date">2026-07</span>
-        <p class="cor-item__body">An unsupervised-clustering ARI figure was retracted before it ever shipped — caught by internal audit, listed here as part of the record.</p>
+        <p class="cor-item__body">An unsupervised-clustering ARI figure was retracted before publication.</p>
       </div>
       <div class="cor-item">
         <span class="cor-item__date">2026-07</span>
-        <p class="cor-item__body">A "+13pp over baseline" delta was removed: the baseline and the headline came from different corpora and class sets. The baseline row above states the honest scope; a matched comparison is queued.</p>
+        <p class="cor-item__body">A "+13pp over baseline" delta was removed: the paired numbers came from different label sets and split instantiations. A matched comparison is queued.</p>
       </div>
       <div class="cor-item">
         <span class="cor-item__date">2026-07-30</span>
-        <p class="cor-item__body">The banner phrase "independently reproduced" was removed from the hero. The reproduction is an independent internal re-run of the pipeline, not third-party replication, and that provenance now lives in this register rather than in a banner label. In the same pass, the text-baseline card was rescoped to its actual corpus after an external review caught the mismatch.</p>
+        <p class="cor-item__body">"Independently reproduced" was removed from the hero banner: the reproduction was an internal re-derivation of the pipeline, not third-party replication. Provenance for the figure now lives in this register.</p>
       </div>
       <div class="cor-item">
         <span class="cor-item__date">2026-07-31</span>
-        <p class="cor-item__body">The text-baseline row was corrected twice in two days: first rescoped from "same corpus" to a 3B corpus — wrongly. The script's data path shows the actual substrate is the five-state healthy subset of the same Qwen3-8B corpus. The geometry figures quoted beside it were never run on the baseline's folds; that same-split comparison is now queued. Corrections to corrections get listed too.</p>
+        <p class="cor-item__body">The text-baseline row's substrate was corrected to the five-state healthy subset of the same Qwen3-8B corpus; an intermediate revision had misattributed it to a 3B corpus. The geometry figures quoted beside it were not run on the baseline's folds; a same-split comparison is queued.</p>
       </div>
     </section>
 
