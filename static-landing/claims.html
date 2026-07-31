@@ -81,7 +81,7 @@
             <tr>
               <td class="figure">74.6% / 58.9%</td>
               <td>What prompt text alone, and prompt length alone, achieve — the baselines any geometric result must beat.</td>
-              <td class="scope">3B corpus · five states · 780 samples · 260 prompt groups · grouped splits. Geometry reads 85–91% on those same splits. A matched text baseline for the 8B seven-category figure has not been run yet; it is queued. An earlier "+13pp" delta was removed because it paired numbers from different corpora — see corrections below.</td>
+              <td class="scope">Qwen3-8B · the five-state healthy subset of the headline corpus · 780 matched samples over 260 prompt groups · grouped splits · TF-IDF + logistic regression (Feb 2026). The 85–91% geometry range comes from different label sets and split instantiations — no geometry run exists on these exact folds; a same-split comparison is queued. An earlier "+13pp" delta was removed because it paired mismatched numbers — see corrections below.</td>
               <td class="rec">prompt_text_baseline</td>
             </tr>
             <tr>
@@ -146,6 +146,10 @@
       <div class="cor-item">
         <span class="cor-item__date">2026-07-30</span>
         <p class="cor-item__body">The banner phrase "independently reproduced" was removed from the hero. The reproduction is an independent internal re-run of the pipeline, not third-party replication, and that provenance now lives in this register rather than in a banner label. In the same pass, the text-baseline card was rescoped to its actual corpus after an external review caught the mismatch.</p>
+      </div>
+      <div class="cor-item">
+        <span class="cor-item__date">2026-07-31</span>
+        <p class="cor-item__body">The text-baseline row was corrected twice in two days: first rescoped from "same corpus" to a 3B corpus — wrongly. The script's data path shows the actual substrate is the five-state healthy subset of the same Qwen3-8B corpus. The geometry figures quoted beside it were never run on the baseline's folds; that same-split comparison is now queued. Corrections to corrections get listed too.</p>
       </div>
     </section>
 
