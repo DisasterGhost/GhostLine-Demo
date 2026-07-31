@@ -58,13 +58,13 @@
               <td class="figure">91.3%</td>
               <td>Task category read from the prompt encoding alone — scoped to the five prompt-intent categories the live display renders.</td>
               <td class="scope">Qwen3-8B · 5 prompt-intent categories · 335 aggregated (non-per-head) prompt features · 900 samples over 300 prompts · prompt-grouped CV. Mean over five fold seeds: 91.3% ± 0.8 (single-seed range 90.3–92.7); macro-F1 0.911. Text baseline on identical folds: 66.4%. Sampling uncertainty at 300 prompt groups is roughly ±3 points; a cluster-bootstrap interval is queued. Distinct from the 3,791-feature figure below — the shared numeral is coincidence.</td>
-              <td class="rec">record queued</td>
+              <td class="rec">CLM-2026-0731-001</td>
             </tr>
             <tr>
               <td class="figure">98.4 / 95.4 / 94.0 / 84.5 / 78.0</td>
               <td>Per-category recall of the headline classifier: creativity, retrieval, reasoning, uncertainty, precision (seed-mean).</td>
               <td class="scope">Supports 150 / 300 / 180 / 120 / 150, n = 900. Support-weighted these values reconcile to 91.3%, the headline. Precision is the weakest category.</td>
-              <td class="rec">record queued</td>
+              <td class="rec">CLM-2026-0731-001</td>
             </tr>
             <tr>
               <td class="figure">88.4%</td>
@@ -88,7 +88,7 @@
               <td class="figure">66.4%</td>
               <td>What prompt text alone achieves on the headline's own folds — the baseline any geometric result must beat.</td>
               <td class="scope">Qwen3-8B · five categories · 900 samples over 300 prompt groups · identical folds to the headline · TF-IDF + logistic regression, fitted in-fold · mean over five fold seeds. The earlier 74.6% (Feb 2026) fitted its vectorizer on the full corpus before cross-validation and ran on a 780-sample matched subset; retained as the historical configuration. An earlier "+13pp" delta was removed because it paired mismatched numbers — see corrections below.</td>
-              <td class="rec">record queued</td>
+              <td class="rec">CLM-2026-0731-001</td>
             </tr>
             <tr>
               <td class="figure">d ≈ 4.2</td>
